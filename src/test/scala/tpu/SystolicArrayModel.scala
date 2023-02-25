@@ -18,7 +18,7 @@ class SystolicArrayModel(a: Matrix, b: Matrix) {
       return Seq.tabulate(a.head.size){
         j => Seq.tabulate(width){
           i => {
-            if(a.size-j-1-i <= 0 && a.size-j-1-i+a.head.size > 0){
+            if(a.head.size-j-1-i <= 0 && a.size-j-1-i+a.head.size > 0){
               a(width - i - 1 - j)(j)
             }
             else{

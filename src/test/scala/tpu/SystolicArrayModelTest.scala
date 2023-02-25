@@ -33,6 +33,10 @@ object SystolicArrayModelData {
                 Seq(9,10,11),
                 Seq(13,14,15))
   
+  val a3x4 = Seq(Seq(1,2,3,4),
+                Seq(5,6,7,8),
+                Seq(9,10,11,12))
+
   val b  = Seq(Seq(2,5,5),
                Seq(4,1,3),
                Seq(2,3,1))
@@ -53,6 +57,11 @@ object SystolicArrayModelData {
   val staggerAns4x3 = Seq(Seq(0, 0, 13, 9, 5, 1), 
                         Seq(0, 14, 10, 6, 2, 0), 
                         Seq(15, 11, 7, 3, 0, 0))
+  
+  val staggerAns3x4 = Seq(Seq(0, 0, 0, 9, 5, 1), 
+                        Seq(0, 0, 10, 6, 2, 0), 
+                        Seq(0, 11, 7, 3, 0, 0), 
+                        Seq(12, 8, 4, 0, 0, 0))                   
 }
 
 
@@ -76,5 +85,10 @@ class SystolicArrayModelTester extends AnyFlatSpec with ChiselScalatestTester {
   it should "get the staggered input array 4x3" in {
     val sam = SystolicArrayModel(SystolicArrayModelData.a, SystolicArrayModelData.b)
     assert(sam.getStagger(SystolicArrayModelData.a4x3) == SystolicArrayModelData.staggerAns4x3)
+  }
+
+  it should "get the staggered input array 3x4" in {
+    val sam = SystolicArrayModel(SystolicArrayModelData.a, SystolicArrayModelData.b)
+    assert(sam.getStagger(SystolicArrayModelData.a3x4) == SystolicArrayModelData.staggerAns3x4)
   }
 }

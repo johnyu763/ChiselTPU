@@ -1,88 +1,19 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<testsuite hostname="MacBook-Pro-3.local" name="tpu.SystolicArrayModelTester" tests="4" errors="0" failures="1" skipped="0" time="0.035" timestamp="2023-02-24T20:34:57">
+<testsuite hostname="MacBook-Pro-3.local" name="tpu.SystolicArrayModelTester" tests="5" errors="0" failures="0" skipped="0" time="0.012" timestamp="2023-02-24T20:41:30">
           <properties>
       <property name="java.specification.version" value="19"/><property name="sun.jnu.encoding" value="UTF-8"/><property name="sun.arch.data.model" value="64"/><property name="java.vendor.url" value="https://github.com/Homebrew/homebrew-core/issues"/><property name="sun.boot.library.path" value="/usr/local/Cellar/openjdk/19.0.1/libexec/openjdk.jdk/Contents/Home/lib"/><property name="sun.java.command" value="/usr/local/Cellar/sbt/1.8.2/libexec/bin/sbt-launch.jar"/><property name="jdk.debug" value="release"/><property name="java.specification.vendor" value="Oracle Corporation"/><property name="java.version.date" value="2022-10-18"/><property name="java.home" value="/usr/local/Cellar/openjdk/19.0.1/libexec/openjdk.jdk/Contents/Home"/><property name="file.separator" value="/"/><property name="java.vm.compressedOopsMode" value="Zero based"/><property name="line.separator" value="
 "/><property name="java.vm.specification.vendor" value="Oracle Corporation"/><property name="java.specification.name" value="Java Platform API Specification"/><property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/><property name="java.runtime.version" value="19.0.1"/><property name="user.name" value="johnyu"/><property name="log4j.ignoreTCL" value="true"/><property name="file.encoding" value="UTF-8"/><property name="jnidispatch.path" value="/Users/johnyu/Library/Caches/JNA/temp/jna15782236962581575732.tmp"/><property name="java.vendor.version" value="Homebrew"/><property name="jna.loaded" value="true"/><property name="java.io.tmpdir" value="/var/folders/mp/6ps070t95qj5_k8vr8pfphg80000gq/T/"/><property name="java.version" value="19.0.1"/><property name="java.vm.specification.name" value="Java Virtual Machine Specification"/><property name="native.encoding" value="UTF-8"/><property name="java.library.path" value="/Users/johnyu/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/><property name="stderr.encoding" value="UTF-8"/><property name="java.vendor" value="Homebrew"/><property name="scala.ext.dirs" value="/Users/johnyu/.sbt/1.0/java9-rt-ext-homebrew_19_0_1"/><property name="sun.io.unicode.encoding" value="UnicodeBig"/><property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/><property name="java.class.path" value="/usr/local/Cellar/sbt/1.8.2/libexec/bin/sbt-launch.jar"/><property name="java.vm.vendor" value="Homebrew"/><property name="jline.shutdownhook" value="false"/><property name="user.timezone" value="America/Los_Angeles"/><property name="java.vm.specification.version" value="19"/><property name="os.name" value="Mac OS X"/><property name="sun.java.launcher" value="SUN_STANDARD"/><property name="user.country" value="US"/><property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/><property name="sun.cpu.endian" value="little"/><property name="user.home" value="/Users/johnyu"/><property name="user.language" value="en"/><property name="sbt.script" value="/usr/local/Cellar/sbt/1.8.2/libexec/bin/sbt"/><property name="sbt.ipcsocket.tmpdir" value="/var/folders/mp/6ps070t95qj5_k8vr8pfphg80000gq/T/.sbt5402e45a/ipcsocket"/><property name="swoval.tmpdir" value="/var/folders/mp/6ps070t95qj5_k8vr8pfphg80000gq/T/.sbt5402e45a/swoval"/><property name="apple.awt.application.name" value="Boot"/><property name="jline.esc.timeout" value="0"/><property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/><property name="stdout.encoding" value="UTF-8"/><property name="path.separator" value=":"/><property name="os.version" value="11.1"/><property name="jna.nosys" value="true"/><property name="java.runtime.name" value="OpenJDK Runtime Environment"/><property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/><property name="jna.platform.library.path" value="/usr/lib:/usr/lib"/><property name="java.vendor.url.bug" value="https://github.com/Homebrew/homebrew-core/issues"/><property name="user.dir" value="/Users/johnyu/Projects/CSE228A/ChiselTPU"/><property name="os.arch" value="x86_64"/><property name="java.vm.info" value="mixed mode, sharing"/><property name="java.vm.version" value="19.0.1"/><property name="java.class.version" value="63.0"/>
     </properties>
-          <testcase classname="tpu.SystolicArrayModelTester" name="SystolicArrayModel should get the staggered input array" time="0.013">
+          <testcase classname="tpu.SystolicArrayModelTester" name="SystolicArrayModel should get the staggered input array" time="0.011">
                       
                     </testcase><testcase classname="tpu.SystolicArrayModelTester" name="SystolicArrayModel should get the staggered input array 2" time="0.001">
                       
                     </testcase><testcase classname="tpu.SystolicArrayModelTester" name="SystolicArrayModel should get the staggered input array 4x4" time="0.0">
                       
-                    </testcase><testcase classname="tpu.SystolicArrayModelTester" name="SystolicArrayModel should get the staggered input array 4x3" time="0.021">
-                      <failure message="List(List(0, 0, 0, 9, 5, 1), List(0, 0, 10, 6, 2, 0), List(0, 11, 7, 3, 0, 0)) did not equal List(List(0, 0, 13, 9, 5, 1), List(0, 14, 10, 6, 2, 0), List(15, 11, 7, 3, 0, 0))" type="org.scalatest.exceptions.TestFailedException">org.scalatest.exceptions.TestFailedException: List(List(0, 0, 0, 9, 5, 1), List(0, 0, 10, 6, 2, 0), List(0, 11, 7, 3, 0, 0)) did not equal List(List(0, 0, 13, 9, 5, 1), List(0, 14, 10, 6, 2, 0), List(15, 11, 7, 3, 0, 0))
-	at org.scalatest.Assertions.newAssertionFailedException(Assertions.scala:472)
-	at org.scalatest.Assertions.newAssertionFailedException$(Assertions.scala:471)
-	at org.scalatest.Assertions$.newAssertionFailedException(Assertions.scala:1231)
-	at org.scalatest.Assertions$AssertionsHelper.macroAssert(Assertions.scala:1295)
-	at tpu.SystolicArrayModelTester.$anonfun$new$4(SystolicArrayModelTest.scala:78)
-	at org.scalatest.OutcomeOf.outcomeOf(OutcomeOf.scala:85)
-	at org.scalatest.OutcomeOf.outcomeOf$(OutcomeOf.scala:83)
-	at org.scalatest.OutcomeOf$.outcomeOf(OutcomeOf.scala:104)
-	at org.scalatest.Transformer.apply(Transformer.scala:22)
-	at org.scalatest.Transformer.apply(Transformer.scala:20)
-	at org.scalatest.flatspec.AnyFlatSpecLike$$anon$5.apply(AnyFlatSpecLike.scala:1683)
-	at org.scalatest.TestSuite.withFixture(TestSuite.scala:196)
-	at org.scalatest.TestSuite.withFixture$(TestSuite.scala:195)
-	at tpu.SystolicArrayModelTester.chiseltest$ChiselScalatestTester$$super$withFixture(SystolicArrayModelTest.scala:59)
-	at chiseltest.ChiselScalatestTester.$anonfun$withFixture$1(ChiselScalatestTester.scala:82)
-	at scala.util.DynamicVariable.withValue(DynamicVariable.scala:59)
-	at chiseltest.ChiselScalatestTester.withFixture(ChiselScalatestTester.scala:82)
-	at chiseltest.ChiselScalatestTester.withFixture$(ChiselScalatestTester.scala:79)
-	at tpu.SystolicArrayModelTester.withFixture(SystolicArrayModelTest.scala:59)
-	at org.scalatest.flatspec.AnyFlatSpecLike.invokeWithFixture$1(AnyFlatSpecLike.scala:1681)
-	at org.scalatest.flatspec.AnyFlatSpecLike.$anonfun$runTest$1(AnyFlatSpecLike.scala:1693)
-	at org.scalatest.SuperEngine.runTestImpl(Engine.scala:306)
-	at org.scalatest.flatspec.AnyFlatSpecLike.runTest(AnyFlatSpecLike.scala:1693)
-	at org.scalatest.flatspec.AnyFlatSpecLike.runTest$(AnyFlatSpecLike.scala:1675)
-	at org.scalatest.flatspec.AnyFlatSpec.runTest(AnyFlatSpec.scala:1685)
-	at org.scalatest.flatspec.AnyFlatSpecLike.$anonfun$runTests$1(AnyFlatSpecLike.scala:1751)
-	at org.scalatest.SuperEngine.$anonfun$runTestsInBranch$1(Engine.scala:413)
-	at scala.collection.immutable.List.foreach(List.scala:333)
-	at org.scalatest.SuperEngine.traverseSubNodes$1(Engine.scala:401)
-	at org.scalatest.SuperEngine.runTestsInBranch(Engine.scala:390)
-	at org.scalatest.SuperEngine.$anonfun$runTestsInBranch$1(Engine.scala:427)
-	at scala.collection.immutable.List.foreach(List.scala:333)
-	at org.scalatest.SuperEngine.traverseSubNodes$1(Engine.scala:401)
-	at org.scalatest.SuperEngine.runTestsInBranch(Engine.scala:396)
-	at org.scalatest.SuperEngine.runTestsImpl(Engine.scala:475)
-	at org.scalatest.flatspec.AnyFlatSpecLike.runTests(AnyFlatSpecLike.scala:1751)
-	at org.scalatest.flatspec.AnyFlatSpecLike.runTests$(AnyFlatSpecLike.scala:1750)
-	at org.scalatest.flatspec.AnyFlatSpec.runTests(AnyFlatSpec.scala:1685)
-	at org.scalatest.Suite.run(Suite.scala:1112)
-	at org.scalatest.Suite.run$(Suite.scala:1094)
-	at org.scalatest.flatspec.AnyFlatSpec.org$scalatest$flatspec$AnyFlatSpecLike$$super$run(AnyFlatSpec.scala:1685)
-	at org.scalatest.flatspec.AnyFlatSpecLike.$anonfun$run$1(AnyFlatSpecLike.scala:1796)
-	at org.scalatest.SuperEngine.runImpl(Engine.scala:535)
-	at org.scalatest.flatspec.AnyFlatSpecLike.run(AnyFlatSpecLike.scala:1796)
-	at org.scalatest.flatspec.AnyFlatSpecLike.run$(AnyFlatSpecLike.scala:1794)
-	at org.scalatest.flatspec.AnyFlatSpec.run(AnyFlatSpec.scala:1685)
-	at org.scalatest.tools.Framework.org$scalatest$tools$Framework$$runSuite(Framework.scala:318)
-	at org.scalatest.tools.Framework$ScalaTestTask.execute(Framework.scala:513)
-	at sbt.TestRunner.runTest$1(TestFramework.scala:147)
-	at sbt.TestRunner.run(TestFramework.scala:162)
-	at sbt.TestFramework$$anon$3$$anonfun$$lessinit$greater$1.$anonfun$apply$1(TestFramework.scala:330)
-	at sbt.TestFramework$.sbt$TestFramework$$withContextLoader(TestFramework.scala:290)
-	at sbt.TestFramework$$anon$3$$anonfun$$lessinit$greater$1.apply(TestFramework.scala:330)
-	at sbt.TestFramework$$anon$3$$anonfun$$lessinit$greater$1.apply(TestFramework.scala:330)
-	at sbt.TestFunction.apply(TestFramework.scala:342)
-	at sbt.Tests$.$anonfun$toTask$1(Tests.scala:435)
-	at sbt.std.Transform$$anon$3.$anonfun$apply$2(Transform.scala:46)
-	at sbt.std.Transform$$anon$4.work(Transform.scala:68)
-	at sbt.Execute.$anonfun$submit$2(Execute.scala:282)
-	at sbt.internal.util.ErrorHandling$.wideConvert(ErrorHandling.scala:23)
-	at sbt.Execute.work(Execute.scala:291)
-	at sbt.Execute.$anonfun$submit$1(Execute.scala:282)
-	at sbt.ConcurrentRestrictions$$anon$4.$anonfun$submitValid$1(ConcurrentRestrictions.scala:265)
-	at sbt.CompletionService$$anon$2.call(CompletionService.scala:64)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
-	at java.base/java.lang.Thread.run(Thread.java:1589)
-</failure>
+                    </testcase><testcase classname="tpu.SystolicArrayModelTester" name="SystolicArrayModel should get the staggered input array 4x3" time="0.0">
+                      
+                    </testcase><testcase classname="tpu.SystolicArrayModelTester" name="SystolicArrayModel should get the staggered input array 3x4" time="0.0">
+                      
                     </testcase>
           <system-out><![CDATA[]]></system-out>
           <system-err><![CDATA[]]></system-err>

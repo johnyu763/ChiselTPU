@@ -1,18 +1,15 @@
-[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(tpu.SystolicArrayModelTester, org.scalatest.tools.Framework$$anon$1@24856f5a, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(tpu.SystolicArrayModelTester, org.scalatest.tools.Framework$$anon$1@41a1b21, false, [SuiteSelector])[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mSystolicArrayModelTester:[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mSystolicArrayModel[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should get the staggered input array[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should get the staggered input array 2[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should get the staggered input array 4x4[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m- should get the staggered input array 4x3 *** FAILED ***[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m  List(List(0, 0, 0, 9, 5, 1), List(0, 0, 10, 6, 2, 0), List(0, 11, 7, 3, 0, 0)) did not equal List(List(0, 0, 13, 9, 5, 1), List(0, 14, 10, 6, 2, 0), List(15, 11, 7, 3, 0, 0)) (SystolicArrayModelTest.scala:78)[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m  Analysis:[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m  List(0: List(0, 0, 0, 9, 5, 1) -> List(0, 0, 13, 9, 5, 1), 1: List(0, 0, 10, 6, 2, 0) -> List(0, 14, 10, 6, 2, 0), 2: List(0, 11, 7, 3, 0, 0) -> List(15, 11, 7, 3, 0, 0))[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 137 milliseconds.[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 4[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should get the staggered input array 4x3[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should get the staggered input array 3x4[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 138 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 5[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 1, aborted 0[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 3, failed 1, canceled 0, ignored 0, pending 0[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m*** 1 TEST FAILED ***[0m[0m
-[0m[[0m[31merror[0m] [0m[0mFailed tests:[0m
-[0m[[0m[31merror[0m] [0m[0m	tpu.SystolicArrayModelTester[0m
-[0m[[0m[31merror[0m] [0m[0m(Test / [31mtest[0m) sbt.TestsFailedException: Tests unsuccessful[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 5, failed 0, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mAll tests passed.[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mPassed tests:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	tpu.SystolicArrayModelTester[0m

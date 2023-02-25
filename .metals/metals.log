@@ -146,3 +146,8 @@ WARNING: Unmatched cancel notification for request id 3130
 2023.02.24 20:34:45 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m
 2023.02.24 20:34:54 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m
 2023.02.24 20:34:55 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m
+2023.02.24 20:38:50 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:38:59 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:39:19 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:41:06 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m
+2023.02.24 20:41:25 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m

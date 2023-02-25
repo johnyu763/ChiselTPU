@@ -1,0 +1,57 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(test, Some(2b8b91ea-027b-41da-9a00-94b9d5c1c19d), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Test / test[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskStart, {"taskId":{"id":"81","parents":[]},"eventTime":1677299960891,"message":"Compiling root","dataKind":"compile-task","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Compile"}}})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskFinish, {"taskId":{"id":"81","parents":[]},"eventTime":1677299960898,"message":"Compiled root","status":1,"dataKind":"compile-report","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Compile"},"errors":0,"warnings":0,"time":7}})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskStart, {"taskId":{"id":"82","parents":[]},"eventTime":1677299960902,"message":"Compiling root-test","dataKind":"compile-task","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"}}})[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /Users/johnyu/Projects/CSE228A/ChiselTPU/target/scala-2.13/test-classes ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":3,"message":"compiling 1 Scala source to /Users/johnyu/Projects/CSE228A/ChiselTPU/target/scala-2.13/test-classes ..."})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskProgress, {"taskId":{"id":"82","parents":[]},"eventTime":1677299960959,"message":"Compiling root-test (10%)","total":28,"progress":10,"dataKind":"compile-progress","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"}}})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskProgress, {"taskId":{"id":"82","parents":[]},"eventTime":1677299960959,"message":"Compiling root-test (10%)","total":28,"progress":10,"dataKind":"compile-progress","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"}}})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskProgress, {"taskId":{"id":"82","parents":[]},"eventTime":1677299960999,"message":"Compiling root-test (25%)","total":28,"progress":25,"dataKind":"compile-progress","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"}}})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskProgress, {"taskId":{"id":"82","parents":[]},"eventTime":1677299961000,"message":"Compiling root-test (25%)","total":28,"progress":25,"dataKind":"compile-progress","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"}}})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskProgress, {"taskId":{"id":"82","parents":[]},"eventTime":1677299961004,"message":"Compiling root-test (35%)","total":28,"progress":35,"dataKind":"compile-progress","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"}}})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskProgress, {"taskId":{"id":"82","parents":[]},"eventTime":1677299961004,"message":"Compiling root-test (35%)","total":28,"progress":35,"dataKind":"compile-progress","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"}}})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskProgress, {"taskId":{"id":"82","parents":[]},"eventTime":1677299961011,"message":"Compiling root-test (50%)","total":28,"progress":50,"dataKind":"compile-progress","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"}}})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskProgress, {"taskId":{"id":"82","parents":[]},"eventTime":1677299961011,"message":"Compiling root-test (50%)","total":28,"progress":50,"dataKind":"compile-progress","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"}}})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskProgress, {"taskId":{"id":"82","parents":[]},"eventTime":1677299961013,"message":"Compiling root-test (60%)","total":28,"progress":60,"dataKind":"compile-progress","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"}}})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskProgress, {"taskId":{"id":"82","parents":[]},"eventTime":1677299961034,"message":"Compiling root-test (60%)","total":28,"progress":60,"dataKind":"compile-progress","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"}}})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskProgress, {"taskId":{"id":"82","parents":[]},"eventTime":1677299961040,"message":"Compiling root-test (75%)","total":28,"progress":75,"dataKind":"compile-progress","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"}}})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskProgress, {"taskId":{"id":"82","parents":[]},"eventTime":1677299961040,"message":"Compiling root-test (75%)","total":28,"progress":75,"dataKind":"compile-progress","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"}}})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskProgress, {"taskId":{"id":"82","parents":[]},"eventTime":1677299961041,"message":"Compiling root-test (85%)","total":28,"progress":85,"dataKind":"compile-progress","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"}}})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskProgress, {"taskId":{"id":"82","parents":[]},"eventTime":1677299961041,"message":"Compiling root-test (85%)","total":28,"progress":85,"dataKind":"compile-progress","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"}}})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskProgress, {"taskId":{"id":"82","parents":[]},"eventTime":1677299961053,"message":"Compiling root-test (100%)","total":28,"progress":100,"dataKind":"compile-progress","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"}}})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskProgress, {"taskId":{"id":"82","parents":[]},"eventTime":1677299961053,"message":"Compiling root-test (100%)","total":28,"progress":100,"dataKind":"compile-progress","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"}}})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskFinish, {"taskId":{"id":"82","parents":[]},"eventTime":1677299961065,"message":"Compiled root-test","status":1,"dataKind":"compile-report","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"},"errors":0,"warnings":0,"time":163}})[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mSystolicArrayModelTester:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mSystolicArrayModel[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should get the staggered input array[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should get the staggered input array 2[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should get the staggered input array 4x4[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should get the staggered input array 4x3[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":3,"message":"\u001b[32mSystolicArrayModelTester:\u001b[0m"})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":3,"message":"\u001b[32mSystolicArrayModel\u001b[0m"})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":3,"message":"\u001b[32m- should get the staggered input array\u001b[0m"})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":3,"message":"\u001b[32m- should get the staggered input array 2\u001b[0m"})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":3,"message":"\u001b[32m- should get the staggered input array 4x4\u001b[0m"})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":3,"message":"\u001b[32m- should get the staggered input array 4x3\u001b[0m"})[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 115 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 4[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 1, aborted 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 4, failed 0, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mAll tests passed.[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":3,"message":"\u001b[36mRun completed in 115 milliseconds.\u001b[0m\n\u001b[36mTotal number of tests run: 4\u001b[0m\n\u001b[36mSuites: completed 1, aborted 0\u001b[0m\n\u001b[36mTests: succeeded 4, failed 0, canceled 0, ignored 0, pending 0\u001b[0m\n\u001b[32mAll tests passed.\u001b[0m"})[0m
+[0m[[0m[32msuccess[0m] [0m[0mTotal time: 0 s, completed Feb 24, 2023, 8:39:21 PM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition json request: {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala"},"position":{"line":30,"character":2}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition found line:   val a4x3 = Seq(Seq(1,2,3),[0m
+[0m[[0m[0mdebug[0m] [0m[0msymbol va[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition locations Vector()[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition json request: {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala"},"position":{"line":84,"character":2}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition found line:   it should "get the staggered input array 4x3" in {[0m
+[0m[[0m[0mdebug[0m] [0m[0msymbol it[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition locations Vector()[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition json request: {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala"},"position":{"line":91,"character":92}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition found line:     assert(sam.getStagger(SystolicArrayModelData.a3x4) == SystolicArrayModelData.staggerAns3x4)[0m
+[0m[[0m[0mdebug[0m] [0m[0msymbol staggerAns3x4[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition locations Vector()[0m
