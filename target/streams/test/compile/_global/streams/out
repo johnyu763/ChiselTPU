@@ -1,0 +1,8 @@
+[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala:31:7: a4x4 is already defined as value a4x4[0m
+[0m[[0m[31merror[0m] [0m[0m  val a4x4 = Seq(Seq(1,2,3),[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala:78:50: value a4x3 is not a member of object tpu.SystolicArrayModelData[0m
+[0m[[0m[31merror[0m] [0m[0mdid you mean a4x4?[0m
+[0m[[0m[31merror[0m] [0m[0m    assert(sam.getStagger(SystolicArrayModelData.a4x3) == SystolicArrayModelData.staggerAns4x3)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                 ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m

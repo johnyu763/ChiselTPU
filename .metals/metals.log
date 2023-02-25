@@ -1,0 +1,148 @@
+2023.02.24 16:33:26 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/johnyu/Projects/CSE228A/ChiselTPU/.metals/lsp.trace.json or /Users/johnyu/Library/Caches/org.scalameta.metals/lsp.trace.json[0m
+2023.02.24 16:33:27 INFO  logging to file /Users/johnyu/Projects/CSE228A/ChiselTPU/.metals/metals.log[0m
+2023.02.24 16:33:27 INFO  Started: Metals version 0.11.10 in workspace '/Users/johnyu/Projects/CSE228A/ChiselTPU' for client Visual Studio Code 1.75.1.[0m
+SLF4J: No SLF4J providers were found.
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
+SLF4J: Class path contains SLF4J bindings targeting slf4j-api versions 1.7.x or earlier.
+SLF4J: Ignoring binding found at [jar:file:/Users/johnyu/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/outr/scribe-slf4j_2.13/3.10.5/scribe-slf4j_2.13-3.10.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See https://www.slf4j.org/codes.html#ignoredBindings for an explanation.
+2023.02.24 16:33:29 INFO  time: initialize in 1.57s[0m
+2023.02.24 16:33:31 WARN  Build server is not auto-connectable.[0m
+2023.02.24 16:33:31 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/build.sc[0m
+Feb 24, 2023 4:33:31 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1
+Feb 24, 2023 4:33:31 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2
+2023.02.24 16:33:36 INFO  no build target found for /Users/johnyu/Projects/CSE228A/ChiselTPU/build.sc. Using presentation compiler with project's scala-library version: 3.2.1[0m
+2023.02.24 16:33:37 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/build.sbt[0m
+2023.02.24 16:33:39 INFO  time: code lens generation in 1.77s[0m
+2023.02.24 16:33:39 INFO  time: code lens generation in 7.24s[0m
+2023.02.24 16:33:39 ERROR Unexpected error initializing serverscala.concurrent.Future$$anon$2: Future.filter predicate is not satisfied
+[0m
+2023.02.24 16:33:48 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/gcd/GCD.scala[0m
+2023.02.24 16:33:50 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/gcd/GCDSpec.scala[0m
+2023.02.24 16:33:55 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/gcd/DecoupledGCD.scala[0m
+2023.02.24 16:33:57 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/gcd/GCDSpec.scala[0m
+2023.02.24 16:34:07 INFO  shutting down Metals[0m
+2023.02.24 16:35:39 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/johnyu/Projects/CSE228A/ChiselTPU/.metals/lsp.trace.json or /Users/johnyu/Library/Caches/org.scalameta.metals/lsp.trace.json[0m
+2023.02.24 16:35:40 INFO  logging to file /Users/johnyu/Projects/CSE228A/ChiselTPU/.metals/metals.log[0m
+2023.02.24 16:35:40 INFO  Started: Metals version 0.11.10 in workspace '/Users/johnyu/Projects/CSE228A/ChiselTPU' for client Visual Studio Code 1.75.1.[0m
+SLF4J: No SLF4J providers were found.
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
+SLF4J: Class path contains SLF4J bindings targeting slf4j-api versions 1.7.x or earlier.
+SLF4J: Ignoring binding found at [jar:file:/Users/johnyu/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/outr/scribe-slf4j_2.13/3.10.5/scribe-slf4j_2.13-3.10.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See https://www.slf4j.org/codes.html#ignoredBindings for an explanation.
+2023.02.24 16:35:43 INFO  time: initialize in 2.65s[0m
+2023.02.24 16:35:48 WARN  Build server is not auto-connectable.[0m
+2023.02.24 16:35:48 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/gcd/GCDSpec.scala[0m
+2023.02.24 16:35:53 INFO  no build target found for /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/gcd/GCDSpec.scala. Using presentation compiler with project's scala-library version: 3.2.1[0m
+2023.02.24 16:35:55 INFO  time: code lens generation in 7.42s[0m
+2023.02.24 16:36:58 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/SystolicArrayModel.scala[0m
+Feb 24, 2023 4:37:12 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 22
+2023.02.24 16:39:53 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 16:40:17 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 19:25:30 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 19:25:55 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m
+Exception in thread "pool-3-thread-1" java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:195)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Exception in thread "pool-3-thread-2" java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:195)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Exception in thread "pool-3-thread-3" java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:195)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Exception in thread "pool-3-thread-4" java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:195)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Exception in thread "pool-3-thread-5" java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:195)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2023.02.24 19:31:53 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m
+2023.02.24 19:33:27 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m
+Feb 24, 2023 7:34:09 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 3130
+2023.02.24 19:34:35 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 19:35:17 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m
+2023.02.24 19:35:31 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m
+2023.02.24 19:35:37 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m
+2023.02.24 19:37:08 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 19:37:08 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 19:37:08 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 19:37:08 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 19:37:08 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 19:37:20 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 19:40:20 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 19:40:42 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 19:41:09 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 19:46:42 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 19:46:58 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m
+2023.02.24 19:49:57 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:05:54 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:05:58 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:07:16 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:07:17 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:07:36 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:07:52 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:08:08 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:08:52 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:09:12 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:09:47 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:10:06 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:10:47 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:11:14 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:11:17 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:11:44 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:13:40 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:13:47 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:15:50 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:15:59 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:16:46 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:18:10 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:18:17 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:19:36 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:19:47 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:19:55 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:20:37 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:21:40 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:23:58 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:24:13 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:24:34 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:24:36 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:25:05 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.02.24 20:28:04 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m
+2023.02.24 20:28:04 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m
+2023.02.24 20:29:05 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m
+2023.02.24 20:31:33 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m
+2023.02.24 20:32:02 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m
+2023.02.24 20:33:52 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m
+2023.02.24 20:34:06 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m
+2023.02.24 20:34:10 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m
+2023.02.24 20:34:24 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m
+2023.02.24 20:34:45 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m
+2023.02.24 20:34:45 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m
+2023.02.24 20:34:54 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m
+2023.02.24 20:34:55 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala[0m
