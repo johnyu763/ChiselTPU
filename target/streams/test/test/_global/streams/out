@@ -1,4 +1,5 @@
-[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(tpu.SystolicArrayModelTester, org.scalatest.tools.Framework$$anon$1@41a1b21, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(tpu.SystolicArrayModelTester, org.scalatest.tools.Framework$$anon$1@3599c6dc, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(hw1.SystArrTester, org.scalatest.tools.Framework$$anon$1@3599c6dc, false, [SuiteSelector])[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mSystolicArrayModelTester:[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mSystolicArrayModel[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should get the staggered input array[0m[0m
@@ -6,10 +7,14 @@
 [0m[[0m[0minfo[0m] [0m[0m[32m- should get the staggered input array 4x4[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should get the staggered input array 4x3[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should get the staggered input array 3x4[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 138 milliseconds.[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 5[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 1, aborted 0[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 5, failed 0, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mSystArrTester:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mTPU syst arr test[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should multiply (1s row) x (1s column)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 9 seconds, 36 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 6[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 2, aborted 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 6, failed 0, canceled 0, ignored 0, pending 0[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mAll tests passed.[0m[0m
 [0m[[0m[0mdebug[0m] [0m[0mPassed tests:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	tpu.SystolicArrayModelTester[0m
+[0m[[0m[0mdebug[0m] [0m[0m	hw1.SystArrTester[0m

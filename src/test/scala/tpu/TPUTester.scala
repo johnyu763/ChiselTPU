@@ -1,0 +1,94 @@
+package hw1
+
+import chisel3._
+import chiseltest._
+import org.scalatest.flatspec.AnyFlatSpec
+
+import hw1.TPUModel.Matrix
+import hw1.TPUParams
+
+import scala.Array
+
+object TPUTestData {
+  def genIdentity(n: Int): Matrix = Array.tabulate(n,n) { (i,j) => if (i==j) 1 else 0 }
+
+  def genOnesRow(n: Int): Matrix = Array(Array.fill(n)(1))
+
+  def genOnesCol(n: Int): Matrix = Array.fill(n)(Array(1))
+
+  val in2x4  = Array(Array(1,2,3,4),
+                   Array(5,6,7,8))
+  val in4x2  = Array(Array(1,2),
+                   Array(3,4),
+                   Array(5,6),
+                   Array(7,8))
+  val out2x2 = Array(Array(50, 60),
+                   Array(114,140))
+  val out4x4 = Array(Array(11, 14, 17, 20),
+                   Array(23, 30, 37, 44),
+                   Array(35, 46, 57, 68),
+                   Array(47, 62, 77, 92))
+
+  val inA3x3 = Array(Array(2, 3, 1),
+                   Array(1, 5, 4),
+                   Array(3, 4, 1))
+  val inAShifted =  Array(Array(2, 1, 3, 0, 0),
+                        Array(0, 3, 5, 4, 0),
+                        Array(0, 0, 1, 4, 1))
+  val inB3x3 = Array(Array(2, 5, 5),
+                   Array(4, 1, 3),
+                   Array(2, 3, 1))
+}
+
+
+class SystArrTester extends AnyFlatSpec with ChiselScalatestTester {
+  def doSystArrTest_noShift(a: Matrix, aShifted: Matrix, b: Matrix): Unit = {
+    val p = TPUParams(aShifted.size, a.head.size, b.head.size)
+    test(new SystArr(p)).withAnnotations(Seq(WriteVcdAnnotation)) { dut =>
+
+      // load b_in with b matrix
+    for (r <- 0 until p.k) {
+        for (c <- 0 until p.n) {
+            dut.io.b_in(r)(c).poke(b(r)(c).S)
+        }
+    }
+    dut.clock.step()
+    print("\n---------------\n")
+    for (r <- 0 until p.k) {
+        for (c <- 0 until p.n) {
+            print(dut.io.b_reg_debug(r)(c).peek())
+            print("\t")
+        }
+        print("\n")
+    }
+      // wait for completion
+    for(clock <- 0 until (p.m + p.n - 1) + p.n){
+        if (clock < p.m + p.n - 1){
+            for (idx <- 0 until p.m) {
+                dut.io.a_in(idx).poke(aShifted(idx)(clock))
+            }
+        }else{
+            for (idx <- 0 until p.m) {
+                dut.io.a_in(idx).poke(0.S(p.w.W))
+            }
+        }
+        print("\n-------c_reg--------\n")
+        for (r <- 0 until p.k) {
+            for (c <- 0 until p.n) {
+                print(dut.io.cmp_debug(r)(c).peek())
+                print("\t")
+            }
+            print("\n")
+        }
+        dut.clock.step()
+    }
+      
+    }
+  }
+
+  behavior of "TPU syst arr test"
+  it should "multiply (1s row) x (1s column)" in {
+    val k = 4
+    doSystArrTest_noShift(TPUTestData.inA3x3, TPUTestData.inAShifted, TPUTestData.inB3x3)
+  }
+}

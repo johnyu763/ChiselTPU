@@ -1,14 +1,25 @@
-[0m[[0m[0mdebug[0m] [0m[0mCreated transactional ClassFileManager with tempDir = /Users/johnyu/Projects/CSE228A/ChiselTPU/target/scala-2.13/test-classes.bak[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreated transactional ClassFileManager with tempDir = /mnt/c/Users/alexl/Documents/cse283_chisel/ChiselTPU/target/scala-2.13/test-classes.bak[0m
 [0m[[0m[0mdebug[0m] [0m[0mAbout to delete class files:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	SystolicArrayModel$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	SystolicArrayModel.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	SystolicArrayModelData$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	SystolicArrayModelTester.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	SystolicArrayModelData.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	SystolicArrayModelTester.class[0m
 [0m[[0m[0mdebug[0m] [0m[0mWe backup class files:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	SystolicArrayModel$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	SystolicArrayModel.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	SystolicArrayModelData$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	SystolicArrayModelTester.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	SystolicArrayModelData.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	SystolicArrayModelTester.class[0m
 [0m[[0m[0mdebug[0m] [0m[0mRegistering generated classes:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	TPUModel.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	SystolicArrayModel$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	SystolicArrayModel.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	TPUTestData$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	TPUTestData.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	SystolicArrayModelData$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	SystolicArrayModelTester.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	SystolicArrayModelData.class[0m
-[0m[[0m[0mdebug[0m] [0m[0mRemoving the temporary directory used for backing up class files: /Users/johnyu/Projects/CSE228A/ChiselTPU/target/scala-2.13/test-classes.bak[0m
+[0m[[0m[0mdebug[0m] [0m[0m	SystArrTester.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	TPUModel$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	SystolicArrayModelTester.class[0m
+[0m[[0m[0mdebug[0m] [0m[0mRemoving the temporary directory used for backing up class files: /mnt/c/Users/alexl/Documents/cse283_chisel/ChiselTPU/target/scala-2.13/test-classes.bak[0m

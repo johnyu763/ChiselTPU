@@ -1,0 +1,387 @@
+$date
+2023-02-27T12:44+0000
+$end
+$version
+0.2
+$end
+$comment
+
+$end
+$timescale 1ns  $end
+$scope module SystArr $end
+ $var wire 8 ! io_b_reg_debug_0_2 $end
+ $var wire 8 " io_b_reg_debug_0_0 $end
+ $var wire 8 # io_b_reg_debug_0_1 $end
+ $var wire 8 $ io_b_in_1_2 $end
+ $var wire 8 % b_reg_2_0 $end
+ $var wire 8 & b_reg_2_2 $end
+ $var wire 8 ' b_reg_2_1 $end
+ $var wire 8 ( io_b_in_0_0 $end
+ $var wire 8 ) io_b_in_0_1 $end
+ $var wire 8 * io_b_in_0_2 $end
+ $var wire 8 + cms_reg_1_2 $end
+ $var wire 8 , cms_reg_1_1 $end
+ $var wire 1 - reset $end
+ $var wire 8 . cms_reg_1_0 $end
+ $var wire 8 / io_b_reg_debug_1_1 $end
+ $var wire 8 0 io_b_reg_debug_1_2 $end
+ $var wire 8 1 io_b_reg_debug_1_0 $end
+ $var wire 8 2 a_reg_2_0 $end
+ $var wire 8 3 a_reg_2_1 $end
+ $var wire 8 4 io_cmp_debug_2_1 $end
+ $var wire 8 5 io_cmp_debug_2_2 $end
+ $var wire 8 6 io_cmp_debug_2_0 $end
+ $var wire 8 7 cms_reg_0_2 $end
+ $var wire 8 8 cms_reg_0_1 $end
+ $var wire 8 9 cms_reg_0_0 $end
+ $var wire 8 : io_b_reg_debug_2_0 $end
+ $var wire 8 ; io_b_reg_debug_2_1 $end
+ $var wire 8 < io_b_reg_debug_2_2 $end
+ $var wire 8 = b_reg_0_0 $end
+ $var wire 8 > b_reg_0_2 $end
+ $var wire 8 ? b_reg_0_1 $end
+ $var wire 1 @ clock $end
+ $var wire 8 A io_b_in_2_0 $end
+ $var wire 8 B a_reg_1_0 $end
+ $var wire 8 C a_reg_1_1 $end
+ $var wire 8 D io_cmp_debug_1_2 $end
+ $var wire 8 E cmp_input_8 $end
+ $var wire 8 F io_cmp_debug_1_0 $end
+ $var wire 8 G cmp_input_7 $end
+ $var wire 8 H io_cmp_debug_1_1 $end
+ $var wire 8 I cmp_input_6 $end
+ $var wire 8 J io_out_2 $end
+ $var wire 8 K io_out_0 $end
+ $var wire 8 L cmp_input_1 $end
+ $var wire 8 M io_out_1 $end
+ $var wire 8 N cmp_input $end
+ $var wire 8 O cmp_input_5 $end
+ $var wire 8 P cmp_input_4 $end
+ $var wire 8 Q cmp_input_3 $end
+ $var wire 8 R cmp_input_2 $end
+ $var wire 8 S io_b_in_2_1 $end
+ $var wire 8 T io_b_in_2_2 $end
+ $var wire 8 U b_reg_1_1 $end
+ $var wire 8 V b_reg_1_0 $end
+ $var wire 8 W b_reg_1_2 $end
+ $var wire 8 X io_b_in_1_0 $end
+ $var wire 8 Y io_b_in_1_1 $end
+ $var wire 8 Z a_reg_0_0 $end
+ $var wire 8 [ a_reg_0_1 $end
+ $var wire 8 \ io_cmp_debug_0_1 $end
+ $var wire 8 ] io_cmp_debug_0_2 $end
+ $var wire 8 ^ io_cmp_debug_0_0 $end
+ $var wire 8 _ cms_reg_2_1 $end
+ $var wire 8 ` io_a_in_1 $end
+ $var wire 8 a cms_reg_2_0 $end
+ $var wire 8 b io_a_in_2 $end
+ $var wire 8 c io_a_in_0 $end
+ $var wire 8 d cms_reg_2_2 $end
+$upscope $end
+$enddefinitions $end
+$dumpvars
+b00000000 c
+b00000000 b
+b00000000 d
+b00000000 _
+b00000000 ^
+b00000000 a
+b00000000 `
+0@
+b00000000 K
+b00000000 J
+b00000000 M
+b00000000 L
+b00000000 G
+b00000000 F
+b00000000 I
+b00000000 H
+b00000000 C
+b00000000 B
+b00000000 E
+b00000000 D
+b00000000 ?
+b00000000 >
+b00000000 A
+b00000000 [
+b00000000 Z
+b00000000 ]
+b00000000 \
+b00000000 W
+b00000000 V
+b00000000 Y
+b00000000 X
+b00000000 S
+b00000000 R
+b00000000 U
+b00000000 T
+b00000000 O
+b00000000 N
+b00000000 Q
+b00000000 P
+b00000000 +
+b00000000 *
+b00000000 ,
+b00000000 '
+b00000000 &
+b00000000 )
+b00000000 (
+b00000000 #
+b00000000 "
+b00000000 %
+b00000000 $
+b00000000 !
+b00000000 ;
+b00000000 :
+b00000000 =
+b00000000 <
+b00000000 7
+b00000000 6
+b00000000 9
+b00000000 8
+b00000000 3
+b00000000 2
+b00000000 5
+b00000000 4
+b00000000 /
+b00000000 .
+b00000000 1
+b00000000 0
+0-
+$end
+#0
+1-
+#1
+1@
+#6
+0@
+b00000010 A
+b00000011 S
+b00000011 $
+b00000001 T
+b00000010 (
+b00000100 X
+b00000101 )
+b00000001 Y
+b00000101 *
+0-
+#11
+1@
+b00000101 !
+b00000010 "
+b00000101 #
+b00000010 %
+b00000001 &
+b00000011 '
+b00000001 /
+b00000011 0
+b00000100 1
+b00000001 U
+b00000100 V
+b00000011 W
+b00000010 :
+b00000011 ;
+b00000001 <
+b00000010 =
+b00000101 >
+b00000101 ?
+#16
+0@
+b00000010 c
+b00000100 N
+#21
+1@
+b00000100 Q
+b00000100 9
+b00000010 Z
+b00001010 L
+b00000100 ^
+#26
+0@
+b00000011 `
+b00010000 Q
+b00000001 c
+b00000010 N
+#31
+1@
+b00000011 B
+b00010000 F
+b00010000 I
+b00000101 L
+b00010000 .
+b00001101 P
+b00001110 Q
+b00001010 R
+b00001010 8
+b00000010 9
+b00000001 Z
+b00000010 [
+b00001010 \
+b00000010 ^
+#36
+0@
+b00000101 `
+b00010110 Q
+b00000001 b
+b00000011 c
+b00010010 I
+b00000110 N
+#41
+1@
+b00000101 B
+b00000011 C
+b00010110 F
+b00010000 G
+b00001101 H
+b00011000 I
+b00010010 K
+b00001111 L
+b00010011 O
+b00001010 P
+b00011010 Q
+b00000101 R
+b00000011 Z
+b00000001 [
+b00000101 \
+b00001010 ]
+b00000110 ^
+b00010010 a
+b00001101 ,
+b00010110 .
+b00000001 2
+b00010010 6
+b00001010 7
+b00000101 8
+b00000110 9
+#46
+0@
+b00000100 `
+b00010110 Q
+b00000100 b
+b00000000 c
+b00011110 I
+b00000000 N
+#51
+1@
+b00000100 B
+b00000101 C
+b00010011 D
+b00010100 E
+b00010110 G
+b00001010 H
+b00011110 K
+b00000000 L
+b00010000 M
+b00010100 O
+b00010011 P
+b00010000 Q
+b00001111 R
+b00000000 Z
+b00000011 [
+b00001111 \
+b00000101 ]
+b00000000 ^
+b00010000 _
+b00011110 a
+b00010011 +
+b00001010 ,
+b00000100 2
+b00000001 3
+b00010000 4
+b00011110 6
+b00000101 7
+b00001111 8
+b00000000 9
+#56
+0@
+b00000000 `
+b00000000 Q
+b00000001 b
+b00011000 I
+#61
+1@
+b00000000 B
+b00000100 C
+b00010100 D
+b00011000 E
+b00000000 F
+b00010011 H
+b00000010 I
+b00010100 J
+b00011000 K
+b00010110 M
+b00011011 O
+b00000000 P
+b00000000 R
+b00000000 [
+b00000000 \
+b00001111 ]
+b00010110 _
+b00011000 a
+b00010100 d
+b00010100 +
+b00010011 ,
+b00000000 .
+b00000001 2
+b00000100 3
+b00010110 4
+b00010100 5
+b00011000 6
+b00001111 7
+b00000000 8
+#66
+0@
+b00000000 b
+b00000000 I
+#71
+1@
+b00000000 a
+b00000000 C
+b00011011 D
+b00011000 d
+b00011100 E
+b00000000 G
+b00000000 H
+b00011000 J
+b00011011 +
+b00000000 K
+b00000000 ,
+b00000000 O
+b00000000 2
+b00000001 3
+b00011000 5
+b00000000 6
+b00000000 7
+b00000000 ]
+#76
+0@
+#81
+1@
+b00000000 3
+b00000000 4
+b00000000 D
+b00011100 d
+b00011100 5
+b00000000 E
+b00011100 J
+b00000000 +
+b00000000 M
+b00000000 _
+#86
+0@
+#91
+1@
+b00000000 d
+b00000000 5
+b00000000 J
+#96
+0@
+b00000000 A
+b00000000 S
+b00000000 $
+b00000000 T
+b00000000 (
+b00000000 X
+b00000000 )
+b00000000 Y
+b00000000 *

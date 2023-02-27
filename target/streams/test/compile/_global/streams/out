@@ -1,8 +1,14 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala:31:7: a4x4 is already defined as value a4x4[0m
-[0m[[0m[31merror[0m] [0m[0m  val a4x4 = Seq(Seq(1,2,3),[0m
-[0m[[0m[31merror[0m] [0m[0m      ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModelTest.scala:78:50: value a4x3 is not a member of object tpu.SystolicArrayModelData[0m
-[0m[[0m[31merror[0m] [0m[0mdid you mean a4x4?[0m
-[0m[[0m[31merror[0m] [0m[0m    assert(sam.getStagger(SystolicArrayModelData.a4x3) == SystolicArrayModelData.staggerAns4x3)[0m
-[0m[[0m[31merror[0m] [0m[0m                                                 ^[0m
-[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
+[0m[[0m[0minfo[0m] [0m[0m/mnt/c/Users/alexl/Documents/cse283_chisel/ChiselTPU/src/test/scala/tpu/TPUModelTester.scala:1:1: [0m
+[0m[[0m[0minfo[0m] [0m[0mFound names but no class, trait or object is defined in the compilation unit.[0m
+[0m[[0m[0minfo[0m] [0m[0mThe incremental compiler cannot record the dependency information in such case.[0m
+[0m[[0m[0minfo[0m] [0m[0mSome errors like unused import referring to a non-existent class might not be reported.[0m
+[0m[[0m[0minfo[0m] [0m[0m    [0m
+[0m[[0m[0minfo[0m] [0m[0mpackage hw1[0m
+[0m[[0m[0minfo[0m] [0m[0m^[0m
+[0m[[0m[0minfo[0m] [0m[0m/mnt/c/Users/alexl/Documents/cse283_chisel/ChiselTPU/src/test/scala/tpu/TPUModelTester.scala:1:1: [0m
+[0m[[0m[0minfo[0m] [0m[0mFound top level imports but no class, trait or object is defined in the compilation unit.[0m
+[0m[[0m[0minfo[0m] [0m[0mThe incremental compiler cannot record the dependency information in such case.[0m
+[0m[[0m[0minfo[0m] [0m[0mSome errors like unused import referring to a non-existent class might not be reported.[0m
+[0m[[0m[0minfo[0m] [0m[0m    [0m
+[0m[[0m[0minfo[0m] [0m[0mpackage hw1[0m
+[0m[[0m[0minfo[0m] [0m[0m^[0m
