@@ -1,1 +1,1 @@
-["tpu.SystolicArrayModelTester","hw1.SystArrTester"]
+["tpu.TPUTester","tpu.SystArrTester","tpu.SystolicArrayModelTester"]

@@ -1,11 +1,11 @@
-package hw1
+package tpu
 
 import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
 
-import hw1.TPUModel.Matrix
-import hw1.TPUParams
+import tpu.TPUModel.Matrix
+import tpu.TPUParams
 
 import scala.Array
 
@@ -53,14 +53,14 @@ class SystArrTester extends AnyFlatSpec with ChiselScalatestTester {
         }
     }
     dut.clock.step()
-    print("\n---------------\n")
-    for (r <- 0 until p.k) {
-        for (c <- 0 until p.n) {
-            print(dut.io.b_reg_debug(r)(c).peek())
-            print("\t")
-        }
-        print("\n")
-    }
+    // print("\n---------------\n")
+    // for (r <- 0 until p.k) {
+    //     for (c <- 0 until p.n) {
+    //         print(dut.io.b_reg_debug(r)(c).peek())
+    //         print("\t")
+    //     }
+    //     print("\n")
+    // }
       // wait for completion
     for(clock <- 0 until (p.m + p.n - 1) + p.n){
         if (clock < p.m + p.n - 1){
@@ -72,14 +72,14 @@ class SystArrTester extends AnyFlatSpec with ChiselScalatestTester {
                 dut.io.a_in(idx).poke(0.S(p.w.W))
             }
         }
-        print("\n-------c_reg--------\n")
-        for (r <- 0 until p.k) {
-            for (c <- 0 until p.n) {
-                print(dut.io.cmp_debug(r)(c).peek())
-                print("\t")
-            }
-            print("\n")
-        }
+        // print("\n-------c_reg--------\n")
+        // for (r <- 0 until p.k) {
+        //     for (c <- 0 until p.n) {
+        //         print(dut.io.cmp_debug(r)(c).peek())
+        //         print("\t")
+        //     }
+        //     print("\n")
+        // }
         dut.clock.step()
     }
       
@@ -90,5 +90,69 @@ class SystArrTester extends AnyFlatSpec with ChiselScalatestTester {
   it should "multiply (1s row) x (1s column)" in {
     val k = 4
     doSystArrTest_noShift(TPUTestData.inA3x3, TPUTestData.inAShifted, TPUTestData.inB3x3)
+  }
+}
+
+class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
+  def doTPUTest(a: Matrix, b: Matrix): Unit = {
+    val p = TPUParams(a.size, a.head.size, b.head.size)
+    test(new ChiselTPU(p)).withAnnotations(Seq(WriteVcdAnnotation)) { dut =>
+
+      // load a with a matrix
+    for (r <- 0 until p.m) {
+        for (c <- 0 until p.k) {
+            dut.io.a(r)(c).poke(a(r)(c).S)
+        }
+    }
+
+     // load b with b matrix
+    for (r <- 0 until p.k) {
+        for (c <- 0 until p.n) {
+            dut.io.b(r)(c).poke(b(r)(c).S)
+        }
+    }
+    dut.clock.step()
+
+    for(i <- 0 until p.k+p.m+p.k){
+      dut.clock.step()
+    }
+    
+    // print("\n---------------\n")
+    // for (r <- 0 until p.k) {
+    //     for (c <- 0 until p.n) {
+    //         print(dut.io.b_reg_debug(r)(c).peek())
+    //         print("\t")
+    //     }
+    //     print("\n")
+    // }
+    //   // wait for completion
+    // for(clock <- 0 until (p.m + p.n - 1) + p.n){
+    //     if (clock < p.m + p.n - 1){
+    //         for (idx <- 0 until p.m) {
+    //             dut.io.a_in(idx).poke(aShifted(idx)(clock))
+    //         }
+    //     }else{
+    //         for (idx <- 0 until p.m) {
+    //             dut.io.a_in(idx).poke(0.S(p.w.W))
+    //         }
+    //     }
+    //     print("\n-------c_reg--------\n")
+    //     for (r <- 0 until p.k) {
+    //         for (c <- 0 until p.n) {
+    //             print(dut.io.cmp_debug(r)(c).peek())
+    //             print("\t")
+    //         }
+    //         print("\n")
+    //     }
+    //     dut.clock.step()
+    // }
+      
+    }
+  }
+
+  behavior of "TPU test"
+  it should "stagger a" in {
+    // val k = 4
+    doTPUTest(TPUTestData.inA3x3, TPUTestData.inB3x3)
   }
 }
