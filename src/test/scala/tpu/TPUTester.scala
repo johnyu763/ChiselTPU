@@ -97,23 +97,41 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
   def doTPUTest(a: Matrix, b: Matrix): Unit = {
     val p = TPUParams(a.size, a.head.size, b.head.size)
     test(new ChiselTPU(p)).withAnnotations(Seq(WriteVcdAnnotation)) { dut =>
-
+    
+    dut.io.a.valid.poke(true.B)
+    dut.io.a.ready.expect(true.B)
       // load a with a matrix
     for (r <- 0 until p.m) {
         for (c <- 0 until p.k) {
-            dut.io.a(r)(c).poke(a(r)(c).S)
+            dut.io.a.bits(r)(c).poke(a(r)(c).S)
         }
     }
-
+    
+    dut.io.b.valid.poke(true.B)
+    dut.io.b.ready.expect(true.B)
      // load b with b matrix
     for (r <- 0 until p.k) {
         for (c <- 0 until p.n) {
-            dut.io.b(r)(c).poke(b(r)(c).S)
+            dut.io.b.bits(r)(c).poke(b(r)(c).S)
         }
     }
     dut.clock.step()
 
-    for(i <- 0 until p.k+p.m+p.k){
+    for(i <- 0 until p.k+p.m+p.k+3){
+      dut.clock.step()
+    }
+
+    dut.io.b.valid.poke(true.B)
+    dut.io.b.ready.expect(true.B)
+     // load b with next b matrix
+    for (r <- 0 until p.k) {
+        for (c <- 0 until p.n) {
+            dut.io.b.bits(r)(c).poke(a(r)(c).S)
+        }
+    }
+    dut.clock.step()
+    
+    for(i <- 0 until p.k+p.m+p.k+3){
       dut.clock.step()
     }
     

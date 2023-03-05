@@ -556,3 +556,122 @@ WARNING: Unmatched cancel notification for request id 12820
 2023.03.04 00:00:04 WARN  Using indexes to guess the definition of systArr[0m
 2023.03.04 00:00:04 WARN  Using indexes to guess the definition of io[0m
 2023.03.04 00:00:05 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 00:03:58 WARN  Using indexes to guess the definition of cycle[0m
+2023.03.04 00:03:59 WARN  Using indexes to guess the definition of cycle[0m
+2023.03.04 00:04:00 WARN  Using indexes to guess the definition of n[0m
+2023.03.04 00:04:00 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 17:37:36 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 17:41:41 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 17:41:58 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 17:51:55 WARN  Using indexes to guess the definition of state[0m
+2023.03.04 17:51:55 WARN  Using indexes to guess the definition of io[0m
+Mar 04, 2023 5:52:14 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 15152
+2023.03.04 17:52:38 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 17:53:11 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+Mar 04, 2023 5:54:01 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 15337
+2023.03.04 17:54:10 WARN  Using indexes to guess the definition of k[0m
+2023.03.04 17:55:14 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 17:55:18 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 17:55:28 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 17:55:34 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 17:55:40 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+Mar 04, 2023 5:56:22 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 15644
+2023.03.04 17:56:30 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+Mar 04, 2023 5:57:27 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 15735
+2023.03.04 17:57:31 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 17:57:31 WARN  Using indexes to guess the definition of reset[0m
+2023.03.04 17:58:14 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 17:58:43 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/TPUTester.scala[0m
+Mar 04, 2023 5:59:24 PM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: 0
+java.lang.IndexOutOfBoundsException: 0
+	at scala.collection.LinearSeqOps.apply(LinearSeq.scala:131)
+	at scala.collection.LinearSeqOps.apply$(LinearSeq.scala:128)
+	at scala.collection.immutable.List.apply(List.scala:79)
+	at dotty.tools.dotc.util.Signatures$.countParams(Signatures.scala:501)
+	at dotty.tools.dotc.util.Signatures$.applyCallInfo(Signatures.scala:186)
+	at dotty.tools.dotc.util.Signatures$.computeSignatureHelp(Signatures.scala:94)
+	at dotty.tools.dotc.util.Signatures$.signatureHelp(Signatures.scala:63)
+	at scala.meta.internal.pc.MetalsSignatures$.signatures(MetalsSignatures.scala:21)
+	at scala.meta.internal.pc.SignatureHelpProvider$.signatureHelp(SignatureHelpProvider.scala:51)
+
+Mar 04, 2023 5:59:33 PM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: 0
+java.lang.IndexOutOfBoundsException: 0
+	at scala.collection.LinearSeqOps.apply(LinearSeq.scala:131)
+	at scala.collection.LinearSeqOps.apply$(LinearSeq.scala:128)
+	at scala.collection.immutable.List.apply(List.scala:79)
+	at dotty.tools.dotc.util.Signatures$.countParams(Signatures.scala:501)
+	at dotty.tools.dotc.util.Signatures$.applyCallInfo(Signatures.scala:186)
+	at dotty.tools.dotc.util.Signatures$.computeSignatureHelp(Signatures.scala:94)
+	at dotty.tools.dotc.util.Signatures$.signatureHelp(Signatures.scala:63)
+	at scala.meta.internal.pc.MetalsSignatures$.signatures(MetalsSignatures.scala:21)
+	at scala.meta.internal.pc.SignatureHelpProvider$.signatureHelp(SignatureHelpProvider.scala:51)
+
+2023.03.04 17:59:35 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/TPUTester.scala[0m
+2023.03.04 18:01:00 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+Mar 04, 2023 6:02:52 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 16473
+2023.03.04 18:02:56 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 18:02:56 WARN  Using indexes to guess the definition of io[0m
+Mar 04, 2023 6:02:56 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 16494
+2023.03.04 18:03:11 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 18:03:11 WARN  Using indexes to guess the definition of k[0m
+2023.03.04 18:05:12 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 18:05:45 WARN  Using indexes to guess the definition of io[0m
+2023.03.04 18:05:51 WARN  Using indexes to guess the definition of io[0m
+2023.03.04 18:09:02 WARN  Using indexes to guess the definition of io[0m
+2023.03.04 18:09:07 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 18:09:51 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/TPUTester.scala[0m
+2023.03.04 18:11:21 WARN  Using indexes to guess the definition of io[0m
+2023.03.04 18:11:40 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+Mar 04, 2023 6:12:15 PM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: 0
+java.lang.IndexOutOfBoundsException: 0
+	at scala.collection.LinearSeqOps.apply(LinearSeq.scala:131)
+	at scala.collection.LinearSeqOps.apply$(LinearSeq.scala:128)
+	at scala.collection.immutable.List.apply(List.scala:79)
+	at dotty.tools.dotc.util.Signatures$.countParams(Signatures.scala:501)
+	at dotty.tools.dotc.util.Signatures$.applyCallInfo(Signatures.scala:186)
+	at dotty.tools.dotc.util.Signatures$.computeSignatureHelp(Signatures.scala:94)
+	at dotty.tools.dotc.util.Signatures$.signatureHelp(Signatures.scala:63)
+	at scala.meta.internal.pc.MetalsSignatures$.signatures(MetalsSignatures.scala:21)
+	at scala.meta.internal.pc.SignatureHelpProvider$.signatureHelp(SignatureHelpProvider.scala:51)
+
+2023.03.04 18:12:32 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/TPUTester.scala[0m
+2023.03.04 18:12:54 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 18:13:35 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/TPUTester.scala[0m
+2023.03.04 18:13:46 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/TPUTester.scala[0m
+2023.03.04 18:14:06 WARN  Using indexes to guess the definition of myOut[0m
+2023.03.04 18:14:49 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 18:15:23 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 18:15:39 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+Mar 04, 2023 6:15:47 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 17496
+2023.03.04 18:15:54 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 18:16:03 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 18:16:04 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 18:16:26 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 18:16:36 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 18:17:41 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 18:17:47 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 18:17:47 WARN  Using indexes to guess the definition of io[0m
+2023.03.04 18:17:55 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 18:18:03 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/TPUTester.scala[0m
+2023.03.04 18:18:11 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/TPUTester.scala[0m
+2023.03.04 18:18:17 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/TPUTester.scala[0m
+2023.03.04 18:18:19 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/TPUTester.scala[0m
+2023.03.04 18:18:30 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/TPUTester.scala[0m
+2023.03.04 18:19:33 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/TPUTester.scala[0m
+2023.03.04 18:19:43 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/TPUTester.scala[0m
+2023.03.04 18:19:44 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/TPUTester.scala[0m
+2023.03.04 18:20:34 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 18:20:56 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 18:21:09 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 18:22:04 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 18:23:48 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m

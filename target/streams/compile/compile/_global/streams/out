@@ -1,7 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:88:22: not found: value myOut[0m
-[0m[[0m[31merror[0m] [0m[0m    for(i <- 0 until myOut.size){[0m
-[0m[[0m[31merror[0m] [0m[0m                     ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:89:19: not found: value myOut[0m
-[0m[[0m[31merror[0m] [0m[0m      printf(cf"${myOut(i)}\n")[0m
-[0m[[0m[31merror[0m] [0m[0m                  ^[0m
-[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:11:37: value j is not a member of tpu.TPUParams[0m
+[0m[[0m[31merror[0m] [0m[0m    val b = Flipped(Decoupled(Vec(p.j, Vec(p.n, SInt(p.w.W)))))[0m
+[0m[[0m[31merror[0m] [0m[0m                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

@@ -7,62 +7,69 @@ case class TPUParams(m: Int, k: Int, n: Int, w: Int = 8) {
 }
 class ChiselTPU(p: TPUParams) extends Module{
   val io = IO(new Bundle{
-    val a = Input(Vec(p.m, Vec(p.k, SInt(p.w.W))))
-    val b = Input(Vec(p.k, Vec(p.n, SInt(p.w.W))))
+    val a = Flipped(Decoupled(Vec(p.m, Vec(p.k, SInt(p.w.W)))))
+    val b = Flipped(Decoupled(Vec(p.k, Vec(p.n, SInt(p.w.W)))))
     val out = Output(Vec(p.m, Vec(p.n, SInt(p.w.W))))
   })
-  val (cycle, wrap) = Counter(true.B, p.k+p.m+p.k) //assume input is valid for now
+  val load :: fill :: multiply :: clear :: Nil = Enum(4)
+  val state = RegInit(load)
+  val (cycle, wrap) = Counter(state === multiply, p.k+p.m+p.k+1) //assume input is valid for now
   
   val actReg = Module(new ActReg(p))
-  val systParams = TPUParams(p.k, io.a.head.size, io.b.head.size)
+  val systParams = TPUParams(p.k, io.a.bits.head.size, io.b.bits.head.size)
   val systArr = Module(new SystArr(systParams))
-  // val myOut = RegInit(VecInit.tabulate(p.m){
-  //   i => VecInit.tabulate(p.n){
-  //     j => 0.S
-  //   }
-  // })
-  
   val myOut = RegInit(VecInit.fill(p.m, p.n)(0.S(p.w.W)))
+  val a_ready = RegInit(true.B)
+  val b_ready = RegInit(true.B)
+
+  io.a.ready := a_ready
+  io.b.ready := b_ready
   io.out := myOut
-  // io.out := RegInit(VecInit.fill(p.m, p.n)(0.S))
 
+  //initialize inputs for submodules
   actReg.io.index := (p.k+p.m-2).U-cycle
-  actReg.io.a := io.a
   systArr.io.a_in := RegNext(actReg.io.a_out)
-  systArr.io.b_in := io.b
-  // // printf(cf"TPU A OUT\n")
-  // // for(i <- 0 until actReg.io.a_out.size){
-  // //   printf(cf"${actReg.io.a_out(i)}\n")
-  // // }
-  //  printf(cf"\nMY A_IN:\n")
-  //   for(i <- 0 until systArr.io.a_in.size){
-  //     printf(cf"${systArr.io.a_in(i)}\n")
-  //   }
-  //   printf(cf"MY B_IN:\n")
-  //   for(i <- 0 until systArr.io.b_in.size){
-  //     printf(cf"${systArr.io.b_in(i)}\n")
-  //   }
-  //   // printf(cf"MY A_REG:\n")
-  //   // for(i <- 0 until systArr.a_reg.size){
-  //   //   printf(cf"${systArr.a_reg(i)}\n")
-  //   // }
+  val act_in = RegInit(VecInit.fill(p.m, p.k)(0.S(p.w.W)))
+  val syst_in = RegInit(VecInit.fill(p.k, p.n)(0.S(p.w.W)))
+  actReg.io.a := act_in
+  systArr.io.b_in := syst_in
 
-  //   printf(cf"MY OUT:\n")
-  //   for(i <- 0 until systArr.io.out.size){
-  //     printf(cf"${systArr.io.out(i)}\n")
-  //   }
-  
-  // io.out := io.a
-  for(i <- 0 until systArr.io.out.size){
-    when(cycle > (p.n+i).U && cycle < (p.n+p.n+1+i).U){
-      myOut(cycle - (p.n+i+1).U)(i.U) := systArr.io.out(i.U)
+  when(state === load){ 
+      when(io.a.valid && io.a.ready){
+        state := fill
+        act_in := io.a.bits
+        a_ready := false.B
+      }
+  }
+  .elsewhen(state === fill){
+      when(io.b.valid && io.b.ready){
+        state := multiply
+        syst_in := io.b.bits
+        b_ready := false.B
+      }
+      cycle := 0.U
+  }
+  .elsewhen(state === multiply){
+    when(cycle === (p.k+p.m+p.k).U){
+      state := clear
+    }
+    for(i <- 0 until systArr.io.out.size){
+      when(cycle > (p.n+i).U && cycle < (p.n+p.n+1+i).U){
+        myOut(cycle - (p.n+i+1).U)(i.U) := systArr.io.out(i.U)
+      }
+    }
+    printf(cf"MY TPU OUT: \n")
+    for(i <- 0 until myOut.size){
+      printf(cf"${myOut(i)}\n")
     }
   }
-
-  printf(cf"MY TPU OUT: \n")
-  for(i <- 0 until myOut.size){
-    printf(cf"${myOut(i)}\n")
+  .elsewhen(state === clear){
+    printf(cf"FINISH\n")
+    state := fill
+    b_ready := true.B
+    myOut := VecInit.fill(p.m, p.n)(0.S(p.w.W))
   }
+  
 }
 
 class ActReg(p: TPUParams) extends Module{
