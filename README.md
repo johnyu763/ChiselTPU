@@ -21,7 +21,7 @@ This is a module for [Chisel](chisel-lang.org/) that mimics a TPU that allows th
 
 ## How to?
 
-### Test thhe code
+### Test the code
 ```console
 sbt test
 ```
