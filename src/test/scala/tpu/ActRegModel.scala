@@ -1,16 +1,17 @@
+
 package tpu
-import SystolicArrayModel.Matrix
+import tpu.ActRegModel.Matrix
 import scala.collection.mutable.ArrayBuffer
 
-object SystolicArrayModel {
+object ActRegModel {
     type Matrix = Seq[Seq[Int]]
-    def apply(a: Matrix, b: Matrix): SystolicArrayModel = {
+    def apply(a: Matrix, b: Matrix): ActRegModel = {
       assert(a.head.size == b.size)
-      return new SystolicArrayModel(a, b)
+      return new ActRegModel(a, b)
     }
 }
 
-class SystolicArrayModel(a: Matrix, b: Matrix) {
+class ActRegModel(a: Matrix, b: Matrix) {
     
     def getStagger(a: Matrix) : Matrix = {
       val width = (a.size + a.head.size)-1

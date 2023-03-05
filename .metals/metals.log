@@ -675,3 +675,33 @@ WARNING: Unmatched cancel notification for request id 17496
 2023.03.04 18:21:09 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
 2023.03.04 18:22:04 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
 2023.03.04 18:23:48 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+2023.03.04 18:37:31 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/SystolicArrayModel.scala[0m
+2023.03.04 18:37:42 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModel.scala[0m
+2023.03.04 18:37:50 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModelTest.scala[0m
+2023.03.04 18:38:53 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModelTest.scala[0m
+2023.03.04 18:39:12 WARN  Using indexes to guess the definition of ActRegModelData[0m
+2023.03.04 18:40:03 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModelTest.scala[0m
+2023.03.04 18:40:19 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModelTest.scala[0m
+2023.03.04 18:40:19 WARN  Using indexes to guess the definition of Matrix[0m
+2023.03.04 18:40:30 WARN  Using indexes to guess the definition of a2[0m
+2023.03.04 18:40:36 WARN  Using indexes to guess the definition of a4x4[0m
+2023.03.04 18:40:39 WARN  Using indexes to guess the definition of staggerAns4x4[0m
+2023.03.04 18:40:39 WARN  Using indexes to guess the definition of ActRegModelData[0m
+2023.03.04 18:40:42 WARN  Using indexes to guess the definition of a4x3[0m
+2023.03.04 18:40:45 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModelTest.scala[0m
+2023.03.04 18:40:55 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModel.scala[0m
+2023.03.04 18:41:25 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModelTest.scala[0m
+2023.03.04 18:42:06 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModel.scala[0m
+2023.03.04 18:42:17 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModel.scala[0m
+2023.03.04 18:42:45 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModel.scala[0m
+2023.03.04 18:42:54 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModel.scala[0m
+2023.03.04 18:42:57 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModel.scala[0m
+2023.03.04 18:43:06 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModel.scala[0m
+2023.03.04 18:43:09 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModel.scala[0m
+2023.03.04 18:43:12 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModel.scala[0m
+2023.03.04 18:43:36 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModelTest.scala[0m
+2023.03.04 18:43:38 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModelTest.scala[0m
+2023.03.04 18:44:16 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModelTest.scala[0m
+2023.03.04 18:44:30 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModelTest.scala[0m
+2023.03.04 18:44:50 WARN  Using indexes to guess the definition of ActRegModel[0m
+2023.03.04 18:44:51 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModelTest.scala[0m

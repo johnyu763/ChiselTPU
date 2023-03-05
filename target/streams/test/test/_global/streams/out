@@ -1,8 +1,8 @@
-[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(tpu.TPUTester, org.scalatest.tools.Framework$$anon$1@1637dcce, false, [SuiteSelector])[0m
-[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(tpu.SystArrTester, org.scalatest.tools.Framework$$anon$1@1637dcce, false, [SuiteSelector])[0m
-[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(tpu.SystolicArrayModelTester, org.scalatest.tools.Framework$$anon$1@1637dcce, false, [SuiteSelector])[0m
-[0m[[0m[0minfo[0m] [0m[0m[32mSystolicArrayModelTester:[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32mSystolicArrayModel[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(tpu.TPUTester, org.scalatest.tools.Framework$$anon$1@1726c2ec, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(tpu.ActRegModelTester, org.scalatest.tools.Framework$$anon$1@1726c2ec, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(tpu.SystArrTester, org.scalatest.tools.Framework$$anon$1@1726c2ec, false, [SuiteSelector])[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mActRegModelTester:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mActRegModel[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should get the staggered input array[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should get the staggered input array 2[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should get the staggered input array 4x4[0m[0m
@@ -14,7 +14,7 @@
 [0m[[0m[0minfo[0m] [0m[0m[32mTPUTester:[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mTPU test[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should stagger a[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 1 second, 405 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 1 second, 429 milliseconds.[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 7[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 3, aborted 0[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 7, failed 0, canceled 0, ignored 0, pending 0[0m[0m
@@ -22,4 +22,4 @@
 [0m[[0m[0mdebug[0m] [0m[0mPassed tests:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	tpu.TPUTester[0m
 [0m[[0m[0mdebug[0m] [0m[0m	tpu.SystArrTester[0m
-[0m[[0m[0mdebug[0m] [0m[0m	tpu.SystolicArrayModelTester[0m
+[0m[[0m[0mdebug[0m] [0m[0m	tpu.ActRegModelTester[0m

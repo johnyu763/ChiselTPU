@@ -1,13 +1,14 @@
-package tpu
 
+package tpu
 import chisel3._
 import chiseltest._
 import org.scalatest.flatspec.AnyFlatSpec
 
-import tpu.SystolicArrayModel.Matrix
+import tpu.ActRegModel
+import tpu.ActRegModel.Matrix
 import scala.collection.mutable.ArrayBuffer
 
-object SystolicArrayModelData {
+object ActRegModelData {
   def genIdentity(n: Int): Matrix = Seq.tabulate(n,n) { (i,j) => if (i==j) 1 else 0 }
 
   def genOnesRow(n: Int): Matrix = Seq(Seq.fill(n)(1))
@@ -64,30 +65,27 @@ object SystolicArrayModelData {
 }
 
 
-class SystolicArrayModelTester extends AnyFlatSpec with ChiselScalatestTester {
-  behavior of "SystolicArrayModel"
+class ActRegModelTester extends AnyFlatSpec with ChiselScalatestTester {
+  val sam = new ActRegModel(ActRegModelData.a, ActRegModelData.b)
+
+  behavior of "ActRegModel"
   it should "get the staggered input array" in {
-    val sam = SystolicArrayModel(SystolicArrayModelData.a, SystolicArrayModelData.b)
-    assert(sam.getStagger(SystolicArrayModelData.a) == SystolicArrayModelData.staggerAns)
+    assert(sam.getStagger(ActRegModelData.a) == ActRegModelData.staggerAns)
   }
 
   it should "get the staggered input array 2" in {
-    val sam = SystolicArrayModel(SystolicArrayModelData.a, SystolicArrayModelData.b)
-    assert(sam.getStagger(SystolicArrayModelData.a2) == SystolicArrayModelData.staggerAns2)
+    assert(sam.getStagger(ActRegModelData.a2) == ActRegModelData.staggerAns2)
   }
 
   it should "get the staggered input array 4x4" in {
-    val sam = SystolicArrayModel(SystolicArrayModelData.a, SystolicArrayModelData.b)
-    assert(sam.getStagger(SystolicArrayModelData.a4x4) == SystolicArrayModelData.staggerAns4x4)
+    assert(sam.getStagger(ActRegModelData.a4x4) == ActRegModelData.staggerAns4x4)
   }
 
   it should "get the staggered input array 4x3" in {
-    val sam = SystolicArrayModel(SystolicArrayModelData.a, SystolicArrayModelData.b)
-    assert(sam.getStagger(SystolicArrayModelData.a4x3) == SystolicArrayModelData.staggerAns4x3)
+    assert(sam.getStagger(ActRegModelData.a4x3) == ActRegModelData.staggerAns4x3)
   }
 
   it should "get the staggered input array 3x4" in {
-    val sam = SystolicArrayModel(SystolicArrayModelData.a, SystolicArrayModelData.b)
-    assert(sam.getStagger(SystolicArrayModelData.a3x4) == SystolicArrayModelData.staggerAns3x4)
+    assert(sam.getStagger(ActRegModelData.a3x4) == ActRegModelData.staggerAns3x4)
   }
 }
