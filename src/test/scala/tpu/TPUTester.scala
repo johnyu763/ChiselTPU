@@ -116,9 +116,63 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
         }
     }
     dut.clock.step()
-
     for(i <- 0 until p.k+p.m+p.k+2){
-      dut.clock.step()
+        print("-----BEFORE:arrRegs out-----\n")
+        for (cmp_i <- 0 until p.k) {
+          print(dut.io.debug_a_out(cmp_i).peek())
+          print("  ")
+        }
+        print("\n")
+        print("-----BEFORE:cycle out-----\n")
+        print(dut.io.debug_cycleOut.peek())
+        print("\n")
+        print("-----BEFORE:00-----\n")
+        print(dut.io.debug_00.peek())
+        print("\n")
+        print("-----b before is in syst arr:-----\n")
+        for (r <- 0 until p.k) {
+            for (c <- 0 until p.n) {
+                print(dut.io.debug_b_regs(r)(c).peek())
+                print(" ")
+            }
+            print("\n")
+        }
+        dut.clock.step()
+        print("-----b after is in syst arr:-----\n")
+        for (r <- 0 until p.k) {
+            for (c <- 0 until p.n) {
+                print(dut.io.debug_b_regs(r)(c).peek())
+                print(" ")
+            }
+            print("\n")
+        }
+        print("-----AFTER:cycle out-----\n")
+        print(dut.io.debug_cycleOut.peek())
+        print("\n")       
+        print("-----AFTER:00-----\n")
+        print(dut.io.debug_00.peek())
+        print("\n") 
+        print("-----arrRegs out-----\n")
+        for (cmp_i <- 0 until p.k) {
+          print(dut.io.debug_a_out(cmp_i).peek())
+          print("  ")
+        }
+        print("\n")
+        print("-----a regs-----\n")
+        for (cmp_i <- 0 until p.k) {
+          for (cmp_j <- 0 until p.m) {
+            print(dut.io.debug_a_regs(cmp_i)(cmp_j).peek())
+          }
+          print("\n")
+        }
+        print("-----syst arr-----\n")
+        for (cmp_i <- 0 until p.k) {
+          for (cmp_j <- 0 until p.n) {
+            print(dut.io.debug_1(cmp_i)(cmp_j).peek())
+          }
+          print("\n")
+        }
+        print("\n")
     }
 
     //check output 1
@@ -183,7 +237,8 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
   it should "stagger a" in {
     // val k = 4
     // doTPUTest(TPUTestData.inA3x3, TPUTestData.inB3x3)
-    doTPUTest(TPUTestData.in2x4, TPUTestData.in4x2)
+    // doTPUTest(TPUTestData.in2x4, TPUTestData.in4x2)
+    doTPUTest(TPUTestData.in4x2, TPUTestData.in2x4)
   }
 
   // behavior of "TPU test"
