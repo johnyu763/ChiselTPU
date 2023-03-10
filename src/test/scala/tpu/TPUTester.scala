@@ -117,10 +117,18 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
     }
     dut.clock.step()
 
-    for(i <- 0 until p.k+p.m+p.k+3){
+    for(i <- 0 until p.k+p.m+p.k+2){
       dut.clock.step()
     }
 
+    //check output 1
+    val expected = MatMulModel(p, a, b)
+    for (r <- 0 until p.cRows) {
+      for (c <- 0 until p.cCols) {
+        dut.io.out(r)(c).expect(expected(r)(c).S)
+      }
+    }
+    dut.clock.step()
     dut.io.b.valid.poke(true.B)
     dut.io.b.ready.expect(true.B)
      // load b with next b matrix
@@ -134,7 +142,10 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
     for(i <- 0 until p.k+p.m+p.k+3){
       dut.clock.step()
     }
-    
+
+
+    dut.clock.step()
+
     // print("\n---------------\n")
     // for (r <- 0 until p.k) {
     //     for (c <- 0 until p.n) {
@@ -171,6 +182,13 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
   behavior of "TPU test"
   it should "stagger a" in {
     // val k = 4
-    doTPUTest(TPUTestData.inA3x3, TPUTestData.inB3x3)
+    // doTPUTest(TPUTestData.inA3x3, TPUTestData.inB3x3)
+    doTPUTest(TPUTestData.in2x4, TPUTestData.in4x2)
   }
+
+  // behavior of "TPU test"
+  // it should "stagger b" in {
+  //   // val k = 4
+  //   doTPUTest(TPUTestData.inA3x3, TPUTestData.inB3x3)
+  // }
 }

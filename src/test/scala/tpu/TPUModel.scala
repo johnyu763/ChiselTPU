@@ -3,6 +3,28 @@ package tpu
 //import CacheModel.CacheBlockModel
 import scala.collection.mutable.ArrayBuffer
 
+object MatMulModel {
+  type Matrix = Array[Array[Int]]
+
+  def apply(p: TPUParams, a: Matrix, b: Matrix): Matrix = {
+    assert(a.size == p.aRows)
+    assert(a.head.size == p.aCols)
+    assert(b.size == p.bRows)
+    assert(b.head.size == p.bCols)
+
+    // BEGIN SOLUTION
+    var arrOut : Array[Array[Int]]  = Array.fill(p.aRows)( Array.fill(p.bCols)( 0 ) )
+    for(cRows <- 0 until p.bCols){
+        for(cCols <- 0 until p.aRows){
+            for(innerI <- 0 until p.aCols){
+                arrOut(cCols)(cRows) = arrOut(cCols)(cRows) + a(cCols)(innerI) * b(innerI)(cRows)
+            }
+        }
+    }
+    return arrOut
+  }
+}
+
 class TPUModel(p: TPUParams) {
     val m=p.m
     val k=p.k

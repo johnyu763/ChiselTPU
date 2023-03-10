@@ -2,8 +2,18 @@ package tpu
 import chisel3._
 import chisel3.util._
 import chisel3.util.log2Ceil
+import chisel3.internal.firrtl.Width
 
-case class TPUParams(m: Int, k: Int, n: Int, w: Int = 8) {
+case class TPUParams(m: Int, k: Int, n: Int) {
+  // A (m x k) X B (k x n) = C (m x k)
+  val aRows: Int = m
+  val aCols: Int = k
+  val bRows: Int = k
+  val bCols: Int = n
+  val cRows: Int = m
+  val cCols: Int = n
+  // Implementation details
+  val w: Int = 32
 }
 class ChiselTPU(p: TPUParams) extends Module{
   val io = IO(new Bundle{
@@ -58,16 +68,26 @@ class ChiselTPU(p: TPUParams) extends Module{
         myOut(cycle - (p.n+i+1).U)(i.U) := systArr.io.out(i.U)
       }
     }
-    printf(cf"MY TPU OUT: \n")
-    for(i <- 0 until myOut.size){
-      printf(cf"${myOut(i)}\n")
-    }
+  //   printf(cf"MY TPU OUT: \n")
+  //   for(i <- 0 until myOut.size){
+  //     printf(cf"${myOut(i)}\n")
+  //   }
+  //   printf(cf"actreg out:\n")
+  //   for(i <- 0 until p.k){
+  //     printf(cf"${actReg.io.a_out(i)}  ")
+  //   }
+  //   printf("\n")
+  //   printf(cf"systarr out:\n")
+  //   for(i <- 0 until p.n){
+  //     printf(cf"${systArr.io.out(i)}  ")
+  //   }
+  //   printf("\n")
   }
   .elsewhen(state === clear){
     printf(cf"FINISH\n")
     state := fill
     b_ready := true.B
-    myOut := VecInit.fill(p.m, p.n)(0.S(p.w.W))
+    myOut := VecInit.fill(p.m, p.n)(17.S(p.w.W))
   }
   
 }
@@ -101,12 +121,12 @@ class SystArr(p: TPUParams) extends Module{
         val b_in = Input(Vec(p.k, Vec(p.n, SInt(p.w.W))))
         val out = Output((Vec(p.n, SInt(p.w.W))))
         //debugOuts
-        val cmp_debug = Output(Vec(p.k, Vec(p.n, SInt(p.w.W))))
+        val cmp_debug = Output(Vec(p.m, Vec(p.n, SInt(p.w.W))))
         val b_reg_debug = Output(Vec(p.k, Vec(p.n, SInt(p.w.W))))
     })
     val a_reg = Reg(Vec(p.m, Vec(p.k, SInt(p.w.W))))
     val b_reg = Reg(Vec(p.k, Vec(p.n, SInt(p.w.W))))
-    val cms_reg = Reg(Vec(p.m, Vec(p.k, SInt(p.w.W))))
+    val cms_reg = Reg(Vec(p.m, Vec(p.n, SInt(p.w.W))))
     io.cmp_debug := cms_reg
     io.b_reg_debug := b_reg
     b_reg := io.b_in
@@ -138,24 +158,25 @@ class SystArr(p: TPUParams) extends Module{
         
         
     }
-    // printf(cf"MY A_IN:\n")
-    // for(i <- 0 until io.a_in.size){
-    //   printf(cf"${io.a_in(i)}\n")
-    // }
-    // printf(cf"MY B_IN:\n")
-    // for(i <- 0 until io.b_in.size){
-    //   printf(cf"${io.b_in(i)}\n")
-    // }
-    // printf(cf"MY A_REG:\n")
-    // for(i <- 0 until a_reg.size){
-    //   printf(cf"${a_reg(i)}\n")
-    // }
-    // printf(cf"MY CSM:\n")
-    // for(i <- 0 until cms_reg.size){
-    //   printf(cf"${cms_reg(i)}\n")
-    // }
-    // printf(cf"MY OUT:\n")
-    // for(i <- 0 until io.out.size){
-    //   printf(cf"${io.out(i)}\n")
-    // }
+
+    printf(cf"MY A_IN:\n")
+    for(i <- 0 until io.a_in.size){
+      printf(cf"${io.a_in(i)}\n")
+    }
+    printf(cf"MY B_IN:\n")
+    for(i <- 0 until io.b_in.size){
+      printf(cf"${io.b_in(i)}\n")
+    }
+    printf(cf"MY A_REG:\n")
+    for(i <- 0 until a_reg.size){
+      printf(cf"${a_reg(i)}\n")
+    }
+    printf(cf"MY CSM:\n")
+    for(i <- 0 until cms_reg.size){
+      printf(cf"${cms_reg(i)}\n")
+    }
+    printf(cf"MY OUT:\n")
+    for(i <- 0 until io.out.size){
+      printf(cf"${io.out(i)}\n")
+    }
 }

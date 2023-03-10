@@ -1,8 +1,7 @@
 #Successful Tests
-#Sat Mar 04 18:44:58 PST 2023
-ActRegModelTester=1677984258926
-hw1.SystArrTester=1677887659837
-tpu.ActRegModelTester=1677984297154
-tpu.SystArrTester=1677984298368
+#Thu Mar 09 19:50:45 PST 2023
+tpu.SystArrTester=1678420244115
 tpu.SystolicArrayModelTester=1677982927436
-tpu.TPUTester=1677984298480
+hw1.SystArrTester=1677887659837
+ActRegModelTester=1677984258926
+tpu.ActRegModelTester=1678420233928

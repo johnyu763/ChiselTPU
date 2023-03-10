@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:11:37: value j is not a member of tpu.TPUParams[0m
-[0m[[0m[31merror[0m] [0m[0m    val b = Flipped(Decoupled(Vec(p.j, Vec(p.n, SInt(p.w.W)))))[0m
-[0m[[0m[31merror[0m] [0m[0m                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/mnt/c/Users/alexl/Documents/cse283_chisel/ChiselTPU/src/main/scala/tpu/TPU.scala:86:3: Missing closing brace `}` assumed here[0m
+[0m[[0m[31merror[0m] [0m[0m  .elsewhen(state === clear){[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m
