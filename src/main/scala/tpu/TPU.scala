@@ -23,13 +23,14 @@ class ChiselTPU(p: TPUParams) extends Module{
     val debug_1 = Output(Vec(p.k, Vec(p.n, SInt(p.w.W))))
     val debug_a_out = Output(Vec(p.k, SInt(p.w.W)))
     val debug_systreg_out = Output(Vec(p.n, SInt(p.w.W)))
-    val debug_a_regs = Output(Vec(p.k, Vec(p.m, SInt(p.w.W))))
+    val debug_a_regs = Output(Vec(p.k, Vec(p.n, SInt(p.w.W))))
     val debug_b_regs = Output(Vec(p.k, Vec(p.n, SInt(p.w.W))))
     val debug_cycleOut = Output(UInt(32.W))
     val debug_00 = Output(SInt(p.w.W))
-    val debug_cycleIdxCols = Output(Vec(p.m, UInt(p.w.W)))
-    val debug_cycleIdxRows = Output(Vec(p.m, UInt(p.w.W)))
-    val debug_cycleIdx = Output(Vec(p.m, UInt(p.w.W)))
+    val debug_cycleIdxCols = Output(Vec(p.n, UInt(p.w.W)))
+    val debug_cycleIdxRows = Output(Vec(p.n, UInt(p.w.W)))
+    val debug_cycleIdx = Output(Vec(p.n, UInt(p.w.W)))
+    val debug_systout_upperLim = Output(SInt(p.w.W))
   })
   val load :: fill :: multiply :: clear :: Nil = Enum(4)
   val state = RegInit(load)
@@ -60,11 +61,13 @@ class ChiselTPU(p: TPUParams) extends Module{
   systArr.io.b_in := io.b.bits
 
   //declare wires for inputs:
-  val cycleIdx = Wire(Vec(p.m, UInt(p.w.W)))
-  val cycleIdxCols = Wire(Vec(p.m, UInt(p.w.W)))
-  val cycleIdxRows = Wire(Vec(p.m, UInt(p.w.W)))
+  val cycleIdx = Wire(Vec(p.n, UInt(p.w.W)))
+  val cycleIdxCols = Wire(Vec(p.n, UInt(p.w.W)))
+  val cycleIdxRows = Wire(Vec(p.n, UInt(p.w.W)))
   val systArrOutOffset = Wire(UInt(p.w.W))
-  for(i <- 0 until p.m){
+  //declare systWires
+  val limitingDimension = Wire(UInt(p.w.W))
+  for(i <- 0 until p.n){
     cycleIdx(i) := 0.U
     cycleIdxCols(i) := 0.U
     cycleIdxRows(i) := 0.U
@@ -81,9 +84,14 @@ class ChiselTPU(p: TPUParams) extends Module{
   io.debug_cycleIdxCols := cycleIdxCols
   io.debug_cycleIdxRows := cycleIdxRows
   io.debug_cycleIdx := cycleIdx
-
+  io.debug_systout_upperLim := 0.S
 
   systArrOutOffset := 0.U
+  if(p.m<p.n){
+    limitingDimension := p.m.U
+  }else{
+    limitingDimension := p.n.U
+  }
   when(state === load){ 
       when(io.a.valid && io.a.ready){
         state := fill
@@ -114,6 +122,7 @@ class ChiselTPU(p: TPUParams) extends Module{
     when(cycle === (p.m+p.k+p.n).U){
       state := clear
     }
+    io.debug_systout_upperLim := cycleIdx(0).asSInt()-p.m.S
     for(i <- 0 until systArr.io.out.size){
       //cycleIdx is the nominal cycle index starting when cycle reaches outputting
       when(cycle >= (2+p.k-1).U){ //BUG
@@ -125,28 +134,48 @@ class ChiselTPU(p: TPUParams) extends Module{
       }
       //NOTE: these outputs are idx for the OUT reg! an m by n mareix!
       //col to start at should increment until it reaches k
-      when(cycleIdx(i)<=(p.m-1).U){
+      when(cycleIdx(i)<(p.m).U){
         cycleIdxCols(i) := cycleIdx(i) - i.U
       }.otherwise{
         cycleIdxCols(i) := (p.m-1).U - i.U
       }
       //row to start at should increment until it reaches k
-      when(cycleIdx(i)<=(p.m-1).U){
+      when(cycleIdx(i)<(p.m).U){
         cycleIdxRows(i) := 0.U + i.U
       }.otherwise{
-        cycleIdxRows(i) := (cycleIdx(i)-(p.n).U+1.U) + i.U
+        cycleIdxRows(i) := (cycleIdx(i)-(p.m).U+1.U) + i.U
       }
       //when syst arr is outputting, begin attatching and assigning
-      //systArrOutOffset := 0.U
+      systArrOutOffset := 0.U
       when(cycle >= (2+p.k-1).U){
-        when(cycleIdxCols(i)<p.m.U && cycleIdxRows(i)<p.n.U){
-          when(cycleIdx(0)<p.n.U){
+        when((i.U<cycleIdx(0)+1.U) && (i.U<(p.m+p.n-2).U-cycleIdx(0)+1.U)){ //bug here: i limit for large, not small
+          when(cycleIdx(0)<p.m.U){
             myOut(cycleIdxCols(i))(cycleIdxRows(i)) := systArr.io.out(i.U)
           }.otherwise{
-            myOut(cycleIdxCols(i))(cycleIdxRows(i)) := systArr.io.out(i.U + (cycleIdx(0)-p.n.U+1.U))
+            myOut(cycleIdxCols(i))(cycleIdxRows(i)) := systArr.io.out(i.U + (cycleIdx(0)-p.m.U+1.U))
           }
         }
       }
+      // when(cycle >= (2+p.k-1).U){
+      //   when(cycleIdxCols(i)<p.m.U && cycleIdxRows(i)<p.n.U){
+      //     when(cycleIdx(0)<p.n.U){
+      //       myOut(cycleIdxCols(i))(cycleIdxRows(i)) := systArr.io.out(i.U)
+      //     }.otherwise{
+      //       myOut(cycleIdxCols(i))(cycleIdxRows(i)) := systArr.io.out(i.U + (cycleIdx(0)-p.n.U+1.U))
+      //     }
+      //   }
+      // }
+      // when(cycle >= (2+p.k-1).U){
+      //   when(cycleIdx(0)<p.n.U){
+      //     when(cycleIdxCols(i)<p.m.U && cycleIdxRows(i)<p.n.U){
+      //       myOut(cycleIdxCols(i))(cycleIdxRows(i)) := systArr.io.out(i.U)
+      //     }
+      //   }.otherwise{
+      //     when(cycleIdxCols(i)<p.m.U && cycleIdxRows(i)<p.n.U){
+      //       myOut(cycleIdxCols(i))(cycleIdxRows(i)) := systArr.io.out(i.U + (cycleIdx(0)-p.n.U+1.U))
+      //     }
+      //   }
+      // }
     }
     // printf(cf"-------------------------\n")
     // printf(cf"MY TPU OUT: \n")
@@ -209,10 +238,10 @@ class SystArr(p: TPUParams) extends Module{
         //debugOuts
         val cmp_debug = Output(Vec(p.k, Vec(p.n, SInt(p.w.W))))
         val debug_b_regs = Output(Vec(p.k, Vec(p.n, SInt(p.w.W))))
-        val debug_a_regs = Output(Vec(p.k, Vec(p.m, SInt(p.w.W))))
+        val debug_a_regs = Output(Vec(p.k, Vec(p.n, SInt(p.w.W))))
         val debug_00 = Output(SInt(p.w.W))
     })
-    val a_reg = Reg(Vec(p.k, Vec(p.m, SInt(p.w.W))))
+    val a_reg = Reg(Vec(p.k, Vec(p.n, SInt(p.w.W))))
     val b_reg = Reg(Vec(p.k, Vec(p.n, SInt(p.w.W))))
     val cms_reg = Reg(Vec(p.k, Vec(p.n, SInt(p.w.W))))
     io.cmp_debug := cms_reg

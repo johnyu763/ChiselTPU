@@ -29,6 +29,16 @@ object TPUTestData {
                    Array(35, 46, 57, 68),
                    Array(47, 62, 77, 92))
 
+  val in5x3 = Array(Array(1, 2, 3),
+                   Array(7, 8, 4),
+                   Array(2, 3, 1),
+                   Array(5, 1, 6),
+                   Array(1, 6, 3))
+  val in3x7 = Array(Array(1, 9, 0, 3, 4, 5, 1),
+                   Array(8, 5, 6, 4, 1, 2, 3),
+                   Array(3, 2, 5, 7, 5, 4, 7))
+
+
   val inA3x3 = Array(Array(2, 3, 1),
                    Array(1, 5, 4),
                    Array(3, 4, 1))
@@ -96,6 +106,13 @@ class SystArrTester extends AnyFlatSpec with ChiselScalatestTester {
 class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
   def doTPUTest(a: Matrix, b: Matrix): Unit = {
     val p = TPUParams(a.size, a.head.size, b.head.size)
+    print("params: \nm: ")
+    print(a.size)
+    print("\nk: ")
+    print(a.head.size)
+    print("\nn: ")
+    print(b.head.size)
+    print("\n\n")
     test(new ChiselTPU(p)).withAnnotations(Seq(WriteVcdAnnotation)) { dut =>
     
     dut.io.a.valid.poke(true.B)
@@ -210,6 +227,9 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
           }
           print("\n")
         }
+        print("-----debug_systout_upperLim out-----\n")
+        print(dut.io.debug_systout_upperLim.peek())
+        print("\n") 
         print("\n")
         print("\n") 
     }
@@ -276,8 +296,9 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
   it should "stagger a" in {
     // val k = 4
     doTPUTest(TPUTestData.inA3x3, TPUTestData.inB3x3)
-    // doTPUTest(TPUTestData.in2x4, TPUTestData.in4x2)
-    // doTPUTest(TPUTestData.in4x2, TPUTestData.in2x4)
+    doTPUTest(TPUTestData.in2x4, TPUTestData.in4x2)
+    doTPUTest(TPUTestData.in4x2, TPUTestData.in2x4)
+    doTPUTest(TPUTestData.in5x3, TPUTestData.in3x7)
   }
 
   // behavior of "TPU test"
