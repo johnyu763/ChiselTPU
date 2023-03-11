@@ -1,13 +1,24 @@
-[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(tpu.TPUTester, org.scalatest.tools.Framework$$anon$1@7e52ba72, false, [SuiteSelector])[0m
-[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(tpu.SystArrTester, org.scalatest.tools.Framework$$anon$1@7e52ba72, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(tpu.TPUTester, org.scalatest.tools.Framework$$anon$1@7a7af3e6, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(tpu.SystArrTester, org.scalatest.tools.Framework$$anon$1@7a7af3e6, false, [SuiteSelector])[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mSystArrTester:[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mTPU syst arr test[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should multiply (1s row) x (1s column)[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mTPUTester:[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mTPU test[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[31m- should stagger a *** FAILED ***[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m  io_out_0_0=17 (0x11) did not equal expected=11 (0xb) (lines in TPUTester.scala: 181, 180, 99) (TPUTester.scala:182)[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 10 seconds, 190 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  java.lang.ArrayIndexOutOfBoundsException: 2[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at tpu.TPUTester.$anonfun$doTPUTest$16(TPUTester.scala:230)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at scala.collection.immutable.Range.foreach$mVc$sp(Range.scala:190)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at tpu.TPUTester.$anonfun$doTPUTest$15(TPUTester.scala:229)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at scala.collection.immutable.Range.foreach$mVc$sp(Range.scala:190)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at tpu.TPUTester.$anonfun$doTPUTest$2(TPUTester.scala:228)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at tpu.TPUTester.$anonfun$doTPUTest$2$adapted(TPUTester.scala:99)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at chiseltest.internal.GenericBackend.$anonfun$run$1(GenericBackend.scala:151)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at chiseltest.internal.ThreadedBackend$TesterThread$$anon$1.$anonfun$run$1(ThreadedBackend.scala:495)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at chiseltest.internal.GenericBackend.doTimescope(GenericBackend.scala:96)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at chiseltest.internal.ThreadedBackend$TesterThread$$anon$1.run(ThreadedBackend.scala:495)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  ...[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 11 seconds, 318 milliseconds.[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 2[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 2, aborted 0[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 1, failed 1, canceled 0, ignored 0, pending 0[0m[0m

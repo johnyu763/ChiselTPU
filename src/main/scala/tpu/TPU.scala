@@ -22,16 +22,20 @@ class ChiselTPU(p: TPUParams) extends Module{
     val out = Output(Vec(p.m, Vec(p.n, SInt(p.w.W))))
     val debug_1 = Output(Vec(p.k, Vec(p.n, SInt(p.w.W))))
     val debug_a_out = Output(Vec(p.k, SInt(p.w.W)))
+    val debug_systreg_out = Output(Vec(p.n, SInt(p.w.W)))
     val debug_a_regs = Output(Vec(p.k, Vec(p.m, SInt(p.w.W))))
     val debug_b_regs = Output(Vec(p.k, Vec(p.n, SInt(p.w.W))))
     val debug_cycleOut = Output(UInt(32.W))
     val debug_00 = Output(SInt(p.w.W))
+    val debug_cycleIdxCols = Output(Vec(p.m, UInt(p.w.W)))
+    val debug_cycleIdxRows = Output(Vec(p.m, UInt(p.w.W)))
+    val debug_cycleIdx = Output(Vec(p.m, UInt(p.w.W)))
   })
   val load :: fill :: multiply :: clear :: Nil = Enum(4)
   val state = RegInit(load)
   val counterFlag = Wire(Bool())
   //val (cycle, wrap) = Counter(state === multiply, p.k+p.m+p.k+1) //assume input is valid for now
-  val (cycle, wrap) = Counter(counterFlag, p.k+p.m+p.k+1) //assume input is valid for now
+  val (cycle, wrap) = Counter(counterFlag, p.k+p.m+p.n+1) //assume input is valid for now
   val actReg = Module(new ActReg(p))
   //val systParams = TPUParams(p.k, io.a.bits.head.size, io.b.bits.head.size)
   val systArr = Module(new SystArr(p))
@@ -55,6 +59,17 @@ class ChiselTPU(p: TPUParams) extends Module{
   //systArr.io.b_in := syst_in
   systArr.io.b_in := io.b.bits
 
+  //declare wires for inputs:
+  val cycleIdx = Wire(Vec(p.m, UInt(p.w.W)))
+  val cycleIdxCols = Wire(Vec(p.m, UInt(p.w.W)))
+  val cycleIdxRows = Wire(Vec(p.m, UInt(p.w.W)))
+  val systArrOutOffset = Wire(UInt(p.w.W))
+  for(i <- 0 until p.m){
+    cycleIdx(i) := 0.U
+    cycleIdxCols(i) := 0.U
+    cycleIdxRows(i) := 0.U
+  }
+
   //DEBUGGING:
   io.debug_1 := systArr.io.cmp_debug
   io.debug_a_out := actReg.io.a_out
@@ -62,6 +77,13 @@ class ChiselTPU(p: TPUParams) extends Module{
   io.debug_b_regs := systArr.io.debug_b_regs
   io.debug_cycleOut := cycle
   io.debug_00 := systArr.io.debug_00
+  io.debug_systreg_out := systArr.io.out
+  io.debug_cycleIdxCols := cycleIdxCols
+  io.debug_cycleIdxRows := cycleIdxRows
+  io.debug_cycleIdx := cycleIdx
+
+
+  systArrOutOffset := 0.U
   when(state === load){ 
       when(io.a.valid && io.a.ready){
         state := fill
@@ -78,6 +100,7 @@ class ChiselTPU(p: TPUParams) extends Module{
         systArr.io.b_readingin := true.B
         b_ready := false.B
         counterFlag := true.B
+        cycle := 0.U
       }
       // print("cycle:")
       // print(cycle)
@@ -88,13 +111,42 @@ class ChiselTPU(p: TPUParams) extends Module{
     //   print(cycle)
     //   print("\n")
     counterFlag := true.B
-    when(cycle === (p.k+p.m+p.k).U){
+    when(cycle === (p.m+p.k+p.n+1).U){
       state := clear
     }
     for(i <- 0 until systArr.io.out.size){
-      //when(cycle > (p.n+i).U && cycle < (p.n+p.n+1+i).U){
-        myOut(cycle - (p.n+i+1).U)(i.U) := systArr.io.out(i.U)
-      //}
+      //cycleIdx is the nominal cycle index starting when cycle reaches outputting
+      when(cycle >= (2+p.k-1).U){ //BUG
+        //cycleIdx(i) := cycle-(p.m+2).U-1.U
+        cycleIdx(i) := cycle-(2+p.k-1).U
+      }.
+      otherwise{
+        cycleIdx(i) := cycle
+      }
+      //NOTE: these outputs are idx for the OUT reg! an m by n mareix!
+      //col to start at should increment until it reaches k
+      when(cycleIdx(i)<=(p.m-1).U){
+        cycleIdxCols(i) := cycleIdx(i) - i.U
+      }.otherwise{
+        cycleIdxCols(i) := (p.m-1).U - i.U
+      }
+      //row to start at should increment until it reaches k
+      when(cycleIdx(i)<=(p.m-1).U){
+        cycleIdxRows(i) := 0.U + i.U
+      }.otherwise{
+        cycleIdxRows(i) := (cycleIdx(i)-(p.n).U+1.U) + i.U
+      }
+      //when syst arr is outputting, begin attatching and assigning
+      //systArrOutOffset := 0.U
+      when(cycle >= (2+p.k-1).U){
+        when(cycleIdxCols(i)<p.m.U && cycleIdxRows(i)<p.n.U){
+          when(cycleIdx(0)<p.n.U){
+            myOut(cycleIdxCols(i))(cycleIdxRows(i)) := systArr.io.out(i.U)
+          }.otherwise{
+            myOut(cycleIdxCols(i))(cycleIdxRows(i)) := systArr.io.out(i.U + (cycleIdx(0)-p.n.U+1.U))
+          }
+        }
+      }
     }
     // printf(cf"-------------------------\n")
     // printf(cf"MY TPU OUT: \n")

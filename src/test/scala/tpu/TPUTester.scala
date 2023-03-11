@@ -116,55 +116,69 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
         }
     }
     dut.clock.step()
-    for(i <- 0 until p.k+p.m+p.k+2){
-        print("-----BEFORE:arrRegs out-----\n")
-        for (cmp_i <- 0 until p.k) {
-          print(dut.io.debug_a_out(cmp_i).peek())
-          print("  ")
-        }
-        print("\n")
-        print("-----BEFORE:cycle out-----\n")
-        print(dut.io.debug_cycleOut.peek())
-        print("\n")
-        print("-----BEFORE:00-----\n")
-        print(dut.io.debug_00.peek())
-        print("\n")
-        print("-----b before is in syst arr:-----\n")
-        for (r <- 0 until p.k) {
-            for (c <- 0 until p.n) {
-                print(dut.io.debug_b_regs(r)(c).peek())
-                print(" ")
-            }
-            print("\n")
-        }
+        print("\n") 
+        print("-----cycleIdx out-----\n")
+        print(dut.io.debug_cycleIdx.peek())
+        print("\n") 
+        print("-----cycleIdxCols out-----\n")
+        print(dut.io.debug_cycleIdxCols.peek())
+        print("\n") 
+        print("-----cycleIdxCols out-----\n")
+        print(dut.io.debug_cycleIdxRows.peek())
+        print("\n") 
+        print("\n") 
+    //for(i <- 0 until p.k+p.m+p.k+2){
+    //len to feed a slanted all the way though a_in window, eg:
+    //
+    for(i <- 0 until 2+(p.k+p.m-1)+(p.n)){
+        // print("-----BEFORE:arrRegs out-----\n")
+        // for (cmp_i <- 0 until p.k) {
+        //   print(dut.io.debug_a_out(cmp_i).peek())
+        //   print("  ")
+        // }
+        // print("\n")
+        // print("-----BEFORE:cycle out-----\n")
+        // print(dut.io.debug_cycleOut.peek())
+        // print("\n")
+        // print("-----BEFORE:00-----\n")
+        // print(dut.io.debug_00.peek())
+        // print("\n")
+        // print("-----b before is in syst arr:-----\n")
+        // for (r <- 0 until p.k) {
+        //     for (c <- 0 until p.n) {
+        //         print(dut.io.debug_b_regs(r)(c).peek())
+        //         print(" ")
+        //     }
+        //     print("\n")
+        // }
         dut.clock.step()
-        print("-----b after is in syst arr:-----\n")
-        for (r <- 0 until p.k) {
-            for (c <- 0 until p.n) {
-                print(dut.io.debug_b_regs(r)(c).peek())
-                print(" ")
-            }
-            print("\n")
-        }
+        // print("-----b after is in syst arr:-----\n")
+        // for (r <- 0 until p.k) {
+        //     for (c <- 0 until p.n) {
+        //         print(dut.io.debug_b_regs(r)(c).peek())
+        //         print(" ")
+        //     }
+        //     print("\n")
+        // }
         print("-----AFTER:cycle out-----\n")
         print(dut.io.debug_cycleOut.peek())
         print("\n")       
-        print("-----AFTER:00-----\n")
-        print(dut.io.debug_00.peek())
-        print("\n") 
-        print("-----arrRegs out-----\n")
-        for (cmp_i <- 0 until p.k) {
-          print(dut.io.debug_a_out(cmp_i).peek())
-          print("  ")
-        }
-        print("\n")
-        print("-----a regs-----\n")
-        for (cmp_i <- 0 until p.k) {
-          for (cmp_j <- 0 until p.m) {
-            print(dut.io.debug_a_regs(cmp_i)(cmp_j).peek())
-          }
-          print("\n")
-        }
+        // print("-----AFTER:00-----\n")
+        // print(dut.io.debug_00.peek())
+        // print("\n") 
+        // print("-----arrRegs out-----\n")
+        // for (cmp_i <- 0 until p.k) {
+        //   print(dut.io.debug_a_out(cmp_i).peek())
+        //   print("  ")
+        // }
+        // print("\n")
+        // print("-----a regs-----\n")
+        // for (cmp_i <- 0 until p.k) {
+        //   for (cmp_j <- 0 until p.m) {
+        //     print(dut.io.debug_a_regs(cmp_i)(cmp_j).peek())
+        //   }
+        //   print("\n")
+        // }
         print("-----syst arr-----\n")
         for (cmp_i <- 0 until p.k) {
           for (cmp_j <- 0 until p.n) {
@@ -172,7 +186,32 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
           }
           print("\n")
         }
+        // print("\n")
+
+        print("-----systreg out-----\n")
+        for (cmp_i <- 0 until p.n) {
+          print(dut.io.debug_systreg_out(cmp_i).peek())
+          print("  ")
+        }
+        print("\n") 
+        print("-----cycleIdx out-----\n")
+        print(dut.io.debug_cycleIdx.peek())
+        print("\n") 
+        print("-----cycleIdxCols out-----\n")
+        print(dut.io.debug_cycleIdxCols.peek())
+        print("\n") 
+        print("-----cycleIdxRows out-----\n")
+        print(dut.io.debug_cycleIdxRows.peek())
+        print("\n") 
+        print("-----outReg-----\n")
+        for (cmp_i <- 0 until p.m) {
+          for (cmp_j <- 0 until p.n) {
+            print(dut.io.out(cmp_i)(cmp_j).peek())
+          }
+          print("\n")
+        }
         print("\n")
+        print("\n") 
     }
 
     //check output 1
