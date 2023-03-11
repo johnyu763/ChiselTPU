@@ -8,7 +8,7 @@ import tpu.TPUModel.Matrix
 import tpu.TPUParams
 
 import scala.Array
-
+import scala.util.Random
 object TPUTestData {
   def genIdentity(n: Int): Matrix = Array.tabulate(n,n) { (i,j) => if (i==j) 1 else 0 }
 
@@ -37,6 +37,13 @@ object TPUTestData {
   val in3x7 = Array(Array(1, 9, 0, 3, 4, 5, 1),
                    Array(8, 5, 6, 4, 1, 2, 3),
                    Array(3, 2, 5, 7, 5, 4, 7))
+  val in7x5 = Array(Array(1, 9, 0, 3, 4, 5, 1),
+                   Array(8, 5, 6, 4, 1, 2, 3),
+                   Array(3, 2, 5, 7, 5, 4, 7),
+                   Array(6, 7, 2, 9, 4, 3, 6),
+                   Array(1, 9, 4, 3, 5, 7, 2),
+                   Array(9, 8, 3, 5, 6, 1, 8),
+                   Array(2, 4, 3, 1, 6, 5, 9))
 
 
   val inA3x3 = Array(Array(2, 3, 1),
@@ -48,6 +55,7 @@ object TPUTestData {
   val inB3x3 = Array(Array(2, 5, 5),
                    Array(4, 1, 3),
                    Array(2, 3, 1))
+  def genRand(rows: Int, cols: Int): Matrix = Array.fill(rows)( Array.fill(cols)(Random.nextInt(30)+1) )
 }
 
 
@@ -293,12 +301,40 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
   }
 
   behavior of "TPU test"
-  it should "stagger a" in {
+  it should "mult one cycle" in {
     // val k = 4
     doTPUTest(TPUTestData.inA3x3, TPUTestData.inB3x3)
     doTPUTest(TPUTestData.in2x4, TPUTestData.in4x2)
     doTPUTest(TPUTestData.in4x2, TPUTestData.in2x4)
     doTPUTest(TPUTestData.in5x3, TPUTestData.in3x7)
+    doTPUTest(TPUTestData.in3x7, TPUTestData.in7x5)
+  }
+  it should "smult rand" in {
+    // val k = 4
+    val m = Random.nextInt(10)+1
+    val k = Random.nextInt(10)+1
+    val n = Random.nextInt(10)+1
+    val m1 = TPUTestData.genRand(m, k)
+    val m2 = TPUTestData.genRand(k, n)
+    print("----------m1----------\n")
+    for(r <- 0 until m1.size){
+      for(c <- 0 until m1.head.size){
+        print(m1(r)(c))
+        print(" ")
+      }
+      print("\n")
+    }
+    print("----------m2----------\n")
+    for(r <- 0 until m2.size){
+      for(c <- 0 until m2.head.size){
+        print(m2(r)(c))
+        print(" ")
+      }
+      print("\n")
+    }
+    print("\n")
+    print("\n")
+    doTPUTest(m1, m2)
   }
 
   // behavior of "TPU test"
