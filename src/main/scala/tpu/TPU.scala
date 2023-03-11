@@ -66,7 +66,7 @@ class ChiselTPU(p: TPUParams) extends Module{
   val cycleIdxRows = Wire(Vec(p.n, UInt(p.w.W)))
   val systArrOutOffset = Wire(UInt(p.w.W))
   //declare systWires
-  val limitingDimension = Wire(UInt(p.w.W))
+  // val limitingDimension = Wire(UInt(p.w.W))
   cycleIdx := 0.U
   for(i <- 0 until p.n){
     cycleIdxCols(i) := 0.U
@@ -87,11 +87,11 @@ class ChiselTPU(p: TPUParams) extends Module{
   io.debug_systout_upperLim := 0.S
 
   systArrOutOffset := 0.U
-  if(p.m<p.n){
-    limitingDimension := p.m.U
-  }else{
-    limitingDimension := p.n.U
-  }
+  // if(p.m<p.n){
+  //   limitingDimension := p.m.U
+  // }else{
+  //   limitingDimension := p.n.U
+  // }
   when(state === load){ 
       when(io.a.valid && io.a.ready){
         state := fill
@@ -220,7 +220,7 @@ class ChiselTPU(p: TPUParams) extends Module{
     state := fill
     //b_ready := true.B
     io.b.ready := true.B
-    myOut := VecInit.fill(p.m, p.n)(17.S(p.w.W))
+    myOut := VecInit.fill(p.m, p.n)(0.S(p.w.W))
   }
   
 }
