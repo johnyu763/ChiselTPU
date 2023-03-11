@@ -29,7 +29,7 @@ class ChiselTPU(p: TPUParams) extends Module{
     val debug_00 = Output(SInt(p.w.W))
     val debug_cycleIdxCols = Output(Vec(p.n, UInt(p.w.W)))
     val debug_cycleIdxRows = Output(Vec(p.n, UInt(p.w.W)))
-    val debug_cycleIdx = Output(Vec(p.n, UInt(p.w.W)))
+    val debug_cycleIdx = Output(UInt(p.w.W))
     val debug_systout_upperLim = Output(SInt(p.w.W))
   })
   val load :: fill :: multiply :: clear :: Nil = Enum(4)
@@ -61,14 +61,14 @@ class ChiselTPU(p: TPUParams) extends Module{
   systArr.io.b_in := io.b.bits
 
   //declare wires for inputs:
-  val cycleIdx = Wire(Vec(p.n, UInt(p.w.W)))
+  val cycleIdx = Wire(UInt(p.w.W))
   val cycleIdxCols = Wire(Vec(p.n, UInt(p.w.W)))
   val cycleIdxRows = Wire(Vec(p.n, UInt(p.w.W)))
   val systArrOutOffset = Wire(UInt(p.w.W))
   //declare systWires
   val limitingDimension = Wire(UInt(p.w.W))
+  cycleIdx := 0.U
   for(i <- 0 until p.n){
-    cycleIdx(i) := 0.U
     cycleIdxCols(i) := 0.U
     cycleIdxRows(i) := 0.U
   }
@@ -122,40 +122,59 @@ class ChiselTPU(p: TPUParams) extends Module{
     when(cycle === (p.m+p.k+p.n).U){
       state := clear
     }
-    io.debug_systout_upperLim := cycleIdx(0).asSInt()-p.m.S
-    for(i <- 0 until systArr.io.out.size){
-      //cycleIdx is the nominal cycle index starting when cycle reaches outputting
-      when(cycle >= (2+p.k-1).U){ //BUG
-        //cycleIdx(i) := cycle-(p.m+2).U-1.U
-        cycleIdx(i) := cycle-(2+p.k-1).U
-      }.
-      otherwise{
-        cycleIdx(i) := cycle
-      }
-      //NOTE: these outputs are idx for the OUT reg! an m by n mareix!
-      //col to start at should increment until it reaches k
-      when(cycleIdx(i)<(p.m).U){
-        cycleIdxCols(i) := cycleIdx(i) - i.U
-      }.otherwise{
-        cycleIdxCols(i) := (p.m-1).U - i.U
-      }
-      //row to start at should increment until it reaches k
-      when(cycleIdx(i)<(p.m).U){
-        cycleIdxRows(i) := 0.U + i.U
-      }.otherwise{
-        cycleIdxRows(i) := (cycleIdx(i)-(p.m).U+1.U) + i.U
-      }
-      //when syst arr is outputting, begin attatching and assigning
-      systArrOutOffset := 0.U
-      when(cycle >= (2+p.k-1).U){
-        when((i.U<cycleIdx(0)+1.U) && (i.U<(p.m+p.n-2).U-cycleIdx(0)+1.U)){ //bug here: i limit for large, not small
-          when(cycleIdx(0)<p.m.U){
-            myOut(cycleIdxCols(i))(cycleIdxRows(i)) := systArr.io.out(i.U)
-          }.otherwise{
-            myOut(cycleIdxCols(i))(cycleIdxRows(i)) := systArr.io.out(i.U + (cycleIdx(0)-p.m.U+1.U))
+    when(cycle >= (2+p.k-1).U){ //BUG
+      cycleIdx := cycle-(2+p.k-1).U
+    }.
+    otherwise{
+      cycleIdx := cycle
+    }
+    when(cycle >= (2+p.k-1).U){
+      for(c <- 0 until p.n){
+        when(cycleIdx>=c.U && cycleIdx<(p.m+c).U){
+          for(r <- 0 until p.m){
+            if(r==(p.m-1)){
+              myOut(r.U)(c.U) := systArr.io.out(c.U)
+            }else{
+              myOut(r.U)(c.U) := myOut((r+1).U)(c.U)
+            }
           }
         }
-      }
+      } 
+    }
+    // io.debug_systout_upperLim := cycleIdx(0).asSInt()-p.m.S
+    // for(i <- 0 until systArr.io.out.size){
+    //   //cycleIdx is the nominal cycle index starting when cycle reaches outputting
+    //   when(cycle >= (2+p.k-1).U){ //BUG
+    //     //cycleIdx(i) := cycle-(p.m+2).U-1.U
+    //     cycleIdx(i) := cycle-(2+p.k-1).U
+    //   }.
+    //   otherwise{
+    //     cycleIdx(i) := cycle
+    //   }
+    //   //NOTE: these outputs are idx for the OUT reg! an m by n mareix!
+    //   //col to start at should increment until it reaches k
+    //   when(cycleIdx(i)<(p.m).U){
+    //     cycleIdxCols(i) := cycleIdx(i) - i.U
+    //   }.otherwise{
+    //     cycleIdxCols(i) := (p.m-1).U - i.U
+    //   }
+    //   //row to start at should increment until it reaches k
+    //   when(cycleIdx(i)<(p.m).U){
+    //     cycleIdxRows(i) := 0.U + i.U
+    //   }.otherwise{
+    //     cycleIdxRows(i) := (cycleIdx(i)-(p.m).U+1.U) + i.U
+    //   }
+    //   //when syst arr is outputting, begin attatching and assigning
+    //   systArrOutOffset := 0.U
+    //   when(cycle >= (2+p.k-1).U){
+    //     when((i.U<cycleIdx(0)+1.U) && (i.U<(p.m+p.n-2).U-cycleIdx(0)+1.U)){ //bug here: i limit for large, not small
+    //       when(cycleIdx(0)<p.m.U){
+    //         myOut(cycleIdxCols(i))(cycleIdxRows(i)) := systArr.io.out(i.U)
+    //       }.otherwise{
+    //         myOut(cycleIdxCols(i))(cycleIdxRows(i)) := systArr.io.out(i.U + (cycleIdx(0)-p.m.U+1.U))
+    //       }
+    //     }
+    //   }
       // when(cycle >= (2+p.k-1).U){
       //   when(cycleIdxCols(i)<p.m.U && cycleIdxRows(i)<p.n.U){
       //     when(cycleIdx(0)<p.n.U){
@@ -176,7 +195,7 @@ class ChiselTPU(p: TPUParams) extends Module{
       //     }
       //   }
       // }
-    }
+    // }
     // printf(cf"-------------------------\n")
     // printf(cf"MY TPU OUT: \n")
     // for(i <- 0 until myOut.size){

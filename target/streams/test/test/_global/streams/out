@@ -1,5 +1,5 @@
-[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(tpu.TPUTester, org.scalatest.tools.Framework$$anon$1@14036def, false, [SuiteSelector])[0m
-[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(tpu.SystArrTester, org.scalatest.tools.Framework$$anon$1@14036def, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(tpu.TPUTester, org.scalatest.tools.Framework$$anon$1@423ff13b, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(tpu.SystArrTester, org.scalatest.tools.Framework$$anon$1@423ff13b, false, [SuiteSelector])[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mSystArrTester:[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mTPU syst arr test[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should multiply (1s row) x (1s column)[0m[0m
@@ -7,7 +7,7 @@
 [0m[[0m[0minfo[0m] [0m[0m[32mTPU test[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should mult one cycle[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should smult rand[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 14 seconds, 168 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 21 seconds, 879 milliseconds.[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 3[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 2, aborted 0[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 3, failed 0, canceled 0, ignored 0, pending 0[0m[0m

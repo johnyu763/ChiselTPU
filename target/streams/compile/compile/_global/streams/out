@@ -1,6 +1,13 @@
-[0m[[0m[31merror[0m] [0m[0m/mnt/c/Users/alexl/Documents/cse283_chisel/ChiselTPU/src/main/scala/tpu/TPU.scala:142:68: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : chisel3.SInt[0m
-[0m[[0m[31merror[0m] [0m[0m required: chisel3.UInt[0m
-[0m[[0m[31merror[0m] [0m[0m        when((i.U<cycleIdx(0)+1.U) && (i.U>cycleIdx(0).asSInt-p.m.S-1.S)){[0m
-[0m[[0m[31merror[0m] [0m[0m                                                                   ^[0m
+[0m[[0m[31merror[0m] [0m[0m/mnt/c/Users/alexl/Documents/cse283_chisel/ChiselTPU/src/main/scala/tpu/TPU.scala:133:31: overloaded method + with alternatives:[0m
+[0m[[0m[31merror[0m] [0m[0m  (x: Double)Double <and>[0m
+[0m[[0m[31merror[0m] [0m[0m  (x: Float)Float <and>[0m
+[0m[[0m[31merror[0m] [0m[0m  (x: Long)Long <and>[0m
+[0m[[0m[31merror[0m] [0m[0m  (x: Int)Int <and>[0m
+[0m[[0m[31merror[0m] [0m[0m  (x: Char)Int <and>[0m
+[0m[[0m[31merror[0m] [0m[0m  (x: Short)Int <and>[0m
+[0m[[0m[31merror[0m] [0m[0m  (x: Byte)Int <and>[0m
+[0m[[0m[31merror[0m] [0m[0m  (x: String)String[0m
+[0m[[0m[31merror[0m] [0m[0m cannot be applied to (chisel3.UInt)[0m
+[0m[[0m[31merror[0m] [0m[0m        when(cycleIdx>(p.k+p.m+c.U)){[0m
+[0m[[0m[31merror[0m] [0m[0m                              ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m
