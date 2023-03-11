@@ -111,7 +111,7 @@ class ChiselTPU(p: TPUParams) extends Module{
     //   print(cycle)
     //   print("\n")
     counterFlag := true.B
-    when(cycle === (p.m+p.k+p.n+1).U){
+    when(cycle === (p.m+p.k+p.n).U){
       state := clear
     }
     for(i <- 0 until systArr.io.out.size){
@@ -170,7 +170,8 @@ class ChiselTPU(p: TPUParams) extends Module{
   .elsewhen(state === clear){
     printf(cf"FINISH\n")
     state := fill
-    b_ready := true.B
+    //b_ready := true.B
+    io.b.ready := true.B
     myOut := VecInit.fill(p.m, p.n)(17.S(p.w.W))
   }
   
