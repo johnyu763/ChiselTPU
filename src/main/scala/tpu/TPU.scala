@@ -19,6 +19,8 @@ case class TPUParams(m: Int, k: Int, n: Int) {
 
 
 class ChiselTPU(p: TPUParams) extends Module{
+  type Matrix = Vec[Vec[SInt]]
+
   val io = IO(new Bundle{
     val a = Flipped(Decoupled(Vec(p.m, Vec(p.k, SInt(p.w.W)))))
     val b = Flipped(Decoupled(Vec(p.k, Vec(p.n, SInt(p.w.W)))))
@@ -35,19 +37,6 @@ class ChiselTPU(p: TPUParams) extends Module{
     val debug_cycleIdx = Output(UInt(p.w.W))
     val debug_systout_upperLim = Output(SInt(p.w.W))
   })
-
-  def copyMatrixToPadded(in: Vec[Vec[SInt]], out: Vec[Vec[SInt]]) = {
-    for(i <- 0 until out.size){
-      for(j <- 0 until out.head.size){
-        if(i < in.size && j < in.head.size){
-          out(i)(j) := in(i)(j)
-        }
-        else{
-          out(i)(j) := 0.S
-        }
-      }
-    }
-  }
 
   val load :: fill :: slice :: multiply :: clear :: Nil = Enum(5)
   val state = RegInit(load)
@@ -67,11 +56,18 @@ class ChiselTPU(p: TPUParams) extends Module{
   val paddedKDim = if(p.k >= systParams.k) p.k % systParams.k + p.k else p.k % systParams.k + systParams.k % p.k
   val paddedNDim = if(p.n >= systParams.n) p.n % systParams.n + p.n else p.n % systParams.n + systParams.n % p.n
 
+  // used for calculating slice boundaries
+  val numSliceM = paddedMDim/systParams.m
+  val numSliceK = paddedKDim/systParams.k
+  val numSliceN = paddedNDim/systParams.n
+
   // initialization of padded input matrices
   val paddedA = RegInit(VecInit.fill(paddedMDim, paddedKDim)(0.S(p.w.W)))
   val paddedB = RegInit(VecInit.fill(paddedKDim, paddedNDim)(0.S(p.w.W)))
-  val ASlice = RegInit(VecInit.fill(systParams.m, systParams.k)(0.S(p.w.W)))
-  val BSlice = RegInit(VecInit.fill(systParams.k, systParams.n)(0.S(p.w.W)))
+  val slicedA = RegInit(VecInit.fill(systParams.m, systParams.k)(0.S(p.w.W)))
+  val slicedB = RegInit(VecInit.fill(systParams.k, systParams.n)(0.S(p.w.W)))
+
+  val (sliceCycle, sliceWrap) = Counter(past(state) === slice, numSliceM * numSliceK * numSliceN)
 
   // only allows reading input in input states
   io.a.ready := a_ready
@@ -94,9 +90,7 @@ class ChiselTPU(p: TPUParams) extends Module{
   val cycleIdx = Wire(UInt(p.w.W))
   val cycleIdxCols = Wire(Vec(p.n, UInt(p.w.W)))
   val cycleIdxRows = Wire(Vec(p.n, UInt(p.w.W)))
-  val systArrOutOffset = Wire(UInt(p.w.W))
   //declare systWires
-  // val limitingDimension = Wire(UInt(p.w.W))
   cycleIdx := 0.U
   for(i <- 0 until p.n){
     cycleIdxCols(i) := 0.U
@@ -116,12 +110,28 @@ class ChiselTPU(p: TPUParams) extends Module{
   io.debug_cycleIdx := cycleIdx
   io.debug_systout_upperLim := 0.S
 
-  systArrOutOffset := 0.U
-  // if(p.m<p.n){
-  //   limitingDimension := p.m.U
-  // }else{
-  //   limitingDimension := p.n.U
-  // }
+  def copyMatrixToPadded(in: Matrix, out: Matrix) = {
+    for(i <- 0 until out.size){
+      for(j <- 0 until out.head.size){
+        if(i < in.size && j < in.head.size){
+          out(i)(j) := in(i)(j)
+        }
+        else{
+          out(i)(j) := 0.S
+        }
+      }
+    }
+  }
+
+  def updateMatricesSlices() = {
+    val topBoundA = systParams.m * (sliceCycle % (numSliceK*numSliceM))/numSliceM
+    val topBoundB = systParams.k * (sliceCycle % (numSliceK*numSliceN))/numSliceK
+    val leftBoundA =  systParams.k * (sliceCycle % (numSliceK*numSliceM))%numSliceK
+    val leftBoundB =  systParams.n * (sliceCycle % (numSliceK*numSliceN))%numSliceN
+
+    slicedA := 
+  }
+
   when(state === load){ 
       when(io.a.valid && io.a.ready){
         state := fill
@@ -133,7 +143,7 @@ class ChiselTPU(p: TPUParams) extends Module{
   }
   .elsewhen(state === fill){
       when(io.b.valid && io.b.ready){
-        state := multiply
+        state := slice
         //syst_in := io.b.bits
         copyMatrixToPadded(io.b.bits, paddedB)
         systArr.io.b_in := io.b.bits
@@ -145,6 +155,10 @@ class ChiselTPU(p: TPUParams) extends Module{
       // print("cycle:")
       // print(cycle)
       // print("\n")
+  }
+  .elsewhen(state === slice){
+    slicedA := paddedA(sliceCycle/())
+    state := multiply
   }
   .elsewhen(state === multiply){
     // print("cycle:")
@@ -173,61 +187,7 @@ class ChiselTPU(p: TPUParams) extends Module{
         }
       } 
     }
-    // io.debug_systout_upperLim := cycleIdx(0).asSInt()-p.m.S
-    // for(i <- 0 until systArr.io.out.size){
-    //   //cycleIdx is the nominal cycle index starting when cycle reaches outputting
-    //   when(cycle >= (2+p.k-1).U){ //BUG
-    //     //cycleIdx(i) := cycle-(p.m+2).U-1.U
-    //     cycleIdx(i) := cycle-(2+p.k-1).U
-    //   }.
-    //   otherwise{
-    //     cycleIdx(i) := cycle
-    //   }
-    //   //NOTE: these outputs are idx for the OUT reg! an m by n mareix!
-    //   //col to start at should increment until it reaches k
-    //   when(cycleIdx(i)<(p.m).U){
-    //     cycleIdxCols(i) := cycleIdx(i) - i.U
-    //   }.otherwise{
-    //     cycleIdxCols(i) := (p.m-1).U - i.U
-    //   }
-    //   //row to start at should increment until it reaches k
-    //   when(cycleIdx(i)<(p.m).U){
-    //     cycleIdxRows(i) := 0.U + i.U
-    //   }.otherwise{
-    //     cycleIdxRows(i) := (cycleIdx(i)-(p.m).U+1.U) + i.U
-    //   }
-    //   //when syst arr is outputting, begin attatching and assigning
-    //   systArrOutOffset := 0.U
-    //   when(cycle >= (2+p.k-1).U){
-    //     when((i.U<cycleIdx(0)+1.U) && (i.U<(p.m+p.n-2).U-cycleIdx(0)+1.U)){ //bug here: i limit for large, not small
-    //       when(cycleIdx(0)<p.m.U){
-    //         myOut(cycleIdxCols(i))(cycleIdxRows(i)) := systArr.io.out(i.U)
-    //       }.otherwise{
-    //         myOut(cycleIdxCols(i))(cycleIdxRows(i)) := systArr.io.out(i.U + (cycleIdx(0)-p.m.U+1.U))
-    //       }
-    //     }
-    //   }
-      // when(cycle >= (2+p.k-1).U){
-      //   when(cycleIdxCols(i)<p.m.U && cycleIdxRows(i)<p.n.U){
-      //     when(cycleIdx(0)<p.n.U){
-      //       myOut(cycleIdxCols(i))(cycleIdxRows(i)) := systArr.io.out(i.U)
-      //     }.otherwise{
-      //       myOut(cycleIdxCols(i))(cycleIdxRows(i)) := systArr.io.out(i.U + (cycleIdx(0)-p.n.U+1.U))
-      //     }
-      //   }
-      // }
-      // when(cycle >= (2+p.k-1).U){
-      //   when(cycleIdx(0)<p.n.U){
-      //     when(cycleIdxCols(i)<p.m.U && cycleIdxRows(i)<p.n.U){
-      //       myOut(cycleIdxCols(i))(cycleIdxRows(i)) := systArr.io.out(i.U)
-      //     }
-      //   }.otherwise{
-      //     when(cycleIdxCols(i)<p.m.U && cycleIdxRows(i)<p.n.U){
-      //       myOut(cycleIdxCols(i))(cycleIdxRows(i)) := systArr.io.out(i.U + (cycleIdx(0)-p.n.U+1.U))
-      //     }
-      //   }
-      // }
-    // }
+   
     printf(cf"\n-------------------------\n")
     printf(cf"MY TPU OUT: \n")
     for(i <- 0 until myOut.size){

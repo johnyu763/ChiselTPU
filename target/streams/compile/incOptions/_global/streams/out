@@ -1,2 +1,31 @@
 [0m[[0m[0mdebug[0m] [0m[0mCreated transactional ClassFileManager with tempDir = /Users/johnyu/Projects/CSE228A/ChiselTPU/target/scala-2.13/classes.bak[0m
+[0m[[0m[0mdebug[0m] [0m[0mAbout to delete class files:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ChiselTPU.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	TPUParams.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	SystArr.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	TPUParams$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	SystArr$$anon$3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ActReg.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ActReg$$anon$2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ChiselTPU$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0mWe backup class files:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ChiselTPU.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	TPUParams.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	SystArr.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	TPUParams$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	SystArr$$anon$3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ActReg.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ActReg$$anon$2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ChiselTPU$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0mRolling back changes to class files.[0m
+[0m[[0m[0mdebug[0m] [0m[0mRemoving generated classes:[0m
+[0m[[0m[0mdebug[0m] [0m[0mRestoring class files: [0m
+[0m[[0m[0mdebug[0m] [0m[0m	SystArr.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ActReg.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ChiselTPU.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	TPUParams$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ActReg$$anon$2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	SystArr$$anon$3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ChiselTPU$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	TPUParams.class[0m
 [0m[[0m[0mdebug[0m] [0m[0mRemoving the temporary directory used for backing up class files: /Users/johnyu/Projects/CSE228A/ChiselTPU/target/scala-2.13/classes.bak[0m
