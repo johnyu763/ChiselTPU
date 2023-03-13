@@ -1,0 +1,96 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(test, Some(a968d52c-0124-4721-96f2-41ea1925739d), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Test / test[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskStart, {"taskId":{"id":"60","parents":[]},"eventTime":1678671535940,"message":"Compiling root","dataKind":"compile-task","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Compile"}}})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskFinish, {"taskId":{"id":"60","parents":[]},"eventTime":1678671535945,"message":"Compiled root","status":1,"dataKind":"compile-report","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Compile"},"errors":0,"warnings":0,"time":5}})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskStart, {"taskId":{"id":"61","parents":[]},"eventTime":1678671535953,"message":"Compiling root-test","dataKind":"compile-task","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"}}})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/publishDiagnostics, {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModelTest.scala"},"buildTarget":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"},"diagnostics":[{"range":{"start":{"line":0,"character":0},"end":{"line":0,"character":1}},"severity":3,"source":"sbt","message":"\nFound names but no class, trait or object is defined in the compilation unit.\nThe incremental compiler cannot record the dependency information in such case.\nSome errors like unused import referring to a non-existent class might not be reported.\n    "},{"range":{"start":{"line":0,"character":0},"end":{"line":0,"character":1}},"severity":3,"source":"sbt","message":"\nFound top level imports but no class, trait or object is defined in the compilation unit.\nThe incremental compiler cannot record the dependency information in such case.\nSome errors like unused import referring to a non-existent class might not be reported.\n    "}],"reset":true})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/publishDiagnostics, {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/TPUModelTester.scala"},"buildTarget":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"},"diagnostics":[{"range":{"start":{"line":0,"character":0},"end":{"line":0,"character":1}},"severity":3,"source":"sbt","message":"\nFound names but no class, trait or object is defined in the compilation unit.\nThe incremental compiler cannot record the dependency information in such case.\nSome errors like unused import referring to a non-existent class might not be reported.\n    "},{"range":{"start":{"line":0,"character":0},"end":{"line":0,"character":1}},"severity":3,"source":"sbt","message":"\nFound top level imports but no class, trait or object is defined in the compilation unit.\nThe incremental compiler cannot record the dependency information in such case.\nSome errors like unused import referring to a non-existent class might not be reported.\n    "}],"reset":true})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskFinish, {"taskId":{"id":"61","parents":[]},"eventTime":1678671535959,"message":"Compiled root-test","status":1,"dataKind":"compile-report","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"},"errors":0,"warnings":0,"time":6}})[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mSystArrTester:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mTPU syst arr test[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should multiply (1s row) x (1s column)[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":3,"message":"\u001b[32mSystArrTester:\u001b[0m"})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":3,"message":"\u001b[32mTPU syst arr test\u001b[0m"})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":3,"message":"\u001b[32m- should multiply (1s row) x (1s column)\u001b[0m"})[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mTPUTester:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mTPU test[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should mult one cycle[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":3,"message":"\u001b[32mTPUTester:\u001b[0m"})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":3,"message":"\u001b[32mTPU test\u001b[0m"})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":3,"message":"\u001b[32m- should mult one cycle\u001b[0m"})[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 1 second, 938 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 2[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 2, aborted 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 2, failed 0, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mAll tests passed.[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":3,"message":"\u001b[36mRun completed in 1 second, 938 milliseconds.\u001b[0m\n\u001b[36mTotal number of tests run: 2\u001b[0m\n\u001b[36mSuites: completed 2, aborted 0\u001b[0m\n\u001b[36mTests: succeeded 2, failed 0, canceled 0, ignored 0, pending 0\u001b[0m\n\u001b[32mAll tests passed.\u001b[0m"})[0m
+[0m[[0m[32msuccess[0m] [0m[0mTotal time: 2 s, completed Mar 12, 2023, 6:38:57 PM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition json request: {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala"},"position":{"line":42,"character":14}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition found line:   val myOut = RegInit(VecInit.fill(p.m, p.n)(0.S(p.w.W)))[0m
+[0m[[0m[0mdebug[0m] [0m[0msymbol RegInit[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition potentials: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition locations Vector()[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition json request: {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala"},"position":{"line":45,"character":15}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition found line: [0m
+[0m[[0m[0minfo[0m] [0m[0mSymbol not found in definition request {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala"},"position":{"line":45,"character":15}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition json request: {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala"},"position":{"line":38,"character":35}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition found line:   val (cycle, wrap) = Counter(counterFlag, p.k+p.m+p.n+1) //assume input is valid for now[0m
+[0m[[0m[0mdebug[0m] [0m[0msymbol counterFlag[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition potentials: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition locations Vector()[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition json request: {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala"},"position":{"line":45,"character":36}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition found line: [0m
+[0m[[0m[0minfo[0m] [0m[0mSymbol not found in definition request {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala"},"position":{"line":45,"character":36}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition json request: {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala"},"position":{"line":46,"character":38}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition found line:   io.a.ready := a_ready[0m
+[0m[[0m[0minfo[0m] [0m[0mSymbol not found in definition request {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala"},"position":{"line":46,"character":38}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition json request: {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala"},"position":{"line":45,"character":3}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition found line: [0m
+[0m[[0m[0minfo[0m] [0m[0mSymbol not found in definition request {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala"},"position":{"line":45,"character":3}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition json request: {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala"},"position":{"line":37,"character":72}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition found line:   //val (cycle, wrap) = Counter(state === multiply, p.k+p.m+p.k+1) //assume input is valid for now[0m
+[0m[[0m[0mdebug[0m] [0m[0msymbol assume[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition potentials: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition locations Vector()[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition json request: {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala"},"position":{"line":37,"character":70}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition found line:   //val (cycle, wrap) = Counter(state === multiply, p.k+p.m+p.k+1) //assume input is valid for now[0m
+[0m[[0m[0mdebug[0m] [0m[0mUnhandled notification received: $/cancelRequest: JsonRpcNotificationMessage(2.0, $/cancelRequest, {"id":37})[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition json request: {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala"},"position":{"line":38,"character":68}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition found line:   val (cycle, wrap) = Counter(counterFlag, p.k+p.m+p.n+1) //assume input is valid for now[0m
+[0m[[0m[0mdebug[0m] [0m[0msymbol input[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition potentials: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition locations Vector()[0m
+[0m[[0m[0mdebug[0m] [0m[0msymbol assume[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition potentials: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition locations Vector()[0m
+[0m[[0m[0mdebug[0m] [0m[0mForcing garbage collection...[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition json request: {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala"},"position":{"line":47,"character":23}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition found line:   io.b.ready := b_ready[0m
+[0m[[0m[0mdebug[0m] [0m[0mUnhandled notification received: $/cancelRequest: JsonRpcNotificationMessage(2.0, $/cancelRequest, {"id":39})[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition json request: {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala"},"position":{"line":47,"character":25}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition found line:   io.b.ready := b_ready[0m
+[0m[[0m[0minfo[0m] [0m[0mSymbol not found in definition request {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala"},"position":{"line":47,"character":25}}[0m
+[0m[[0m[0mdebug[0m] [0m[0msymbol b_ready[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition potentials: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition locations Vector()[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition json request: {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala"},"position":{"line":47,"character":6}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition found line:   io.b.ready := b_ready[0m
+[0m[[0m[0mdebug[0m] [0m[0msymbol b[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition potentials: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition locations Vector()[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition json request: {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala"},"position":{"line":53,"character":37}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition found line:   //systArr.io.a_in := RegNext(actReg.io.a_out)[0m
+[0m[[0m[0mdebug[0m] [0m[0msymbol actReg[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition potentials: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition locations Vector()[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition json request: {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala"},"position":{"line":53,"character":61}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition found line:   //systArr.io.a_in := RegNext(actReg.io.a_out)[0m
+[0m[[0m[0minfo[0m] [0m[0mSymbol not found in definition request {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala"},"position":{"line":53,"character":61}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition json request: {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala"},"position":{"line":54,"character":49}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition found line:   systArr.io.a_in := actReg.io.a_out[0m
+[0m[[0m[0minfo[0m] [0m[0mSymbol not found in definition request {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala"},"position":{"line":54,"character":49}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition json request: {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala"},"position":{"line":54,"character":62}}[0m
+[0m[[0m[0mdebug[0m] [0m[0mlsp-definition found line:   systArr.io.a_in := actReg.io.a_out[0m
+[0m[[0m[0minfo[0m] [0m[0mSymbol not found in definition request {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala"},"position":{"line":54,"character":62}}[0m

@@ -32,17 +32,29 @@ class ChiselTPU(p: TPUParams) extends Module{
     val debug_cycleIdx = Output(UInt(p.w.W))
     val debug_systout_upperLim = Output(SInt(p.w.W))
   })
-  val load :: fill :: multiply :: clear :: Nil = Enum(4)
+  val load :: fill :: slice :: multiply :: clear :: Nil = Enum(5)
   val state = RegInit(load)
   val counterFlag = Wire(Bool())
   //val (cycle, wrap) = Counter(state === multiply, p.k+p.m+p.k+1) //assume input is valid for now
   val (cycle, wrap) = Counter(counterFlag, p.k+p.m+p.n+1) //assume input is valid for now
+  val systParams = TPUParams(2, 2, 2) //hard-coded systolic array size of 3 for slicing
   val actReg = Module(new ActReg(p))
-  //val systParams = TPUParams(p.k, io.a.bits.head.size, io.b.bits.head.size)
   val systArr = Module(new SystArr(p))
   val myOut = RegInit(VecInit.fill(p.m, p.n)(0.S(p.w.W)))
   val a_ready = RegInit(true.B)
   val b_ready = RegInit(true.B)
+
+  // slice parameters
+  // dimensions of padded input matrices
+  val paddedMDim = p.m % systParams.m + p.m
+  val paddedKDim = p.k % systParams.k + p.k
+  val paddedNDim = p.n % systParams.n + p.n
+
+  // initialization of padded input matrices
+  val paddedA = RegInit(VecInit.fill(paddedMDim, paddedKDim)(0.S(p.w.W)))
+  val paddedB = RegInit(VecInit.fill(paddedKDim, paddedNDim)(0.S(p.w.W)))
+  val ASlice = RegInit(VecInit.fill(systParams.m, systParams.k)(0.S(p.w.W)))
+  val BSlice = RegInit(VecInit.fill(systParams.k, systParams.n)(0.S(p.w.W)))
 
   io.a.ready := a_ready
   io.b.ready := b_ready
@@ -66,7 +78,7 @@ class ChiselTPU(p: TPUParams) extends Module{
   val cycleIdxRows = Wire(Vec(p.n, UInt(p.w.W)))
   val systArrOutOffset = Wire(UInt(p.w.W))
   //declare systWires
-  val limitingDimension = Wire(UInt(p.w.W))
+  // val limitingDimension = Wire(UInt(p.w.W))
   cycleIdx := 0.U
   for(i <- 0 until p.n){
     cycleIdxCols(i) := 0.U
@@ -87,11 +99,11 @@ class ChiselTPU(p: TPUParams) extends Module{
   io.debug_systout_upperLim := 0.S
 
   systArrOutOffset := 0.U
-  if(p.m<p.n){
-    limitingDimension := p.m.U
-  }else{
-    limitingDimension := p.n.U
-  }
+  // if(p.m<p.n){
+  //   limitingDimension := p.m.U
+  // }else{
+  //   limitingDimension := p.n.U
+  // }
   when(state === load){ 
       when(io.a.valid && io.a.ready){
         state := fill
@@ -196,15 +208,15 @@ class ChiselTPU(p: TPUParams) extends Module{
       //   }
       // }
     // }
-    // printf(cf"-------------------------\n")
-    // printf(cf"MY TPU OUT: \n")
-    // for(i <- 0 until myOut.size){
-    //   printf(cf"${myOut(i)}\n")
-    // }
-    // printf(cf"actreg out:\n")
-    // for(i <- 0 until p.k){
-    //   printf(cf"${actReg.io.a_out(i)}  ")
-    // }
+    printf(cf"-------------------------\n")
+    printf(cf"MY TPU OUT: \n")
+    for(i <- 0 until myOut.size){
+      printf(cf"${myOut(i)}\n")
+    }
+    printf(cf"actreg out:\n")
+    for(i <- 0 until p.k){
+      printf(cf"${actReg.io.a_out(i)}  ")
+    }
     // printf("\n")
     // printf(cf"systarr out:\n")
     // for(i <- 0 until p.n){

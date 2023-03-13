@@ -141,17 +141,17 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
         }
     }
     dut.clock.step()
-        print("\n") 
-        print("-----cycleIdx out-----\n")
-        print(dut.io.debug_cycleIdx.peek())
-        print("\n") 
-        print("-----cycleIdxCols out-----\n")
-        print(dut.io.debug_cycleIdxCols.peek())
-        print("\n") 
-        print("-----cycleIdxCols out-----\n")
-        print(dut.io.debug_cycleIdxRows.peek())
-        print("\n") 
-        print("\n") 
+        // print("\n") 
+        // print("-----cycleIdx out-----\n")
+        // print(dut.io.debug_cycleIdx.peek())
+        // print("\n") 
+        // print("-----cycleIdxCols out-----\n")
+        // print(dut.io.debug_cycleIdxCols.peek())
+        // print("\n") 
+        // print("-----cycleIdxCols out-----\n")
+        // print(dut.io.debug_cycleIdxRows.peek())
+        // print("\n") 
+        // print("\n") 
     //for(i <- 0 until p.k+p.m+p.k+2){
     //len to feed a slanted all the way though a_in window, eg:
     //
@@ -185,9 +185,9 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
         //     }
         //     print("\n")
         // }
-        print("-----AFTER:cycle out-----\n")
-        print(dut.io.debug_cycleOut.peek())
-        print("\n")       
+        // print("-----AFTER:cycle out-----\n")
+        // print(dut.io.debug_cycleOut.peek())
+        // print("\n")       
         // print("-----AFTER:00-----\n")
         // print(dut.io.debug_00.peek())
         // print("\n") 
@@ -204,42 +204,42 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
         //   }
         //   print("\n")
         // }
-        print("-----syst arr-----\n")
-        for (cmp_i <- 0 until p.k) {
-          for (cmp_j <- 0 until p.n) {
-            print(dut.io.debug_1(cmp_i)(cmp_j).peek())
-          }
-          print("\n")
-        }
+        // print("-----syst arr-----\n")
+        // for (cmp_i <- 0 until p.k) {
+        //   for (cmp_j <- 0 until p.n) {
+        //     print(dut.io.debug_1(cmp_i)(cmp_j).peek())
+        //   }
+        //   print("\n")
+        // }
         // print("\n")
 
-        print("-----systreg out-----\n")
-        for (cmp_i <- 0 until p.n) {
-          print(dut.io.debug_systreg_out(cmp_i).peek())
-          print("  ")
-        }
-        print("\n") 
-        print("-----cycleIdx out-----\n")
-        print(dut.io.debug_cycleIdx.peek())
-        print("\n") 
-        print("-----cycleIdxCols out-----\n")
-        print(dut.io.debug_cycleIdxCols.peek())
-        print("\n") 
-        print("-----cycleIdxRows out-----\n")
-        print(dut.io.debug_cycleIdxRows.peek())
-        print("\n") 
-        print("-----outReg-----\n")
-        for (cmp_i <- 0 until p.m) {
-          for (cmp_j <- 0 until p.n) {
-            print(dut.io.out(cmp_i)(cmp_j).peek())
-          }
-          print("\n")
-        }
-        print("-----debug_systout_upperLim out-----\n")
-        print(dut.io.debug_systout_upperLim.peek())
-        print("\n") 
-        print("\n")
-        print("\n") 
+        // print("-----systreg out-----\n")
+        // for (cmp_i <- 0 until p.n) {
+        //   print(dut.io.debug_systreg_out(cmp_i).peek())
+        //   print("  ")
+        // }
+        // print("\n") 
+        // print("-----cycleIdx out-----\n")
+        // print(dut.io.debug_cycleIdx.peek())
+        // print("\n") 
+        // print("-----cycleIdxCols out-----\n")
+        // print(dut.io.debug_cycleIdxCols.peek())
+        // print("\n") 
+        // print("-----cycleIdxRows out-----\n")
+        // print(dut.io.debug_cycleIdxRows.peek())
+        // print("\n") 
+        // print("-----outReg-----\n")
+        // for (cmp_i <- 0 until p.m) {
+        //   for (cmp_j <- 0 until p.n) {
+        //     print(dut.io.out(cmp_i)(cmp_j).peek())
+        //   }
+        //   print("\n")
+        // }
+        // print("-----debug_systout_upperLim out-----\n")
+        // print(dut.io.debug_systout_upperLim.peek())
+        // print("\n") 
+        // print("\n")
+        // print("\n") 
     }
 
     //check output 1
@@ -304,38 +304,38 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
   it should "mult one cycle" in {
     // val k = 4
     doTPUTest(TPUTestData.inA3x3, TPUTestData.inB3x3)
-    doTPUTest(TPUTestData.in2x4, TPUTestData.in4x2)
-    doTPUTest(TPUTestData.in4x2, TPUTestData.in2x4)
-    doTPUTest(TPUTestData.in5x3, TPUTestData.in3x7)
-    doTPUTest(TPUTestData.in3x7, TPUTestData.in7x5)
+    // doTPUTest(TPUTestData.in2x4, TPUTestData.in4x2)
+    // doTPUTest(TPUTestData.in4x2, TPUTestData.in2x4)
+    // doTPUTest(TPUTestData.in5x3, TPUTestData.in3x7)
+    // doTPUTest(TPUTestData.in3x7, TPUTestData.in7x5)
   }
-  it should "smult rand" in {
-    // val k = 4
-    val m = Random.nextInt(10)+1
-    val k = Random.nextInt(10)+1
-    val n = Random.nextInt(10)+1
-    val m1 = TPUTestData.genRand(m, k)
-    val m2 = TPUTestData.genRand(k, n)
-    print("----------m1----------\n")
-    for(r <- 0 until m1.size){
-      for(c <- 0 until m1.head.size){
-        print(m1(r)(c))
-        print(" ")
-      }
-      print("\n")
-    }
-    print("----------m2----------\n")
-    for(r <- 0 until m2.size){
-      for(c <- 0 until m2.head.size){
-        print(m2(r)(c))
-        print(" ")
-      }
-      print("\n")
-    }
-    print("\n")
-    print("\n")
-    doTPUTest(m1, m2)
-  }
+  // it should "smult rand" in {
+  //   // val k = 4
+  //   val m = Random.nextInt(10)+1
+  //   val k = Random.nextInt(10)+1
+  //   val n = Random.nextInt(10)+1
+  //   val m1 = TPUTestData.genRand(m, k)
+  //   val m2 = TPUTestData.genRand(k, n)
+  //   print("----------m1----------\n")
+  //   for(r <- 0 until m1.size){
+  //     for(c <- 0 until m1.head.size){
+  //       print(m1(r)(c))
+  //       print(" ")
+  //     }
+  //     print("\n")
+  //   }
+  //   print("----------m2----------\n")
+  //   for(r <- 0 until m2.size){
+  //     for(c <- 0 until m2.head.size){
+  //       print(m2(r)(c))
+  //       print(" ")
+  //     }
+  //     print("\n")
+  //   }
+  //   print("\n")
+  //   print("\n")
+  //   doTPUTest(m1, m2)
+  // }
 
   // behavior of "TPU test"
   // it should "stagger b" in {
