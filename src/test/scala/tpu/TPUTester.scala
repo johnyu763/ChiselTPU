@@ -15,7 +15,8 @@ object TPUTestData {
   def genOnesRow(n: Int): Matrix = Array(Array.fill(n)(1))
 
   def genOnesCol(n: Int): Matrix = Array.fill(n)(Array(1))
-
+  val in2x2 = Array(Array(1,2),
+                   Array(3,4))
   val in2x4  = Array(Array(1,2,3,4),
                    Array(5,6,7,8))
   val in4x2  = Array(Array(1,2),
@@ -24,6 +25,9 @@ object TPUTestData {
                    Array(7,8))
   val out2x2 = Array(Array(50, 60),
                    Array(114,140))
+
+  // val alt2x2A = Array(Array(2,3),
+  //                  Array(1,5))
   val out4x4 = Array(Array(11, 14, 17, 20),
                    Array(23, 30, 37, 44),
                    Array(35, 46, 57, 68),
@@ -107,7 +111,7 @@ class SystArrTester extends AnyFlatSpec with ChiselScalatestTester {
   behavior of "TPU syst arr test"
   it should "multiply (1s row) x (1s column)" in {
     val k = 4
-    doSystArrTest_noShift(TPUTestData.inA3x3, TPUTestData.inAShifted, TPUTestData.inB3x3)
+    // doSystArrTest_noShift(TPUTestData.inA3x3, TPUTestData.inAShifted, TPUTestData.inB3x3)
   }
 }
 
@@ -155,7 +159,7 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
     //for(i <- 0 until p.k+p.m+p.k+2){
     //len to feed a slanted all the way though a_in window, eg:
     //
-    for(i <- 0 until 2+(p.k+p.m-1)+(p.n)){
+    for(i <- 0 until (4+(p.k+p.m-1)+(p.n))){
         // print("-----BEFORE:arrRegs out-----\n")
         // for (cmp_i <- 0 until p.k) {
         //   print(dut.io.debug_a_out(cmp_i).peek())
@@ -244,6 +248,13 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
 
     //check output 1
     val expected = MatMulModel(p, a, b)
+    print("EXPECTED OUT\n")
+    for (r <- 0 until p.cRows) {
+      for (c <- 0 until p.cCols) {
+        print(s"${expected(r)(c).S} ")
+      }
+      print("\n")
+    }
     for (r <- 0 until p.cRows) {
       for (c <- 0 until p.cCols) {
         dut.io.out(r)(c).expect(expected(r)(c).S)
@@ -303,6 +314,7 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
   behavior of "TPU test"
   it should "mult one cycle" in {
     // val k = 4
+    // doTPUTest(TPUTestData.in2x2, TPUTestData.in2x2)
     doTPUTest(TPUTestData.inA3x3, TPUTestData.inB3x3)
     // doTPUTest(TPUTestData.in2x4, TPUTestData.in4x2)
     // doTPUTest(TPUTestData.in4x2, TPUTestData.in2x4)

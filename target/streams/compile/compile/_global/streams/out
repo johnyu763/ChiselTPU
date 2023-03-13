@@ -1,13 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:70:41: not found: value past[0m
-[0m[[0m[31merror[0m] [0m[0m  val (sliceCycle, sliceWrap) = Counter(past(state) === slice, numSliceM * numSliceK * numSliceN)[0m
-[0m[[0m[31merror[0m] [0m[0m                                        ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:127:48: value % is not a member of Any[0m
-[0m[[0m[31merror[0m] [0m[0m    val boundK = systParams.k.U * ((sliceCycle % (numSliceK*numSliceN).U) % numSliceK.U)//systParams.k.U * (sliceCycle % (numSliceK*numSliceN).U)/systParams.k.U[0m
-[0m[[0m[31merror[0m] [0m[0m                                               ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:128:48: value % is not a member of Any[0m
-[0m[[0m[31merror[0m] [0m[0m    val boundM = systParams.m.U * ((sliceCycle % (numSliceM*numSliceK).U) / numSliceK.U) //(sliceCycle*systParams.m.U % (numSliceK*numSliceM).U)/systParams.m.U[0m
-[0m[[0m[31merror[0m] [0m[0m                                               ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:129:47: value / is not a member of Any[0m
-[0m[[0m[31merror[0m] [0m[0m    val boundN = systParams.n.U * (sliceCycle / (numSliceK*numSliceN).U)[0m
-[0m[[0m[31merror[0m] [0m[0m                                              ^[0m
-[0m[[0m[31merror[0m] [0m[0mfour errors found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:389:1: Missing closing brace `}` assumed here[0m
+[0m[[0m[31merror[0m] [0m[0m}[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
