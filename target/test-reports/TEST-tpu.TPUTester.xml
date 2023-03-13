@@ -1,11 +1,32 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<testsuite hostname="MacBook-Pro-3.local" name="tpu.TPUTester" tests="1" errors="0" failures="0" skipped="0" time="1.916" timestamp="2023-03-12T21:28:39">
+<testsuite hostname="MacBook-Pro-3.local" name="tpu.TPUTester" tests="1" errors="0" failures="1" skipped="0" time="2.098" timestamp="2023-03-12T23:02:15">
           <properties>
       <property name="java.specification.version" value="19"/><property name="sun.jnu.encoding" value="UTF-8"/><property name="sun.arch.data.model" value="64"/><property name="java.vendor.url" value="https://github.com/Homebrew/homebrew-core/issues"/><property name="sun.boot.library.path" value="/usr/local/Cellar/openjdk/19.0.1/libexec/openjdk.jdk/Contents/Home/lib"/><property name="sun.java.command" value="/usr/local/Cellar/sbt/1.8.2/libexec/bin/sbt-launch.jar"/><property name="jdk.debug" value="release"/><property name="java.specification.vendor" value="Oracle Corporation"/><property name="java.version.date" value="2022-10-18"/><property name="java.home" value="/usr/local/Cellar/openjdk/19.0.1/libexec/openjdk.jdk/Contents/Home"/><property name="file.separator" value="/"/><property name="java.vm.compressedOopsMode" value="Zero based"/><property name="line.separator" value="
 "/><property name="java.vm.specification.vendor" value="Oracle Corporation"/><property name="java.specification.name" value="Java Platform API Specification"/><property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/><property name="java.runtime.version" value="19.0.1"/><property name="user.name" value="johnyu"/><property name="log4j.ignoreTCL" value="true"/><property name="file.encoding" value="UTF-8"/><property name="jnidispatch.path" value="/Users/johnyu/Library/Caches/JNA/temp/jna14802288684814503626.tmp"/><property name="java.vendor.version" value="Homebrew"/><property name="jna.loaded" value="true"/><property name="java.io.tmpdir" value="/var/folders/mp/6ps070t95qj5_k8vr8pfphg80000gq/T/"/><property name="java.version" value="19.0.1"/><property name="java.vm.specification.name" value="Java Virtual Machine Specification"/><property name="native.encoding" value="UTF-8"/><property name="java.library.path" value="/Users/johnyu/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/><property name="stderr.encoding" value="UTF-8"/><property name="java.vendor" value="Homebrew"/><property name="scala.ext.dirs" value="/Users/johnyu/.sbt/1.0/java9-rt-ext-homebrew_19_0_1"/><property name="sun.io.unicode.encoding" value="UnicodeBig"/><property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/><property name="java.class.path" value="/usr/local/Cellar/sbt/1.8.2/libexec/bin/sbt-launch.jar"/><property name="java.vm.vendor" value="Homebrew"/><property name="jline.shutdownhook" value="false"/><property name="user.timezone" value="America/Los_Angeles"/><property name="java.vm.specification.version" value="19"/><property name="os.name" value="Mac OS X"/><property name="sun.java.launcher" value="SUN_STANDARD"/><property name="user.country" value="US"/><property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/><property name="sun.cpu.endian" value="little"/><property name="user.home" value="/Users/johnyu"/><property name="user.language" value="en"/><property name="sbt.script" value="/usr/local/Cellar/sbt/1.8.2/libexec/bin/sbt"/><property name="sbt.ipcsocket.tmpdir" value="/var/folders/mp/6ps070t95qj5_k8vr8pfphg80000gq/T/.sbt5402e45a/ipcsocket"/><property name="swoval.tmpdir" value="/var/folders/mp/6ps070t95qj5_k8vr8pfphg80000gq/T/.sbt5402e45a/swoval"/><property name="apple.awt.application.name" value="Boot"/><property name="jline.esc.timeout" value="0"/><property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/><property name="stdout.encoding" value="UTF-8"/><property name="path.separator" value=":"/><property name="os.version" value="11.1"/><property name="jna.nosys" value="true"/><property name="java.runtime.name" value="OpenJDK Runtime Environment"/><property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/><property name="jna.platform.library.path" value="/usr/lib:/usr/lib"/><property name="java.vendor.url.bug" value="https://github.com/Homebrew/homebrew-core/issues"/><property name="user.dir" value="/Users/johnyu/Projects/CSE228A/ChiselTPU"/><property name="os.arch" value="x86_64"/><property name="java.vm.info" value="mixed mode, sharing"/><property name="java.vm.version" value="19.0.1"/><property name="java.class.version" value="63.0"/>
     </properties>
-          <testcase classname="tpu.TPUTester" name="TPU test should mult one cycle" time="1.916">
-                      
+          <testcase classname="tpu.TPUTester" name="TPU test should mult one cycle" time="2.098">
+                      <failure message="io_out_0_2=0 (0x0) did not equal expected=20 (0x14) (lines in TPUTester.scala: 248, 247, 124)" type="org.scalatest.exceptions.TestFailedException">org.scalatest.exceptions.TestFailedException: io_out_0_2=0 (0x0) did not equal expected=20 (0x14) (lines in TPUTester.scala: 248, 247, 124)
+	at chiseltest.internal.TestEnvInterface.signalExpectFailure(TestEnvInterface.scala:58)
+	at chiseltest.internal.TestEnvInterface.signalExpectFailure$(TestEnvInterface.scala:45)
+	at tpu.TPUTester.signalExpectFailure(TPUTester.scala:114)
+	at chiseltest.package$Utils$.expectFailed(package.scala:512)
+	at chiseltest.package$Utils$.expectBits(package.scala:503)
+	at chiseltest.package$testableSInt.expectInternal(package.scala:74)
+	at chiseltest.package$testableSInt.expect(package.scala:76)
+	at tpu.TPUTester.$anonfun$doTPUTest$9(TPUTester.scala:249)
+	at scala.collection.immutable.Range.foreach$mVc$sp(Range.scala:190)
+	at tpu.TPUTester.$anonfun$doTPUTest$8(TPUTester.scala:248)
+	at scala.collection.immutable.Range.foreach$mVc$sp(Range.scala:190)
+	at tpu.TPUTester.$anonfun$doTPUTest$2(TPUTester.scala:247)
+	at tpu.TPUTester.$anonfun$doTPUTest$2$adapted(TPUTester.scala:124)
+	at chiseltest.internal.GenericBackend.$anonfun$run$1(GenericBackend.scala:151)
+	at chiseltest.internal.ThreadedBackend$TesterThread$$anon$1.$anonfun$run$1(ThreadedBackend.scala:495)
+	at chiseltest.internal.GenericBackend.doTimescope(GenericBackend.scala:96)
+	at chiseltest.internal.ThreadedBackend$TesterThread$$anon$1.run(ThreadedBackend.scala:495)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: chiseltest.internal.FailedExpectException: io_out_0_2=0 (0x0) did not equal expected=20 (0x14) (lines in TPUTester.scala: 248, 247, 124)
+	... 18 more
+</failure>
                     </testcase>
           <system-out><![CDATA[]]></system-out>
           <system-err><![CDATA[]]></system-err>

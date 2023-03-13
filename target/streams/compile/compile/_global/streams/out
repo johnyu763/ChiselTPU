@@ -2,23 +2,12 @@
 [0m[[0m[31merror[0m] [0m[0m  val (sliceCycle, sliceWrap) = Counter(past(state) === slice, numSliceM * numSliceK * numSliceN)[0m
 [0m[[0m[31merror[0m] [0m[0m                                        ^[0m
 [0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:127:48: value % is not a member of Any[0m
-[0m[[0m[31merror[0m] [0m[0m    val topBoundA = systParams.m * (sliceCycle % (numSliceK*numSliceM))/numSliceM[0m
+[0m[[0m[31merror[0m] [0m[0m    val boundK = systParams.k.U * ((sliceCycle % (numSliceK*numSliceN).U) % numSliceK.U)//systParams.k.U * (sliceCycle % (numSliceK*numSliceN).U)/systParams.k.U[0m
 [0m[[0m[31merror[0m] [0m[0m                                               ^[0m
 [0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:128:48: value % is not a member of Any[0m
-[0m[[0m[31merror[0m] [0m[0m    val topBoundB = systParams.k * (sliceCycle % (numSliceK*numSliceN))/numSliceK[0m
+[0m[[0m[31merror[0m] [0m[0m    val boundM = systParams.m.U * ((sliceCycle % (numSliceM*numSliceK).U) / numSliceK.U) //(sliceCycle*systParams.m.U % (numSliceK*numSliceM).U)/systParams.m.U[0m
 [0m[[0m[31merror[0m] [0m[0m                                               ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:129:50: value % is not a member of Any[0m
-[0m[[0m[31merror[0m] [0m[0m    val leftBoundA =  systParams.k * (sliceCycle % (numSliceK*numSliceM))%numSliceK[0m
-[0m[[0m[31merror[0m] [0m[0m                                                 ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:130:50: value % is not a member of Any[0m
-[0m[[0m[31merror[0m] [0m[0m    val leftBoundB =  systParams.n * (sliceCycle % (numSliceK*numSliceN))%numSliceN[0m
-[0m[[0m[31merror[0m] [0m[0m                                                 ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:132:13: missing argument list for method := in class Vec[0m
-[0m[[0m[31merror[0m] [0m[0mUnapplied methods are only converted to functions when a function type is expected.[0m
-[0m[[0m[31merror[0m] [0m[0mYou can make this conversion explicit by writing `:= _` or `:=(_)(_,_)` instead of `:=`.[0m
-[0m[[0m[31merror[0m] [0m[0m    slicedA := [0m
-[0m[[0m[31merror[0m] [0m[0m            ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:160:34: value / is not a member of Any[0m
-[0m[[0m[31merror[0m] [0m[0m    slicedA := paddedA(sliceCycle/())[0m
-[0m[[0m[31merror[0m] [0m[0m                                 ^[0m
-[0m[[0m[31merror[0m] [0m[0m7 errors found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:129:47: value / is not a member of Any[0m
+[0m[[0m[31merror[0m] [0m[0m    val boundN = systParams.n.U * (sliceCycle / (numSliceK*numSliceN).U)[0m
+[0m[[0m[31merror[0m] [0m[0m                                              ^[0m
+[0m[[0m[31merror[0m] [0m[0mfour errors found[0m

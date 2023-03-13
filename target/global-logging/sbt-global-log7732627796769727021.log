@@ -1,0 +1,37 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(test, Some(b9930dc4-abae-44cb-8277-519e94bb159b), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Test / test[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskStart, {"taskId":{"id":"277","parents":[]},"eventTime":1678687334931,"message":"Compiling root","dataKind":"compile-task","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Compile"}}})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskFinish, {"taskId":{"id":"277","parents":[]},"eventTime":1678687334936,"message":"Compiled root","status":1,"dataKind":"compile-report","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Compile"},"errors":0,"warnings":0,"time":5}})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskStart, {"taskId":{"id":"278","parents":[]},"eventTime":1678687334939,"message":"Compiling root-test","dataKind":"compile-task","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"}}})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/publishDiagnostics, {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModelTest.scala"},"buildTarget":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"},"diagnostics":[{"range":{"start":{"line":0,"character":0},"end":{"line":0,"character":1}},"severity":3,"source":"sbt","message":"\nFound names but no class, trait or object is defined in the compilation unit.\nThe incremental compiler cannot record the dependency information in such case.\nSome errors like unused import referring to a non-existent class might not be reported.\n    "},{"range":{"start":{"line":0,"character":0},"end":{"line":0,"character":1}},"severity":3,"source":"sbt","message":"\nFound top level imports but no class, trait or object is defined in the compilation unit.\nThe incremental compiler cannot record the dependency information in such case.\nSome errors like unused import referring to a non-existent class might not be reported.\n    "}],"reset":true})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/publishDiagnostics, {"textDocument":{"uri":"file:///Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/TPUModelTester.scala"},"buildTarget":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"},"diagnostics":[{"range":{"start":{"line":0,"character":0},"end":{"line":0,"character":1}},"severity":3,"source":"sbt","message":"\nFound names but no class, trait or object is defined in the compilation unit.\nThe incremental compiler cannot record the dependency information in such case.\nSome errors like unused import referring to a non-existent class might not be reported.\n    "},{"range":{"start":{"line":0,"character":0},"end":{"line":0,"character":1}},"severity":3,"source":"sbt","message":"\nFound top level imports but no class, trait or object is defined in the compilation unit.\nThe incremental compiler cannot record the dependency information in such case.\nSome errors like unused import referring to a non-existent class might not be reported.\n    "}],"reset":true})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/taskFinish, {"taskId":{"id":"278","parents":[]},"eventTime":1678687334945,"message":"Compiled root-test","status":1,"dataKind":"compile-report","data":{"target":{"uri":"file:/Users/johnyu/Projects/CSE228A/ChiselTPU/#root/Test"},"errors":0,"warnings":0,"time":6}})[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mSystArrTester:[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":3,"message":"\u001b[32mSystArrTester:\u001b[0m"})[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mTPU syst arr test[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":3,"message":"\u001b[32mTPU syst arr test\u001b[0m"})[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should multiply (1s row) x (1s column)[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":3,"message":"\u001b[32m- should multiply (1s row) x (1s column)\u001b[0m"})[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mTPUTester:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mTPU test[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m- should mult one cycle *** FAILED ***[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  io_out_0_2=0 (0x0) did not equal expected=20 (0x14) (lines in TPUTester.scala: 248, 247, 124) (TPUTester.scala:249)[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":3,"message":"\u001b[32mTPUTester:\u001b[0m"})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":3,"message":"\u001b[32mTPU test\u001b[0m"})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":3,"message":"\u001b[31m- should mult one cycle *** FAILED ***\u001b[0m"})[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":3,"message":"\u001b[31m  io_out_0_2=0 (0x0) did not equal expected=20 (0x14) (lines in TPUTester.scala: 248, 247, 124) (TPUTester.scala:249)\u001b[0m"})[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 2 seconds, 177 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 2[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 2, aborted 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 1, failed 1, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m*** 1 TEST FAILED ***[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":3,"message":"\u001b[36mRun completed in 2 seconds, 177 milliseconds.\u001b[0m\n\u001b[36mTotal number of tests run: 2\u001b[0m\n\u001b[36mSuites: completed 2, aborted 0\u001b[0m\n\u001b[36mTests: succeeded 1, failed 1, canceled 0, ignored 0, pending 0\u001b[0m\n\u001b[31m*** 1 TEST FAILED ***\u001b[0m"})[0m
+[0m[[0m[31merror[0m] [0m[0mFailed tests:[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":1,"message":"Failed tests:"})[0m
+[0m[[0m[31merror[0m] [0m[0m	tpu.TPUTester[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":1,"message":"\ttpu.TPUTester"})[0m
+[0m[[0m[31merror[0m] [0m[0m(Test / [31mtest[0m) sbt.TestsFailedException: Tests unsuccessful[0m
+[0m[[0m[0mdebug[0m] [0m[0mjsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":1,"message":"(Test / \u001b[31mtest\u001b[0m) sbt.TestsFailedException: Tests unsuccessful"})[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 2 s, completed Mar 12, 2023, 11:02:17 PM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m

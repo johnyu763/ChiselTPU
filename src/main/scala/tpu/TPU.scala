@@ -67,7 +67,7 @@ class ChiselTPU(p: TPUParams) extends Module{
   val slicedA = RegInit(VecInit.fill(systParams.m, systParams.k)(0.S(p.w.W)))
   val slicedB = RegInit(VecInit.fill(systParams.k, systParams.n)(0.S(p.w.W)))
 
-  val (sliceCycle, sliceWrap) = Counter(past(state) === slice, numSliceM * numSliceK * numSliceN)
+  val (sliceCycle, sliceWrap) = Counter(RegNext(state) === slice, numSliceM * numSliceK * numSliceN)
 
   // only allows reading input in input states
   io.a.ready := a_ready
@@ -124,14 +124,30 @@ class ChiselTPU(p: TPUParams) extends Module{
   }
 
   def updateMatricesSlices() = {
-    val topBoundA = systParams.m * (sliceCycle % (numSliceK*numSliceM))/numSliceM
-    val topBoundB = systParams.k * (sliceCycle % (numSliceK*numSliceN))/numSliceK
-    val leftBoundA =  systParams.k * (sliceCycle % (numSliceK*numSliceM))%numSliceK
-    val leftBoundB =  systParams.n * (sliceCycle % (numSliceK*numSliceN))%numSliceN
+    val boundK = systParams.k.U * ((sliceCycle % (numSliceK*numSliceN).U) % numSliceK.U)//systParams.k.U * (sliceCycle % (numSliceK*numSliceN).U)/systParams.k.U
+    val boundM = systParams.m.U * ((sliceCycle % (numSliceM*numSliceK).U) / numSliceK.U) //(sliceCycle*systParams.m.U % (numSliceK*numSliceM).U)/systParams.m.U
+    val boundN = systParams.n.U * (sliceCycle / (numSliceK*numSliceN).U)
 
-    slicedA := 
+    printf(cf"\nbound K: ${boundK} -${boundK+systParams.k.U}\n")
+    printf(cf"bound M: ${boundM} -${boundM+systParams.m.U}\n")
+    printf(cf"bound N: ${boundN} -${boundN+systParams.n.U}\n")
+    // printf(cf"NUM M SLICE: ${numSliceM}\n")
+    // printf(cf"NUM K SLICE: ${numSliceK}\n")
+    // printf(cf"NUM N SLICE: ${numSliceN}\n")
+    for(i <- 0 until systParams.k){
+      for(j <- 0 until systParams.m){
+        slicedA(j)(i) := paddedA(boundM+j.U)(boundK+i.U)
+      }
+      for(j <- 0 until systParams.n){
+        slicedB(i)(j) := paddedB(boundK+i.U)(boundN+j.U) 
+      }
+    }
+    // printf(cf"\nFIRST SLICED A ${paddedA(0.U).slice(0,2)}\n")
+    // slicedA := paddedA(boundM, boundM+systParams.m.U)(boundK, boundK+systParams.k.U)
+    // slicedB := paddedB(boundK, boundK+systParams.k.U)(boundN, boundN+systParams.n.U)
   }
 
+  
   when(state === load){ 
       when(io.a.valid && io.a.ready){
         state := fill
@@ -157,7 +173,7 @@ class ChiselTPU(p: TPUParams) extends Module{
       // print("\n")
   }
   .elsewhen(state === slice){
-    slicedA := paddedA(sliceCycle/())
+    updateMatricesSlices()
     state := multiply
   }
   .elsewhen(state === multiply){
@@ -187,12 +203,13 @@ class ChiselTPU(p: TPUParams) extends Module{
         }
       } 
     }
-   
-    printf(cf"\n-------------------------\n")
-    printf(cf"MY TPU OUT: \n")
-    for(i <- 0 until myOut.size){
-      printf(cf"${myOut(i)}\n")
-    }
+
+    // printf(cf"\n-------------------------\n")
+    // printf(cf"MY TPU OUT: \n")
+    // for(i <- 0 until myOut.size){
+    //   printf(cf"${myOut(i)}\n")
+    // }
+    printf(cf"SLICE CYCLE ${sliceCycle}\n")
     printf(cf"NORMAL A: \n")
     for(i <- 0 until io.a.bits.size){
       printf(cf"${io.a.bits(i)}\n")
@@ -204,15 +221,23 @@ class ChiselTPU(p: TPUParams) extends Module{
     printf(cf"PADDED A: \n")
     for(i <- 0 until paddedA.size){
       printf(cf"${paddedA(i)}\n")
-    }
+   }
      printf(cf"PADDED B: \n")
     for(i <- 0 until paddedB.size){
       printf(cf"${paddedB(i)}\n")
     }
-    printf(cf"actreg out:\n")
-    for(i <- 0 until p.k){
-      printf(cf"${actReg.io.a_out(i)}  ")
+    printf(cf"SLICED A: \n")
+    for(i <- 0 until slicedA.size){
+      printf(cf"${slicedA(i)}\n")
     }
+    printf(cf"SLICED B: \n")
+    for(i <- 0 until slicedB.size){
+      printf(cf"${slicedB(i)}\n")
+    }
+    // printf(cf"actreg out:\n")
+    // for(i <- 0 until p.k){
+    //   printf(cf"${actReg.io.a_out(i)}  ")
+    // }
     // printf("\n")
     // printf(cf"systarr out:\n")
     // for(i <- 0 until p.n){
