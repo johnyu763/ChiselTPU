@@ -2,13 +2,5 @@
 [0m[[0m[0mdebug[0m] [0m[0mIncrementalCompile.incrementalCompile[0m
 [0m[[0m[0mdebug[0m] [0m[0mprevious = Stamps for: 10 products, 5 sources, 7 libraries[0m
 [0m[[0m[0mdebug[0m] [0m[0mcurrent source = Set(${BASE}/src/test/scala/tpu/ActRegModel.scala, ${BASE}/src/test/scala/tpu/ActRegModelTest.scala, ${BASE}/src/test/scala/tpu/TPUModel.scala, ${BASE}/src/test/scala/tpu/TPUTester.scala, ${BASE}/src/test/scala/tpu/TPUModelTester.scala)[0m
-[0m[[0m[0mdebug[0m] [0m[0m> initialChanges = InitialChanges(Changes(added = Set(), removed = Set(), changed = Set(), unmodified = ...),Set(),Set(),API Changes: Set(NamesChange(tpu.ChiselTPU,ModifiedNames(changes = UsedName(paddedB,[Default]), UsedName(paddedKDim,[Default]), UsedName(ASlice,[Default]), UsedName(paddedMDim,[Default]), UsedName(paddedNDim,[Default]), UsedName(paddedA,[Default]), UsedName(BSlice,[Default])))))[0m
-[0m[[0m[0mdebug[0m] [0m[0mThe tpu.ChiselTPU has the following regular definitions changed:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	UsedName(paddedB,[Default]), UsedName(paddedKDim,[Default]), UsedName(ASlice,[Default]), UsedName(paddedMDim,[Default]), UsedName(paddedNDim,[Default]), UsedName(paddedA,[Default]), UsedName(BSlice,[Default]).[0m
-[0m[[0m[0mdebug[0m] [0m[0mAll member reference dependencies will be considered within this context.[0m
-[0m[[0m[0mdebug[0m] [0m[0mFiles invalidated by inheriting from (external) tpu.ChiselTPU: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0mNow invalidating by inheritance (internally).[0m
-[0m[[0m[0mdebug[0m] [0m[0mGetting direct dependencies of all classes transitively invalidated by inheritance.[0m
-[0m[[0m[0mdebug[0m] [0m[0mGetting classes that directly depend on (external) tpu.ChiselTPU.[0m
-[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of tpu.TPUTester. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0m> initialChanges = InitialChanges(Changes(added = Set(), removed = Set(), changed = Set(), unmodified = ...),Set(),Set(),API Changes: Set())[0m
 [0m[[0m[0mdebug[0m] [0m[0mNo changes[0m

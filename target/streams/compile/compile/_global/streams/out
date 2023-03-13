@@ -1,13 +1,7 @@
-[0m[[0m[31merror[0m] [0m[0m/mnt/c/Users/alexl/Documents/cse283_chisel/ChiselTPU/src/main/scala/tpu/TPU.scala:133:31: overloaded method + with alternatives:[0m
-[0m[[0m[31merror[0m] [0m[0m  (x: Double)Double <and>[0m
-[0m[[0m[31merror[0m] [0m[0m  (x: Float)Float <and>[0m
-[0m[[0m[31merror[0m] [0m[0m  (x: Long)Long <and>[0m
-[0m[[0m[31merror[0m] [0m[0m  (x: Int)Int <and>[0m
-[0m[[0m[31merror[0m] [0m[0m  (x: Char)Int <and>[0m
-[0m[[0m[31merror[0m] [0m[0m  (x: Short)Int <and>[0m
-[0m[[0m[31merror[0m] [0m[0m  (x: Byte)Int <and>[0m
-[0m[[0m[31merror[0m] [0m[0m  (x: String)String[0m
-[0m[[0m[31merror[0m] [0m[0m cannot be applied to (chisel3.UInt)[0m
-[0m[[0m[31merror[0m] [0m[0m        when(cycleIdx>(p.k+p.m+c.U)){[0m
-[0m[[0m[31merror[0m] [0m[0m                              ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:236:25: value in is not a member of chisel3.Bundle{val a: chisel3.util.DecoupledIO[chisel3.Vec[chisel3.Vec[chisel3.SInt]]]; val b: chisel3.util.DecoupledIO[chisel3.Vec[chisel3.Vec[chisel3.SInt]]]; val out: chisel3.Vec[chisel3.Vec[chisel3.SInt]]; val debug_1: chisel3.Vec[chisel3.Vec[chisel3.SInt]]; val debug_a_out: chisel3.Vec[chisel3.SInt]; val debug_systreg_out: chisel3.Vec[chisel3.SInt]; val debug_a_regs: chisel3.Vec[chisel3.Vec[chisel3.SInt]]; val debug_b_regs: chisel3.Vec[chisel3.Vec[chisel3.SInt]]; val debug_cycleOut: chisel3.UInt; val debug_00: chisel3.SInt; val debug_cycleIdxCols: chisel3.Vec[chisel3.UInt]; val debug_cycleIdxRows: chisel3.Vec[chisel3.UInt]; val debug_cycleIdx: chisel3.UInt; val debug_systout_upperLim: chisel3.SInt}[0m
+[0m[[0m[31merror[0m] [0m[0m    for(i <- 0 until io.in.a.bits.size){[0m
+[0m[[0m[31merror[0m] [0m[0m                        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:237:22: value in is not a member of chisel3.Bundle{val a: chisel3.util.DecoupledIO[chisel3.Vec[chisel3.Vec[chisel3.SInt]]]; val b: chisel3.util.DecoupledIO[chisel3.Vec[chisel3.Vec[chisel3.SInt]]]; val out: chisel3.Vec[chisel3.Vec[chisel3.SInt]]; val debug_1: chisel3.Vec[chisel3.Vec[chisel3.SInt]]; val debug_a_out: chisel3.Vec[chisel3.SInt]; val debug_systreg_out: chisel3.Vec[chisel3.SInt]; val debug_a_regs: chisel3.Vec[chisel3.Vec[chisel3.SInt]]; val debug_b_regs: chisel3.Vec[chisel3.Vec[chisel3.SInt]]; val debug_cycleOut: chisel3.UInt; val debug_00: chisel3.SInt; val debug_cycleIdxCols: chisel3.Vec[chisel3.UInt]; val debug_cycleIdxRows: chisel3.Vec[chisel3.UInt]; val debug_cycleIdx: chisel3.UInt; val debug_systout_upperLim: chisel3.SInt}[0m
+[0m[[0m[31merror[0m] [0m[0m      printf(cf"${io.in.a.bits(i)}\n")[0m
+[0m[[0m[31merror[0m] [0m[0m                     ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m

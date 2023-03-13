@@ -15,6 +15,9 @@ case class TPUParams(m: Int, k: Int, n: Int) {
   // Implementation details
   val w: Int = 32
 }
+
+
+
 class ChiselTPU(p: TPUParams) extends Module{
   val io = IO(new Bundle{
     val a = Flipped(Decoupled(Vec(p.m, Vec(p.k, SInt(p.w.W)))))
@@ -32,6 +35,20 @@ class ChiselTPU(p: TPUParams) extends Module{
     val debug_cycleIdx = Output(UInt(p.w.W))
     val debug_systout_upperLim = Output(SInt(p.w.W))
   })
+
+  def copyMatrixToPadded(in: Vec[Vec[SInt]], out: Vec[Vec[SInt]]) = {
+    for(i <- 0 until out.size){
+      for(j <- 0 until out.head.size){
+        if(i < in.size && j < in.head.size){
+          out(i)(j) := in(i)(j)
+        }
+        else{
+          out(i)(j) := 0.S
+        }
+      }
+    }
+  }
+
   val load :: fill :: slice :: multiply :: clear :: Nil = Enum(5)
   val state = RegInit(load)
   val counterFlag = Wire(Bool())
@@ -46,9 +63,9 @@ class ChiselTPU(p: TPUParams) extends Module{
 
   // slice parameters
   // dimensions of padded input matrices
-  val paddedMDim = p.m % systParams.m + p.m
-  val paddedKDim = p.k % systParams.k + p.k
-  val paddedNDim = p.n % systParams.n + p.n
+  val paddedMDim = if(p.m >= systParams.m) p.m % systParams.m + p.m else p.m % systParams.m + systParams.m % p.m
+  val paddedKDim = if(p.k >= systParams.k) p.k % systParams.k + p.k else p.k % systParams.k + systParams.k % p.k
+  val paddedNDim = if(p.n >= systParams.n) p.n % systParams.n + p.n else p.n % systParams.n + systParams.n % p.n
 
   // initialization of padded input matrices
   val paddedA = RegInit(VecInit.fill(paddedMDim, paddedKDim)(0.S(p.w.W)))
@@ -56,6 +73,7 @@ class ChiselTPU(p: TPUParams) extends Module{
   val ASlice = RegInit(VecInit.fill(systParams.m, systParams.k)(0.S(p.w.W)))
   val BSlice = RegInit(VecInit.fill(systParams.k, systParams.n)(0.S(p.w.W)))
 
+  // only allows reading input in input states
   io.a.ready := a_ready
   io.b.ready := b_ready
   io.out := myOut
@@ -108,6 +126,7 @@ class ChiselTPU(p: TPUParams) extends Module{
       when(io.a.valid && io.a.ready){
         state := fill
         act_in := io.a.bits
+        copyMatrixToPadded(io.a.bits, paddedA)
         a_ready := false.B
       }
       cycle := 0.U
@@ -116,6 +135,7 @@ class ChiselTPU(p: TPUParams) extends Module{
       when(io.b.valid && io.b.ready){
         state := multiply
         //syst_in := io.b.bits
+        copyMatrixToPadded(io.b.bits, paddedB)
         systArr.io.b_in := io.b.bits
         systArr.io.b_readingin := true.B
         b_ready := false.B
@@ -208,10 +228,26 @@ class ChiselTPU(p: TPUParams) extends Module{
       //   }
       // }
     // }
-    printf(cf"-------------------------\n")
+    printf(cf"\n-------------------------\n")
     printf(cf"MY TPU OUT: \n")
     for(i <- 0 until myOut.size){
       printf(cf"${myOut(i)}\n")
+    }
+    printf(cf"NORMAL A: \n")
+    for(i <- 0 until io.a.bits.size){
+      printf(cf"${io.a.bits(i)}\n")
+    }
+    printf(cf"NORMAL B: \n")
+    for(i <- 0 until io.b.bits.size){
+      printf(cf"${io.b.bits(i)}\n")
+    }
+    printf(cf"PADDED A: \n")
+    for(i <- 0 until paddedA.size){
+      printf(cf"${paddedA(i)}\n")
+    }
+     printf(cf"PADDED B: \n")
+    for(i <- 0 until paddedB.size){
+      printf(cf"${paddedB(i)}\n")
     }
     printf(cf"actreg out:\n")
     for(i <- 0 until p.k){
