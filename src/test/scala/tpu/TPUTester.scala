@@ -121,7 +121,7 @@ class SystArrTester extends AnyFlatSpec with ChiselScalatestTester {
 
 class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
   def doTPUTest(a: Matrix, b: Matrix): Unit = {
-    val p = TPUParams(a.size, a.head.size, b.head.size, 2, 2, 2)
+    val p = TPUParams(a.size, a.head.size, b.head.size, 3, 3, 3)
     // slice parameters
     // dimensions of padded input matrices
     val paddedMDim = if(p.m >= p.actM) p.actM*(((p.m-1)/p.actM)+1) else p.actM
@@ -144,7 +144,7 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
     print(maxM)
     print("\n")
 
-    val numCycles = 2+numSlice*(3+p.k+p.n+p.m)
+    val numCycles = 2+numSlice*(3+maxM+maxK+maxN)
 
     print("params: \nm: ")
     print(a.size)
@@ -343,14 +343,14 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
   behavior of "TPU test"
   it should "mult one cycle" in {
     // val k = 4
-    // doTPUTest(TPUTestData.ain2x2, TPUTestData.bin2x2)
-    // doTPUTest(TPUTestData.in2x2, TPUTestData.in2x2)
-    // doTPUTest(TPUTestData.inA3x3, TPUTestData.inB3x3)
-    // doTPUTest(TPUTestData.in2x4, TPUTestData.in4x2)
-    // doTPUTest(TPUTestData.in4x2, TPUTestData.in2x4)
-    // doTPUTest(TPUTestData.out4x4, TPUTestData.out4x4)
+    doTPUTest(TPUTestData.ain2x2, TPUTestData.bin2x2)
+    doTPUTest(TPUTestData.in2x2, TPUTestData.in2x2)
+    doTPUTest(TPUTestData.inA3x3, TPUTestData.inB3x3)
+    doTPUTest(TPUTestData.in2x4, TPUTestData.in4x2)
+    doTPUTest(TPUTestData.in4x2, TPUTestData.in2x4)
+    doTPUTest(TPUTestData.out4x4, TPUTestData.out4x4)
     doTPUTest(TPUTestData.in5x3, TPUTestData.in3x7)
-    // doTPUTest(TPUTestData.in3x7, TPUTestData.in7x5)
+    doTPUTest(TPUTestData.in3x7, TPUTestData.in7x5)
   }
   // it should "smult rand" in {
   //   // val k = 4

@@ -51,8 +51,10 @@ class ChiselTPU(p: TPUParams) extends Module{
   val b_ready = RegInit(true.B)
   val enabledSyst = RegInit(false.B)
   systArr.io.en := enabledSyst
-  val (cycle, wrap) = Counter(counterFlag && systArr.io.en, p.k+p.m+p.n+1) //assume input is valid for now
-  
+  val maxM = if(p.m > p.actM) p.m else p.actM
+  val maxK = if(p.k > p.s1) p.k else p.s1
+  val maxN = if(p.n > p.s2) p.n else p.s2
+  val (cycle, wrap) = Counter(counterFlag && systArr.io.en, maxM+maxK+maxN+1) //assume input is valid for now
 
   // slice parameters
   // dimensions of padded input matrices
@@ -218,7 +220,7 @@ class ChiselTPU(p: TPUParams) extends Module{
 
     
 
-    when(sliceCycle === (numSliceM * numSliceK * numSliceN - 1).U && cycle === (p.m+p.k+p.n).U){
+    when(sliceCycle === (numSliceM * numSliceK * numSliceN - 1).U && cycle === (maxM+maxK+maxN).U){
       for(i <- 0 until slicedOut.size){
         for(j <- 0 until slicedOut.head.size){
           paddedOut(i.U + boundM)(j.U + boundN) := paddedOut(i.U + boundM)(j.U + boundN) + slicedOut(i.U)(j.U)
@@ -230,7 +232,7 @@ class ChiselTPU(p: TPUParams) extends Module{
        printf(cf"\nSTART CLEAR TOTAL CYCLE ${totalCycle}\n")
       state := clear
     }
-    .elsewhen(cycle === (p.m+p.k+p.n).U){
+    .elsewhen(cycle === (maxM+maxK+maxN).U){
       for(i <- 0 until slicedOut.size){
         for(j <- 0 until slicedOut.head.size){
           paddedOut(i.U + boundM)(j.U + boundN) := paddedOut(i.U + boundM)(j.U + boundN) + slicedOut(i.U)(j.U)
