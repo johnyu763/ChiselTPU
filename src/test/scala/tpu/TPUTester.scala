@@ -121,7 +121,7 @@ class SystArrTester extends AnyFlatSpec with ChiselScalatestTester {
 
 class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
   def doTPUTest(a: Matrix, b: Matrix): Unit = {
-    val p = TPUParams(a.size, a.head.size, b.head.size, 2, 2)
+    val p = TPUParams(a.size, a.head.size, b.head.size, 1, 1)
     // slice parameters
     // dimensions of padded input matrices
     val paddedMDim = if(p.m >= p.s1) p.m % p.s1 + p.m else p.m % p.s1 + p.s1 % p.m
@@ -130,6 +130,9 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
 
     // used for calculating slice boundaries
     val numSlice = (paddedMDim/p.s1) * (paddedKDim/p.s1) * (paddedNDim/p.s2)
+    print("numSlice: ")
+    print(numSlice)
+    print("\n")
     val numCycles = numSlice * (paddedMDim+paddedNDim+paddedKDim)
     print("params: \nm: ")
     print(a.size)
@@ -173,7 +176,7 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
     //len to feed a slanted all the way though a_in window, eg:
     
     //Plz calculate how many cycles it takes
-    for(i <- 0 until 72+2*(4+p.m+p.k+p.n)){
+    for(i <- 0 until 2+numSlice*(3+p.k+p.m+p.n)){
         // print("-----BEFORE:arrRegs out-----\n")
         // for (cmp_i <- 0 until p.k) {
         //   print(dut.io.debug_a_out(cmp_i).peek())
@@ -259,7 +262,7 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
         // print("\n")
         // print("\n") 
     }
-
+    print(s"${72+2*(4+p.m+p.k+p.n)} CYCLES NEEDED")
     //check output 1
     val expected = MatMulModel(p, a, b)
     print("EXPECTED OUT\n")
@@ -274,23 +277,23 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
         dut.io.out(r)(c).expect(expected(r)(c).S)
       }
     }
-    dut.clock.step()
-    dut.io.b.valid.poke(true.B)
-    dut.io.b.ready.expect(true.B)
-     // load b with next b matrix
-    for (r <- 0 until p.k) {
-        for (c <- 0 until p.n) {
-            dut.io.b.bits(r)(c).poke(b(r)(c).S)
-        }
-    }
-    dut.clock.step()
+    // dut.clock.step()
+    // dut.io.b.valid.poke(true.B)
+    // dut.io.b.ready.expect(true.B)
+    //  // load b with next b matrix
+    // for (r <- 0 until p.k) {
+    //     for (c <- 0 until p.n) {
+    //         dut.io.b.bits(r)(c).poke(b(r)(c).S)
+    //     }
+    // }
+    // dut.clock.step()
     
-    for(i <- 0 until p.k+p.m+p.k+3){
-      dut.clock.step()
-    }
+    // for(i <- 0 until p.k+p.m+p.k+3){
+    //   dut.clock.step()
+    // }
 
 
-    dut.clock.step()
+    // dut.clock.step()
 
     // print("\n---------------\n")
     // for (r <- 0 until p.k) {
@@ -328,8 +331,8 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
   behavior of "TPU test"
   it should "mult one cycle" in {
     // val k = 4
-    // doTPUTest(TPUTestData.ain2x2, TPUTestData.bin2x2)
-    // doTPUTest(TPUTestData.in2x2, TPUTestData.in2x2)
+    doTPUTest(TPUTestData.ain2x2, TPUTestData.bin2x2)
+    doTPUTest(TPUTestData.in2x2, TPUTestData.in2x2)
     doTPUTest(TPUTestData.inA3x3, TPUTestData.inB3x3)
     // doTPUTest(TPUTestData.in2x4, TPUTestData.in4x2)
     // doTPUTest(TPUTestData.in4x2, TPUTestData.in2x4)

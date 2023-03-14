@@ -1,16 +1,17 @@
-[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(tpu.TPUTester, org.scalatest.tools.Framework$$anon$1@faf6ea4, false, [SuiteSelector])[0m
-[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(tpu.SystArrTester, org.scalatest.tools.Framework$$anon$1@faf6ea4, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(test, Some(a1d8a43c-801e-4f59-99a9-6cec1e77c2fe), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Test / test[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /Users/johnyu/Projects/CSE228A/ChiselTPU/target/scala-2.13/test-classes ...[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mSystArrTester:[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mTPU syst arr test[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should multiply (1s row) x (1s column)[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mTPUTester:[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mTPU test[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should mult one cycle[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 5 seconds, 261 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 4 seconds, 754 milliseconds.[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 2[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 2, aborted 0[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 2, failed 0, canceled 0, ignored 0, pending 0[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mAll tests passed.[0m[0m
-[0m[[0m[0mdebug[0m] [0m[0mPassed tests:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	tpu.TPUTester[0m
-[0m[[0m[0mdebug[0m] [0m[0m	tpu.SystArrTester[0m
+[0m[[0m[32msuccess[0m] [0m[0mTotal time: 5 s, completed Mar 14, 2023, 12:12:51 AM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m

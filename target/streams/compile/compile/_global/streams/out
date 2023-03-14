@@ -1,13 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:405:20: reassignment to val[0m
-[0m[[0m[31merror[0m] [0m[0m      io.cmp_debug = VecInit.fill(p.k)(0.S(p.w.W))[0m
-[0m[[0m[31merror[0m] [0m[0m                   ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:406:23: reassignment to val[0m
-[0m[[0m[31merror[0m] [0m[0m      io.debug_b_regs = VecInit.fill(p.k, p.n)(0.S(p.w.W))[0m
-[0m[[0m[31merror[0m] [0m[0m                      ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:407:23: reassignment to val[0m
-[0m[[0m[31merror[0m] [0m[0m      io.debug_a_regs = VecInit.fill(p.k, p.n)(0.S(p.w.W))[0m
-[0m[[0m[31merror[0m] [0m[0m                      ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:408:19: reassignment to val[0m
-[0m[[0m[31merror[0m] [0m[0m      io.debug_00 = 0.S[0m
-[0m[[0m[31merror[0m] [0m[0m                  ^[0m
-[0m[[0m[31merror[0m] [0m[0mfour errors found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:291:29: not found: value numSlice[0m
+[0m[[0m[31merror[0m] [0m[0m    printf(cf"NUM SLICES: ${numSlice}")[0m
+[0m[[0m[31merror[0m] [0m[0m                            ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

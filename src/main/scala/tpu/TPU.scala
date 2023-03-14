@@ -43,7 +43,7 @@ class ChiselTPU(p: TPUParams) extends Module{
   val load :: fill :: slice :: multiply :: clear :: Nil = Enum(5)
   val state = RegInit(load)
   val counterFlag = Wire(Bool())
-  val systParams = TPUParams(2, 2, 2, p.s1, p.s2) //hard-coded systolic array size of 3 for slicing
+  val systParams = TPUParams(p.s1, p.s1, p.s2, p.s1, p.s2) //hard-coded systolic array size of 3 for slicing
   val actReg = Module(new ActReg(systParams)) // to switch to non slice, use p instead of systParams
   val systArr = Module(new SystArr(systParams))
   val myOut = RegInit(VecInit.fill(p.m, p.n)(0.S(p.w.W)))
@@ -73,6 +73,7 @@ class ChiselTPU(p: TPUParams) extends Module{
   val slicedB = RegInit(VecInit.fill(systParams.k, systParams.n)(0.S(p.w.W)))
   val slicedOut = RegInit(VecInit.fill(systParams.m, systParams.n)(0.S(p.w.W)))
 
+  val (totalCycle, totalWrap) = Counter(true.B, 1000)
   val (sliceCycle, sliceWrap) = Counter(state === slice, numSliceM * numSliceK * numSliceN)
   
   
@@ -148,6 +149,7 @@ class ChiselTPU(p: TPUParams) extends Module{
   systArr.io.b_in := slicedB//io.b.bits//   //switch between slice and b.bits
 
   when(state === load){ 
+    printf(cf"\nLOAD TOTAL CYCLE ${totalCycle}\n")
     printf(cf"LOAD\n")
     when(io.a.valid && io.a.ready){
         state := fill
@@ -176,7 +178,8 @@ class ChiselTPU(p: TPUParams) extends Module{
       }
   }
   .elsewhen(state === slice){
-    printf(cf"SLICE\n")
+    printf(cf"\nSLICE TOTAL CYCLE ${totalCycle}\n")
+    // printf(cf"SLICE\n")
     state := multiply
     // allowReadB := true.B
     cycle := 0.U
@@ -187,8 +190,8 @@ class ChiselTPU(p: TPUParams) extends Module{
   .elsewhen(state === multiply){
     enabledSyst := true.B
     counterFlag := true.B
-    printf(cf"MULT\n")
-    printf(cf"CYCLE: ${cycle}\n")
+    // printf(cf"MULT\n")
+    // printf(cf"CYCLE: ${cycle}\n")
     when(cycle === 0.U){
       allowReadB := true.B
     }
@@ -202,7 +205,7 @@ class ChiselTPU(p: TPUParams) extends Module{
       cycleIdx := cycle
     }
     when(cycle >= (2+systParams.k-1).U){
-      printf(cf"SYST ARR: ${systArr.io.out}\n")
+      // printf(cf"SYST ARR: ${systArr.io.out}\n")
       for(c <- 0 until systParams.n){
         when(cycleIdx>=c.U && cycleIdx<(systParams.m+c).U){
           for(r <- 0 until systParams.m){
@@ -227,6 +230,7 @@ class ChiselTPU(p: TPUParams) extends Module{
           }
         }
       }
+      printf(cf"\nTOTAL CYCLE ${totalCycle}\n")
       state := clear
     }
     .elsewhen(cycle === (p.m+p.k+p.n).U){
@@ -265,7 +269,7 @@ class ChiselTPU(p: TPUParams) extends Module{
   //   for(i <- 0 until paddedB.size){
   //     printf(cf"${paddedB(i)}\n")
   //   }
-   printf(cf"\n\n")
+  //  printf(cf"\n\n")
     printf(cf"SLICED A: \n")
     for(i <- 0 until slicedA.size){
       printf(cf"${slicedA(i)}\n")
@@ -287,10 +291,12 @@ class ChiselTPU(p: TPUParams) extends Module{
     for(i <- 0 until paddedOut.size){
       printf(cf"${paddedOut(i)}\n")
     }
-    printf(cf"\n\n")
+  //   printf(cf"\n\n")
+  //   printf(cf"NUM SLICES: ${numSliceM * numSliceK * numSliceN}\n")
   }
   .elsewhen(state === clear){
-    printf(cf"FINISHED")
+    
+    printf(cf"\nCLEAR TOTAL CYCLE ${totalCycle}\n")
     state := fill
     b_ready := true.B
     // io.b.ready := true.B
@@ -387,27 +393,7 @@ class SystArr(p: TPUParams) extends Module{
       //   printf(cf"${io.a_in(i)} ")
       // }
       // printf("\n\n")
-      printf(cf"MY B_IN:\n")
-      for(i <- 0 until io.b_in.size){
-        printf(cf"${io.b_in(i)}\n")
-      }
-      printf(cf"MY A_REG:\n")
-      for(i <- 0 until a_reg.size){
-        printf(cf"${a_reg(i)}\n")
-      }
-      printf(cf"MY B_REG:\n")
-      for(i <- 0 until b_reg.size){
-        printf(cf"${b_reg(i)}\n")
-      }
-      printf(cf"\nMY CSM:\n")
-      for(i <- 0 until cms_reg.size){
-        printf(cf"${cms_reg(i)}\n")
-      }
-      // printf(cf"MY SYST OUT:\n")
-      // for(i <- 0 until io.out.size){
-      //   printf(cf"${io.out(i)}\n")
-      // }
-      // printf(cf"\n\n")
+    
     }
     .otherwise{
       io.out := VecInit.fill(p.n)(0.S(p.w.W))
