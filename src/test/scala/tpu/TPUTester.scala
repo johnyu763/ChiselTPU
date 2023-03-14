@@ -17,6 +17,10 @@ object TPUTestData {
   def genOnesCol(n: Int): Matrix = Array.fill(n)(Array(1))
   val in2x2 = Array(Array(1,2),
                    Array(3,4))
+  val ain2x2 = Array(Array(1,0),
+                   Array(4,0))
+  val bin2x2 = Array(Array(2,3),
+                   Array(0,0))
   val in2x4  = Array(Array(1,2,3,4),
                    Array(5,6,7,8))
   val in4x2  = Array(Array(1,2),
@@ -323,8 +327,9 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
   behavior of "TPU test"
   it should "mult one cycle" in {
     // val k = 4
+    doTPUTest(TPUTestData.ain2x2, TPUTestData.bin2x2)
     // doTPUTest(TPUTestData.in2x2, TPUTestData.in2x2)
-    doTPUTest(TPUTestData.inA3x3, TPUTestData.inB3x3)
+    // doTPUTest(TPUTestData.inA3x3, TPUTestData.inB3x3)
     // doTPUTest(TPUTestData.in2x4, TPUTestData.in4x2)
     // doTPUTest(TPUTestData.in4x2, TPUTestData.in2x4)
     // doTPUTest(TPUTestData.in5x3, TPUTestData.in3x7)

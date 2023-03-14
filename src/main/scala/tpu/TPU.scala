@@ -189,7 +189,7 @@ class ChiselTPU(p: TPUParams) extends Module{
       // print("\n")
   }
   .elsewhen(state === slice){
-    printf(cf"SLICE CYCLE: ${sliceCycle}\n")
+    // printf(cf"SLICE CYCLE: ${sliceCycle}\n")
     // printf(cf"IN SLICE STATE\n")
     // updateMatricesSlices()
     state := multiply
@@ -197,25 +197,26 @@ class ChiselTPU(p: TPUParams) extends Module{
     for(i <- 0 until io.out.size){
       printf(cf"${io.out(i)}\n")
     }
-    printf(cf"SLICED A: \n")
-    for(i <- 0 until slicedA.size){
-      printf(cf"${slicedA(i)}\n")
-    }
-    printf(cf"SLICED B: \n")
-    for(i <- 0 until systArr.io.b_in.size){
-      printf(cf"${systArr.io.b_in(i)}\n")
-    }
+    systArr.io.b_readingin := true.B
+    // printf(cf"SLICED A: \n")
+    // for(i <- 0 until slicedA.size){
+    //   printf(cf"${slicedA(i)}\n")
+    // }
+    // printf(cf"SLICED B: \n")
+    // for(i <- 0 until systArr.io.b_in.size){
+    //   printf(cf"${systArr.io.b_in(i)}\n")
+    // }
     cycle := 0.U
     slicedOut := VecInit.fill(systParams.m, systParams.n)(0.S(p.w.W))
   }
   .elsewhen(state === multiply){
     counterFlag := true.B
-    printf(cf"SLICE CYCLE: ${sliceCycle}\n")
+    // printf(cf"SLICE CYCLE: ${sliceCycle}\n")
     // printf(cf"\nCYCLE COUNT: ${cycle} AND MAX ${p.m+p.k+p.n}\n")
     // when(cycle === (p.m+p.k+p.n).U){
     //   state := clear
     // }
-    printf(cf"IN MULTIPLE\n")
+    // printf(cf"IN MULTIPLE\n")
     
     // for(i <- 0 until systArr.io.out.size){
     //   when(cycle > (p.n+i).U && cycle < (p.n+p.n+1+i).U){
@@ -247,7 +248,7 @@ class ChiselTPU(p: TPUParams) extends Module{
     
 
     when(sliceCycle === (numSliceM * numSliceK * numSliceN - 1).U && cycle === (p.m+p.k+p.n).U){
-      printf(cf"SLICE MY OUT\n")
+      // printf(cf"SLICE MY OUT\n")
       printf(cf"${boundM} ${boundN}\n")
       for(i <- 0 until slicedOut.size){
         for(j <- 0 until slicedOut.head.size){
@@ -258,13 +259,13 @@ class ChiselTPU(p: TPUParams) extends Module{
       }
       // copyMatrixToPadded(paddedOut, myOut)
       // printf(cf"MY PADDED OUT: \n")
-      for(i <- 0 until paddedOut.size){
-        printf(cf"${paddedOut(i)}\n")
-      }
+      // for(i <- 0 until paddedOut.size){
+      //   printf(cf"${paddedOut(i)}\n")
+      // }
       state := clear
     }
     .elsewhen(cycle === (p.m+p.k+p.n).U){
-      printf(cf"CLEAR MY OUT\n")
+      // printf(cf"CLEAR MY OUT\n")
       for(i <- 0 until slicedOut.size){
         for(j <- 0 until slicedOut.head.size){
           when(i.U + boundM < p.m.U && j.U + boundN < p.n.U){
@@ -274,22 +275,22 @@ class ChiselTPU(p: TPUParams) extends Module{
       }
       // copyMatrixToPadded(paddedOut, myOut)
       // printf(cf"MY PADDED OUT: \n")
-      for(i <- 0 until paddedOut.size){
-        printf(cf"${paddedOut(i)}\n")
-      }
+      // for(i <- 0 until paddedOut.size){
+      //   printf(cf"${paddedOut(i)}\n")
+      // }
       state := slice
       
     }
 
-    printf(cf"MY SLICED OUT: \n")
-    for(i <- 0 until slicedOut.size){
-      printf(cf"${slicedOut(i)}\n")
-    }
-    // // printf(cf"\n-------------------------\n")
-    printf(cf"MY OUT: \n")
-    for(i <- 0 until io.out.size){
-      printf(cf"${io.out(i)}\n")
-    }
+    // printf(cf"MY SLICED OUT: \n")
+    // for(i <- 0 until slicedOut.size){
+    //   printf(cf"${slicedOut(i)}\n")
+    // }
+    // // // printf(cf"\n-------------------------\n")
+    // printf(cf"MY OUT: \n")
+    // for(i <- 0 until io.out.size){
+    //   printf(cf"${io.out(i)}\n")
+    // }
     // printf(cf"SLICE CYCLE ${sliceCycle}\n")
     // printf(cf"NORMAL A: \n")
     // for(i <- 0 until io.a.bits.size){
@@ -330,11 +331,11 @@ class ChiselTPU(p: TPUParams) extends Module{
     // printf("\n\n\n")
   }
   .elsewhen(state === clear){
-    printf(cf"PADDED THING CLEAR\n")
-    for(i <- 0 until io.out.size){
-      printf(cf"${io.out(i)}\n")
-    }
-    printf(cf"FINISH\n")
+    // printf(cf"PADDED THING CLEAR\n")
+    // for(i <- 0 until io.out.size){
+    //   printf(cf"${io.out(i)}\n")
+    // }
+    // printf(cf"FINISH\n")
     state := fill
     b_ready := true.B
     // io.b.ready := true.B
@@ -428,26 +429,26 @@ class SystArr(p: TPUParams) extends Module{
         
     }
     // printf(cf"-------------------------\n")
-    // printf(cf"\nMY A_IN:\n")
-    // for(i <- 0 until io.a_in.size){
-    //   printf(cf"${io.a_in(i)} ")
-    // }
-    // printf("\n\n")
-    // printf(cf"MY B_IN:\n")
-    // for(i <- 0 until io.b_in.size){
-    //   printf(cf"${io.b_in(i)}\n")
-    // }
-    // printf(cf"MY A_REG:\n")
-    // for(i <- 0 until a_reg.size){
-    //   printf(cf"${a_reg(i)}\n")
-    // }
-    // printf(cf"\nMY CSM:\n")
-    // for(i <- 0 until cms_reg.size){
-    //   printf(cf"${cms_reg(i)}\n")
-    // }
-    // printf(cf"MY SYST OUT:\n")
-    // for(i <- 0 until io.out.size){
-    //   printf(cf"${io.out(i)}\n")
-    // }
+    printf(cf"\nMY A_IN:\n")
+    for(i <- 0 until io.a_in.size){
+      printf(cf"${io.a_in(i)} ")
+    }
+    printf("\n\n")
+    printf(cf"MY B_IN:\n")
+    for(i <- 0 until io.b_in.size){
+      printf(cf"${io.b_in(i)}\n")
+    }
+    printf(cf"MY A_REG:\n")
+    for(i <- 0 until a_reg.size){
+      printf(cf"${a_reg(i)}\n")
+    }
+    printf(cf"\nMY CSM:\n")
+    for(i <- 0 until cms_reg.size){
+      printf(cf"${cms_reg(i)}\n")
+    }
+    printf(cf"MY SYST OUT:\n")
+    for(i <- 0 until io.out.size){
+      printf(cf"${io.out(i)}\n")
+    }
     // printf(cf"\n\n")
 }
