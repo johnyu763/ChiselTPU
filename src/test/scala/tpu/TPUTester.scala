@@ -121,7 +121,7 @@ class SystArrTester extends AnyFlatSpec with ChiselScalatestTester {
 
 class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
   def doTPUTest(a: Matrix, b: Matrix): Unit = {
-    val p = TPUParams(a.size, a.head.size, b.head.size, 3, 3, 3)
+    val p = TPUParams(a.size, a.head.size, b.head.size, 2, 2, 2)
     // slice parameters
     // dimensions of padded input matrices
     val paddedMDim = if(p.m >= p.actM) p.actM*(((p.m-1)/p.actM)+1) else p.actM
