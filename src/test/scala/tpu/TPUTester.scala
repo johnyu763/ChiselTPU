@@ -159,7 +159,7 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
     //for(i <- 0 until p.k+p.m+p.k+2){
     //len to feed a slanted all the way though a_in window, eg:
     //
-    for(i <- 0 until (6+(p.k+p.m+p.n))){
+    for(i <- 0 until (4+(p.k+p.m+p.n))){
         // print("-----BEFORE:arrRegs out-----\n")
         // for (cmp_i <- 0 until p.k) {
         //   print(dut.io.debug_a_out(cmp_i).peek())
@@ -314,12 +314,12 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
   behavior of "TPU test"
   it should "mult one cycle" in {
     // val k = 4
-    // doTPUTest(TPUTestData.in2x2, TPUTestData.in2x2)
+    doTPUTest(TPUTestData.in2x2, TPUTestData.in2x2)
     doTPUTest(TPUTestData.inA3x3, TPUTestData.inB3x3)
-    // doTPUTest(TPUTestData.in2x4, TPUTestData.in4x2)
-    // doTPUTest(TPUTestData.in4x2, TPUTestData.in2x4)
-    // doTPUTest(TPUTestData.in5x3, TPUTestData.in3x7)
-    // doTPUTest(TPUTestData.in3x7, TPUTestData.in7x5)
+    doTPUTest(TPUTestData.in2x4, TPUTestData.in4x2)
+    doTPUTest(TPUTestData.in4x2, TPUTestData.in2x4)
+    doTPUTest(TPUTestData.in5x3, TPUTestData.in3x7)
+    doTPUTest(TPUTestData.in3x7, TPUTestData.in7x5)
   }
   // it should "smult rand" in {
   //   // val k = 4

@@ -330,8 +330,8 @@ class ChiselTPU(p: TPUParams) extends Module{
     }
     printf(cf"FINISH\n")
     state := fill
-    //b_ready := true.B
-    io.b.ready := true.B
+    b_ready := true.B
+    // io.b.ready := true.B
     myOut := VecInit.fill(p.m, p.n)(0.S(p.w.W))
   }
   
