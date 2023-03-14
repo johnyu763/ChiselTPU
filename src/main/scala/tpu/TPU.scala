@@ -43,13 +43,16 @@ class ChiselTPU(p: TPUParams) extends Module{
   val load :: fill :: slice :: multiply :: clear :: Nil = Enum(5)
   val state = RegInit(load)
   val counterFlag = Wire(Bool())
-  val (cycle, wrap) = Counter(counterFlag, p.k+p.m+p.n+1) //assume input is valid for now
-  val systParams = TPUParams(1, 1, 1, p.s1, p.s2) //hard-coded systolic array size of 3 for slicing
+  val systParams = TPUParams(2, 2, 2, p.s1, p.s2) //hard-coded systolic array size of 3 for slicing
   val actReg = Module(new ActReg(systParams)) // to switch to non slice, use p instead of systParams
   val systArr = Module(new SystArr(systParams))
   val myOut = RegInit(VecInit.fill(p.m, p.n)(0.S(p.w.W)))
   val a_ready = RegInit(true.B)
   val b_ready = RegInit(true.B)
+  val enabledSyst = RegInit(false.B)
+  systArr.io.en := enabledSyst
+  val (cycle, wrap) = Counter(counterFlag && systArr.io.en, p.k+p.m+p.n+1) //assume input is valid for now
+  
 
   // slice parameters
   // dimensions of padded input matrices
@@ -71,21 +74,8 @@ class ChiselTPU(p: TPUParams) extends Module{
   val slicedOut = RegInit(VecInit.fill(systParams.m, systParams.n)(0.S(p.w.W)))
 
   val (sliceCycle, sliceWrap) = Counter(state === slice, numSliceM * numSliceK * numSliceN)
-  // val ()
-  // only allows reading input in input states
-  io.a.ready := a_ready
-  io.b.ready := b_ready
-  io.out := myOut
   
-  counterFlag := false.B
-  //initialize inputs for submodules
-  actReg.io.index := (systParams.k+systParams.m-1).U-cycle
-  systArr.io.a_in := actReg.io.a_out
-  val act_in = RegInit(VecInit.fill(p.m, p.k)(0.S(p.w.W)))
-  val allowReadB = RegInit(false.B)
-  systArr.io.b_readingin := allowReadB
-  actReg.io.a :=  slicedA//act_in// //switch between slice and act_in
-  systArr.io.b_in := slicedB//io.b.bits//   //switch between slice and b.bits
+  
 
   //declare wires for inputs:
   val cycleIdx = Wire(UInt(p.w.W))
@@ -128,14 +118,6 @@ class ChiselTPU(p: TPUParams) extends Module{
    val boundN = systParams.n.U * (sliceCycle / (numSliceK*numSliceN).U)
 
   def updateMatricesSlices() = {
-   
-
-    // printf(cf"\nbound K: ${boundK} -${boundK+systParams.k.U}\n")
-    // printf(cf"bound M: ${boundM} -${boundM+systParams.m.U}\n")
-    // printf(cf"bound N: ${boundN} -${boundN+systParams.n.U}\n")
-    // printf(cf"NUM M SLICE: ${numSliceM}\n")
-    // printf(cf"NUM K SLICE: ${numSliceK}\n")
-    // printf(cf"NUM N SLICE: ${numSliceN}\n")
     for(i <- 0 until systParams.k){
       for(j <- 0 until systParams.m){
         slicedA(j)(i) := paddedA(boundM+j.U)(boundK+i.U)
@@ -144,23 +126,29 @@ class ChiselTPU(p: TPUParams) extends Module{
         slicedB(i)(j) := paddedB(boundK+i.U)(boundN+j.U) 
       }
     }
-
-    // printf(cf"SLICED 2 A: \n")
-    // for(i <- 0 until slicedA.size){
-    //   printf(cf"${slicedA(i)}\n")
-    // }
-    // printf(cf"SLICED 2 B: \n")
-    // for(i <- 0 until slicedB.size){
-    //   printf(cf"${slicedB(i)}\n")
-    // }
-    // printf(cf"\nFIRST SLICED A ${paddedA(0.U).slice(0,2)}\n")
-    // slicedA := paddedA(boundM, boundM+systParams.m.U)(boundK, boundK+systParams.k.U)
-    // slicedB := paddedB(boundK, boundK+systParams.k.U)(boundN, boundN+systParams.n.U)
   }
   
   // printf(cf"SLICE CYCLE: ${sliceCycle}\n")
   updateMatricesSlices()
+
+  // val ()
+  // only allows reading input in input states
+  io.a.ready := a_ready
+  io.b.ready := b_ready
+  io.out := myOut
+  
+  counterFlag := false.B
+  //initialize inputs for submodules
+  actReg.io.index := (systParams.k+systParams.m-1).U-cycle
+  systArr.io.a_in := actReg.io.a_out
+  val act_in = RegInit(VecInit.fill(p.m, p.k)(0.S(p.w.W)))
+  val allowReadB = RegInit(false.B)
+  systArr.io.b_readingin := allowReadB
+  actReg.io.a :=  slicedA//act_in// //switch between slice and act_in
+  systArr.io.b_in := slicedB//io.b.bits//   //switch between slice and b.bits
+
   when(state === load){ 
+    printf(cf"LOAD\n")
     when(io.a.valid && io.a.ready){
         state := fill
         act_in := io.a.bits
@@ -171,11 +159,12 @@ class ChiselTPU(p: TPUParams) extends Module{
       cycle := 0.U
   }
   .elsewhen(state === fill){
+      enabledSyst := false.B
+      printf(cf"FILL\n")
       when(io.b.valid && io.b.ready){
         //syst_in := io.b.bits
         copyMatrixToPadded(io.b.bits, paddedB)
         copyMatrixToPadded(io.b.bits, systArr.io.b_in)
-        // systArr.io.b_in := io.b.bits//slicedB//   //switch between slice and b.bits
         allowReadB := true.B
         b_ready := false.B
         counterFlag := true.B
@@ -185,52 +174,26 @@ class ChiselTPU(p: TPUParams) extends Module{
         state := slice
         sliceCycle := (numSliceM * numSliceK * numSliceN - 1).U
       }
-      // print("cycle:")
-      // print(cycle)
-      // print("\n")
   }
   .elsewhen(state === slice){
-    // printf(cf"SLICE CYCLE: ${sliceCycle}\n")
-    // printf(cf"IN SLICE STATE\n")
-    // updateMatricesSlices()
+    printf(cf"SLICE\n")
     state := multiply
-    allowReadB := false.B
-    printf(cf"PADDED THING\n")
-    for(i <- 0 until io.out.size){
-      printf(cf"${io.out(i)}\n")
-    }
     // allowReadB := true.B
-    // printf(cf"SLICED A: \n")
-    // for(i <- 0 until slicedA.size){
-    //   printf(cf"${slicedA(i)}\n")
-    // }
-    // printf(cf"SLICED B: \n")
-    // for(i <- 0 until systArr.io.b_in.size){
-    //   printf(cf"${systArr.io.b_in(i)}\n")
-    // }
     cycle := 0.U
-    slicedOut := VecInit.fill(systParams.m, systParams.n)(0.S(p.w.W))
+    counterFlag := false.B
+    slicedOut := VecInit.fill(systParams.m, systParams.n)(0.S(p.w.W))    
+    enabledSyst := false.B
   }
   .elsewhen(state === multiply){
-    
+    enabledSyst := true.B
     counterFlag := true.B
-    // printf(cf"SLICE CYCLE: ${sliceCycle}\n")
-    // printf(cf"\nCYCLE COUNT: ${cycle} AND MAX ${p.m+p.k+p.n}\n")
-    // when(cycle === (p.m+p.k+p.n).U){
-    //   state := clear
-    // }
-    // printf(cf"IN MULTIPLE\n")
-    
-    // for(i <- 0 until systArr.io.out.size){
-    //   when(cycle > (p.n+i).U && cycle < (p.n+p.n+1+i).U){
-    //     myOut(cycle - (p.n+i+1).U)(i.U) := systArr.io.out(i.U)
-    //   }
-    // }
+    printf(cf"MULT\n")
+    printf(cf"CYCLE: ${cycle}\n")
     when(cycle === 0.U){
       allowReadB := true.B
     }
     .otherwise{
-      allowReadB := true.B
+      allowReadB := false.B
     }
     when(cycle >= (2+systParams.k-1).U){ //BUG
       cycleIdx := cycle-(2+systParams.k-1).U
@@ -239,15 +202,14 @@ class ChiselTPU(p: TPUParams) extends Module{
       cycleIdx := cycle
     }
     when(cycle >= (2+systParams.k-1).U){
+      printf(cf"SYST ARR: ${systArr.io.out}\n")
       for(c <- 0 until systParams.n){
         when(cycleIdx>=c.U && cycleIdx<(systParams.m+c).U){
           for(r <- 0 until systParams.m){
             if(r==(systParams.m-1)){
               slicedOut(r.U)(c.U) := systArr.io.out(c.U)
-              // paddedOut(r.U)(c.U) := systArr.io.out(c.U)
             }else{
               slicedOut(r.U)(c.U) := slicedOut((r+1).U)(c.U)
-              // paddedOut(r.U + boundM)(c.U + boundN) := paddedOut((r+1).U + boundM)(c.U + boundN)
             }
           }
         }
@@ -257,8 +219,6 @@ class ChiselTPU(p: TPUParams) extends Module{
     
 
     when(sliceCycle === (numSliceM * numSliceK * numSliceN - 1).U && cycle === (p.m+p.k+p.n).U){
-      // printf(cf"SLICE MY OUT\n")
-      printf(cf"${boundM} ${boundN}\n")
       for(i <- 0 until slicedOut.size){
         for(j <- 0 until slicedOut.head.size){
           paddedOut(i.U + boundM)(j.U + boundN) := paddedOut(i.U + boundM)(j.U + boundN) + slicedOut(i.U)(j.U)
@@ -267,15 +227,9 @@ class ChiselTPU(p: TPUParams) extends Module{
           }
         }
       }
-      // copyMatrixToPadded(paddedOut, myOut)
-      // printf(cf"MY PADDED OUT: \n")
-      // for(i <- 0 until paddedOut.size){
-      //   printf(cf"${paddedOut(i)}\n")
-      // }
       state := clear
     }
     .elsewhen(cycle === (p.m+p.k+p.n).U){
-      // printf(cf"CLEAR MY OUT\n")
       for(i <- 0 until slicedOut.size){
         for(j <- 0 until slicedOut.head.size){
           paddedOut(i.U + boundM)(j.U + boundN) := paddedOut(i.U + boundM)(j.U + boundN) + slicedOut(i.U)(j.U)
@@ -290,22 +244,10 @@ class ChiselTPU(p: TPUParams) extends Module{
       //   printf(cf"${paddedOut(i)}\n")
       // }
       state := slice
+    }
       
-    }
-
-    printf(cf"MY SLICED OUT: \n")
-    for(i <- 0 until slicedOut.size){
-      printf(cf"${slicedOut(i)}\n")
-    }
-    // // printf(cf"\n-------------------------\n")
-    printf(cf"MY OUT: \n")
-    for(i <- 0 until io.out.size){
-      printf(cf"${io.out(i)}\n")
-    }
-    printf(cf"PADDED OUT: \n")
-    for(i <- 0 until paddedOut.size){
-      printf(cf"${paddedOut(i)}\n")
-    }
+      
+    
     // printf(cf"SLICE CYCLE ${sliceCycle}\n")
     // printf(cf"NORMAL A: \n")
     // for(i <- 0 until io.a.bits.size){
@@ -323,34 +265,32 @@ class ChiselTPU(p: TPUParams) extends Module{
   //   for(i <- 0 until paddedB.size){
   //     printf(cf"${paddedB(i)}\n")
   //   }
-    // printf(cf"SLICED A: \n")
-    // for(i <- 0 until slicedA.size){
-    //   printf(cf"${slicedA(i)}\n")
-    // }
-    // printf(cf"SLICED B: \n")
-    // for(i <- 0 until slicedB.size){
-    //   printf(cf"${slicedB(i)}\n")
-    // }
-    // printf(cf"actreg out:\n")
-    // for(i <- 0 until actReg.io.a_out.size){
-    //   printf(cf"${actReg.io.a_out(i)}  ")
-    // }
-    // printf("\n")
-    // printf(cf"systarr out:\n")
-    // for(i <- 0 until systArr.io.out.size){
-    //   printf(cf"${systArr.io.out(i)}  ")
-    // }
-    // printf("\n")
-    // printf(cf"index: \n")
-    // printf(cf"${(p.k+p.m-2).U-cycle}  ")
-    // printf("\n\n\n")
+   printf(cf"\n\n")
+    printf(cf"SLICED A: \n")
+    for(i <- 0 until slicedA.size){
+      printf(cf"${slicedA(i)}\n")
+    }
+    printf(cf"SLICED B: \n")
+    for(i <- 0 until slicedB.size){
+      printf(cf"${slicedB(i)}\n")
+    }
+    printf(cf"MY SLICED OUT: \n")
+    for(i <- 0 until slicedOut.size){
+      printf(cf"${slicedOut(i)}\n")
+    }
+    // // printf(cf"\n-------------------------\n")
+    printf(cf"MY OUT: \n")
+    for(i <- 0 until io.out.size){
+      printf(cf"${io.out(i)}\n")
+    }
+    printf(cf"PADDED OUT: \n")
+    for(i <- 0 until paddedOut.size){
+      printf(cf"${paddedOut(i)}\n")
+    }
+    printf(cf"\n\n")
   }
   .elsewhen(state === clear){
-    // printf(cf"PADDED THING CLEAR\n")
-    // for(i <- 0 until io.out.size){
-    //   printf(cf"${io.out(i)}\n")
-    // }
-    // printf(cf"FINISH\n")
+    printf(cf"FINISHED")
     state := fill
     b_ready := true.B
     // io.b.ready := true.B
@@ -365,12 +305,6 @@ class ActReg(p: TPUParams) extends Module{
         val a = Input(Vec(p.m, Vec(p.k, SInt(p.w.W))))
         val a_out = Output(Vec(p.k, SInt(p.w.W)))
     })
-    // printf(cf"ACT REG CYCLE: ${io.index}\n")
-    // printf(cf"ACT REG INPUT: \n")
-    // for(i <- 0 until io.a.size){
-    //   printf(cf"${io.a(i)} \n")
-    // }
-    // printf("\n")
     
     when(io.index < (p.k+p.m-1).U){
       for (j <- 0 until p.k) {
@@ -395,6 +329,7 @@ class SystArr(p: TPUParams) extends Module{
     val io = IO(new Bundle {
         val a_in = Input(Vec(p.k, SInt(p.w.W)))
         val b_in = Input(Vec(p.k, Vec(p.n, SInt(p.w.W))))
+        val en = Input(Bool())
         val b_readingin = Input(Bool())
         val out = Output((Vec(p.n, SInt(p.w.W))))
         //debugOuts
@@ -406,64 +341,81 @@ class SystArr(p: TPUParams) extends Module{
     val a_reg = Reg(Vec(p.k, Vec(p.n, SInt(p.w.W))))
     val b_reg = Reg(Vec(p.k, Vec(p.n, SInt(p.w.W))))
     val cms_reg = Reg(Vec(p.k, Vec(p.n, SInt(p.w.W))))
-    io.cmp_debug := cms_reg
-    io.debug_b_regs := b_reg
-    io.debug_a_regs := a_reg
-    io.debug_00 := io.a_in(0) * b_reg(0)(0)
-    when(io.b_readingin){
-      b_reg := io.b_in
-    }.otherwise{
-      b_reg := b_reg
+
+    when(io.en){
+      
+      io.cmp_debug := cms_reg
+      io.debug_b_regs := b_reg
+      io.debug_a_regs := a_reg
+      io.debug_00 := io.a_in(0) * b_reg(0)(0)
+      when(io.b_readingin){
+        b_reg := io.b_in
+      }.otherwise{
+        b_reg := b_reg
+      }
+      for(i <- 0 until p.n){
+          io.out(i) := cms_reg(p.k-1)(i)
+      }
+      val cmp_input = Wire(Vec(p.k, Vec(p.n, SInt(p.w.W))))
+      for(kidx <- 0 until p.k){
+          for(nidx <- 0 until p.n){
+              if(kidx==0){
+                  if(nidx==0){
+                      cmp_input(kidx)(nidx) := io.a_in(kidx) * b_reg(kidx)(nidx)
+                      a_reg(kidx)(nidx) := io.a_in(kidx)
+                  }else{
+                      cmp_input(kidx)(nidx) := a_reg(kidx)(nidx-1) * b_reg(kidx)(nidx)
+                      a_reg(kidx)(nidx) := a_reg(kidx)(nidx-1)
+                  }
+              }else{
+                  if(nidx==0){
+                      cmp_input(kidx)(nidx) := (io.a_in(kidx) * b_reg(kidx)(nidx)) + cms_reg(kidx-1)(nidx)
+                      a_reg(kidx)(nidx) := io.a_in(kidx)
+                  }else{
+                      cmp_input(kidx)(nidx) := (a_reg(kidx)(nidx-1) * b_reg(kidx)(nidx)) + cms_reg(kidx-1)(nidx)
+                      a_reg(kidx)(nidx) := a_reg(kidx)(nidx-1)
+                  }
+              }
+              cms_reg := cmp_input
+          }
+          
+          
+      }
+      // printf(cf"-------------------------\n")
+      // printf(cf"\nMY A_IN:\n")
+      // for(i <- 0 until io.a_in.size){
+      //   printf(cf"${io.a_in(i)} ")
+      // }
+      // printf("\n\n")
+      printf(cf"MY B_IN:\n")
+      for(i <- 0 until io.b_in.size){
+        printf(cf"${io.b_in(i)}\n")
+      }
+      printf(cf"MY A_REG:\n")
+      for(i <- 0 until a_reg.size){
+        printf(cf"${a_reg(i)}\n")
+      }
+      printf(cf"MY B_REG:\n")
+      for(i <- 0 until b_reg.size){
+        printf(cf"${b_reg(i)}\n")
+      }
+      printf(cf"\nMY CSM:\n")
+      for(i <- 0 until cms_reg.size){
+        printf(cf"${cms_reg(i)}\n")
+      }
+      // printf(cf"MY SYST OUT:\n")
+      // for(i <- 0 until io.out.size){
+      //   printf(cf"${io.out(i)}\n")
+      // }
+      // printf(cf"\n\n")
     }
-    for(i <- 0 until p.n){
-        io.out(i) := cms_reg(p.k-1)(i)
+    .otherwise{
+      io.out := VecInit.fill(p.n)(0.S(p.w.W))
+      io.cmp_debug := VecInit.fill(p.k, p.n)(0.S(p.w.W))
+      io.debug_b_regs := VecInit.fill(p.k, p.n)(0.S(p.w.W))
+      io.debug_a_regs := VecInit.fill(p.k, p.n)(0.S(p.w.W))
+      io.debug_00 := 0.S
+      cms_reg := VecInit.fill(p.k, p.n)(0.S(p.w.W))
     }
-    val cmp_input = Wire(Vec(p.k, Vec(p.n, SInt(p.w.W))))
-    for(kidx <- 0 until p.k){
-        for(nidx <- 0 until p.n){
-            if(kidx==0){
-                if(nidx==0){
-                    cmp_input(kidx)(nidx) := io.a_in(kidx) * b_reg(kidx)(nidx)
-                    a_reg(kidx)(nidx) := io.a_in(kidx)
-                }else{
-                    cmp_input(kidx)(nidx) := a_reg(kidx)(nidx-1) * b_reg(kidx)(nidx)
-                    a_reg(kidx)(nidx) := a_reg(kidx)(nidx-1)
-                }
-            }else{
-                if(nidx==0){
-                    cmp_input(kidx)(nidx) := (io.a_in(kidx) * b_reg(kidx)(nidx)) + cms_reg(kidx-1)(nidx)
-                    a_reg(kidx)(nidx) := io.a_in(kidx)
-                }else{
-                    cmp_input(kidx)(nidx) := (a_reg(kidx)(nidx-1) * b_reg(kidx)(nidx)) + cms_reg(kidx-1)(nidx)
-                    a_reg(kidx)(nidx) := a_reg(kidx)(nidx-1)
-                }
-            }
-            cms_reg := cmp_input
-        }
-        
-        
-    }
-    // printf(cf"-------------------------\n")
-    printf(cf"\nMY A_IN:\n")
-    for(i <- 0 until io.a_in.size){
-      printf(cf"${io.a_in(i)} ")
-    }
-    printf("\n\n")
-    printf(cf"MY B_IN:\n")
-    for(i <- 0 until io.b_in.size){
-      printf(cf"${io.b_in(i)}\n")
-    }
-    printf(cf"MY A_REG:\n")
-    for(i <- 0 until a_reg.size){
-      printf(cf"${a_reg(i)}\n")
-    }
-    printf(cf"\nMY CSM:\n")
-    for(i <- 0 until cms_reg.size){
-      printf(cf"${cms_reg(i)}\n")
-    }
-    printf(cf"MY SYST OUT:\n")
-    for(i <- 0 until io.out.size){
-      printf(cf"${io.out(i)}\n")
-    }
-    // printf(cf"\n\n")
+    
 }

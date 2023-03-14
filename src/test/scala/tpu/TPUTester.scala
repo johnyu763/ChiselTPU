@@ -17,10 +17,10 @@ object TPUTestData {
   def genOnesCol(n: Int): Matrix = Array.fill(n)(Array(1))
   val in2x2 = Array(Array(1,2),
                    Array(3,4))
-  val ain2x2 = Array(Array(1,0),
-                   Array(4,0))
-  val bin2x2 = Array(Array(2,3),
-                   Array(0,0))
+  val ain2x2 = Array(Array(2,3),
+                   Array(1,5))
+  val bin2x2 = Array(Array(5,0),
+                   Array(3,0))
   val in2x4  = Array(Array(1,2,3,4),
                    Array(5,6,7,8))
   val in4x2  = Array(Array(1,2),
@@ -171,8 +171,9 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
         // print("\n") 
     //for(i <- 0 until p.k+p.m+p.k+2){
     //len to feed a slanted all the way though a_in window, eg:
-    //
-    for(i <- 0 until 3*(2+p.m+p.k+p.n)){
+    
+    //Plz calculate how many cycles it takes
+    for(i <- 0 until 72+2*(4+p.m+p.k+p.n)){
         // print("-----BEFORE:arrRegs out-----\n")
         // for (cmp_i <- 0 until p.k) {
         //   print(dut.io.debug_a_out(cmp_i).peek())
@@ -328,8 +329,8 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
   it should "mult one cycle" in {
     // val k = 4
     // doTPUTest(TPUTestData.ain2x2, TPUTestData.bin2x2)
-    doTPUTest(TPUTestData.in2x2, TPUTestData.in2x2)
-    // doTPUTest(TPUTestData.inA3x3, TPUTestData.inB3x3)
+    // doTPUTest(TPUTestData.in2x2, TPUTestData.in2x2)
+    doTPUTest(TPUTestData.inA3x3, TPUTestData.inB3x3)
     // doTPUTest(TPUTestData.in2x4, TPUTestData.in4x2)
     // doTPUTest(TPUTestData.in4x2, TPUTestData.in2x4)
     // doTPUTest(TPUTestData.in5x3, TPUTestData.in3x7)
