@@ -4,7 +4,7 @@ import chisel3.util._
 import chisel3.util.log2Ceil
 import chisel3.internal.firrtl.Width
 
-case class TPUParams(m: Int, k: Int, n: Int, s1: Int, s2: Int) {
+case class TPUParams(m: Int, k: Int, n: Int, actM: Int,  s1: Int, s2: Int) {
   // A (m x k) X B (k x n) = C (m x k)
   val aRows: Int = m
   val aCols: Int = k
@@ -12,6 +12,7 @@ case class TPUParams(m: Int, k: Int, n: Int, s1: Int, s2: Int) {
   val bCols: Int = n
   val cRows: Int = m
   val cCols: Int = n
+  val actRows: Int = actM
   val sRows: Int = s1
   val sCols: Int = s2
   // Implementation details
@@ -43,9 +44,8 @@ class ChiselTPU(p: TPUParams) extends Module{
   val load :: fill :: slice :: multiply :: clear :: Nil = Enum(5)
   val state = RegInit(load)
   val counterFlag = Wire(Bool())
-  val systParams = TPUParams(p.s1, p.s1, p.s2, p.s1, p.s2) //hard-coded systolic array size of 3 for slicing
-  val actReg = Module(new ActReg(systParams)) // to switch to non slice, use p instead of systParams
-  val systArr = Module(new SystArr(systParams))
+  val actReg = Module(new ActReg(p)) // to switch to non slice, use p instead of systParams
+  val systArr = Module(new SystArr(p))
   val myOut = RegInit(VecInit.fill(p.m, p.n)(0.S(p.w.W)))
   val a_ready = RegInit(true.B)
   val b_ready = RegInit(true.B)
@@ -56,22 +56,22 @@ class ChiselTPU(p: TPUParams) extends Module{
 
   // slice parameters
   // dimensions of padded input matrices
-  val paddedMDim = if(p.m >= systParams.m) systParams.m*(((p.m-1)/systParams.m)+1) else systParams.m
-  val paddedKDim = if(p.k >= systParams.k) systParams.k*(((p.k-1)/systParams.k)+1) else systParams.k 
-  val paddedNDim = if(p.n >= systParams.n) systParams.n*(((p.n-1)/systParams.n)+1) else systParams.n
+  val paddedMDim = if(p.m >= p.actM) p.actM*(((p.m-1)/p.actM)+1) else p.actM
+  val paddedKDim = if(p.k >= p.s1) p.s1*(((p.k-1)/p.s1)+1) else p.s1 
+  val paddedNDim = if(p.n >= p.s2) p.s2*(((p.n-1)/p.s2)+1) else p.s2
 
   // used for calculating slice boundaries
-  val numSliceM = paddedMDim/systParams.m
-  val numSliceK = paddedKDim/systParams.k
-  val numSliceN = paddedNDim/systParams.n
+  val numSliceM = paddedMDim/p.actM
+  val numSliceK = paddedKDim/p.s1
+  val numSliceN = paddedNDim/p.s2
 
   // initialization of padded input matrices
   val paddedA = RegInit(VecInit.fill(paddedMDim, paddedKDim)(0.S(p.w.W)))
   val paddedB = RegInit(VecInit.fill(paddedKDim, paddedNDim)(0.S(p.w.W)))
   val paddedOut = RegInit(VecInit.fill(paddedMDim, paddedNDim)(0.S(p.w.W)))
-  val slicedA = RegInit(VecInit.fill(systParams.m, systParams.k)(0.S(p.w.W)))
-  val slicedB = RegInit(VecInit.fill(systParams.k, systParams.n)(0.S(p.w.W)))
-  val slicedOut = RegInit(VecInit.fill(systParams.m, systParams.n)(0.S(p.w.W)))
+  val slicedA = RegInit(VecInit.fill(p.actM, p.s1)(0.S(p.w.W)))
+  val slicedB = RegInit(VecInit.fill(p.s1, p.s2)(0.S(p.w.W)))
+  val slicedOut = RegInit(VecInit.fill(p.actM, p.s2)(0.S(p.w.W)))
 
   val (totalCycle, totalWrap) = Counter(true.B, 1000)
   val (sliceCycle, sliceWrap) = Counter(state === slice, numSliceM * numSliceK * numSliceN)
@@ -114,16 +114,18 @@ class ChiselTPU(p: TPUParams) extends Module{
       }
     }
   }
-   val boundK = systParams.k.U * ((sliceCycle % (numSliceK*numSliceN).U) % numSliceK.U)//systParams.k.U * (sliceCycle % (numSliceK*numSliceN).U)/systParams.k.U
-   val boundM = systParams.m.U * ((sliceCycle % (numSliceM*numSliceK).U) / numSliceK.U) //(sliceCycle*systParams.m.U % (numSliceK*numSliceM).U)/systParams.m.U
-   val boundN = systParams.n.U * (sliceCycle / (numSliceK*numSliceN).U)
-
+   val boundK = p.s1.U * (sliceCycle % numSliceK.U)//p.s1.U * (sliceCycle % (numSliceK*numSliceN).U)/p.s1.U
+   val boundM = p.actM.U * ((sliceCycle % (numSliceM*numSliceK).U) / numSliceK.U) //(sliceCycle*p.actM.U % (numSliceK*numSliceM).U)/p.actM.U
+   val boundN = p.s2.U * (sliceCycle / (numSliceK*numSliceM).U)
+  printf(cf"bound K: ${boundK}\n")
+  printf(cf"bound M: ${boundM}\n")
+  printf(cf"bound N: ${boundN}\n")
   def updateMatricesSlices() = {
-    for(i <- 0 until systParams.k){
-      for(j <- 0 until systParams.m){
+    for(i <- 0 until p.s1){
+      for(j <- 0 until p.actM){
         slicedA(j)(i) := paddedA(boundM+j.U)(boundK+i.U)
       }
-      for(j <- 0 until systParams.n){
+      for(j <- 0 until p.s2){
         slicedB(i)(j) := paddedB(boundK+i.U)(boundN+j.U) 
       }
     }
@@ -140,7 +142,7 @@ class ChiselTPU(p: TPUParams) extends Module{
   
   counterFlag := false.B
   //initialize inputs for submodules
-  actReg.io.index := (systParams.k+systParams.m-1).U-cycle
+  actReg.io.index := (p.s1+p.actM-1).U-cycle
   systArr.io.a_in := actReg.io.a_out
   val act_in = RegInit(VecInit.fill(p.m, p.k)(0.S(p.w.W)))
   val allowReadB = RegInit(false.B)
@@ -182,7 +184,7 @@ class ChiselTPU(p: TPUParams) extends Module{
     // allowReadB := true.B
     cycle := 0.U
     counterFlag := false.B
-    slicedOut := VecInit.fill(systParams.m, systParams.n)(0.S(p.w.W))    
+    slicedOut := VecInit.fill(p.actM, p.s2)(0.S(p.w.W))    
     enabledSyst := false.B
   }
   .elsewhen(state === multiply){
@@ -194,17 +196,17 @@ class ChiselTPU(p: TPUParams) extends Module{
     .otherwise{
       allowReadB := false.B
     }
-    when(cycle >= (2+systParams.k-1).U){ //BUG
-      cycleIdx := cycle-(2+systParams.k-1).U
+    when(cycle >= (2+p.s1-1).U){ //BUG
+      cycleIdx := cycle-(2+p.s1-1).U
     }.
     otherwise{
       cycleIdx := cycle
     }
-    when(cycle >= (2+systParams.k-1).U){
-      for(c <- 0 until systParams.n){
-        when(cycleIdx>=c.U && cycleIdx<(systParams.m+c).U){
-          for(r <- 0 until systParams.m){
-            if(r==(systParams.m-1)){
+    when(cycle >= (2+p.s1-1).U){
+      for(c <- 0 until p.s2){
+        when(cycleIdx>=c.U && cycleIdx<(p.actM+c).U){
+          for(r <- 0 until p.actM){
+            if(r==(p.actM-1)){
               slicedOut(r.U)(c.U) := systArr.io.out(c.U)
             }else{
               slicedOut(r.U)(c.U) := slicedOut((r+1).U)(c.U)
@@ -239,23 +241,31 @@ class ChiselTPU(p: TPUParams) extends Module{
       }
       state := slice
     }
-  //     printf(cf"PADDED A: \n")
-  //   for(i <- 0 until paddedA.size){
-  //     printf(cf"${paddedA(i)}\n")
-  //  }
-  //    printf(cf"PADDED B: \n")
-  //   for(i <- 0 until paddedB.size){
-  //     printf(cf"${paddedB(i)}\n")
-  //   }
-  //   printf(cf"MY SLICED OUT: \n")
-  //   for(i <- 0 until slicedOut.size){
-  //     printf(cf"${slicedOut(i)}\n")
-  //   }
-  //       // // printf(cf"\n-------------------------\n")
-  //   printf(cf"MY OUT: \n")
-  //   for(i <- 0 until io.out.size){
-  //     printf(cf"${io.out(i)}\n")
-  //   }
+      printf(cf"PADDED A: \n")
+    for(i <- 0 until paddedA.size){
+      printf(cf"${paddedA(i)}\n")
+   }
+     printf(cf"PADDED B: \n")
+    for(i <- 0 until paddedB.size){
+      printf(cf"${paddedB(i)}\n")
+    }
+    printf(cf"SLICED A: \n")
+    for(i <- 0 until slicedA.size){
+      printf(cf"${slicedA(i)}\n")
+    }
+    printf(cf"SLICED B: \n")
+    for(i <- 0 until slicedB.size){
+      printf(cf"${slicedB(i)}\n")
+    }
+    printf(cf"MY SLICED OUT: \n")
+    for(i <- 0 until slicedOut.size){
+      printf(cf"${slicedOut(i)}\n")
+    }
+        // // printf(cf"\n-------------------------\n")
+    printf(cf"MY OUT: \n")
+    for(i <- 0 until io.out.size){
+      printf(cf"${io.out(i)}\n")
+    }
   }
   
   .elsewhen(state === clear){
@@ -270,15 +280,15 @@ class ChiselTPU(p: TPUParams) extends Module{
 
 class ActReg(p: TPUParams) extends Module{
     val io = IO(new Bundle{
-        val index = Input(UInt((log2Ceil(p.k+p.m-1) + 1).W))
-        val a = Input(Vec(p.m, Vec(p.k, SInt(p.w.W))))
-        val a_out = Output(Vec(p.k, SInt(p.w.W)))
+        val index = Input(UInt((log2Ceil(p.s1+p.actM-1) + 1).W))
+        val a = Input(Vec(p.actM, Vec(p.s1, SInt(p.w.W))))
+        val a_out = Output(Vec(p.s1, SInt(p.w.W)))
     })
     
-    when(io.index < (p.k+p.m-1).U){
-      for (j <- 0 until p.k) {
-        when((p.k-j-1).S-io.index.asSInt <= 0.S && (p.m-j-1+p.k).S-io.index.asSInt > 0.S){
-          io.a_out(j.U) := io.a((p.k + p.m - 2 - j).U - io.index)(j)
+    when(io.index < (p.s1+p.actM-1).U){
+      for (j <- 0 until p.s1) {
+        when((p.s1-j-1).S-io.index.asSInt <= 0.S && (p.actM-j-1+p.s1).S-io.index.asSInt > 0.S){
+          io.a_out(j.U) := io.a((p.s1 + p.actM - 2 - j).U - io.index)(j)
         }
         .otherwise{
           io.a_out(j.U) := 0.S
@@ -286,7 +296,7 @@ class ActReg(p: TPUParams) extends Module{
       }
     }
     .otherwise{
-      for(j <- 0 until p.k){
+      for(j <- 0 until p.s1){
         io.a_out(j.U) := 0.S
       }
     }
@@ -294,20 +304,20 @@ class ActReg(p: TPUParams) extends Module{
 
 class SystArr(p: TPUParams) extends Module{
     val io = IO(new Bundle {
-        val a_in = Input(Vec(p.k, SInt(p.w.W)))
-        val b_in = Input(Vec(p.k, Vec(p.n, SInt(p.w.W))))
+        val a_in = Input(Vec(p.s1, SInt(p.w.W)))
+        val b_in = Input(Vec(p.s1, Vec(p.s2, SInt(p.w.W))))
         val en = Input(Bool())
         val b_readingin = Input(Bool())
-        val out = Output((Vec(p.n, SInt(p.w.W))))
+        val out = Output((Vec(p.s2, SInt(p.w.W))))
         //debugOuts
-        val cmp_debug = Output(Vec(p.k, Vec(p.n, SInt(p.w.W))))
-        val debug_b_regs = Output(Vec(p.k, Vec(p.n, SInt(p.w.W))))
-        val debug_a_regs = Output(Vec(p.k, Vec(p.n, SInt(p.w.W))))
+        val cmp_debug = Output(Vec(p.s1, Vec(p.s2, SInt(p.w.W))))
+        val debug_b_regs = Output(Vec(p.s1, Vec(p.s2, SInt(p.w.W))))
+        val debug_a_regs = Output(Vec(p.s1, Vec(p.s2, SInt(p.w.W))))
         val debug_00 = Output(SInt(p.w.W))
     })
-    val a_reg = Reg(Vec(p.k, Vec(p.n, SInt(p.w.W))))
-    val b_reg = Reg(Vec(p.k, Vec(p.n, SInt(p.w.W))))
-    val cms_reg = Reg(Vec(p.k, Vec(p.n, SInt(p.w.W))))
+    val a_reg = Reg(Vec(p.s1, Vec(p.s2, SInt(p.w.W))))
+    val b_reg = Reg(Vec(p.s1, Vec(p.s2, SInt(p.w.W))))
+    val cms_reg = Reg(Vec(p.s1, Vec(p.s2, SInt(p.w.W))))
 
     when(io.en){
       
@@ -320,12 +330,12 @@ class SystArr(p: TPUParams) extends Module{
       }.otherwise{
         b_reg := b_reg
       }
-      for(i <- 0 until p.n){
-          io.out(i) := cms_reg(p.k-1)(i)
+      for(i <- 0 until p.s2){
+          io.out(i) := cms_reg(p.s1-1)(i)
       }
-      val cmp_input = Wire(Vec(p.k, Vec(p.n, SInt(p.w.W))))
-      for(kidx <- 0 until p.k){
-          for(nidx <- 0 until p.n){
+      val cmp_input = Wire(Vec(p.s1, Vec(p.s2, SInt(p.w.W))))
+      for(kidx <- 0 until p.s1){
+          for(nidx <- 0 until p.s2){
               if(kidx==0){
                   if(nidx==0){
                       cmp_input(kidx)(nidx) := io.a_in(kidx) * b_reg(kidx)(nidx)
@@ -350,12 +360,12 @@ class SystArr(p: TPUParams) extends Module{
       }
     }
     .otherwise{
-      io.out := VecInit.fill(p.n)(0.S(p.w.W))
-      io.cmp_debug := VecInit.fill(p.k, p.n)(0.S(p.w.W))
-      io.debug_b_regs := VecInit.fill(p.k, p.n)(0.S(p.w.W))
-      io.debug_a_regs := VecInit.fill(p.k, p.n)(0.S(p.w.W))
+      io.out := VecInit.fill(p.s2)(0.S(p.w.W))
+      io.cmp_debug := VecInit.fill(p.s1, p.s2)(0.S(p.w.W))
+      io.debug_b_regs := VecInit.fill(p.s1, p.s2)(0.S(p.w.W))
+      io.debug_a_regs := VecInit.fill(p.s1, p.s2)(0.S(p.w.W))
       io.debug_00 := 0.S
-      cms_reg := VecInit.fill(p.k, p.n)(0.S(p.w.W))
+      cms_reg := VecInit.fill(p.s1, p.s2)(0.S(p.w.W))
     }
     
 }

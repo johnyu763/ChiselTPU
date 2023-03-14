@@ -1,4 +1,5 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/TPUTester.scala:171:33: not found: value pn[0m
-[0m[[0m[31merror[0m] [0m[0m    for(i <- 0 until (4+p.m+p.k+pn)){[0m
-[0m[[0m[31merror[0m] [0m[0m                                ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/TPUTester.scala:72:22: not enough arguments for method apply: (m: Int, k: Int, n: Int, actM: Int, s1: Int, s2: Int): tpu.TPUParams in object TPUParams.[0m
+[0m[[0m[31merror[0m] [0m[0mUnspecified value parameter s2.[0m
+[0m[[0m[31merror[0m] [0m[0m    val p = TPUParams(aShifted.size, a.head.size, b.head.size, a.head.size, b.head.size)[0m
+[0m[[0m[31merror[0m] [0m[0m                     ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m

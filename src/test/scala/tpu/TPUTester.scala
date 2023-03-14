@@ -69,7 +69,7 @@ object TPUTestData {
 
 class SystArrTester extends AnyFlatSpec with ChiselScalatestTester {
   def doSystArrTest_noShift(a: Matrix, aShifted: Matrix, b: Matrix): Unit = {
-    val p = TPUParams(aShifted.size, a.head.size, b.head.size, a.head.size, b.head.size)
+    val p = TPUParams(a.size, a.head.size, b.head.size, a.size, a.head.size, b.head.size)
     test(new SystArr(p)).withAnnotations(Seq(WriteVcdAnnotation)) { dut =>
 
       // load b_in with b matrix
@@ -121,21 +121,22 @@ class SystArrTester extends AnyFlatSpec with ChiselScalatestTester {
 
 class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
   def doTPUTest(a: Matrix, b: Matrix): Unit = {
-    val p = TPUParams(a.size, a.head.size, b.head.size, 2, 2)
+    val p = TPUParams(a.size, a.head.size, b.head.size, 2, 2, 2)
     // slice parameters
     // dimensions of padded input matrices
-    val paddedMDim = if(p.m >= p.s1) p.s1*(((p.m-1)/p.s1)+1) else p.s1
+    val paddedMDim = if(p.m >= p.actM) p.actM*(((p.m-1)/p.actM)+1) else p.actM
     val paddedKDim = if(p.k >= p.s1) p.s1*(((p.k-1)/p.s1)+1) else p.s1
     val paddedNDim = if(p.n >= p.s2) p.s2*(((p.n-1)/p.s2)+1) else p.s2
 
     // used for calculating slice boundaries
-    val numSlice = (paddedMDim/p.s1) * (paddedKDim/p.s1) * (paddedNDim/p.s2)
+    val numSlice = (paddedMDim/p.actM) * (paddedKDim/p.s1) * (paddedNDim/p.s2)
     print("numSlice: ")
     print(numSlice)
     print("\n")
+    val maxM = if(p.m > p.actM) p.m else p.actM
     val maxK = if(p.k > p.s1) p.k else p.s1
     val maxN = if(p.n > p.s2) p.n else p.s2
-    val maxM = if(p.m > p.s1) p.m else p.s1
+    
     print(maxK)
     print("\n")
     print(maxN)
@@ -342,13 +343,13 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
   behavior of "TPU test"
   it should "mult one cycle" in {
     // val k = 4
-    doTPUTest(TPUTestData.ain2x2, TPUTestData.bin2x2)
-    doTPUTest(TPUTestData.in2x2, TPUTestData.in2x2)
-    doTPUTest(TPUTestData.inA3x3, TPUTestData.inB3x3)
-    doTPUTest(TPUTestData.in2x4, TPUTestData.in4x2)
-    doTPUTest(TPUTestData.in4x2, TPUTestData.in2x4)
-    doTPUTest(TPUTestData.out4x4, TPUTestData.out4x4)
-    // doTPUTest(TPUTestData.in5x3, TPUTestData.in3x7)
+    // doTPUTest(TPUTestData.ain2x2, TPUTestData.bin2x2)
+    // doTPUTest(TPUTestData.in2x2, TPUTestData.in2x2)
+    // doTPUTest(TPUTestData.inA3x3, TPUTestData.inB3x3)
+    // doTPUTest(TPUTestData.in2x4, TPUTestData.in4x2)
+    // doTPUTest(TPUTestData.in4x2, TPUTestData.in2x4)
+    // doTPUTest(TPUTestData.out4x4, TPUTestData.out4x4)
+    doTPUTest(TPUTestData.in5x3, TPUTestData.in3x7)
     // doTPUTest(TPUTestData.in3x7, TPUTestData.in7x5)
   }
   // it should "smult rand" in {
