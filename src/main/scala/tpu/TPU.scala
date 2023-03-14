@@ -162,7 +162,6 @@ class ChiselTPU(p: TPUParams) extends Module{
   }
   .elsewhen(state === fill){
       enabledSyst := false.B
-      printf(cf"FILL\n")
       when(io.b.valid && io.b.ready){
         //syst_in := io.b.bits
         copyMatrixToPadded(io.b.bits, paddedB)
@@ -178,8 +177,6 @@ class ChiselTPU(p: TPUParams) extends Module{
       }
   }
   .elsewhen(state === slice){
-    printf(cf"\nSLICE TOTAL CYCLE ${totalCycle}\n")
-    // printf(cf"SLICE\n")
     state := multiply
     // allowReadB := true.B
     cycle := 0.U
@@ -190,8 +187,6 @@ class ChiselTPU(p: TPUParams) extends Module{
   .elsewhen(state === multiply){
     enabledSyst := true.B
     counterFlag := true.B
-    // printf(cf"MULT\n")
-    // printf(cf"CYCLE: ${cycle}\n")
     when(cycle === 0.U){
       allowReadB := true.B
     }
@@ -205,7 +200,6 @@ class ChiselTPU(p: TPUParams) extends Module{
       cycleIdx := cycle
     }
     when(cycle >= (2+systParams.k-1).U){
-      // printf(cf"SYST ARR: ${systArr.io.out}\n")
       for(c <- 0 until systParams.n){
         when(cycleIdx>=c.U && cycleIdx<(systParams.m+c).U){
           for(r <- 0 until systParams.m){
@@ -230,7 +224,6 @@ class ChiselTPU(p: TPUParams) extends Module{
           }
         }
       }
-      printf(cf"\nTOTAL CYCLE ${totalCycle}\n")
       state := clear
     }
     .elsewhen(cycle === (p.m+p.k+p.n).U){
@@ -242,61 +235,10 @@ class ChiselTPU(p: TPUParams) extends Module{
           }
         }
       }
-      // copyMatrixToPadded(paddedOut, myOut)
-      // printf(cf"MY PADDED OUT: \n")
-      // for(i <- 0 until paddedOut.size){
-      //   printf(cf"${paddedOut(i)}\n")
-      // }
       state := slice
     }
-      
-      
-    
-    // printf(cf"SLICE CYCLE ${sliceCycle}\n")
-    // printf(cf"NORMAL A: \n")
-    // for(i <- 0 until io.a.bits.size){
-    //   printf(cf"${io.a.bits(i)}\n")
-    // }
-    // printf(cf"NORMAL B: \n")
-    // for(i <- 0 until io.b.bits.size){
-    //   printf(cf"${io.b.bits(i)}\n")
-    // }
-  //   printf(cf"PADDED A: \n")
-  //   for(i <- 0 until paddedA.size){
-  //     printf(cf"${paddedA(i)}\n")
-  //  }
-  //    printf(cf"PADDED B: \n")
-  //   for(i <- 0 until paddedB.size){
-  //     printf(cf"${paddedB(i)}\n")
-  //   }
-  //  printf(cf"\n\n")
-    printf(cf"SLICED A: \n")
-    for(i <- 0 until slicedA.size){
-      printf(cf"${slicedA(i)}\n")
-    }
-    printf(cf"SLICED B: \n")
-    for(i <- 0 until slicedB.size){
-      printf(cf"${slicedB(i)}\n")
-    }
-    printf(cf"MY SLICED OUT: \n")
-    for(i <- 0 until slicedOut.size){
-      printf(cf"${slicedOut(i)}\n")
-    }
-    // // printf(cf"\n-------------------------\n")
-    printf(cf"MY OUT: \n")
-    for(i <- 0 until io.out.size){
-      printf(cf"${io.out(i)}\n")
-    }
-    printf(cf"PADDED OUT: \n")
-    for(i <- 0 until paddedOut.size){
-      printf(cf"${paddedOut(i)}\n")
-    }
-  //   printf(cf"\n\n")
-  //   printf(cf"NUM SLICES: ${numSliceM * numSliceK * numSliceN}\n")
   }
   .elsewhen(state === clear){
-    
-    printf(cf"\nCLEAR TOTAL CYCLE ${totalCycle}\n")
     state := fill
     b_ready := true.B
     // io.b.ready := true.B
@@ -327,8 +269,6 @@ class ActReg(p: TPUParams) extends Module{
         io.a_out(j.U) := 0.S
       }
     }
-
-    // printf(cf"ACT REG INPUT: ${io.a_out}\n")
 }
 
 class SystArr(p: TPUParams) extends Module{
@@ -387,13 +327,6 @@ class SystArr(p: TPUParams) extends Module{
           
           
       }
-      // printf(cf"-------------------------\n")
-      // printf(cf"\nMY A_IN:\n")
-      // for(i <- 0 until io.a_in.size){
-      //   printf(cf"${io.a_in(i)} ")
-      // }
-      // printf("\n\n")
-    
     }
     .otherwise{
       io.out := VecInit.fill(p.n)(0.S(p.w.W))

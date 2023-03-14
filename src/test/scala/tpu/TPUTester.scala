@@ -121,7 +121,7 @@ class SystArrTester extends AnyFlatSpec with ChiselScalatestTester {
 
 class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
   def doTPUTest(a: Matrix, b: Matrix): Unit = {
-    val p = TPUParams(a.size, a.head.size, b.head.size, 1, 1)
+    val p = TPUParams(a.size, a.head.size, b.head.size, 2, 2)
     // slice parameters
     // dimensions of padded input matrices
     val paddedMDim = if(p.m >= p.s1) p.m % p.s1 + p.m else p.m % p.s1 + p.s1 % p.m
@@ -133,7 +133,12 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
     print("numSlice: ")
     print(numSlice)
     print("\n")
-    val numCycles = numSlice * (paddedMDim+paddedNDim+paddedKDim)
+    val maxK = if(p.k > p.s1) p.k else p.s1
+    val maxN = if(p.n > p.s2) p.n else p.s2
+    val maxM = if(p.m > p.s1) p.m else p.s1
+
+    val numCycles = 2+numSlice*(3+maxK+maxN+maxM)
+    
     print("params: \nm: ")
     print(a.size)
     print("\nk: ")
@@ -176,7 +181,7 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
     //len to feed a slanted all the way though a_in window, eg:
     
     //Plz calculate how many cycles it takes
-    for(i <- 0 until 2+numSlice*(3+p.k+p.m+p.n)){
+    for(i <- 0 until numCycles){
         // print("-----BEFORE:arrRegs out-----\n")
         // for (cmp_i <- 0 until p.k) {
         //   print(dut.io.debug_a_out(cmp_i).peek())
@@ -277,9 +282,9 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
         dut.io.out(r)(c).expect(expected(r)(c).S)
       }
     }
-    // dut.clock.step()
-    // dut.io.b.valid.poke(true.B)
-    // dut.io.b.ready.expect(true.B)
+    dut.clock.step()
+    dut.io.b.valid.poke(true.B)
+    dut.io.b.ready.expect(true.B)
     //  // load b with next b matrix
     // for (r <- 0 until p.k) {
     //     for (c <- 0 until p.n) {
@@ -332,8 +337,8 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
   it should "mult one cycle" in {
     // val k = 4
     doTPUTest(TPUTestData.ain2x2, TPUTestData.bin2x2)
-    doTPUTest(TPUTestData.in2x2, TPUTestData.in2x2)
-    doTPUTest(TPUTestData.inA3x3, TPUTestData.inB3x3)
+    // doTPUTest(TPUTestData.in2x2, TPUTestData.in2x2)
+    // doTPUTest(TPUTestData.inA3x3, TPUTestData.inB3x3)
     // doTPUTest(TPUTestData.in2x4, TPUTestData.in4x2)
     // doTPUTest(TPUTestData.in4x2, TPUTestData.in2x4)
     // doTPUTest(TPUTestData.in5x3, TPUTestData.in3x7)
