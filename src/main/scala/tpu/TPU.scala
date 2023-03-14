@@ -56,9 +56,9 @@ class ChiselTPU(p: TPUParams) extends Module{
 
   // slice parameters
   // dimensions of padded input matrices
-  val paddedMDim = if(p.m >= systParams.m) p.m % systParams.m + p.m else p.m % systParams.m + systParams.m % p.m
-  val paddedKDim = if(p.k >= systParams.k) p.k % systParams.k + p.k else p.k % systParams.k + systParams.k % p.k
-  val paddedNDim = if(p.n >= systParams.n) p.n % systParams.n + p.n else p.n % systParams.n + systParams.n % p.n
+  val paddedMDim = if(p.m >= systParams.m) systParams.m*(((p.m-1)/systParams.m)+1) else systParams.m
+  val paddedKDim = if(p.k >= systParams.k) systParams.k*(((p.k-1)/systParams.k)+1) else systParams.k 
+  val paddedNDim = if(p.n >= systParams.n) systParams.n*(((p.n-1)/systParams.n)+1) else systParams.n
 
   // used for calculating slice boundaries
   val numSliceM = paddedMDim/systParams.m
@@ -177,6 +177,7 @@ class ChiselTPU(p: TPUParams) extends Module{
       }
   }
   .elsewhen(state === slice){
+    printf(cf"\nSLICE TOTAL CYCLE ${totalCycle}\n")
     state := multiply
     // allowReadB := true.B
     cycle := 0.U
@@ -224,6 +225,7 @@ class ChiselTPU(p: TPUParams) extends Module{
           }
         }
       }
+       printf(cf"\nSTART CLEAR TOTAL CYCLE ${totalCycle}\n")
       state := clear
     }
     .elsewhen(cycle === (p.m+p.k+p.n).U){
@@ -237,8 +239,27 @@ class ChiselTPU(p: TPUParams) extends Module{
       }
       state := slice
     }
+  //     printf(cf"PADDED A: \n")
+  //   for(i <- 0 until paddedA.size){
+  //     printf(cf"${paddedA(i)}\n")
+  //  }
+  //    printf(cf"PADDED B: \n")
+  //   for(i <- 0 until paddedB.size){
+  //     printf(cf"${paddedB(i)}\n")
+  //   }
+  //   printf(cf"MY SLICED OUT: \n")
+  //   for(i <- 0 until slicedOut.size){
+  //     printf(cf"${slicedOut(i)}\n")
+  //   }
+  //       // // printf(cf"\n-------------------------\n")
+  //   printf(cf"MY OUT: \n")
+  //   for(i <- 0 until io.out.size){
+  //     printf(cf"${io.out(i)}\n")
+  //   }
   }
+  
   .elsewhen(state === clear){
+    printf(cf"\nCLEAR TOTAL CYCLE ${totalCycle}\n")
     state := fill
     b_ready := true.B
     // io.b.ready := true.B

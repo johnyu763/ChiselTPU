@@ -1,17 +1,17 @@
-[0m[[0m[0mdebug[0m] [0m[0m> Exec(test, Some(48d92a2c-68b6-450a-82e8-cf766a6d8623), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(test, Some(9a3ca346-7dd7-41c8-84cb-d882bdf48883), Some(CommandSource(console0)))[0m
 [0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Test / test[0m
 [0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
-[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /Users/johnyu/Projects/CSE228A/ChiselTPU/target/scala-2.13/test-classes ...[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /Users/johnyu/Projects/CSE228A/ChiselTPU/target/scala-2.13/classes ...[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mSystArrTester:[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mTPU syst arr test[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should multiply (1s row) x (1s column)[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mTPUTester:[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mTPU test[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m- should mult one cycle[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 7 seconds, 418 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 9 seconds, 782 milliseconds.[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 2[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 2, aborted 0[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 2, failed 0, canceled 0, ignored 0, pending 0[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32mAll tests passed.[0m[0m
-[0m[[0m[32msuccess[0m] [0m[0mTotal time: 8 s, completed Mar 14, 2023, 12:36:57 AM[0m
+[0m[[0m[32msuccess[0m] [0m[0mTotal time: 11 s, completed Mar 14, 2023, 1:25:26 AM[0m
 [0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m

@@ -124,9 +124,9 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
     val p = TPUParams(a.size, a.head.size, b.head.size, 2, 2)
     // slice parameters
     // dimensions of padded input matrices
-    val paddedMDim = if(p.m >= p.s1) p.m % p.s1 + p.m else p.m % p.s1 + p.s1 % p.m
-    val paddedKDim = if(p.k >= p.s1) p.k % p.s1 + p.k else p.k % p.s1 + p.s1 % p.k
-    val paddedNDim = if(p.n >= p.s2) p.n % p.s2 + p.n else p.n % p.s2 + p.s2 % p.n
+    val paddedMDim = if(p.m >= p.s1) p.s1*(((p.m-1)/p.s1)+1) else p.s1
+    val paddedKDim = if(p.k >= p.s1) p.s1*(((p.k-1)/p.s1)+1) else p.s1
+    val paddedNDim = if(p.n >= p.s2) p.s2*(((p.n-1)/p.s2)+1) else p.s2
 
     // used for calculating slice boundaries
     val numSlice = (paddedMDim/p.s1) * (paddedKDim/p.s1) * (paddedNDim/p.s2)
@@ -136,8 +136,14 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
     val maxK = if(p.k > p.s1) p.k else p.s1
     val maxN = if(p.n > p.s2) p.n else p.s2
     val maxM = if(p.m > p.s1) p.m else p.s1
+    print(maxK)
+    print("\n")
+    print(maxN)
+    print("\n")
+    print(maxM)
+    print("\n")
 
-    val numCycles = 2+numSlice*(3+maxK+maxN+maxM)
+    val numCycles = 2+numSlice*(3+p.k+p.n+p.m)
 
     print("params: \nm: ")
     print(a.size)
@@ -341,6 +347,7 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
     doTPUTest(TPUTestData.inA3x3, TPUTestData.inB3x3)
     doTPUTest(TPUTestData.in2x4, TPUTestData.in4x2)
     doTPUTest(TPUTestData.in4x2, TPUTestData.in2x4)
+    doTPUTest(TPUTestData.out4x4, TPUTestData.out4x4)
     // doTPUTest(TPUTestData.in5x3, TPUTestData.in3x7)
     // doTPUTest(TPUTestData.in3x7, TPUTestData.in7x5)
   }

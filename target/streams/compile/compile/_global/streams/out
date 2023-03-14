@@ -1,4 +1,49 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:291:29: not found: value numSlice[0m
-[0m[[0m[31merror[0m] [0m[0m    printf(cf"NUM SLICES: ${numSlice}")[0m
-[0m[[0m[31merror[0m] [0m[0m                            ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:69:38: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : Float[0m
+[0m[[0m[31merror[0m] [0m[0m required: Int[0m
+[0m[[0m[31merror[0m] [0m[0m  val paddedA = RegInit(VecInit.fill(paddedMDim, paddedKDim)(0.S(p.w.W)))[0m
+[0m[[0m[31merror[0m] [0m[0m                                     ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:71:40: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : Float[0m
+[0m[[0m[31merror[0m] [0m[0m required: Int[0m
+[0m[[0m[31merror[0m] [0m[0m  val paddedOut = RegInit(VecInit.fill(paddedMDim, paddedNDim)(0.S(p.w.W)))[0m
+[0m[[0m[31merror[0m] [0m[0m                                       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:77:33: overloaded method apply with alternatives:[0m
+[0m[[0m[31merror[0m] [0m[0m  (r: Range,enable: chisel3.Bool,reset: chisel3.Bool)(chisel3.UInt, chisel3.Bool) <and>[0m
+[0m[[0m[31merror[0m] [0m[0m  (cond: chisel3.Bool,n: Int)(chisel3.UInt, chisel3.Bool)[0m
+[0m[[0m[31merror[0m] [0m[0m cannot be applied to (chisel3.Bool, Float)[0m
+[0m[[0m[31merror[0m] [0m[0m  val (sliceCycle, sliceWrap) = Counter(state === slice, numSliceM * numSliceK * numSliceN)[0m
+[0m[[0m[31merror[0m] [0m[0m                                ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:117:47: value % is not a member of Any[0m
+[0m[[0m[31merror[0m] [0m[0m   val boundK = systParams.k.U * ((sliceCycle % (numSliceK*numSliceN).U) % numSliceK.U)//systParams.k.U * (sliceCycle % (numSliceK*numSliceN).U)/systParams.k.U[0m
+[0m[[0m[31merror[0m] [0m[0m                                              ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:118:47: value % is not a member of Any[0m
+[0m[[0m[31merror[0m] [0m[0m   val boundM = systParams.m.U * ((sliceCycle % (numSliceM*numSliceK).U) / numSliceK.U) //(sliceCycle*systParams.m.U % (numSliceK*numSliceM).U)/systParams.m.U[0m
+[0m[[0m[31merror[0m] [0m[0m                                              ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:118:71: value U is not a member of Float[0m
+[0m[[0m[31merror[0m] [0m[0m   val boundM = systParams.m.U * ((sliceCycle % (numSliceM*numSliceK).U) / numSliceK.U) //(sliceCycle*systParams.m.U % (numSliceK*numSliceM).U)/systParams.m.U[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                      ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:119:46: value / is not a member of Any[0m
+[0m[[0m[31merror[0m] [0m[0m   val boundN = systParams.n.U * (sliceCycle / (numSliceK*numSliceN).U)[0m
+[0m[[0m[31merror[0m] [0m[0m                                             ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:176:20: value := is not a member of Any[0m
+[0m[[0m[31merror[0m] [0m[0m  Expression does not convert to assignment because receiver is not assignable.[0m
+[0m[[0m[31merror[0m] [0m[0m        sliceCycle := (numSliceM * numSliceK * numSliceN - 1).U[0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:176:63: value U is not a member of Float[0m
+[0m[[0m[31merror[0m] [0m[0m        sliceCycle := (numSliceM * numSliceK * numSliceN - 1).U[0m
+[0m[[0m[31merror[0m] [0m[0m                                                              ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:219:21: value === is not a member of Any[0m
+[0m[[0m[31merror[0m] [0m[0m    when(sliceCycle === (numSliceM * numSliceK * numSliceN - 1).U && cycle === (p.m+p.k+p.n).U){[0m
+[0m[[0m[31merror[0m] [0m[0m                    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:219:65: value U is not a member of Float[0m
+[0m[[0m[31merror[0m] [0m[0m    when(sliceCycle === (numSliceM * numSliceK * numSliceN - 1).U && cycle === (p.m+p.k+p.n).U){[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:59:52: Widening conversion from Int to Float is deprecated because it loses precision. Write `.toFloat` instead.[0m
+[0m[[0m[33mwarn[0m] [0m[0m  val paddedMDim = if(p.m >= systParams.m) ((p.m-1)/systParams.m).ceil else p.m % systParams.m + systParams.m % p.m[0m
+[0m[[0m[33mwarn[0m] [0m[0m                                                   ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:59:96: Widening conversion from Int to Float is deprecated because it loses precision. Write `.toFloat` instead.[0m
+[0m[[0m[33mwarn[0m] [0m[0m  val paddedMDim = if(p.m >= systParams.m) ((p.m-1)/systParams.m).ceil else p.m % systParams.m + systParams.m % p.m[0m
+[0m[[0m[33mwarn[0m] [0m[0m                                                                                               ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mtwo warnings found[0m
+[0m[[0m[31merror[0m] [0m[0m11 errors found[0m
