@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/TPUTester.scala:250:5: ')' expected but 'val' found.[0m
-[0m[[0m[31merror[0m] [0m[0m    val expected = MatMulModel(p, a, b)[0m
-[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/TPUTester.scala:171:33: not found: value pn[0m
+[0m[[0m[31merror[0m] [0m[0m    for(i <- 0 until (4+p.m+p.k+pn)){[0m
+[0m[[0m[31merror[0m] [0m[0m                                ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m

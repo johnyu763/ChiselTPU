@@ -1,4 +1,5 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:195:21: ';' expected but ',' found.[0m
-[0m[[0m[31merror[0m] [0m[0m      printf(cf"${io,out(i)}\n")[0m
-[0m[[0m[31merror[0m] [0m[0m                    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/CSE228A/ChiselTPU/src/main/scala/tpu/TPU.scala:47:29: not enough arguments for method apply: (m: Int, k: Int, n: Int, s1: Int, s2: Int): tpu.TPUParams in object TPUParams.[0m
+[0m[[0m[31merror[0m] [0m[0mUnspecified value parameters s1, s2.[0m
+[0m[[0m[31merror[0m] [0m[0m  val systParams = TPUParams(p.s1, p.s1, p.s2) //hard-coded systolic array size of 3 for slicing[0m
+[0m[[0m[31merror[0m] [0m[0m                            ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m

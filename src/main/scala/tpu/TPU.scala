@@ -4,7 +4,7 @@ import chisel3.util._
 import chisel3.util.log2Ceil
 import chisel3.internal.firrtl.Width
 
-case class TPUParams(m: Int, k: Int, n: Int) {
+case class TPUParams(m: Int, k: Int, n: Int, s1: Int, s2: Int) {
   // A (m x k) X B (k x n) = C (m x k)
   val aRows: Int = m
   val aCols: Int = k
@@ -12,6 +12,8 @@ case class TPUParams(m: Int, k: Int, n: Int) {
   val bCols: Int = n
   val cRows: Int = m
   val cCols: Int = n
+  val sRows: Int = s1
+  val sCols: Int = s2
   // Implementation details
   val w: Int = 32
 }
@@ -42,7 +44,7 @@ class ChiselTPU(p: TPUParams) extends Module{
   val state = RegInit(load)
   val counterFlag = Wire(Bool())
   val (cycle, wrap) = Counter(counterFlag, p.k+p.m+p.n+1) //assume input is valid for now
-  val systParams = TPUParams(p.m, p.k, p.n) //hard-coded systolic array size of 3 for slicing
+  val systParams = TPUParams(2, 2, 2, p.s1, p.s2) //hard-coded systolic array size of 3 for slicing
   val actReg = Module(new ActReg(systParams)) // to switch to non slice, use p instead of systParams
   val systArr = Module(new SystArr(systParams))
   val myOut = RegInit(VecInit.fill(p.m, p.n)(0.S(p.w.W)))
@@ -180,13 +182,14 @@ class ChiselTPU(p: TPUParams) extends Module{
       }
       .elsewhen(!io.b.ready){
         state := slice
-        sliceCycle := (numSliceM * numSliceK * numSliceN - 1).U
+        sliceCycle := (numSliceM * numSliceK * numSliceN).U
       }
       // print("cycle:")
       // print(cycle)
       // print("\n")
   }
   .elsewhen(state === slice){
+    printf(cf"SLICE CYCLE: ${sliceCycle}\n")
     // printf(cf"IN SLICE STATE\n")
     // updateMatricesSlices()
     state := multiply
@@ -273,6 +276,7 @@ class ChiselTPU(p: TPUParams) extends Module{
         printf(cf"${paddedOut(i)}\n")
       }
       state := slice
+      
     }
 
     printf(cf"MY SLICED OUT: \n")
