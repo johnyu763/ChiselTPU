@@ -1,7 +1,7 @@
 #Successful Tests
-#Mon Mar 13 16:53:24 PDT 2023
+#Mon Mar 13 18:15:03 PDT 2023
 ActRegModelTester=1677984258926
 hw1.SystArrTester=1677887659837
 tpu.ActRegModelTester=1678441799452
-tpu.SystArrTester=1678751601654
+tpu.SystArrTester=1678756499459
 tpu.SystolicArrayModelTester=1677982927436
