@@ -182,7 +182,7 @@ class ChiselTPU(p: TPUParams) extends Module{
       }
       .elsewhen(!io.b.ready){
         state := slice
-        sliceCycle := (numSliceM * numSliceK * numSliceN).U
+        sliceCycle := (numSliceM * numSliceK * numSliceN - 1).U
       }
       // print("cycle:")
       // print(cycle)
@@ -206,9 +206,11 @@ class ChiselTPU(p: TPUParams) extends Module{
       printf(cf"${systArr.io.b_in(i)}\n")
     }
     cycle := 0.U
+    slicedOut := VecInit.fill(systParams.m, systParams.n)(0.S(p.w.W))
   }
   .elsewhen(state === multiply){
     counterFlag := true.B
+    printf(cf"SLICE CYCLE: ${sliceCycle}\n")
     // printf(cf"\nCYCLE COUNT: ${cycle} AND MAX ${p.m+p.k+p.n}\n")
     // when(cycle === (p.m+p.k+p.n).U){
     //   state := clear

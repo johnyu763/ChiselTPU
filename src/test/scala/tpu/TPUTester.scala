@@ -168,7 +168,7 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
     //for(i <- 0 until p.k+p.m+p.k+2){
     //len to feed a slanted all the way though a_in window, eg:
     //
-    for(i <- 0 until (5+p.m+p.k+p.n)){
+    for(i <- 0 until (4+p.m+p.k+p.n)){
         // print("-----BEFORE:arrRegs out-----\n")
         // for (cmp_i <- 0 until p.k) {
         //   print(dut.io.debug_a_out(cmp_i).peek())
