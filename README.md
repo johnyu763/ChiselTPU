@@ -19,6 +19,10 @@ This is a module for [Chisel](chisel-lang.org/) that mimics a TPU that allows th
 ## What remains?
 * Use output from last matrix multiplication as activation matrix for next multiplication
 
+## Documentation?
+* Link to slide show covering the basic inner workings out the design:
+https://docs.google.com/presentation/d/1dl2cejkrsm3kbw7wlSPrMA0yyJekU9egKISaslJLLgc/edit#slide=id.g203beab8bf6_0_76
+
 ## How to?
 
 ### Test the code
