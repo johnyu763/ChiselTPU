@@ -55,7 +55,7 @@ class ChiselTPU(p: TPUParams) extends Module{
   val maxK = if(p.k > p.s1) p.k else p.s1
   val maxN = if(p.n > p.s2) p.n else p.s2
   val (cycle, wrap) = Counter(counterFlag && systArr.io.en, maxM+maxK+maxN+1) //assume input is valid for now
-
+  val outReg = Module(new OutReg(p, maxM, maxK, maxN)) // to switch to non slice, use p instead of systParams
   // slice parameters
   // dimensions of padded input matrices
   val paddedMDim = if(p.m >= p.actM) p.actM*(((p.m-1)/p.actM)+1) else p.actM
@@ -73,7 +73,8 @@ class ChiselTPU(p: TPUParams) extends Module{
   val paddedOut = RegInit(VecInit.fill(paddedMDim, paddedNDim)(0.S(p.w.W)))
   val slicedA = RegInit(VecInit.fill(p.actM, p.s1)(0.S(p.w.W)))
   val slicedB = RegInit(VecInit.fill(p.s1, p.s2)(0.S(p.w.W)))
-  val slicedOut = RegInit(VecInit.fill(p.actM, p.s2)(0.S(p.w.W)))
+//   val slicedOut = RegInit(VecInit.fill(p.actM, p.s2)(0.S(p.w.W)))
+  val slicedOut = Wire(Vec(p.actM, Vec(p.s2, SInt(p.w.W))))
 
   val (totalCycle, totalWrap) = Counter(true.B, 1000)
   val (sliceCycle, sliceWrap) = Counter(state === slice, numSliceM * numSliceK * numSliceN)
@@ -146,11 +147,15 @@ class ChiselTPU(p: TPUParams) extends Module{
   //initialize inputs for submodules
   actReg.io.index := (p.s1+p.actM-1).U-cycle
   systArr.io.a_in := actReg.io.a_out
+  outReg.io.cycle := cycle
+  slicedOut := outReg.io.slicedOut
+  outReg.io.clearsig := false.B
   val act_in = RegInit(VecInit.fill(p.m, p.k)(0.S(p.w.W)))
   val allowReadB = RegInit(false.B)
   systArr.io.b_readingin := allowReadB
   actReg.io.a :=  slicedA//act_in// //switch between slice and act_in
   systArr.io.b_in := slicedB//io.b.bits//   //switch between slice and b.bits
+  outReg.io.systArr_out := systArr.io.out
 
   when(state === load){ 
     printf(cf"\nLOAD TOTAL CYCLE ${totalCycle}\n")
@@ -186,7 +191,8 @@ class ChiselTPU(p: TPUParams) extends Module{
     // allowReadB := true.B
     cycle := 0.U
     counterFlag := false.B
-    slicedOut := VecInit.fill(p.actM, p.s2)(0.S(p.w.W))    
+    //slicedOut := VecInit.fill(p.actM, p.s2)(0.S(p.w.W))    
+    outReg.io.clearsig := true.B
     enabledSyst := false.B
   }
   .elsewhen(state === multiply){
@@ -198,25 +204,25 @@ class ChiselTPU(p: TPUParams) extends Module{
     .otherwise{
       allowReadB := false.B
     }
-    when(cycle >= (2+p.s1-1).U){ //BUG
-      cycleIdx := cycle-(2+p.s1-1).U
-    }.
-    otherwise{
-      cycleIdx := cycle
-    }
-    when(cycle >= (2+p.s1-1).U){
-      for(c <- 0 until p.s2){
-        when(cycleIdx>=c.U && cycleIdx<(p.actM+c).U){
-          for(r <- 0 until p.actM){
-            if(r==(p.actM-1)){
-              slicedOut(r.U)(c.U) := systArr.io.out(c.U)
-            }else{
-              slicedOut(r.U)(c.U) := slicedOut((r+1).U)(c.U)
-            }
-          }
-        }
-      } 
-    }
+    // when(cycle >= (2+p.s1-1).U){ //BUG
+    //   cycleIdx := cycle-(2+p.s1-1).U
+    // }.
+    // otherwise{
+    //   cycleIdx := cycle
+    // }
+    // when(cycle >= (2+p.s1-1).U){
+    //   for(c <- 0 until p.s2){
+    //     when(cycleIdx>=c.U && cycleIdx<(p.actM+c).U){
+    //       for(r <- 0 until p.actM){
+    //         if(r==(p.actM-1)){
+    //           slicedOut(r.U)(c.U) := systArr.io.out(c.U)
+    //         }else{
+    //           slicedOut(r.U)(c.U) := slicedOut((r+1).U)(c.U)
+    //         }
+    //       }
+    //     }
+    //   } 
+    // }
 
     
 
@@ -301,6 +307,40 @@ class ActReg(p: TPUParams) extends Module{
       for(j <- 0 until p.s1){
         io.a_out(j.U) := 0.S
       }
+    }
+}
+
+class OutReg(p: TPUParams,  maxM: Int, maxK: Int, maxN: Int) extends Module{
+    val io = IO(new Bundle{
+        val cycle = Input(UInt((log2Ceil(maxM+maxK+maxN) + 5).W))
+        val systArr_out = Input((Vec(p.s2, SInt(p.w.W))))
+        val slicedOut = Output(Vec(p.actM, Vec(p.s2, SInt(p.w.W))))
+        val clearsig = Input(Bool())
+    })
+    val cycleIdx = Wire(UInt((log2Ceil(maxM+maxK+maxN) + 5).W))
+    val slicedOut = RegInit(VecInit.fill(p.actM, p.s2)(0.S(p.w.W)))
+    when(io.cycle >= (2+p.s1-1).U){ //BUG
+      cycleIdx := io.cycle-(2+p.s1-1).U
+    }.
+    otherwise{
+      cycleIdx := io.cycle
+    }
+    io.slicedOut := slicedOut
+    when(io.cycle >= (2+p.s1-1).U){
+      for(c <- 0 until p.s2){
+        when(cycleIdx>=c.U && cycleIdx<(p.actM+c).U){
+          for(r <- 0 until p.actM){
+            if(r==(p.actM-1)){
+              slicedOut(r.U)(c.U) := io.systArr_out(c.U)
+            }else{
+              slicedOut(r.U)(c.U) := slicedOut((r+1).U)(c.U)
+            }
+          }
+        }
+      } 
+    }
+    when(io.clearsig){
+      slicedOut := VecInit.fill(p.actM, p.s2)(0.S(p.w.W)) 
     }
 }
 

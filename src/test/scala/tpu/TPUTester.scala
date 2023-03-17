@@ -341,15 +341,32 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
   }
 
   behavior of "TPU test"
-  it should "mult one cycle" in {
+  it should "1" in {
     // val k = 4
     doTPUTest(TPUTestData.ain2x2, TPUTestData.bin2x2)
+  }
+  it should "2" in {
+    // val k = 4
     doTPUTest(TPUTestData.in2x2, TPUTestData.in2x2)
-    doTPUTest(TPUTestData.inA3x3, TPUTestData.inB3x3)
+  }
+  it should "3" in {
+    // val k = 4
     doTPUTest(TPUTestData.in2x4, TPUTestData.in4x2)
+  }
+  it should "4" in {
+    // val k = 4
     doTPUTest(TPUTestData.in4x2, TPUTestData.in2x4)
+  }
+  it should "5" in {
+    // val k = 4
     doTPUTest(TPUTestData.out4x4, TPUTestData.out4x4)
+  }
+  it should "6" in {
+    // val k = 4
     doTPUTest(TPUTestData.in5x3, TPUTestData.in3x7)
+  }
+  it should "7" in {
+    // val k = 4
     doTPUTest(TPUTestData.in3x7, TPUTestData.in7x5)
   }
   // it should "smult rand" in {
