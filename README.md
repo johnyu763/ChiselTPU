@@ -15,9 +15,10 @@ This is a module for [Chisel](chisel-lang.org/) that mimics a TPU that allows th
 * Chisel model for systolic matrix
 * Chisel model for activation matrix
 * Basic TPU state machine for taking in input and multiplying
+* Slicing of input matrices to fit in variable sized systolic arrays
 
 ## What remains?
-* Use output from last matrix multiplication as activation matrix for next multiplication
+* All goals that we set have been accomplished
 
 ## Documentation?
 * Link to slide show covering the basic inner workings out the design:
