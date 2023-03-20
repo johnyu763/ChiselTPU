@@ -23,15 +23,15 @@ This is a module for [Chisel](chisel-lang.org/) that mimics a TPU that allows th
 ## Documentation?
 * Modules
   * TPU (Top Level Module)
-    * Parameters(Systolic Array and Input Array sizes)
+    * Parameters(Systolic Array size, Input Array sizes, Width of Signed Int in Matrices)
     * Inputs(Matrices to be multipled A and B)
     * Outputs(Result of Matrix Multiplication)
   * Activation Register
-    * Parameters(Systolic Array and Input Array sizes)
+    * Parameters(Systolic Array size, Input Array sizes, Width of Signed Int in Matrices)
     * Inputs(Index of which staggered input is requested, first input matrix)
     * Output(Staggered output from input matrix)
   * Systolic Array
-    * Parameters(Systolic Array and Input Array sizes)
+    * Parameters(Systolic Array size, Input Array sizes, Width of Signed Int in Matrices)
     * Inputs(Output from Activation Register, second input matrix, enable, reading input enable)
     * Output(Staggered result of matrix multiplication)
 
