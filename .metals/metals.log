@@ -705,3 +705,179 @@ WARNING: Unmatched cancel notification for request id 17496
 2023.03.04 18:44:30 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModelTest.scala[0m
 2023.03.04 18:44:50 WARN  Using indexes to guess the definition of ActRegModel[0m
 2023.03.04 18:44:51 WARN  no build target for: /Users/johnyu/Projects/CSE228A/ChiselTPU/src/test/scala/tpu/ActRegModelTest.scala[0m
+2023.03.19 20:03:11 INFO  Started: Metals version 0.11.11 in workspace '/Users/johnyu/Projects/ChiselTPU' for client Visual Studio Code 1.76.0.[0m
+SLF4J: No SLF4J providers were found.
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
+SLF4J: Class path contains SLF4J bindings targeting slf4j-api versions 1.7.x or earlier.
+SLF4J: Ignoring binding found at [jar:file:/Users/johnyu/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/outr/scribe-slf4j_2.13/3.11.0/scribe-slf4j_2.13-3.11.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See https://www.slf4j.org/codes.html#ignoredBindings for an explanation.
+2023.03.19 20:03:15 INFO  time: initialize in 3.9s[0m
+2023.03.19 20:03:17 WARN  Build server is not auto-connectable.[0m
+2023.03.19 20:04:16 WARN  no build target for: /Users/johnyu/Projects/ChiselTPU/src/test/scala/tpu/ActRegModel.scala[0m
+2023.03.19 20:04:21 INFO  no build target found for /Users/johnyu/Projects/ChiselTPU/src/test/scala/tpu/ActRegModel.scala. Using presentation compiler with project's scala-library version: 3.2.2[0m
+2023.03.19 20:04:22 WARN  no build target for: /Users/johnyu/Projects/ChiselTPU/src/test/scala/tpu/ActRegModelTest.scala[0m
+Mar 19, 2023 8:04:22 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 10
+Mar 19, 2023 8:04:22 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 16
+Mar 19, 2023 8:04:22 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 8
+2023.03.19 20:04:23 WARN  no build target for: /Users/johnyu/Projects/ChiselTPU/src/test/scala/tpu/ActRegModelTest.scala[0m
+2023.03.19 20:04:24 INFO  time: code lens generation in 8.07s[0m
+2023.03.19 20:04:24 INFO  time: code lens generation in 2.47s[0m
+2023.03.19 20:04:24 INFO  time: code lens generation in 2.54s[0m
+2023.03.19 20:04:24 WARN  no build target for: /Users/johnyu/Projects/ChiselTPU/src/test/scala/tpu/TPUModel.scala[0m
+2023.03.19 20:04:32 WARN  no build target for: /Users/johnyu/Projects/ChiselTPU/src/test/scala/tpu/TPUModelTester.scala[0m
+2023.03.19 20:04:41 WARN  no build target for: /Users/johnyu/Projects/ChiselTPU/src/test/scala/tpu/TPUModelTester.scala[0m
+2023.03.19 20:05:12 WARN  no build target for: /Users/johnyu/Projects/ChiselTPU/src/test/scala/tpu/TPUModelTester.scala[0m
+2023.03.19 20:05:18 WARN  no build target for: /Users/johnyu/Projects/ChiselTPU/src/test/scala/tpu/TPUModel.scala[0m
+2023.03.19 20:05:42 WARN  no build target for: /Users/johnyu/Projects/ChiselTPU/src/test/scala/tpu/TPUModelTester.scala[0m
+2023.03.19 20:05:42 WARN  no build target for: /Users/johnyu/Projects/ChiselTPU/src/test/scala/tpu/TPUModelTester.scala[0m
+2023.03.19 20:06:22 WARN  no build target for: /Users/johnyu/Projects/ChiselTPU/src/test/scala/tpu/TPUTester.scala[0m
+Mar 19, 2023 8:07:08 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 221
+Mar 19, 2023 8:07:10 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 234
+2023.03.19 20:07:42 WARN  no build target for: /Users/johnyu/Projects/ChiselTPU/src/test/scala/tpu/TPUTester.scala[0m
+2023.03.19 20:08:30 WARN  no build target for: /Users/johnyu/Projects/ChiselTPU/src/test/scala/tpu/TPUTester.scala[0m
+2023.03.19 20:08:44 WARN  no build target for: /Users/johnyu/Projects/ChiselTPU/src/test/scala/tpu/TPUModel.scala[0m
+2023.03.19 20:13:59 WARN  Using indexes to guess the definition of TPUTestData[0m
+2023.03.19 20:14:15 WARN  Using indexes to guess the definition of a[0m
+2023.03.19 20:14:15 WARN  Using indexes to guess the definition of TPUTestData[0m
+2023.03.19 20:14:15 WARN  Using indexes to guess the definition of TPUTestData[0m
+2023.03.19 20:14:56 WARN  Using indexes to guess the definition of b[0m
+2023.03.19 20:14:56 WARN  Using indexes to guess the definition of doTPUTest[0m
+2023.03.19 20:15:05 WARN  Using indexes to guess the definition of TPUTestData[0m
+2023.03.19 20:15:07 WARN  Using indexes to guess the definition of TPUTestData[0m
+2023.03.19 20:15:07 WARN  Using indexes to guess the definition of TPUTestData[0m
+2023.03.19 20:15:10 WARN  Using indexes to guess the definition of in2x2[0m
+2023.03.19 20:15:10 WARN  Using indexes to guess the definition of in2x2[0m
+2023.03.19 20:15:13 WARN  Using indexes to guess the definition of TPUTestData[0m
+Exception in thread "pool-3-thread-1" java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:195)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Exception in thread "pool-3-thread-2" java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:195)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2023.03.19 20:16:53 WARN  Using indexes to guess the definition of TPUTestData[0m
+2023.03.19 20:16:55 WARN  Using indexes to guess the definition of TPUTestData[0m
+2023.03.19 20:16:56 WARN  Using indexes to guess the definition of TPUTestData[0m
+2023.03.19 20:16:57 WARN  Using indexes to guess the definition of TPUTestData[0m
+Exception in thread "pool-3-thread-3" java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:195)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2023.03.19 20:17:55 WARN  Using indexes to guess the definition of TPUTestData[0m
+2023.03.19 20:17:57 WARN  Using indexes to guess the definition of TPUTestData[0m
+2023.03.19 20:17:59 WARN  Using indexes to guess the definition of TPUTestData[0m
+2023.03.19 20:18:17 WARN  Using indexes to guess the definition of TPUTestData[0m
+2023.03.19 20:18:17 WARN  Using indexes to guess the definition of TPUTestData[0m
+Exception in thread "pool-3-thread-4" java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:195)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Exception in thread "pool-3-thread-5" java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:195)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2023.03.19 20:18:18 WARN  Using indexes to guess the definition of in2x4[0m
+2023.03.19 20:18:20 WARN  Using indexes to guess the definition of TPUTestData[0m
+Exception in thread "pool-3-thread-6" java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:195)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2023.03.19 20:18:20 WARN  Using indexes to guess the definition of in4x2[0m
+2023.03.19 20:18:20 WARN  Using indexes to guess the definition of in4x2[0m
+2023.03.19 20:18:21 WARN  Using indexes to guess the definition of in4x2[0m
+2023.03.19 20:18:23 WARN  Using indexes to guess the definition of TPUTestData[0m
+Exception in thread "pool-3-thread-7" java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:195)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2023.03.19 20:18:23 WARN  Using indexes to guess the definition of in2x4[0m
+2023.03.19 20:18:26 WARN  Using indexes to guess the definition of TPUTestData[0m
+2023.03.19 20:18:27 WARN  Using indexes to guess the definition of TPUTestData[0m
+Mar 19, 2023 8:18:37 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1509
+Exception in thread "pool-3-thread-8" java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:195)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Exception in thread "pool-3-thread-9" java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:195)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2023.03.19 20:18:56 WARN  Using indexes to guess the definition of a[0m
+2023.03.19 20:19:29 WARN  Using indexes to guess the definition of doTPUTest[0m
+2023.03.19 20:19:35 WARN  Using indexes to guess the definition of TPUTestData[0m
+Exception in thread "pool-3-thread-10" java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:195)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2023.03.19 20:19:37 WARN  Using indexes to guess the definition of out4x4[0m
+2023.03.19 20:19:39 WARN  Using indexes to guess the definition of TPUTestData[0m
+Exception in thread "pool-3-thread-11" java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:195)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2023.03.19 20:20:15 WARN  Using indexes to guess the definition of TPUTestData[0m
+2023.03.19 20:20:18 WARN  Using indexes to guess the definition of TPUTestData[0m
+2023.03.19 20:20:21 WARN  Using indexes to guess the definition of TPUTestData[0m
+Exception in thread "pool-3-thread-12" java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:195)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Exception in thread "pool-3-thread-13" java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:195)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2023.03.19 20:20:32 WARN  Using indexes to guess the definition of TPUTestData[0m
+2023.03.19 20:21:39 WARN  Using indexes to guess the definition of TPUTestData[0m
+2023.03.19 20:21:56 WARN  Using indexes to guess the definition of TPUTestData[0m
+2023.03.19 20:21:58 WARN  Using indexes to guess the definition of TPUTestData[0m
+2023.03.19 20:22:08 WARN  no build target for: /Users/johnyu/Projects/ChiselTPU/src/test/scala/tpu/TPUTester.scala[0m
+2023.03.19 20:25:15 WARN  no build target for: /Users/johnyu/Projects/ChiselTPU/src/main/scala/tpu/TPU.scala[0m
+Mar 19, 2023 8:26:01 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace

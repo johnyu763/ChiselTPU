@@ -79,15 +79,8 @@ class SystArrTester extends AnyFlatSpec with ChiselScalatestTester {
         }
     }
     dut.clock.step()
-    // print("\n---------------\n")
-    // for (r <- 0 until p.k) {
-    //     for (c <- 0 until p.n) {
-    //         print(dut.io.b_reg_debug(r)(c).peek())
-    //         print("\t")
-    //     }
-    //     print("\n")
-    // }
-      // wait for completion
+
+    // wait for completion
     for(clock <- 0 until (p.m + p.n - 1) + p.n){
         if (clock < p.m + p.n - 1){
             for (idx <- 0 until p.m) {
@@ -98,14 +91,7 @@ class SystArrTester extends AnyFlatSpec with ChiselScalatestTester {
                 dut.io.a_in(idx).poke(0.S(p.w.W))
             }
         }
-        // print("\n-------c_reg--------\n")
-        // for (r <- 0 until p.k) {
-        //     for (c <- 0 until p.n) {
-        //         print(dut.io.cmp_debug(r)(c).peek())
-        //         print("\t")
-        //     }
-        //     print("\n")
-        // }
+        
         dut.clock.step()
     }
       
@@ -115,13 +101,13 @@ class SystArrTester extends AnyFlatSpec with ChiselScalatestTester {
   behavior of "TPU syst arr test"
   it should "multiply (1s row) x (1s column)" in {
     val k = 4
-    // doSystArrTest_noShift(TPUTestData.inA3x3, TPUTestData.inAShifted, TPUTestData.inB3x3)
+    doSystArrTest_noShift(TPUTestData.inA3x3, TPUTestData.inAShifted, TPUTestData.inB3x3)
   }
 }
 
 class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
-  def doTPUTest(a: Matrix, b: Matrix): Unit = {
-    val p = TPUParams(a.size, a.head.size, b.head.size, 2, 2, 2)
+  def doTPUTest(a: Matrix, b: Matrix, systM: Int, systK: Int, systN: Int): Unit = {
+    val p = TPUParams(a.size, a.head.size, b.head.size, systM, systK, systN)
     // slice parameters
     // dimensions of padded input matrices
     val paddedMDim = if(p.m >= p.actM) p.actM*(((p.m-1)/p.actM)+1) else p.actM
@@ -173,108 +159,11 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
         }
     }
     dut.clock.step()
-        // print("\n") 
-        // print("-----cycleIdx out-----\n")
-        // print(dut.io.debug_cycleIdx.peek())
-        // print("\n") 
-        // print("-----cycleIdxCols out-----\n")
-        // print(dut.io.debug_cycleIdxCols.peek())
-        // print("\n") 
-        // print("-----cycleIdxCols out-----\n")
-        // print(dut.io.debug_cycleIdxRows.peek())
-        // print("\n") 
-        // print("\n") 
-    //for(i <- 0 until p.k+p.m+p.k+2){
-    //len to feed a slanted all the way though a_in window, eg:
     
     //Plz calculate how many cycles it takes
     for(i <- 0 until numCycles){
-        // print("-----BEFORE:arrRegs out-----\n")
-        // for (cmp_i <- 0 until p.k) {
-        //   print(dut.io.debug_a_out(cmp_i).peek())
-        //   print("  ")
-        // }
-        // print("\n")
-        // print("-----BEFORE:cycle out-----\n")
-        // print(dut.io.debug_cycleOut.peek())
-        // print("\n")
-        // print("-----BEFORE:00-----\n")
-        // print(dut.io.debug_00.peek())
-        // print("\n")
-        // print("-----b before is in syst arr:-----\n")
-        // for (r <- 0 until p.k) {
-        //     for (c <- 0 until p.n) {
-        //         print(dut.io.debug_b_regs(r)(c).peek())
-        //         print(" ")
-        //     }
-        //     print("\n")
-        // }
         dut.clock.step()
-        // print("-----b after is in syst arr:-----\n")
-        // for (r <- 0 until p.k) {
-        //     for (c <- 0 until p.n) {
-        //         print(dut.io.debug_b_regs(r)(c).peek())
-        //         print(" ")
-        //     }
-        //     print("\n")
-        // }
-        // print("-----AFTER:cycle out-----\n")
-        // print(dut.io.debug_cycleOut.peek())
-        // print("\n")       
-        // print("-----AFTER:00-----\n")
-        // print(dut.io.debug_00.peek())
-        // print("\n") 
-        // print("-----arrRegs out-----\n")
-        // for (cmp_i <- 0 until p.k) {
-        //   print(dut.io.debug_a_out(cmp_i).peek())
-        //   print("  ")
-        // }
-        // print("\n")
-        // print("-----a regs-----\n")
-        // for (cmp_i <- 0 until p.k) {
-        //   for (cmp_j <- 0 until p.m) {
-        //     print(dut.io.debug_a_regs(cmp_i)(cmp_j).peek())
-        //   }
-        //   print("\n")
-        // }
-        // print("-----syst arr-----\n")
-        // for (cmp_i <- 0 until p.k) {
-        //   for (cmp_j <- 0 until p.n) {
-        //     print(dut.io.debug_1(cmp_i)(cmp_j).peek())
-        //   }
-        //   print("\n")
-        // }
-        // print("\n")
-
-        // print("-----systreg out-----\n")
-        // for (cmp_i <- 0 until p.n) {
-        //   print(dut.io.debug_systreg_out(cmp_i).peek())
-        //   print("  ")
-        // }
-        // print("\n") 
-        // print("-----cycleIdx out-----\n")
-        // print(dut.io.debug_cycleIdx.peek())
-        // print("\n") 
-        // print("-----cycleIdxCols out-----\n")
-        // print(dut.io.debug_cycleIdxCols.peek())
-        // print("\n") 
-        // print("-----cycleIdxRows out-----\n")
-        // print(dut.io.debug_cycleIdxRows.peek())
-        // print("\n") 
-        // print("-----outReg-----\n")
-        // for (cmp_i <- 0 until p.m) {
-        //   for (cmp_j <- 0 until p.n) {
-        //     print(dut.io.out(cmp_i)(cmp_j).peek())
-        //   }
-        //   print("\n")
-        // }
-        // print("-----debug_systout_upperLim out-----\n")
-        // print(dut.io.debug_systout_upperLim.peek())
-        // print("\n") 
-        // print("\n")
-        // print("\n") 
     }
-    print(s"${72+2*(4+p.m+p.k+p.n)} CYCLES NEEDED")
     //check output 1
     val expected = MatMulModel(p, a, b)
     print("EXPECTED OUT\n")
@@ -292,82 +181,92 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
     dut.clock.step()
     dut.io.b.valid.poke(true.B)
     dut.io.b.ready.expect(true.B)
-    //  // load b with next b matrix
-    // for (r <- 0 until p.k) {
-    //     for (c <- 0 until p.n) {
-    //         dut.io.b.bits(r)(c).poke(b(r)(c).S)
-    //     }
-    // }
-    // dut.clock.step()
-    
-    // for(i <- 0 until p.k+p.m+p.k+3){
-    //   dut.clock.step()
-    // }
-
-
-    // dut.clock.step()
-
-    // print("\n---------------\n")
-    // for (r <- 0 until p.k) {
-    //     for (c <- 0 until p.n) {
-    //         print(dut.io.b_reg_debug(r)(c).peek())
-    //         print("\t")
-    //     }
-    //     print("\n")
-    // }
-    //   // wait for completion
-    // for(clock <- 0 until (p.m + p.n - 1) + p.n){
-    //     if (clock < p.m + p.n - 1){
-    //         for (idx <- 0 until p.m) {
-    //             dut.io.a_in(idx).poke(aShifted(idx)(clock))
-    //         }
-    //     }else{
-    //         for (idx <- 0 until p.m) {
-    //             dut.io.a_in(idx).poke(0.S(p.w.W))
-    //         }
-    //     }
-    //     print("\n-------c_reg--------\n")
-    //     for (r <- 0 until p.k) {
-    //         for (c <- 0 until p.n) {
-    //             print(dut.io.cmp_debug(r)(c).peek())
-    //             print("\t")
-    //         }
-    //         print("\n")
-    //     }
-    //     dut.clock.step()
-    // }
-      
     }
   }
 
   behavior of "TPU test"
   it should "1" in {
     // val k = 4
-    doTPUTest(TPUTestData.ain2x2, TPUTestData.bin2x2)
+    val a = TPUTestData.ain2x2
+    val b = TPUTestData.bin2x2
+    doTPUTest(a, b, a.size, a.head.size, b.head.size)
+  }
+  it should "test 1 different systarr size" in{
+    val a = TPUTestData.ain2x2
+    val b = TPUTestData.bin2x2
+    doTPUTest(a, b, 1, 1, 1)
   }
   it should "2" in {
     // val k = 4
-    doTPUTest(TPUTestData.in2x2, TPUTestData.in2x2)
+    val a = TPUTestData.in2x2
+    val b = TPUTestData.in2x2
+    doTPUTest(a, b, a.size, a.head.size, b.head.size)
+  }
+  it should "test 2 different systarr size" in {
+    // val k = 4
+    val a = TPUTestData.in2x2
+    val b = TPUTestData.in2x2
+    doTPUTest(a, b, 1, 1, 1)
   }
   it should "3" in {
     // val k = 4
-    doTPUTest(TPUTestData.in2x4, TPUTestData.in4x2)
+    val a = TPUTestData.in2x4
+    val b = TPUTestData.in4x2
+    doTPUTest(a, b, a.size, a.head.size, b.head.size)
+  }
+  it should "test 3 different systarr size" in {
+    // val k = 4
+    val a = TPUTestData.in2x4
+    val b = TPUTestData.in4x2
+    doTPUTest(a, b, 1, 3, 1)
   }
   it should "4" in {
     // val k = 4
-    doTPUTest(TPUTestData.in4x2, TPUTestData.in2x4)
+    val a = TPUTestData.in4x2
+    val b = TPUTestData.in2x4
+    doTPUTest(a, b, a.size, a.head.size, b.head.size)
+  }
+  it should "test 4 different systarr size" in {
+    // val k = 4
+    val a = TPUTestData.in4x2
+    val b = TPUTestData.in2x4
+    doTPUTest(a, b, 3, 1, 3)
   }
   it should "5" in {
     // val k = 4
-    doTPUTest(TPUTestData.out4x4, TPUTestData.out4x4)
+    val a = TPUTestData.out4x4
+    val b = TPUTestData.out4x4
+    doTPUTest(a, b, a.size, a.head.size, b.head.size)
+  }
+  it should "test 5 different systarr size" in {
+    // val k = 4
+    val a = TPUTestData.out4x4
+    val b = TPUTestData.out4x4
+    doTPUTest(a, b, 3, 3, 3)
   }
   it should "6" in {
     // val k = 4
-    doTPUTest(TPUTestData.in5x3, TPUTestData.in3x7)
+    val a = TPUTestData.in5x3
+    val b = TPUTestData.in3x7
+    doTPUTest(a, b, a.size, a.head.size, b.head.size)
+  }
+  it should "test 6 different systarr size" in {
+    // val k = 4
+    val a = TPUTestData.in5x3
+    val b = TPUTestData.in3x7
+    doTPUTest(a, b, 4, 2, 6)
   }
   it should "7" in {
     // val k = 4
-    doTPUTest(TPUTestData.in3x7, TPUTestData.in7x5)
+    val a = TPUTestData.in3x7
+    val b = TPUTestData.in7x5
+    doTPUTest(a, b, a.size, a.head.size, b.head.size)
+  }
+  it should "test 7 different systarr size" in {
+    // val k = 4
+    val a = TPUTestData.in3x7
+    val b = TPUTestData.in7x5
+    doTPUTest(a, b, 2, 6, 4)
   }
   // it should "smult rand" in {
   //   // val k = 4
@@ -397,9 +296,11 @@ class TPUTester extends AnyFlatSpec with ChiselScalatestTester {
   //   doTPUTest(m1, m2)
   // }
 
-  // behavior of "TPU test"
-  // it should "stagger b" in {
-  //   // val k = 4
-  //   doTPUTest(TPUTestData.inA3x3, TPUTestData.inB3x3)
-  // }
+  behavior of "TPU test"
+  it should "stagger b" in {
+    // val k = 4
+    val a = TPUTestData.inA3x3
+    val b = TPUTestData.inB3x3
+    doTPUTest(a, b, a.size, a.head.size, b.head.size)
+  }
 }

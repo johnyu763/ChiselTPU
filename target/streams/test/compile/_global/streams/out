@@ -1,24 +1,7 @@
-[0m[[0m[0minfo[0m] [0m[0m/mnt/c/Users/alexl/Documents/cse283_chisel/ChiselTPU_final/ChiselTPU/src/test/scala/tpu/ActRegModelTest.scala:1:1: [0m
-[0m[[0m[0minfo[0m] [0m[0mFound names but no class, trait or object is defined in the compilation unit.[0m
-[0m[[0m[0minfo[0m] [0m[0mThe incremental compiler cannot record the dependency information in such case.[0m
-[0m[[0m[0minfo[0m] [0m[0mSome errors like unused import referring to a non-existent class might not be reported.[0m
-[0m[[0m[0minfo[0m] [0m[0m    [0m
-[0m[[0m[0minfo[0m] [0m[0m/mnt/c/Users/alexl/Documents/cse283_chisel/ChiselTPU_final/ChiselTPU/src/test/scala/tpu/TPUModelTester.scala:1:1: [0m
-[0m[[0m[0minfo[0m] [0m[0mFound names but no class, trait or object is defined in the compilation unit.[0m
-[0m[[0m[0minfo[0m] [0m[0mThe incremental compiler cannot record the dependency information in such case.[0m
-[0m[[0m[0minfo[0m] [0m[0mSome errors like unused import referring to a non-existent class might not be reported.[0m
-[0m[[0m[0minfo[0m] [0m[0m    [0m
-[0m[[0m[0minfo[0m] [0m[0m// package tpu[0m
-[0m[[0m[0minfo[0m] [0m[0m^[0m
-[0m[[0m[0minfo[0m] [0m[0m/mnt/c/Users/alexl/Documents/cse283_chisel/ChiselTPU_final/ChiselTPU/src/test/scala/tpu/ActRegModelTest.scala:1:1: [0m
-[0m[[0m[0minfo[0m] [0m[0mFound top level imports but no class, trait or object is defined in the compilation unit.[0m
-[0m[[0m[0minfo[0m] [0m[0mThe incremental compiler cannot record the dependency information in such case.[0m
-[0m[[0m[0minfo[0m] [0m[0mSome errors like unused import referring to a non-existent class might not be reported.[0m
-[0m[[0m[0minfo[0m] [0m[0m    [0m
-[0m[[0m[0minfo[0m] [0m[0m/mnt/c/Users/alexl/Documents/cse283_chisel/ChiselTPU_final/ChiselTPU/src/test/scala/tpu/TPUModelTester.scala:1:1: [0m
-[0m[[0m[0minfo[0m] [0m[0mFound top level imports but no class, trait or object is defined in the compilation unit.[0m
-[0m[[0m[0minfo[0m] [0m[0mThe incremental compiler cannot record the dependency information in such case.[0m
-[0m[[0m[0minfo[0m] [0m[0mSome errors like unused import referring to a non-existent class might not be reported.[0m
-[0m[[0m[0minfo[0m] [0m[0m    [0m
-[0m[[0m[0minfo[0m] [0m[0m// package tpu[0m
-[0m[[0m[0minfo[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/ChiselTPU/src/test/scala/tpu/TPUModelTester.scala:13:17: not found: value TPUParams[0m
+[0m[[0m[31merror[0m] [0m[0m        val p = TPUParams(3, 3, 3, 3, 3,3) //note: no params yet[0m
+[0m[[0m[31merror[0m] [0m[0m                ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/johnyu/Projects/ChiselTPU/src/test/scala/tpu/TPUModelTester.scala:24:17: not found: value TPUModel[0m
+[0m[[0m[31merror[0m] [0m[0m        val m = TPUModel(p)[0m
+[0m[[0m[31merror[0m] [0m[0m                ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m

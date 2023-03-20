@@ -1,1 +1,1 @@
-["tpu.TPUTester","tpu.SystArrTester"]
+["tpu.TPUModelTester","tpu.TPUTester","tpu.SystArrTester","tpu.ActRegModelTester"]

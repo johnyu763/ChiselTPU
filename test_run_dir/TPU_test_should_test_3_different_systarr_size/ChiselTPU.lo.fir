@@ -1,0 +1,1031 @@
+circuit ChiselTPU :
+  module ActReg :
+    input clock : Clock
+    input reset : UInt<1>
+    input io_index : UInt<3>
+    input io_a_0_0 : SInt<32>
+    input io_a_0_1 : SInt<32>
+    input io_a_0_2 : SInt<32>
+    output io_a_out_0 : SInt<32>
+    output io_a_out_1 : SInt<32>
+    output io_a_out_2 : SInt<32>
+
+    node _T = lt(io_index, UInt<2>("h3")) @[TPU.scala 296:19]
+    node _T_1 = asSInt(io_index) @[TPU.scala 298:36]
+    node _T_2 = sub(asSInt(UInt<3>("h2")), _T_1) @[TPU.scala 298:26]
+    node _T_3 = tail(_T_2, 1) @[TPU.scala 298:26]
+    node _T_4 = asSInt(_T_3) @[TPU.scala 298:26]
+    node _T_5 = leq(_T_4, asSInt(UInt<1>("h0"))) @[TPU.scala 298:43]
+    node _T_6 = asSInt(io_index) @[TPU.scala 298:82]
+    node _T_7 = sub(asSInt(UInt<3>("h3")), _T_6) @[TPU.scala 298:72]
+    node _T_8 = tail(_T_7, 1) @[TPU.scala 298:72]
+    node _T_9 = asSInt(_T_8) @[TPU.scala 298:72]
+    node _T_10 = gt(_T_9, asSInt(UInt<1>("h0"))) @[TPU.scala 298:89]
+    node _T_11 = and(_T_5, _T_10) @[TPU.scala 298:50]
+    node _io_a_out_0_T = sub(UInt<2>("h2"), io_index) @[TPU.scala 299:59]
+    node _io_a_out_0_T_1 = tail(_io_a_out_0_T, 1) @[TPU.scala 299:59]
+    node _GEN_0 = mux(_T_11, io_a_0_0, asSInt(UInt<1>("h0"))) @[TPU.scala 298:95 299:25 302:25]
+    node _T_12 = asSInt(io_index) @[TPU.scala 298:36]
+    node _T_13 = sub(asSInt(UInt<2>("h1")), _T_12) @[TPU.scala 298:26]
+    node _T_14 = tail(_T_13, 1) @[TPU.scala 298:26]
+    node _T_15 = asSInt(_T_14) @[TPU.scala 298:26]
+    node _T_16 = leq(_T_15, asSInt(UInt<1>("h0"))) @[TPU.scala 298:43]
+    node _T_17 = asSInt(io_index) @[TPU.scala 298:82]
+    node _T_18 = sub(asSInt(UInt<3>("h2")), _T_17) @[TPU.scala 298:72]
+    node _T_19 = tail(_T_18, 1) @[TPU.scala 298:72]
+    node _T_20 = asSInt(_T_19) @[TPU.scala 298:72]
+    node _T_21 = gt(_T_20, asSInt(UInt<1>("h0"))) @[TPU.scala 298:89]
+    node _T_22 = and(_T_16, _T_21) @[TPU.scala 298:50]
+    node _io_a_out_1_T = sub(UInt<1>("h1"), io_index) @[TPU.scala 299:59]
+    node _io_a_out_1_T_1 = tail(_io_a_out_1_T, 1) @[TPU.scala 299:59]
+    node _GEN_1 = mux(_T_22, io_a_0_1, asSInt(UInt<1>("h0"))) @[TPU.scala 298:95 299:25 302:25]
+    node _T_23 = asSInt(io_index) @[TPU.scala 298:36]
+    node _T_24 = sub(asSInt(UInt<1>("h0")), _T_23) @[TPU.scala 298:26]
+    node _T_25 = tail(_T_24, 1) @[TPU.scala 298:26]
+    node _T_26 = asSInt(_T_25) @[TPU.scala 298:26]
+    node _T_27 = leq(_T_26, asSInt(UInt<1>("h0"))) @[TPU.scala 298:43]
+    node _T_28 = asSInt(io_index) @[TPU.scala 298:82]
+    node _T_29 = sub(asSInt(UInt<2>("h1")), _T_28) @[TPU.scala 298:72]
+    node _T_30 = tail(_T_29, 1) @[TPU.scala 298:72]
+    node _T_31 = asSInt(_T_30) @[TPU.scala 298:72]
+    node _T_32 = gt(_T_31, asSInt(UInt<1>("h0"))) @[TPU.scala 298:89]
+    node _T_33 = and(_T_27, _T_32) @[TPU.scala 298:50]
+    node _io_a_out_2_T = sub(UInt<1>("h0"), io_index) @[TPU.scala 299:59]
+    node _io_a_out_2_T_1 = tail(_io_a_out_2_T, 1) @[TPU.scala 299:59]
+    node _GEN_2 = mux(_T_33, io_a_0_2, asSInt(UInt<1>("h0"))) @[TPU.scala 298:95 299:25 302:25]
+    node _GEN_3 = mux(_T, _GEN_0, asSInt(UInt<1>("h0"))) @[TPU.scala 296:39 308:23]
+    node _GEN_4 = mux(_T, _GEN_1, asSInt(UInt<1>("h0"))) @[TPU.scala 296:39 308:23]
+    node _GEN_5 = mux(_T, _GEN_2, asSInt(UInt<1>("h0"))) @[TPU.scala 296:39 308:23]
+    io_a_out_0 <= _GEN_3
+    io_a_out_1 <= _GEN_4
+    io_a_out_2 <= _GEN_5
+
+  module SystArr :
+    input clock : Clock
+    input reset : UInt<1>
+    input io_a_in_0 : SInt<32>
+    input io_a_in_1 : SInt<32>
+    input io_a_in_2 : SInt<32>
+    input io_b_in_0_0 : SInt<32>
+    input io_b_in_1_0 : SInt<32>
+    input io_b_in_2_0 : SInt<32>
+    input io_en : UInt<1>
+    input io_b_readingin : UInt<1>
+    output io_out_0 : SInt<32>
+    output io_cmp_debug_0_0 : SInt<32>
+    output io_cmp_debug_1_0 : SInt<32>
+    output io_cmp_debug_2_0 : SInt<32>
+    output io_debug_b_regs_0_0 : SInt<32>
+    output io_debug_b_regs_1_0 : SInt<32>
+    output io_debug_b_regs_2_0 : SInt<32>
+    output io_debug_a_regs_0_0 : SInt<32>
+    output io_debug_a_regs_1_0 : SInt<32>
+    output io_debug_a_regs_2_0 : SInt<32>
+    output io_debug_00 : SInt<32>
+
+    reg a_reg_0_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), a_reg_0_0) @[TPU.scala 360:20]
+    reg a_reg_1_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), a_reg_1_0) @[TPU.scala 360:20]
+    reg a_reg_2_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), a_reg_2_0) @[TPU.scala 360:20]
+    reg b_reg_0_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), b_reg_0_0) @[TPU.scala 361:20]
+    reg b_reg_1_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), b_reg_1_0) @[TPU.scala 361:20]
+    reg b_reg_2_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), b_reg_2_0) @[TPU.scala 361:20]
+    reg cms_reg_0_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), cms_reg_0_0) @[TPU.scala 362:22]
+    reg cms_reg_1_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), cms_reg_1_0) @[TPU.scala 362:22]
+    reg cms_reg_2_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), cms_reg_2_0) @[TPU.scala 362:22]
+    node _io_debug_00_T = mul(io_a_in_0, b_reg_0_0) @[TPU.scala 369:33]
+    node _GEN_0 = mux(io_b_readingin, io_b_in_0_0, b_reg_0_0) @[TPU.scala 370:27 371:15 373:15]
+    node _GEN_1 = mux(io_b_readingin, io_b_in_1_0, b_reg_1_0) @[TPU.scala 370:27 371:15 373:15]
+    node _GEN_2 = mux(io_b_readingin, io_b_in_2_0, b_reg_2_0) @[TPU.scala 370:27 371:15 373:15]
+    node _cmp_input_0_0_T = mul(io_a_in_0, b_reg_0_0) @[TPU.scala 383:62]
+    node _cmp_input_1_0_T = mul(io_a_in_1, b_reg_1_0) @[TPU.scala 391:63]
+    node _cmp_input_1_0_T_1 = add(_cmp_input_1_0_T, cms_reg_0_0) @[TPU.scala 391:84]
+    node _cmp_input_1_0_T_2 = tail(_cmp_input_1_0_T_1, 1) @[TPU.scala 391:84]
+    node _cmp_input_1_0_T_3 = asSInt(_cmp_input_1_0_T_2) @[TPU.scala 391:84]
+    node _cmp_input_2_0_T = mul(io_a_in_2, b_reg_2_0) @[TPU.scala 391:63]
+    node _cmp_input_2_0_T_1 = add(_cmp_input_2_0_T, cms_reg_1_0) @[TPU.scala 391:84]
+    node _cmp_input_2_0_T_2 = tail(_cmp_input_2_0_T_1, 1) @[TPU.scala 391:84]
+    node _cmp_input_2_0_T_3 = asSInt(_cmp_input_2_0_T_2) @[TPU.scala 391:84]
+    node _WIRE_1_0_0 = asSInt(UInt<32>("h0")) @[TPU.scala 406:{47,47}]
+    node _GEN_3 = mux(io_en, cms_reg_0_0, _WIRE_1_0_0) @[TPU.scala 364:16 366:20 406:20]
+    node _WIRE_1_1_0 = asSInt(UInt<32>("h0")) @[TPU.scala 406:{47,47}]
+    node _GEN_4 = mux(io_en, cms_reg_1_0, _WIRE_1_1_0) @[TPU.scala 364:16 366:20 406:20]
+    node _WIRE_1_2_0 = asSInt(UInt<32>("h0")) @[TPU.scala 406:{47,47}]
+    node _GEN_5 = mux(io_en, cms_reg_2_0, _WIRE_1_2_0) @[TPU.scala 364:16 366:20 406:20]
+    node _WIRE_2_0_0 = asSInt(UInt<32>("h0")) @[TPU.scala 407:{50,50}]
+    node _GEN_6 = mux(io_en, b_reg_0_0, _WIRE_2_0_0) @[TPU.scala 364:16 367:23 407:23]
+    node _WIRE_2_1_0 = asSInt(UInt<32>("h0")) @[TPU.scala 407:{50,50}]
+    node _GEN_7 = mux(io_en, b_reg_1_0, _WIRE_2_1_0) @[TPU.scala 364:16 367:23 407:23]
+    node _WIRE_2_2_0 = asSInt(UInt<32>("h0")) @[TPU.scala 407:{50,50}]
+    node _GEN_8 = mux(io_en, b_reg_2_0, _WIRE_2_2_0) @[TPU.scala 364:16 367:23 407:23]
+    node _WIRE_3_0_0 = asSInt(UInt<32>("h0")) @[TPU.scala 408:{50,50}]
+    node _GEN_9 = mux(io_en, a_reg_0_0, _WIRE_3_0_0) @[TPU.scala 364:16 368:23 408:23]
+    node _WIRE_3_1_0 = asSInt(UInt<32>("h0")) @[TPU.scala 408:{50,50}]
+    node _GEN_10 = mux(io_en, a_reg_1_0, _WIRE_3_1_0) @[TPU.scala 364:16 368:23 408:23]
+    node _WIRE_3_2_0 = asSInt(UInt<32>("h0")) @[TPU.scala 408:{50,50}]
+    node _GEN_11 = mux(io_en, a_reg_2_0, _WIRE_3_2_0) @[TPU.scala 364:16 368:23 408:23]
+    node _GEN_12 = mux(io_en, _io_debug_00_T, asSInt(UInt<1>("h0"))) @[TPU.scala 364:16 369:19 409:19]
+    node _GEN_13 = mux(io_en, _GEN_0, b_reg_0_0) @[TPU.scala 364:16 361:20]
+    node _GEN_14 = mux(io_en, _GEN_1, b_reg_1_0) @[TPU.scala 364:16 361:20]
+    node _GEN_15 = mux(io_en, _GEN_2, b_reg_2_0) @[TPU.scala 364:16 361:20]
+    node _WIRE_0 = asSInt(UInt<32>("h0")) @[TPU.scala 405:{35,35}]
+    node _GEN_16 = mux(io_en, cms_reg_2_0, _WIRE_0) @[TPU.scala 364:16 376:21 405:14]
+    node _GEN_17 = mux(io_en, io_a_in_0, a_reg_0_0) @[TPU.scala 364:16 360:20 384:41]
+    node cmp_input_0_0 = asSInt(bits(_cmp_input_0_0_T, 31, 0)) @[TPU.scala 378:27 383:45]
+    node _WIRE_4_0_0 = asSInt(UInt<32>("h0")) @[TPU.scala 410:{42,42}]
+    node _GEN_18 = mux(io_en, cmp_input_0_0, _WIRE_4_0_0) @[TPU.scala 364:16 398:23 410:15]
+    node cmp_input_1_0 = asSInt(bits(_cmp_input_1_0_T_3, 31, 0)) @[TPU.scala 378:27 391:45]
+    node _WIRE_4_1_0 = asSInt(UInt<32>("h0")) @[TPU.scala 410:{42,42}]
+    node _GEN_19 = mux(io_en, cmp_input_1_0, _WIRE_4_1_0) @[TPU.scala 364:16 398:23 410:15]
+    node cmp_input_2_0 = asSInt(bits(_cmp_input_2_0_T_3, 31, 0)) @[TPU.scala 378:27 391:45]
+    node _WIRE_4_2_0 = asSInt(UInt<32>("h0")) @[TPU.scala 410:{42,42}]
+    node _GEN_20 = mux(io_en, cmp_input_2_0, _WIRE_4_2_0) @[TPU.scala 364:16 398:23 410:15]
+    node _GEN_21 = mux(io_en, io_a_in_1, a_reg_1_0) @[TPU.scala 364:16 360:20 392:41]
+    node _GEN_22 = mux(io_en, io_a_in_2, a_reg_2_0) @[TPU.scala 364:16 360:20 392:41]
+    io_out_0 <= _GEN_16
+    io_cmp_debug_0_0 <= _GEN_3
+    io_cmp_debug_1_0 <= _GEN_4
+    io_cmp_debug_2_0 <= _GEN_5
+    io_debug_b_regs_0_0 <= _GEN_6
+    io_debug_b_regs_1_0 <= _GEN_7
+    io_debug_b_regs_2_0 <= _GEN_8
+    io_debug_a_regs_0_0 <= _GEN_9
+    io_debug_a_regs_1_0 <= _GEN_10
+    io_debug_a_regs_2_0 <= _GEN_11
+    io_debug_00 <= asSInt(bits(_GEN_12, 31, 0))
+    a_reg_0_0 <= _GEN_17
+    a_reg_1_0 <= _GEN_21
+    a_reg_2_0 <= _GEN_22
+    b_reg_0_0 <= _GEN_13
+    b_reg_1_0 <= _GEN_14
+    b_reg_2_0 <= _GEN_15
+    cms_reg_0_0 <= _GEN_18
+    cms_reg_1_0 <= _GEN_19
+    cms_reg_2_0 <= _GEN_20
+
+  module OutReg :
+    input clock : Clock
+    input reset : UInt<1>
+    input io_cycle : UInt<8>
+    input io_systArr_out_0 : SInt<32>
+    output io_slicedOut_0_0 : SInt<32>
+    input io_clearsig : UInt<1>
+
+    reg slicedOut_0_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), slicedOut_0_0) @[TPU.scala 321:28]
+    node _T = geq(io_cycle, UInt<3>("h4")) @[TPU.scala 322:19]
+    node _cycleIdx_T = sub(io_cycle, UInt<3>("h4")) @[TPU.scala 323:27]
+    node _cycleIdx_T_1 = tail(_cycleIdx_T, 1) @[TPU.scala 323:27]
+    node _GEN_0 = mux(_T, _cycleIdx_T_1, io_cycle) @[TPU.scala 322:35 323:16 326:16]
+    node _T_1 = geq(io_cycle, UInt<3>("h4")) @[TPU.scala 329:19]
+    node cycleIdx = _GEN_0 @[TPU.scala 320:24]
+    node _T_2 = geq(cycleIdx, UInt<1>("h0")) @[TPU.scala 331:22]
+    node _T_3 = lt(cycleIdx, UInt<1>("h1")) @[TPU.scala 331:39]
+    node _T_4 = and(_T_2, _T_3) @[TPU.scala 331:28]
+    node _GEN_1 = mux(_T_4, io_systArr_out_0, slicedOut_0_0) @[TPU.scala 321:28 331:53 334:35]
+    node _GEN_2 = mux(_T_1, _GEN_1, slicedOut_0_0) @[TPU.scala 321:28 329:35]
+    node _WIRE_0_0 = asSInt(UInt<32>("h0")) @[TPU.scala 343:{46,46}]
+    node _GEN_3 = mux(io_clearsig, _WIRE_0_0, _GEN_2) @[TPU.scala 342:22 343:17]
+    node _slicedOut_WIRE_0_0 = asSInt(UInt<32>("h0")) @[TPU.scala 321:{55,55}]
+    io_slicedOut_0_0 <= slicedOut_0_0 @[TPU.scala 328:18]
+    slicedOut_0_0 <= mux(reset, _slicedOut_WIRE_0_0, _GEN_3) @[TPU.scala 321:{28,28}]
+
+  module ChiselTPU :
+    input clock : Clock
+    input reset : UInt<1>
+    output io_a_ready : UInt<1>
+    input io_a_valid : UInt<1>
+    input io_a_bits_0_0 : SInt<32>
+    input io_a_bits_0_1 : SInt<32>
+    input io_a_bits_0_2 : SInt<32>
+    input io_a_bits_0_3 : SInt<32>
+    input io_a_bits_1_0 : SInt<32>
+    input io_a_bits_1_1 : SInt<32>
+    input io_a_bits_1_2 : SInt<32>
+    input io_a_bits_1_3 : SInt<32>
+    output io_b_ready : UInt<1>
+    input io_b_valid : UInt<1>
+    input io_b_bits_0_0 : SInt<32>
+    input io_b_bits_0_1 : SInt<32>
+    input io_b_bits_1_0 : SInt<32>
+    input io_b_bits_1_1 : SInt<32>
+    input io_b_bits_2_0 : SInt<32>
+    input io_b_bits_2_1 : SInt<32>
+    input io_b_bits_3_0 : SInt<32>
+    input io_b_bits_3_1 : SInt<32>
+    output io_out_0_0 : SInt<32>
+    output io_out_0_1 : SInt<32>
+    output io_out_1_0 : SInt<32>
+    output io_out_1_1 : SInt<32>
+
+    inst actReg of ActReg @[TPU.scala 47:22]
+    inst systArr of SystArr @[TPU.scala 48:23]
+    inst outReg of OutReg @[TPU.scala 58:22]
+    reg state : UInt<3>, clock with :
+      reset => (UInt<1>("h0"), state) @[TPU.scala 45:22]
+    reg myOut_0_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), myOut_0_0) @[TPU.scala 49:22]
+    reg myOut_0_1 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), myOut_0_1) @[TPU.scala 49:22]
+    reg myOut_1_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), myOut_1_0) @[TPU.scala 49:22]
+    reg myOut_1_1 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), myOut_1_1) @[TPU.scala 49:22]
+    reg a_ready : UInt<1>, clock with :
+      reset => (UInt<1>("h0"), a_ready) @[TPU.scala 50:24]
+    reg b_ready : UInt<1>, clock with :
+      reset => (UInt<1>("h0"), b_ready) @[TPU.scala 51:24]
+    reg enabledSyst : UInt<1>, clock with :
+      reset => (UInt<1>("h0"), enabledSyst) @[TPU.scala 52:28]
+    node _T_8 = eq(state, UInt<3>("h0")) @[TPU.scala 160:14]
+    node _T_14 = eq(state, UInt<3>("h1")) @[TPU.scala 172:19]
+    node _T_15 = and(io_b_valid, io_b_ready) @[TPU.scala 174:23]
+    node _GEN_124 = mux(_T_15, UInt<1>("h1"), UInt<1>("h0")) @[TPU.scala 146:15 174:37 180:21]
+    node _T_17 = eq(state, UInt<3>("h2")) @[TPU.scala 188:19]
+    node _T_20 = eq(state, UInt<3>("h3")) @[TPU.scala 198:19]
+    node _GEN_194 = mux(_T_20, UInt<1>("h1"), UInt<1>("h0")) @[TPU.scala 146:15 198:32 200:17]
+    node _GEN_208 = mux(_T_17, UInt<1>("h0"), _GEN_194) @[TPU.scala 188:29 193:17]
+    node _GEN_239 = mux(_T_14, _GEN_124, _GEN_208) @[TPU.scala 172:28]
+    node _GEN_296 = mux(_T_8, UInt<1>("h0"), _GEN_239) @[TPU.scala 146:15 160:23]
+    node counterFlag = _GEN_296 @[TPU.scala 46:25]
+    node _T = and(counterFlag, systArr.io_en) @[TPU.scala 57:43]
+    reg cycle : UInt<4>, clock with :
+      reset => (UInt<1>("h0"), cycle) @[Counter.scala 61:40]
+    node wrap_wrap = eq(cycle, UInt<4>("h8")) @[Counter.scala 73:24]
+    node _wrap_value_T = add(cycle, UInt<1>("h1")) @[Counter.scala 77:24]
+    node _wrap_value_T_1 = tail(_wrap_value_T, 1) @[Counter.scala 77:24]
+    node _GEN_0 = mux(wrap_wrap, UInt<1>("h0"), _wrap_value_T_1) @[Counter.scala 77:15 87:{20,28}]
+    node _GEN_1 = mux(_T, _GEN_0, cycle) @[Counter.scala 118:16 61:40]
+    node _GEN_2 = mux(_T, wrap_wrap, UInt<1>("h0")) @[Counter.scala 118:{16,23}]
+    reg paddedA_0_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedA_0_0) @[TPU.scala 71:24]
+    reg paddedA_0_1 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedA_0_1) @[TPU.scala 71:24]
+    reg paddedA_0_2 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedA_0_2) @[TPU.scala 71:24]
+    reg paddedA_0_3 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedA_0_3) @[TPU.scala 71:24]
+    reg paddedA_0_4 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedA_0_4) @[TPU.scala 71:24]
+    reg paddedA_0_5 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedA_0_5) @[TPU.scala 71:24]
+    reg paddedA_1_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedA_1_0) @[TPU.scala 71:24]
+    reg paddedA_1_1 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedA_1_1) @[TPU.scala 71:24]
+    reg paddedA_1_2 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedA_1_2) @[TPU.scala 71:24]
+    reg paddedA_1_3 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedA_1_3) @[TPU.scala 71:24]
+    reg paddedA_1_4 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedA_1_4) @[TPU.scala 71:24]
+    reg paddedA_1_5 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedA_1_5) @[TPU.scala 71:24]
+    reg paddedB_0_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedB_0_0) @[TPU.scala 72:24]
+    reg paddedB_0_1 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedB_0_1) @[TPU.scala 72:24]
+    reg paddedB_1_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedB_1_0) @[TPU.scala 72:24]
+    reg paddedB_1_1 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedB_1_1) @[TPU.scala 72:24]
+    reg paddedB_2_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedB_2_0) @[TPU.scala 72:24]
+    reg paddedB_2_1 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedB_2_1) @[TPU.scala 72:24]
+    reg paddedB_3_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedB_3_0) @[TPU.scala 72:24]
+    reg paddedB_3_1 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedB_3_1) @[TPU.scala 72:24]
+    reg paddedB_4_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedB_4_0) @[TPU.scala 72:24]
+    reg paddedB_4_1 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedB_4_1) @[TPU.scala 72:24]
+    reg paddedB_5_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedB_5_0) @[TPU.scala 72:24]
+    reg paddedB_5_1 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedB_5_1) @[TPU.scala 72:24]
+    reg paddedOut_0_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedOut_0_0) @[TPU.scala 73:26]
+    reg paddedOut_0_1 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedOut_0_1) @[TPU.scala 73:26]
+    reg paddedOut_1_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedOut_1_0) @[TPU.scala 73:26]
+    reg paddedOut_1_1 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), paddedOut_1_1) @[TPU.scala 73:26]
+    reg slicedA_0_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), slicedA_0_0) @[TPU.scala 74:24]
+    reg slicedA_0_1 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), slicedA_0_1) @[TPU.scala 74:24]
+    reg slicedA_0_2 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), slicedA_0_2) @[TPU.scala 74:24]
+    reg slicedB_0_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), slicedB_0_0) @[TPU.scala 75:24]
+    reg slicedB_1_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), slicedB_1_0) @[TPU.scala 75:24]
+    reg slicedB_2_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), slicedB_2_0) @[TPU.scala 75:24]
+    reg totalCycle : UInt<10>, clock with :
+      reset => (UInt<1>("h0"), totalCycle) @[Counter.scala 61:40]
+    node wrap_wrap_1 = eq(totalCycle, UInt<10>("h3e7")) @[Counter.scala 73:24]
+    node _wrap_value_T_2 = add(totalCycle, UInt<1>("h1")) @[Counter.scala 77:24]
+    node _wrap_value_T_3 = tail(_wrap_value_T_2, 1) @[Counter.scala 77:24]
+    node _GEN_3 = mux(wrap_wrap_1, UInt<1>("h0"), _wrap_value_T_3) @[Counter.scala 77:15 87:{20,28}]
+    node _GEN_4 = mux(UInt<1>("h1"), _GEN_3, totalCycle) @[Counter.scala 118:16 61:40]
+    node _GEN_5 = mux(UInt<1>("h1"), wrap_wrap_1, UInt<1>("h0")) @[Counter.scala 118:{16,23}]
+    node _T_1 = eq(state, UInt<3>("h2")) @[TPU.scala 80:47]
+    reg sliceCycle : UInt<3>, clock with :
+      reset => (UInt<1>("h0"), sliceCycle) @[Counter.scala 61:40]
+    node wrap_wrap_2 = eq(sliceCycle, UInt<3>("h7")) @[Counter.scala 73:24]
+    node _wrap_value_T_4 = add(sliceCycle, UInt<1>("h1")) @[Counter.scala 77:24]
+    node _wrap_value_T_5 = tail(_wrap_value_T_4, 1) @[Counter.scala 77:24]
+    node _GEN_6 = mux(_T_1, _wrap_value_T_5, sliceCycle) @[Counter.scala 118:16 77:15 61:40]
+    node _GEN_7 = mux(_T_1, wrap_wrap_2, UInt<1>("h0")) @[Counter.scala 118:{16,23}]
+    node _boundK_T = rem(sliceCycle, UInt<2>("h2")) @[TPU.scala 120:38]
+    node boundK = mul(UInt<2>("h3"), _boundK_T) @[TPU.scala 120:24]
+    node _boundM_T = rem(sliceCycle, UInt<3>("h4")) @[TPU.scala 121:41]
+    node _boundM_T_1 = div(_boundM_T, UInt<2>("h2")) @[TPU.scala 121:68]
+    node boundM = mul(UInt<1>("h1"), _boundM_T_1) @[TPU.scala 121:26]
+    node _boundN_T = div(sliceCycle, UInt<3>("h4")) @[TPU.scala 122:38]
+    node boundN = mul(UInt<1>("h1"), _boundN_T) @[TPU.scala 122:24]
+    node _T_2 = bits(reset, 0, 0) @[TPU.scala 123:9]
+    node _T_3 = eq(_T_2, UInt<1>("h0")) @[TPU.scala 123:9]
+    node _T_4 = bits(reset, 0, 0) @[TPU.scala 124:9]
+    node _T_5 = eq(_T_4, UInt<1>("h0")) @[TPU.scala 124:9]
+    node _T_6 = bits(reset, 0, 0) @[TPU.scala 125:9]
+    node _T_7 = eq(_T_6, UInt<1>("h0")) @[TPU.scala 125:9]
+    node _slicedA_0_0_T = add(boundM, UInt<1>("h0")) @[TPU.scala 129:40]
+    node _slicedA_0_0_T_1 = tail(_slicedA_0_0_T, 1) @[TPU.scala 129:40]
+    node _slicedA_0_0_T_2 = bits(_slicedA_0_0_T_1, 0, 0)
+    node _slicedA_0_0_T_3 = add(boundK, UInt<1>("h0")) @[TPU.scala 129:52]
+    node _slicedA_0_0_T_4 = tail(_slicedA_0_0_T_3, 1) @[TPU.scala 129:52]
+    node _slicedA_0_0_T_5 = bits(_slicedA_0_0_T_4, 2, 0)
+    node _GEN_8 = validif(and(eq(UInt<1>("h0"), _slicedA_0_0_T_2), eq(UInt<1>("h0"), _slicedA_0_0_T_5)), paddedA_0_0) @[TPU.scala 129:{23,23}]
+    node _GEN_9 = mux(and(eq(UInt<1>("h0"), _slicedA_0_0_T_2), eq(UInt<1>("h1"), _slicedA_0_0_T_5)), paddedA_0_1, _GEN_8) @[TPU.scala 129:{23,23}]
+    node _GEN_10 = mux(and(eq(UInt<1>("h0"), _slicedA_0_0_T_2), eq(UInt<2>("h2"), _slicedA_0_0_T_5)), paddedA_0_2, _GEN_9) @[TPU.scala 129:{23,23}]
+    node _GEN_11 = mux(and(eq(UInt<1>("h0"), _slicedA_0_0_T_2), eq(UInt<2>("h3"), _slicedA_0_0_T_5)), paddedA_0_3, _GEN_10) @[TPU.scala 129:{23,23}]
+    node _GEN_12 = mux(and(eq(UInt<1>("h0"), _slicedA_0_0_T_2), eq(UInt<3>("h4"), _slicedA_0_0_T_5)), paddedA_0_4, _GEN_11) @[TPU.scala 129:{23,23}]
+    node _GEN_13 = mux(and(eq(UInt<1>("h0"), _slicedA_0_0_T_2), eq(UInt<3>("h5"), _slicedA_0_0_T_5)), paddedA_0_5, _GEN_12) @[TPU.scala 129:{23,23}]
+    node _GEN_14 = mux(and(eq(UInt<1>("h1"), _slicedA_0_0_T_2), eq(UInt<1>("h0"), _slicedA_0_0_T_5)), paddedA_1_0, _GEN_13) @[TPU.scala 129:{23,23}]
+    node _GEN_15 = mux(and(eq(UInt<1>("h1"), _slicedA_0_0_T_2), eq(UInt<1>("h1"), _slicedA_0_0_T_5)), paddedA_1_1, _GEN_14) @[TPU.scala 129:{23,23}]
+    node _GEN_16 = mux(and(eq(UInt<1>("h1"), _slicedA_0_0_T_2), eq(UInt<2>("h2"), _slicedA_0_0_T_5)), paddedA_1_2, _GEN_15) @[TPU.scala 129:{23,23}]
+    node _GEN_17 = mux(and(eq(UInt<1>("h1"), _slicedA_0_0_T_2), eq(UInt<2>("h3"), _slicedA_0_0_T_5)), paddedA_1_3, _GEN_16) @[TPU.scala 129:{23,23}]
+    node _GEN_18 = mux(and(eq(UInt<1>("h1"), _slicedA_0_0_T_2), eq(UInt<3>("h4"), _slicedA_0_0_T_5)), paddedA_1_4, _GEN_17) @[TPU.scala 129:{23,23}]
+    node _GEN_19 = mux(and(eq(UInt<1>("h1"), _slicedA_0_0_T_2), eq(UInt<3>("h5"), _slicedA_0_0_T_5)), paddedA_1_5, _GEN_18) @[TPU.scala 129:{23,23}]
+    node _slicedB_0_0_T = add(boundK, UInt<1>("h0")) @[TPU.scala 132:40]
+    node _slicedB_0_0_T_1 = tail(_slicedB_0_0_T, 1) @[TPU.scala 132:40]
+    node _slicedB_0_0_T_2 = bits(_slicedB_0_0_T_1, 2, 0)
+    node _slicedB_0_0_T_3 = add(boundN, UInt<1>("h0")) @[TPU.scala 132:52]
+    node _slicedB_0_0_T_4 = tail(_slicedB_0_0_T_3, 1) @[TPU.scala 132:52]
+    node _slicedB_0_0_T_5 = bits(_slicedB_0_0_T_4, 0, 0)
+    node _GEN_20 = validif(and(eq(UInt<1>("h0"), _slicedB_0_0_T_2), eq(UInt<1>("h0"), _slicedB_0_0_T_5)), paddedB_0_0) @[TPU.scala 132:{23,23}]
+    node _GEN_21 = mux(and(eq(UInt<1>("h0"), _slicedB_0_0_T_2), eq(UInt<1>("h1"), _slicedB_0_0_T_5)), paddedB_0_1, _GEN_20) @[TPU.scala 132:{23,23}]
+    node _GEN_22 = mux(and(eq(UInt<1>("h1"), _slicedB_0_0_T_2), eq(UInt<1>("h0"), _slicedB_0_0_T_5)), paddedB_1_0, _GEN_21) @[TPU.scala 132:{23,23}]
+    node _GEN_23 = mux(and(eq(UInt<1>("h1"), _slicedB_0_0_T_2), eq(UInt<1>("h1"), _slicedB_0_0_T_5)), paddedB_1_1, _GEN_22) @[TPU.scala 132:{23,23}]
+    node _GEN_24 = mux(and(eq(UInt<2>("h2"), _slicedB_0_0_T_2), eq(UInt<1>("h0"), _slicedB_0_0_T_5)), paddedB_2_0, _GEN_23) @[TPU.scala 132:{23,23}]
+    node _GEN_25 = mux(and(eq(UInt<2>("h2"), _slicedB_0_0_T_2), eq(UInt<1>("h1"), _slicedB_0_0_T_5)), paddedB_2_1, _GEN_24) @[TPU.scala 132:{23,23}]
+    node _GEN_26 = mux(and(eq(UInt<2>("h3"), _slicedB_0_0_T_2), eq(UInt<1>("h0"), _slicedB_0_0_T_5)), paddedB_3_0, _GEN_25) @[TPU.scala 132:{23,23}]
+    node _GEN_27 = mux(and(eq(UInt<2>("h3"), _slicedB_0_0_T_2), eq(UInt<1>("h1"), _slicedB_0_0_T_5)), paddedB_3_1, _GEN_26) @[TPU.scala 132:{23,23}]
+    node _GEN_28 = mux(and(eq(UInt<3>("h4"), _slicedB_0_0_T_2), eq(UInt<1>("h0"), _slicedB_0_0_T_5)), paddedB_4_0, _GEN_27) @[TPU.scala 132:{23,23}]
+    node _GEN_29 = mux(and(eq(UInt<3>("h4"), _slicedB_0_0_T_2), eq(UInt<1>("h1"), _slicedB_0_0_T_5)), paddedB_4_1, _GEN_28) @[TPU.scala 132:{23,23}]
+    node _GEN_30 = mux(and(eq(UInt<3>("h5"), _slicedB_0_0_T_2), eq(UInt<1>("h0"), _slicedB_0_0_T_5)), paddedB_5_0, _GEN_29) @[TPU.scala 132:{23,23}]
+    node _GEN_31 = mux(and(eq(UInt<3>("h5"), _slicedB_0_0_T_2), eq(UInt<1>("h1"), _slicedB_0_0_T_5)), paddedB_5_1, _GEN_30) @[TPU.scala 132:{23,23}]
+    node _slicedA_0_1_T = add(boundM, UInt<1>("h0")) @[TPU.scala 129:40]
+    node _slicedA_0_1_T_1 = tail(_slicedA_0_1_T, 1) @[TPU.scala 129:40]
+    node _slicedA_0_1_T_2 = bits(_slicedA_0_1_T_1, 0, 0)
+    node _slicedA_0_1_T_3 = add(boundK, UInt<1>("h1")) @[TPU.scala 129:52]
+    node _slicedA_0_1_T_4 = tail(_slicedA_0_1_T_3, 1) @[TPU.scala 129:52]
+    node _slicedA_0_1_T_5 = bits(_slicedA_0_1_T_4, 2, 0)
+    node _GEN_32 = validif(and(eq(UInt<1>("h0"), _slicedA_0_1_T_2), eq(UInt<1>("h0"), _slicedA_0_1_T_5)), paddedA_0_0) @[TPU.scala 129:{23,23}]
+    node _GEN_33 = mux(and(eq(UInt<1>("h0"), _slicedA_0_1_T_2), eq(UInt<1>("h1"), _slicedA_0_1_T_5)), paddedA_0_1, _GEN_32) @[TPU.scala 129:{23,23}]
+    node _GEN_34 = mux(and(eq(UInt<1>("h0"), _slicedA_0_1_T_2), eq(UInt<2>("h2"), _slicedA_0_1_T_5)), paddedA_0_2, _GEN_33) @[TPU.scala 129:{23,23}]
+    node _GEN_35 = mux(and(eq(UInt<1>("h0"), _slicedA_0_1_T_2), eq(UInt<2>("h3"), _slicedA_0_1_T_5)), paddedA_0_3, _GEN_34) @[TPU.scala 129:{23,23}]
+    node _GEN_36 = mux(and(eq(UInt<1>("h0"), _slicedA_0_1_T_2), eq(UInt<3>("h4"), _slicedA_0_1_T_5)), paddedA_0_4, _GEN_35) @[TPU.scala 129:{23,23}]
+    node _GEN_37 = mux(and(eq(UInt<1>("h0"), _slicedA_0_1_T_2), eq(UInt<3>("h5"), _slicedA_0_1_T_5)), paddedA_0_5, _GEN_36) @[TPU.scala 129:{23,23}]
+    node _GEN_38 = mux(and(eq(UInt<1>("h1"), _slicedA_0_1_T_2), eq(UInt<1>("h0"), _slicedA_0_1_T_5)), paddedA_1_0, _GEN_37) @[TPU.scala 129:{23,23}]
+    node _GEN_39 = mux(and(eq(UInt<1>("h1"), _slicedA_0_1_T_2), eq(UInt<1>("h1"), _slicedA_0_1_T_5)), paddedA_1_1, _GEN_38) @[TPU.scala 129:{23,23}]
+    node _GEN_40 = mux(and(eq(UInt<1>("h1"), _slicedA_0_1_T_2), eq(UInt<2>("h2"), _slicedA_0_1_T_5)), paddedA_1_2, _GEN_39) @[TPU.scala 129:{23,23}]
+    node _GEN_41 = mux(and(eq(UInt<1>("h1"), _slicedA_0_1_T_2), eq(UInt<2>("h3"), _slicedA_0_1_T_5)), paddedA_1_3, _GEN_40) @[TPU.scala 129:{23,23}]
+    node _GEN_42 = mux(and(eq(UInt<1>("h1"), _slicedA_0_1_T_2), eq(UInt<3>("h4"), _slicedA_0_1_T_5)), paddedA_1_4, _GEN_41) @[TPU.scala 129:{23,23}]
+    node _GEN_43 = mux(and(eq(UInt<1>("h1"), _slicedA_0_1_T_2), eq(UInt<3>("h5"), _slicedA_0_1_T_5)), paddedA_1_5, _GEN_42) @[TPU.scala 129:{23,23}]
+    node _slicedB_1_0_T = add(boundK, UInt<1>("h1")) @[TPU.scala 132:40]
+    node _slicedB_1_0_T_1 = tail(_slicedB_1_0_T, 1) @[TPU.scala 132:40]
+    node _slicedB_1_0_T_2 = bits(_slicedB_1_0_T_1, 2, 0)
+    node _slicedB_1_0_T_3 = add(boundN, UInt<1>("h0")) @[TPU.scala 132:52]
+    node _slicedB_1_0_T_4 = tail(_slicedB_1_0_T_3, 1) @[TPU.scala 132:52]
+    node _slicedB_1_0_T_5 = bits(_slicedB_1_0_T_4, 0, 0)
+    node _GEN_44 = validif(and(eq(UInt<1>("h0"), _slicedB_1_0_T_2), eq(UInt<1>("h0"), _slicedB_1_0_T_5)), paddedB_0_0) @[TPU.scala 132:{23,23}]
+    node _GEN_45 = mux(and(eq(UInt<1>("h0"), _slicedB_1_0_T_2), eq(UInt<1>("h1"), _slicedB_1_0_T_5)), paddedB_0_1, _GEN_44) @[TPU.scala 132:{23,23}]
+    node _GEN_46 = mux(and(eq(UInt<1>("h1"), _slicedB_1_0_T_2), eq(UInt<1>("h0"), _slicedB_1_0_T_5)), paddedB_1_0, _GEN_45) @[TPU.scala 132:{23,23}]
+    node _GEN_47 = mux(and(eq(UInt<1>("h1"), _slicedB_1_0_T_2), eq(UInt<1>("h1"), _slicedB_1_0_T_5)), paddedB_1_1, _GEN_46) @[TPU.scala 132:{23,23}]
+    node _GEN_48 = mux(and(eq(UInt<2>("h2"), _slicedB_1_0_T_2), eq(UInt<1>("h0"), _slicedB_1_0_T_5)), paddedB_2_0, _GEN_47) @[TPU.scala 132:{23,23}]
+    node _GEN_49 = mux(and(eq(UInt<2>("h2"), _slicedB_1_0_T_2), eq(UInt<1>("h1"), _slicedB_1_0_T_5)), paddedB_2_1, _GEN_48) @[TPU.scala 132:{23,23}]
+    node _GEN_50 = mux(and(eq(UInt<2>("h3"), _slicedB_1_0_T_2), eq(UInt<1>("h0"), _slicedB_1_0_T_5)), paddedB_3_0, _GEN_49) @[TPU.scala 132:{23,23}]
+    node _GEN_51 = mux(and(eq(UInt<2>("h3"), _slicedB_1_0_T_2), eq(UInt<1>("h1"), _slicedB_1_0_T_5)), paddedB_3_1, _GEN_50) @[TPU.scala 132:{23,23}]
+    node _GEN_52 = mux(and(eq(UInt<3>("h4"), _slicedB_1_0_T_2), eq(UInt<1>("h0"), _slicedB_1_0_T_5)), paddedB_4_0, _GEN_51) @[TPU.scala 132:{23,23}]
+    node _GEN_53 = mux(and(eq(UInt<3>("h4"), _slicedB_1_0_T_2), eq(UInt<1>("h1"), _slicedB_1_0_T_5)), paddedB_4_1, _GEN_52) @[TPU.scala 132:{23,23}]
+    node _GEN_54 = mux(and(eq(UInt<3>("h5"), _slicedB_1_0_T_2), eq(UInt<1>("h0"), _slicedB_1_0_T_5)), paddedB_5_0, _GEN_53) @[TPU.scala 132:{23,23}]
+    node _GEN_55 = mux(and(eq(UInt<3>("h5"), _slicedB_1_0_T_2), eq(UInt<1>("h1"), _slicedB_1_0_T_5)), paddedB_5_1, _GEN_54) @[TPU.scala 132:{23,23}]
+    node _slicedA_0_2_T = add(boundM, UInt<1>("h0")) @[TPU.scala 129:40]
+    node _slicedA_0_2_T_1 = tail(_slicedA_0_2_T, 1) @[TPU.scala 129:40]
+    node _slicedA_0_2_T_2 = bits(_slicedA_0_2_T_1, 0, 0)
+    node _slicedA_0_2_T_3 = add(boundK, UInt<2>("h2")) @[TPU.scala 129:52]
+    node _slicedA_0_2_T_4 = tail(_slicedA_0_2_T_3, 1) @[TPU.scala 129:52]
+    node _slicedA_0_2_T_5 = bits(_slicedA_0_2_T_4, 2, 0)
+    node _GEN_56 = validif(and(eq(UInt<1>("h0"), _slicedA_0_2_T_2), eq(UInt<1>("h0"), _slicedA_0_2_T_5)), paddedA_0_0) @[TPU.scala 129:{23,23}]
+    node _GEN_57 = mux(and(eq(UInt<1>("h0"), _slicedA_0_2_T_2), eq(UInt<1>("h1"), _slicedA_0_2_T_5)), paddedA_0_1, _GEN_56) @[TPU.scala 129:{23,23}]
+    node _GEN_58 = mux(and(eq(UInt<1>("h0"), _slicedA_0_2_T_2), eq(UInt<2>("h2"), _slicedA_0_2_T_5)), paddedA_0_2, _GEN_57) @[TPU.scala 129:{23,23}]
+    node _GEN_59 = mux(and(eq(UInt<1>("h0"), _slicedA_0_2_T_2), eq(UInt<2>("h3"), _slicedA_0_2_T_5)), paddedA_0_3, _GEN_58) @[TPU.scala 129:{23,23}]
+    node _GEN_60 = mux(and(eq(UInt<1>("h0"), _slicedA_0_2_T_2), eq(UInt<3>("h4"), _slicedA_0_2_T_5)), paddedA_0_4, _GEN_59) @[TPU.scala 129:{23,23}]
+    node _GEN_61 = mux(and(eq(UInt<1>("h0"), _slicedA_0_2_T_2), eq(UInt<3>("h5"), _slicedA_0_2_T_5)), paddedA_0_5, _GEN_60) @[TPU.scala 129:{23,23}]
+    node _GEN_62 = mux(and(eq(UInt<1>("h1"), _slicedA_0_2_T_2), eq(UInt<1>("h0"), _slicedA_0_2_T_5)), paddedA_1_0, _GEN_61) @[TPU.scala 129:{23,23}]
+    node _GEN_63 = mux(and(eq(UInt<1>("h1"), _slicedA_0_2_T_2), eq(UInt<1>("h1"), _slicedA_0_2_T_5)), paddedA_1_1, _GEN_62) @[TPU.scala 129:{23,23}]
+    node _GEN_64 = mux(and(eq(UInt<1>("h1"), _slicedA_0_2_T_2), eq(UInt<2>("h2"), _slicedA_0_2_T_5)), paddedA_1_2, _GEN_63) @[TPU.scala 129:{23,23}]
+    node _GEN_65 = mux(and(eq(UInt<1>("h1"), _slicedA_0_2_T_2), eq(UInt<2>("h3"), _slicedA_0_2_T_5)), paddedA_1_3, _GEN_64) @[TPU.scala 129:{23,23}]
+    node _GEN_66 = mux(and(eq(UInt<1>("h1"), _slicedA_0_2_T_2), eq(UInt<3>("h4"), _slicedA_0_2_T_5)), paddedA_1_4, _GEN_65) @[TPU.scala 129:{23,23}]
+    node _GEN_67 = mux(and(eq(UInt<1>("h1"), _slicedA_0_2_T_2), eq(UInt<3>("h5"), _slicedA_0_2_T_5)), paddedA_1_5, _GEN_66) @[TPU.scala 129:{23,23}]
+    node _slicedB_2_0_T = add(boundK, UInt<2>("h2")) @[TPU.scala 132:40]
+    node _slicedB_2_0_T_1 = tail(_slicedB_2_0_T, 1) @[TPU.scala 132:40]
+    node _slicedB_2_0_T_2 = bits(_slicedB_2_0_T_1, 2, 0)
+    node _slicedB_2_0_T_3 = add(boundN, UInt<1>("h0")) @[TPU.scala 132:52]
+    node _slicedB_2_0_T_4 = tail(_slicedB_2_0_T_3, 1) @[TPU.scala 132:52]
+    node _slicedB_2_0_T_5 = bits(_slicedB_2_0_T_4, 0, 0)
+    node _GEN_68 = validif(and(eq(UInt<1>("h0"), _slicedB_2_0_T_2), eq(UInt<1>("h0"), _slicedB_2_0_T_5)), paddedB_0_0) @[TPU.scala 132:{23,23}]
+    node _GEN_69 = mux(and(eq(UInt<1>("h0"), _slicedB_2_0_T_2), eq(UInt<1>("h1"), _slicedB_2_0_T_5)), paddedB_0_1, _GEN_68) @[TPU.scala 132:{23,23}]
+    node _GEN_70 = mux(and(eq(UInt<1>("h1"), _slicedB_2_0_T_2), eq(UInt<1>("h0"), _slicedB_2_0_T_5)), paddedB_1_0, _GEN_69) @[TPU.scala 132:{23,23}]
+    node _GEN_71 = mux(and(eq(UInt<1>("h1"), _slicedB_2_0_T_2), eq(UInt<1>("h1"), _slicedB_2_0_T_5)), paddedB_1_1, _GEN_70) @[TPU.scala 132:{23,23}]
+    node _GEN_72 = mux(and(eq(UInt<2>("h2"), _slicedB_2_0_T_2), eq(UInt<1>("h0"), _slicedB_2_0_T_5)), paddedB_2_0, _GEN_71) @[TPU.scala 132:{23,23}]
+    node _GEN_73 = mux(and(eq(UInt<2>("h2"), _slicedB_2_0_T_2), eq(UInt<1>("h1"), _slicedB_2_0_T_5)), paddedB_2_1, _GEN_72) @[TPU.scala 132:{23,23}]
+    node _GEN_74 = mux(and(eq(UInt<2>("h3"), _slicedB_2_0_T_2), eq(UInt<1>("h0"), _slicedB_2_0_T_5)), paddedB_3_0, _GEN_73) @[TPU.scala 132:{23,23}]
+    node _GEN_75 = mux(and(eq(UInt<2>("h3"), _slicedB_2_0_T_2), eq(UInt<1>("h1"), _slicedB_2_0_T_5)), paddedB_3_1, _GEN_74) @[TPU.scala 132:{23,23}]
+    node _GEN_76 = mux(and(eq(UInt<3>("h4"), _slicedB_2_0_T_2), eq(UInt<1>("h0"), _slicedB_2_0_T_5)), paddedB_4_0, _GEN_75) @[TPU.scala 132:{23,23}]
+    node _GEN_77 = mux(and(eq(UInt<3>("h4"), _slicedB_2_0_T_2), eq(UInt<1>("h1"), _slicedB_2_0_T_5)), paddedB_4_1, _GEN_76) @[TPU.scala 132:{23,23}]
+    node _GEN_78 = mux(and(eq(UInt<3>("h5"), _slicedB_2_0_T_2), eq(UInt<1>("h0"), _slicedB_2_0_T_5)), paddedB_5_0, _GEN_77) @[TPU.scala 132:{23,23}]
+    node _GEN_79 = mux(and(eq(UInt<3>("h5"), _slicedB_2_0_T_2), eq(UInt<1>("h1"), _slicedB_2_0_T_5)), paddedB_5_1, _GEN_78) @[TPU.scala 132:{23,23}]
+    node _actReg_io_index_T = sub(UInt<2>("h3"), cycle) @[TPU.scala 148:39]
+    node _actReg_io_index_T_1 = tail(_actReg_io_index_T, 1) @[TPU.scala 148:39]
+    reg act_in_0_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), act_in_0_0) @[TPU.scala 153:23]
+    reg act_in_0_1 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), act_in_0_1) @[TPU.scala 153:23]
+    reg act_in_0_2 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), act_in_0_2) @[TPU.scala 153:23]
+    reg act_in_0_3 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), act_in_0_3) @[TPU.scala 153:23]
+    reg act_in_1_0 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), act_in_1_0) @[TPU.scala 153:23]
+    reg act_in_1_1 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), act_in_1_1) @[TPU.scala 153:23]
+    reg act_in_1_2 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), act_in_1_2) @[TPU.scala 153:23]
+    reg act_in_1_3 : SInt<32>, clock with :
+      reset => (UInt<1>("h0"), act_in_1_3) @[TPU.scala 153:23]
+    reg allowReadB : UInt<1>, clock with :
+      reset => (UInt<1>("h0"), allowReadB) @[TPU.scala 154:27]
+    node _T_9 = bits(reset, 0, 0) @[TPU.scala 161:11]
+    node _T_10 = eq(_T_9, UInt<1>("h0")) @[TPU.scala 161:11]
+    node _T_11 = bits(reset, 0, 0) @[TPU.scala 162:11]
+    node _T_12 = eq(_T_11, UInt<1>("h0")) @[TPU.scala 162:11]
+    node _T_13 = and(io_a_valid, io_a_ready) @[TPU.scala 163:21]
+    node _GEN_80 = mux(_T_13, UInt<3>("h1"), state) @[TPU.scala 163:35 164:15 45:22]
+    node _GEN_81 = mux(_T_13, io_a_bits_0_0, act_in_0_0) @[TPU.scala 163:35 165:16 153:23]
+    node _GEN_82 = mux(_T_13, io_a_bits_0_1, act_in_0_1) @[TPU.scala 163:35 165:16 153:23]
+    node _GEN_83 = mux(_T_13, io_a_bits_0_2, act_in_0_2) @[TPU.scala 163:35 165:16 153:23]
+    node _GEN_84 = mux(_T_13, io_a_bits_0_3, act_in_0_3) @[TPU.scala 163:35 165:16 153:23]
+    node _GEN_85 = mux(_T_13, io_a_bits_1_0, act_in_1_0) @[TPU.scala 163:35 165:16 153:23]
+    node _GEN_86 = mux(_T_13, io_a_bits_1_1, act_in_1_1) @[TPU.scala 163:35 165:16 153:23]
+    node _GEN_87 = mux(_T_13, io_a_bits_1_2, act_in_1_2) @[TPU.scala 163:35 165:16 153:23]
+    node _GEN_88 = mux(_T_13, io_a_bits_1_3, act_in_1_3) @[TPU.scala 163:35 165:16 153:23]
+    node _GEN_89 = mux(_T_13, io_a_bits_0_0, paddedA_0_0) @[TPU.scala 112:21 163:35 71:24]
+    node _GEN_90 = mux(_T_13, io_a_bits_0_1, paddedA_0_1) @[TPU.scala 112:21 163:35 71:24]
+    node _GEN_91 = mux(_T_13, io_a_bits_0_2, paddedA_0_2) @[TPU.scala 112:21 163:35 71:24]
+    node _GEN_92 = mux(_T_13, io_a_bits_0_3, paddedA_0_3) @[TPU.scala 112:21 163:35 71:24]
+    node _GEN_93 = mux(_T_13, asSInt(UInt<1>("h0")), paddedA_0_4) @[TPU.scala 115:21 163:35 71:24]
+    node _GEN_94 = mux(_T_13, asSInt(UInt<1>("h0")), paddedA_0_5) @[TPU.scala 115:21 163:35 71:24]
+    node _GEN_95 = mux(_T_13, io_a_bits_1_0, paddedA_1_0) @[TPU.scala 112:21 163:35 71:24]
+    node _GEN_96 = mux(_T_13, io_a_bits_1_1, paddedA_1_1) @[TPU.scala 112:21 163:35 71:24]
+    node _GEN_97 = mux(_T_13, io_a_bits_1_2, paddedA_1_2) @[TPU.scala 112:21 163:35 71:24]
+    node _GEN_98 = mux(_T_13, io_a_bits_1_3, paddedA_1_3) @[TPU.scala 112:21 163:35 71:24]
+    node _GEN_99 = mux(_T_13, asSInt(UInt<1>("h0")), paddedA_1_4) @[TPU.scala 115:21 163:35 71:24]
+    node _GEN_100 = mux(_T_13, asSInt(UInt<1>("h0")), paddedA_1_5) @[TPU.scala 115:21 163:35 71:24]
+    node _GEN_101 = mux(_T_13, io_a_bits_0_0, slicedA_0_0) @[TPU.scala 112:21 156:15 163:35]
+    node _GEN_102 = mux(_T_13, io_a_bits_0_1, slicedA_0_1) @[TPU.scala 112:21 156:15 163:35]
+    node _GEN_103 = mux(_T_13, io_a_bits_0_2, slicedA_0_2) @[TPU.scala 112:21 156:15 163:35]
+    node _GEN_104 = mux(_T_13, UInt<1>("h0"), a_ready) @[TPU.scala 163:35 168:17 50:24]
+    node _T_16 = eq(io_b_ready, UInt<1>("h0")) @[TPU.scala 183:17]
+    node _GEN_105 = mux(_T_16, UInt<3>("h2"), state) @[TPU.scala 183:29 184:15 45:22]
+    node _GEN_106 = mux(_T_16, UInt<3>("h7"), _GEN_6) @[TPU.scala 183:29 185:20]
+    node _GEN_107 = mux(_T_15, io_b_bits_0_0, paddedB_0_0) @[TPU.scala 112:21 174:37 72:24]
+    node _GEN_108 = mux(_T_15, io_b_bits_0_1, paddedB_0_1) @[TPU.scala 112:21 174:37 72:24]
+    node _GEN_109 = mux(_T_15, io_b_bits_1_0, paddedB_1_0) @[TPU.scala 112:21 174:37 72:24]
+    node _GEN_110 = mux(_T_15, io_b_bits_1_1, paddedB_1_1) @[TPU.scala 112:21 174:37 72:24]
+    node _GEN_111 = mux(_T_15, io_b_bits_2_0, paddedB_2_0) @[TPU.scala 112:21 174:37 72:24]
+    node _GEN_112 = mux(_T_15, io_b_bits_2_1, paddedB_2_1) @[TPU.scala 112:21 174:37 72:24]
+    node _GEN_113 = mux(_T_15, io_b_bits_3_0, paddedB_3_0) @[TPU.scala 112:21 174:37 72:24]
+    node _GEN_114 = mux(_T_15, io_b_bits_3_1, paddedB_3_1) @[TPU.scala 112:21 174:37 72:24]
+    node _GEN_115 = mux(_T_15, asSInt(UInt<1>("h0")), paddedB_4_0) @[TPU.scala 115:21 174:37 72:24]
+    node _GEN_116 = mux(_T_15, asSInt(UInt<1>("h0")), paddedB_4_1) @[TPU.scala 115:21 174:37 72:24]
+    node _GEN_117 = mux(_T_15, asSInt(UInt<1>("h0")), paddedB_5_0) @[TPU.scala 115:21 174:37 72:24]
+    node _GEN_118 = mux(_T_15, asSInt(UInt<1>("h0")), paddedB_5_1) @[TPU.scala 115:21 174:37 72:24]
+    node _GEN_119 = mux(_T_15, io_b_bits_0_0, slicedB_0_0) @[TPU.scala 112:21 157:19 174:37]
+    node _GEN_120 = mux(_T_15, io_b_bits_1_0, slicedB_1_0) @[TPU.scala 112:21 157:19 174:37]
+    node _GEN_121 = mux(_T_15, io_b_bits_2_0, slicedB_2_0) @[TPU.scala 112:21 157:19 174:37]
+    node _GEN_122 = mux(_T_15, UInt<1>("h1"), allowReadB) @[TPU.scala 174:37 178:20 154:27]
+    node _GEN_123 = mux(_T_15, UInt<1>("h0"), b_ready) @[TPU.scala 174:37 179:17 51:24]
+    node _GEN_125 = mux(_T_15, UInt<1>("h0"), _GEN_1) @[TPU.scala 174:37 181:15]
+    node _GEN_126 = mux(_T_15, state, _GEN_105) @[TPU.scala 174:37 45:22]
+    node _GEN_127 = mux(_T_15, _GEN_6, _GEN_106) @[TPU.scala 174:37]
+    node _T_18 = bits(reset, 0, 0) @[TPU.scala 189:11]
+    node _T_19 = eq(_T_18, UInt<1>("h0")) @[TPU.scala 189:11]
+    node _T_21 = eq(cycle, UInt<1>("h0")) @[TPU.scala 201:16]
+    node _GEN_128 = mux(_T_21, UInt<1>("h1"), UInt<1>("h0")) @[TPU.scala 201:24 202:18 205:18]
+    node _T_22 = eq(sliceCycle, UInt<3>("h7")) @[TPU.scala 229:21]
+    node _T_23 = eq(cycle, UInt<4>("h8")) @[TPU.scala 229:76]
+    node _T_24 = and(_T_22, _T_23) @[TPU.scala 229:67]
+    node _T_25 = add(UInt<1>("h0"), boundM) @[TPU.scala 232:25]
+    node _T_26 = tail(_T_25, 1) @[TPU.scala 232:25]
+    node _T_27 = bits(_T_26, 0, 0)
+    node _T_28 = add(UInt<1>("h0"), boundN) @[TPU.scala 232:39]
+    node _T_29 = tail(_T_28, 1) @[TPU.scala 232:39]
+    node _T_30 = bits(_T_29, 0, 0)
+    node _paddedOut_T = add(UInt<1>("h0"), boundM) @[TPU.scala 232:66]
+    node _paddedOut_T_1 = tail(_paddedOut_T, 1) @[TPU.scala 232:66]
+    node _paddedOut_T_2 = bits(_paddedOut_T_1, 0, 0)
+    node _paddedOut_T_3 = add(UInt<1>("h0"), boundN) @[TPU.scala 232:80]
+    node _paddedOut_T_4 = tail(_paddedOut_T_3, 1) @[TPU.scala 232:80]
+    node _paddedOut_T_5 = bits(_paddedOut_T_4, 0, 0)
+    node _GEN_129 = validif(and(eq(UInt<1>("h0"), _paddedOut_T_2), eq(UInt<1>("h0"), _paddedOut_T_5)), paddedOut_0_0) @[TPU.scala 232:{90,90}]
+    node _GEN_130 = mux(and(eq(UInt<1>("h0"), _paddedOut_T_2), eq(UInt<1>("h1"), _paddedOut_T_5)), paddedOut_0_1, _GEN_129) @[TPU.scala 232:{90,90}]
+    node _GEN_131 = mux(and(eq(UInt<1>("h1"), _paddedOut_T_2), eq(UInt<1>("h0"), _paddedOut_T_5)), paddedOut_1_0, _GEN_130) @[TPU.scala 232:{90,90}]
+    node _GEN_132 = mux(and(eq(UInt<1>("h1"), _paddedOut_T_2), eq(UInt<1>("h1"), _paddedOut_T_5)), paddedOut_1_1, _GEN_131) @[TPU.scala 232:{90,90}]
+    node _paddedOut_paddedOut_T_2_paddedOut_T_5 = _GEN_132 @[TPU.scala 232:90]
+    node slicedOut_0_0 = outReg.io_slicedOut_0_0 @[TPU.scala 151:13 77:23]
+    node _paddedOut_T_6 = add(_paddedOut_paddedOut_T_2_paddedOut_T_5, slicedOut_0_0) @[TPU.scala 232:90]
+    node _paddedOut_T_7 = tail(_paddedOut_T_6, 1) @[TPU.scala 232:90]
+    node _paddedOut_T_8 = asSInt(_paddedOut_T_7) @[TPU.scala 232:90]
+    node _paddedOut_T_27_T_30 = _paddedOut_T_8 @[TPU.scala 232:{49,49}]
+    node _GEN_133 = mux(and(eq(UInt<1>("h0"), _T_27), eq(UInt<1>("h0"), _T_30)), _paddedOut_T_27_T_30, paddedOut_0_0) @[TPU.scala 232:{49,49} 73:26]
+    node _GEN_134 = mux(and(eq(UInt<1>("h0"), _T_27), eq(UInt<1>("h1"), _T_30)), _paddedOut_T_27_T_30, paddedOut_0_1) @[TPU.scala 232:{49,49} 73:26]
+    node _GEN_135 = mux(and(eq(UInt<1>("h1"), _T_27), eq(UInt<1>("h0"), _T_30)), _paddedOut_T_27_T_30, paddedOut_1_0) @[TPU.scala 232:{49,49} 73:26]
+    node _GEN_136 = mux(and(eq(UInt<1>("h1"), _T_27), eq(UInt<1>("h1"), _T_30)), _paddedOut_T_27_T_30, paddedOut_1_1) @[TPU.scala 232:{49,49} 73:26]
+    node _T_31 = add(UInt<1>("h0"), boundM) @[TPU.scala 233:20]
+    node _T_32 = tail(_T_31, 1) @[TPU.scala 233:20]
+    node _T_33 = lt(_T_32, UInt<2>("h2")) @[TPU.scala 233:29]
+    node _T_34 = add(UInt<1>("h0"), boundN) @[TPU.scala 233:44]
+    node _T_35 = tail(_T_34, 1) @[TPU.scala 233:44]
+    node _T_36 = lt(_T_35, UInt<2>("h2")) @[TPU.scala 233:53]
+    node _T_37 = and(_T_33, _T_36) @[TPU.scala 233:37]
+    node _T_38 = add(UInt<1>("h0"), boundM) @[TPU.scala 234:23]
+    node _T_39 = tail(_T_38, 1) @[TPU.scala 234:23]
+    node _T_40 = bits(_T_39, 0, 0)
+    node _T_41 = add(UInt<1>("h0"), boundN) @[TPU.scala 234:37]
+    node _T_42 = tail(_T_41, 1) @[TPU.scala 234:37]
+    node _T_43 = bits(_T_42, 0, 0)
+    node _myOut_T = add(UInt<1>("h0"), boundM) @[TPU.scala 234:60]
+    node _myOut_T_1 = tail(_myOut_T, 1) @[TPU.scala 234:60]
+    node _myOut_T_2 = bits(_myOut_T_1, 0, 0)
+    node _myOut_T_3 = add(UInt<1>("h0"), boundN) @[TPU.scala 234:74]
+    node _myOut_T_4 = tail(_myOut_T_3, 1) @[TPU.scala 234:74]
+    node _myOut_T_5 = bits(_myOut_T_4, 0, 0)
+    node _GEN_137 = validif(and(eq(UInt<1>("h0"), _myOut_T_2), eq(UInt<1>("h0"), _myOut_T_5)), myOut_0_0) @[TPU.scala 234:{84,84}]
+    node _GEN_138 = mux(and(eq(UInt<1>("h0"), _myOut_T_2), eq(UInt<1>("h1"), _myOut_T_5)), myOut_0_1, _GEN_137) @[TPU.scala 234:{84,84}]
+    node _GEN_139 = mux(and(eq(UInt<1>("h1"), _myOut_T_2), eq(UInt<1>("h0"), _myOut_T_5)), myOut_1_0, _GEN_138) @[TPU.scala 234:{84,84}]
+    node _GEN_140 = mux(and(eq(UInt<1>("h1"), _myOut_T_2), eq(UInt<1>("h1"), _myOut_T_5)), myOut_1_1, _GEN_139) @[TPU.scala 234:{84,84}]
+    node _myOut_myOut_T_2_myOut_T_5 = _GEN_140 @[TPU.scala 234:84]
+    node _myOut_T_6 = add(_myOut_myOut_T_2_myOut_T_5, slicedOut_0_0) @[TPU.scala 234:84]
+    node _myOut_T_7 = tail(_myOut_T_6, 1) @[TPU.scala 234:84]
+    node _myOut_T_8 = asSInt(_myOut_T_7) @[TPU.scala 234:84]
+    node _myOut_T_40_T_43 = _myOut_T_8 @[TPU.scala 234:{47,47}]
+    node _GEN_141 = mux(and(eq(UInt<1>("h0"), _T_40), eq(UInt<1>("h0"), _T_43)), _myOut_T_40_T_43, myOut_0_0) @[TPU.scala 234:{47,47} 49:22]
+    node _GEN_142 = mux(and(eq(UInt<1>("h0"), _T_40), eq(UInt<1>("h1"), _T_43)), _myOut_T_40_T_43, myOut_0_1) @[TPU.scala 234:{47,47} 49:22]
+    node _GEN_143 = mux(and(eq(UInt<1>("h1"), _T_40), eq(UInt<1>("h0"), _T_43)), _myOut_T_40_T_43, myOut_1_0) @[TPU.scala 234:{47,47} 49:22]
+    node _GEN_144 = mux(and(eq(UInt<1>("h1"), _T_40), eq(UInt<1>("h1"), _T_43)), _myOut_T_40_T_43, myOut_1_1) @[TPU.scala 234:{47,47} 49:22]
+    node _GEN_145 = mux(_T_37, _GEN_141, myOut_0_0) @[TPU.scala 233:61 49:22]
+    node _GEN_146 = mux(_T_37, _GEN_142, myOut_0_1) @[TPU.scala 233:61 49:22]
+    node _GEN_147 = mux(_T_37, _GEN_143, myOut_1_0) @[TPU.scala 233:61 49:22]
+    node _GEN_148 = mux(_T_37, _GEN_144, myOut_1_1) @[TPU.scala 233:61 49:22]
+    node _T_44 = bits(reset, 0, 0) @[TPU.scala 238:14]
+    node _T_45 = eq(_T_44, UInt<1>("h0")) @[TPU.scala 238:14]
+    node _T_46 = eq(cycle, UInt<4>("h8")) @[TPU.scala 241:21]
+    node _T_47 = add(UInt<1>("h0"), boundM) @[TPU.scala 244:25]
+    node _T_48 = tail(_T_47, 1) @[TPU.scala 244:25]
+    node _T_49 = bits(_T_48, 0, 0)
+    node _T_50 = add(UInt<1>("h0"), boundN) @[TPU.scala 244:39]
+    node _T_51 = tail(_T_50, 1) @[TPU.scala 244:39]
+    node _T_52 = bits(_T_51, 0, 0)
+    node _paddedOut_T_9 = add(UInt<1>("h0"), boundM) @[TPU.scala 244:66]
+    node _paddedOut_T_10 = tail(_paddedOut_T_9, 1) @[TPU.scala 244:66]
+    node _paddedOut_T_11 = bits(_paddedOut_T_10, 0, 0)
+    node _paddedOut_T_12 = add(UInt<1>("h0"), boundN) @[TPU.scala 244:80]
+    node _paddedOut_T_13 = tail(_paddedOut_T_12, 1) @[TPU.scala 244:80]
+    node _paddedOut_T_14 = bits(_paddedOut_T_13, 0, 0)
+    node _GEN_149 = validif(and(eq(UInt<1>("h0"), _paddedOut_T_11), eq(UInt<1>("h0"), _paddedOut_T_14)), paddedOut_0_0) @[TPU.scala 244:{90,90}]
+    node _GEN_150 = mux(and(eq(UInt<1>("h0"), _paddedOut_T_11), eq(UInt<1>("h1"), _paddedOut_T_14)), paddedOut_0_1, _GEN_149) @[TPU.scala 244:{90,90}]
+    node _GEN_151 = mux(and(eq(UInt<1>("h1"), _paddedOut_T_11), eq(UInt<1>("h0"), _paddedOut_T_14)), paddedOut_1_0, _GEN_150) @[TPU.scala 244:{90,90}]
+    node _GEN_152 = mux(and(eq(UInt<1>("h1"), _paddedOut_T_11), eq(UInt<1>("h1"), _paddedOut_T_14)), paddedOut_1_1, _GEN_151) @[TPU.scala 244:{90,90}]
+    node _paddedOut_paddedOut_T_11_paddedOut_T_14 = _GEN_152 @[TPU.scala 244:90]
+    node _paddedOut_T_15 = add(_paddedOut_paddedOut_T_11_paddedOut_T_14, slicedOut_0_0) @[TPU.scala 244:90]
+    node _paddedOut_T_16 = tail(_paddedOut_T_15, 1) @[TPU.scala 244:90]
+    node _paddedOut_T_17 = asSInt(_paddedOut_T_16) @[TPU.scala 244:90]
+    node _paddedOut_T_49_T_52 = _paddedOut_T_17 @[TPU.scala 244:{49,49}]
+    node _GEN_153 = mux(and(eq(UInt<1>("h0"), _T_49), eq(UInt<1>("h0"), _T_52)), _paddedOut_T_49_T_52, paddedOut_0_0) @[TPU.scala 244:{49,49} 73:26]
+    node _GEN_154 = mux(and(eq(UInt<1>("h0"), _T_49), eq(UInt<1>("h1"), _T_52)), _paddedOut_T_49_T_52, paddedOut_0_1) @[TPU.scala 244:{49,49} 73:26]
+    node _GEN_155 = mux(and(eq(UInt<1>("h1"), _T_49), eq(UInt<1>("h0"), _T_52)), _paddedOut_T_49_T_52, paddedOut_1_0) @[TPU.scala 244:{49,49} 73:26]
+    node _GEN_156 = mux(and(eq(UInt<1>("h1"), _T_49), eq(UInt<1>("h1"), _T_52)), _paddedOut_T_49_T_52, paddedOut_1_1) @[TPU.scala 244:{49,49} 73:26]
+    node _T_53 = add(UInt<1>("h0"), boundM) @[TPU.scala 245:20]
+    node _T_54 = tail(_T_53, 1) @[TPU.scala 245:20]
+    node _T_55 = lt(_T_54, UInt<2>("h2")) @[TPU.scala 245:29]
+    node _T_56 = add(UInt<1>("h0"), boundN) @[TPU.scala 245:44]
+    node _T_57 = tail(_T_56, 1) @[TPU.scala 245:44]
+    node _T_58 = lt(_T_57, UInt<2>("h2")) @[TPU.scala 245:53]
+    node _T_59 = and(_T_55, _T_58) @[TPU.scala 245:37]
+    node _T_60 = add(UInt<1>("h0"), boundM) @[TPU.scala 246:23]
+    node _T_61 = tail(_T_60, 1) @[TPU.scala 246:23]
+    node _T_62 = bits(_T_61, 0, 0)
+    node _T_63 = add(UInt<1>("h0"), boundN) @[TPU.scala 246:37]
+    node _T_64 = tail(_T_63, 1) @[TPU.scala 246:37]
+    node _T_65 = bits(_T_64, 0, 0)
+    node _myOut_T_9 = add(UInt<1>("h0"), boundM) @[TPU.scala 246:60]
+    node _myOut_T_10 = tail(_myOut_T_9, 1) @[TPU.scala 246:60]
+    node _myOut_T_11 = bits(_myOut_T_10, 0, 0)
+    node _myOut_T_12 = add(UInt<1>("h0"), boundN) @[TPU.scala 246:74]
+    node _myOut_T_13 = tail(_myOut_T_12, 1) @[TPU.scala 246:74]
+    node _myOut_T_14 = bits(_myOut_T_13, 0, 0)
+    node _GEN_157 = validif(and(eq(UInt<1>("h0"), _myOut_T_11), eq(UInt<1>("h0"), _myOut_T_14)), myOut_0_0) @[TPU.scala 246:{84,84}]
+    node _GEN_158 = mux(and(eq(UInt<1>("h0"), _myOut_T_11), eq(UInt<1>("h1"), _myOut_T_14)), myOut_0_1, _GEN_157) @[TPU.scala 246:{84,84}]
+    node _GEN_159 = mux(and(eq(UInt<1>("h1"), _myOut_T_11), eq(UInt<1>("h0"), _myOut_T_14)), myOut_1_0, _GEN_158) @[TPU.scala 246:{84,84}]
+    node _GEN_160 = mux(and(eq(UInt<1>("h1"), _myOut_T_11), eq(UInt<1>("h1"), _myOut_T_14)), myOut_1_1, _GEN_159) @[TPU.scala 246:{84,84}]
+    node _myOut_myOut_T_11_myOut_T_14 = _GEN_160 @[TPU.scala 246:84]
+    node _myOut_T_15 = add(_myOut_myOut_T_11_myOut_T_14, slicedOut_0_0) @[TPU.scala 246:84]
+    node _myOut_T_16 = tail(_myOut_T_15, 1) @[TPU.scala 246:84]
+    node _myOut_T_17 = asSInt(_myOut_T_16) @[TPU.scala 246:84]
+    node _myOut_T_62_T_65 = _myOut_T_17 @[TPU.scala 246:{47,47}]
+    node _GEN_161 = mux(and(eq(UInt<1>("h0"), _T_62), eq(UInt<1>("h0"), _T_65)), _myOut_T_62_T_65, myOut_0_0) @[TPU.scala 246:{47,47} 49:22]
+    node _GEN_162 = mux(and(eq(UInt<1>("h0"), _T_62), eq(UInt<1>("h1"), _T_65)), _myOut_T_62_T_65, myOut_0_1) @[TPU.scala 246:{47,47} 49:22]
+    node _GEN_163 = mux(and(eq(UInt<1>("h1"), _T_62), eq(UInt<1>("h0"), _T_65)), _myOut_T_62_T_65, myOut_1_0) @[TPU.scala 246:{47,47} 49:22]
+    node _GEN_164 = mux(and(eq(UInt<1>("h1"), _T_62), eq(UInt<1>("h1"), _T_65)), _myOut_T_62_T_65, myOut_1_1) @[TPU.scala 246:{47,47} 49:22]
+    node _GEN_165 = mux(_T_59, _GEN_161, myOut_0_0) @[TPU.scala 245:61 49:22]
+    node _GEN_166 = mux(_T_59, _GEN_162, myOut_0_1) @[TPU.scala 245:61 49:22]
+    node _GEN_167 = mux(_T_59, _GEN_163, myOut_1_0) @[TPU.scala 245:61 49:22]
+    node _GEN_168 = mux(_T_59, _GEN_164, myOut_1_1) @[TPU.scala 245:61 49:22]
+    node _GEN_169 = mux(_T_46, _GEN_153, paddedOut_0_0) @[TPU.scala 241:44 73:26]
+    node _GEN_170 = mux(_T_46, _GEN_154, paddedOut_0_1) @[TPU.scala 241:44 73:26]
+    node _GEN_171 = mux(_T_46, _GEN_155, paddedOut_1_0) @[TPU.scala 241:44 73:26]
+    node _GEN_172 = mux(_T_46, _GEN_156, paddedOut_1_1) @[TPU.scala 241:44 73:26]
+    node _GEN_173 = mux(_T_46, _GEN_165, myOut_0_0) @[TPU.scala 241:44 49:22]
+    node _GEN_174 = mux(_T_46, _GEN_166, myOut_0_1) @[TPU.scala 241:44 49:22]
+    node _GEN_175 = mux(_T_46, _GEN_167, myOut_1_0) @[TPU.scala 241:44 49:22]
+    node _GEN_176 = mux(_T_46, _GEN_168, myOut_1_1) @[TPU.scala 241:44 49:22]
+    node _GEN_177 = mux(_T_46, UInt<3>("h2"), state) @[TPU.scala 241:44 250:13 45:22]
+    node _GEN_178 = mux(_T_24, _GEN_133, _GEN_169) @[TPU.scala 229:99]
+    node _GEN_179 = mux(_T_24, _GEN_134, _GEN_170) @[TPU.scala 229:99]
+    node _GEN_180 = mux(_T_24, _GEN_135, _GEN_171) @[TPU.scala 229:99]
+    node _GEN_181 = mux(_T_24, _GEN_136, _GEN_172) @[TPU.scala 229:99]
+    node _GEN_182 = mux(_T_24, _GEN_145, _GEN_173) @[TPU.scala 229:99]
+    node _GEN_183 = mux(_T_24, _GEN_146, _GEN_174) @[TPU.scala 229:99]
+    node _GEN_184 = mux(_T_24, _GEN_147, _GEN_175) @[TPU.scala 229:99]
+    node _GEN_185 = mux(_T_24, _GEN_148, _GEN_176) @[TPU.scala 229:99]
+    node _GEN_186 = mux(_T_24, UInt<3>("h4"), _GEN_177) @[TPU.scala 229:99 239:13]
+    node _T_66 = bits(reset, 0, 0) @[TPU.scala 252:13]
+    node _T_67 = eq(_T_66, UInt<1>("h0")) @[TPU.scala 252:13]
+    node _T_68 = bits(reset, 0, 0) @[TPU.scala 254:13]
+    node _T_69 = eq(_T_68, UInt<1>("h0")) @[TPU.scala 254:13]
+    node _T_70 = bits(reset, 0, 0) @[TPU.scala 254:13]
+    node _T_71 = eq(_T_70, UInt<1>("h0")) @[TPU.scala 254:13]
+    node _T_72 = bits(reset, 0, 0) @[TPU.scala 256:12]
+    node _T_73 = eq(_T_72, UInt<1>("h0")) @[TPU.scala 256:12]
+    node _T_74 = bits(reset, 0, 0) @[TPU.scala 258:13]
+    node _T_75 = eq(_T_74, UInt<1>("h0")) @[TPU.scala 258:13]
+    node _T_76 = bits(reset, 0, 0) @[TPU.scala 258:13]
+    node _T_77 = eq(_T_76, UInt<1>("h0")) @[TPU.scala 258:13]
+    node _T_78 = bits(reset, 0, 0) @[TPU.scala 258:13]
+    node _T_79 = eq(_T_78, UInt<1>("h0")) @[TPU.scala 258:13]
+    node _T_80 = bits(reset, 0, 0) @[TPU.scala 258:13]
+    node _T_81 = eq(_T_80, UInt<1>("h0")) @[TPU.scala 258:13]
+    node _T_82 = bits(reset, 0, 0) @[TPU.scala 258:13]
+    node _T_83 = eq(_T_82, UInt<1>("h0")) @[TPU.scala 258:13]
+    node _T_84 = bits(reset, 0, 0) @[TPU.scala 258:13]
+    node _T_85 = eq(_T_84, UInt<1>("h0")) @[TPU.scala 258:13]
+    node _T_86 = bits(reset, 0, 0) @[TPU.scala 260:11]
+    node _T_87 = eq(_T_86, UInt<1>("h0")) @[TPU.scala 260:11]
+    node _T_88 = bits(reset, 0, 0) @[TPU.scala 262:13]
+    node _T_89 = eq(_T_88, UInt<1>("h0")) @[TPU.scala 262:13]
+    node _T_90 = bits(reset, 0, 0) @[TPU.scala 264:11]
+    node _T_91 = eq(_T_90, UInt<1>("h0")) @[TPU.scala 264:11]
+    node _T_92 = bits(reset, 0, 0) @[TPU.scala 266:13]
+    node _T_93 = eq(_T_92, UInt<1>("h0")) @[TPU.scala 266:13]
+    node _T_94 = bits(reset, 0, 0) @[TPU.scala 266:13]
+    node _T_95 = eq(_T_94, UInt<1>("h0")) @[TPU.scala 266:13]
+    node _T_96 = bits(reset, 0, 0) @[TPU.scala 266:13]
+    node _T_97 = eq(_T_96, UInt<1>("h0")) @[TPU.scala 266:13]
+    node _T_98 = bits(reset, 0, 0) @[TPU.scala 268:11]
+    node _T_99 = eq(_T_98, UInt<1>("h0")) @[TPU.scala 268:11]
+    node _T_100 = bits(reset, 0, 0) @[TPU.scala 270:13]
+    node _T_101 = eq(_T_100, UInt<1>("h0")) @[TPU.scala 270:13]
+    node _T_102 = bits(reset, 0, 0) @[TPU.scala 273:11]
+    node _T_103 = eq(_T_102, UInt<1>("h0")) @[TPU.scala 273:11]
+    node _T_104 = bits(reset, 0, 0) @[TPU.scala 275:13]
+    node _T_105 = eq(_T_104, UInt<1>("h0")) @[TPU.scala 275:13]
+    node _T_106 = bits(reset, 0, 0) @[TPU.scala 275:13]
+    node _T_107 = eq(_T_106, UInt<1>("h0")) @[TPU.scala 275:13]
+    node _T_108 = eq(state, UInt<3>("h4")) @[TPU.scala 279:19]
+    node _T_109 = bits(reset, 0, 0) @[TPU.scala 280:11]
+    node _T_110 = eq(_T_109, UInt<1>("h0")) @[TPU.scala 280:11]
+    node _GEN_187 = mux(_T_108, UInt<3>("h1"), state) @[TPU.scala 279:29 281:11 45:22]
+    node _GEN_188 = mux(_T_108, UInt<1>("h1"), b_ready) @[TPU.scala 279:29 282:13 51:24]
+    node _WIRE_0_0 = asSInt(UInt<32>("h0")) @[TPU.scala 284:{36,36}]
+    node _GEN_189 = mux(_T_108, _WIRE_0_0, myOut_0_0) @[TPU.scala 279:29 284:11 49:22]
+    node _WIRE_0_1 = asSInt(UInt<32>("h0")) @[TPU.scala 284:{36,36}]
+    node _GEN_190 = mux(_T_108, _WIRE_0_1, myOut_0_1) @[TPU.scala 279:29 284:11 49:22]
+    node _WIRE_1_0 = asSInt(UInt<32>("h0")) @[TPU.scala 284:{36,36}]
+    node _GEN_191 = mux(_T_108, _WIRE_1_0, myOut_1_0) @[TPU.scala 279:29 284:11 49:22]
+    node _WIRE_1_1 = asSInt(UInt<32>("h0")) @[TPU.scala 284:{36,36}]
+    node _GEN_192 = mux(_T_108, _WIRE_1_1, myOut_1_1) @[TPU.scala 279:29 284:11 49:22]
+    node _GEN_193 = mux(_T_20, UInt<1>("h1"), enabledSyst) @[TPU.scala 198:32 199:17 52:28]
+    node _GEN_195 = mux(_T_20, _GEN_128, allowReadB) @[TPU.scala 154:27 198:32]
+    node _GEN_196 = mux(_T_20, _GEN_178, paddedOut_0_0) @[TPU.scala 198:32 73:26]
+    node _GEN_197 = mux(_T_20, _GEN_179, paddedOut_0_1) @[TPU.scala 198:32 73:26]
+    node _GEN_198 = mux(_T_20, _GEN_180, paddedOut_1_0) @[TPU.scala 198:32 73:26]
+    node _GEN_199 = mux(_T_20, _GEN_181, paddedOut_1_1) @[TPU.scala 198:32 73:26]
+    node _GEN_200 = mux(_T_20, _GEN_182, _GEN_189) @[TPU.scala 198:32]
+    node _GEN_201 = mux(_T_20, _GEN_183, _GEN_190) @[TPU.scala 198:32]
+    node _GEN_202 = mux(_T_20, _GEN_184, _GEN_191) @[TPU.scala 198:32]
+    node _GEN_203 = mux(_T_20, _GEN_185, _GEN_192) @[TPU.scala 198:32]
+    node _GEN_204 = mux(_T_20, _GEN_186, _GEN_187) @[TPU.scala 198:32]
+    node _GEN_205 = mux(_T_20, b_ready, _GEN_188) @[TPU.scala 198:32 51:24]
+    node _GEN_206 = mux(_T_17, UInt<3>("h3"), _GEN_204) @[TPU.scala 188:29 190:11]
+    node _GEN_207 = mux(_T_17, UInt<1>("h0"), _GEN_1) @[TPU.scala 188:29 192:11]
+    node _GEN_209 = mux(_T_17, UInt<1>("h1"), UInt<1>("h0")) @[TPU.scala 152:22 188:29 195:24]
+    node _GEN_210 = mux(_T_17, UInt<1>("h0"), _GEN_193) @[TPU.scala 188:29 196:17]
+    node _GEN_211 = mux(_T_17, allowReadB, _GEN_195) @[TPU.scala 154:27 188:29]
+    node _GEN_212 = mux(_T_17, paddedOut_0_0, _GEN_196) @[TPU.scala 188:29 73:26]
+    node _GEN_213 = mux(_T_17, paddedOut_0_1, _GEN_197) @[TPU.scala 188:29 73:26]
+    node _GEN_214 = mux(_T_17, paddedOut_1_0, _GEN_198) @[TPU.scala 188:29 73:26]
+    node _GEN_215 = mux(_T_17, paddedOut_1_1, _GEN_199) @[TPU.scala 188:29 73:26]
+    node _GEN_216 = mux(_T_17, myOut_0_0, _GEN_200) @[TPU.scala 188:29 49:22]
+    node _GEN_217 = mux(_T_17, myOut_0_1, _GEN_201) @[TPU.scala 188:29 49:22]
+    node _GEN_218 = mux(_T_17, myOut_1_0, _GEN_202) @[TPU.scala 188:29 49:22]
+    node _GEN_219 = mux(_T_17, myOut_1_1, _GEN_203) @[TPU.scala 188:29 49:22]
+    node _GEN_220 = mux(_T_17, b_ready, _GEN_205) @[TPU.scala 188:29 51:24]
+    node _GEN_221 = mux(_T_14, UInt<1>("h0"), _GEN_210) @[TPU.scala 172:28 173:19]
+    node _GEN_222 = mux(_T_14, _GEN_107, paddedB_0_0) @[TPU.scala 172:28 72:24]
+    node _GEN_223 = mux(_T_14, _GEN_108, paddedB_0_1) @[TPU.scala 172:28 72:24]
+    node _GEN_224 = mux(_T_14, _GEN_109, paddedB_1_0) @[TPU.scala 172:28 72:24]
+    node _GEN_225 = mux(_T_14, _GEN_110, paddedB_1_1) @[TPU.scala 172:28 72:24]
+    node _GEN_226 = mux(_T_14, _GEN_111, paddedB_2_0) @[TPU.scala 172:28 72:24]
+    node _GEN_227 = mux(_T_14, _GEN_112, paddedB_2_1) @[TPU.scala 172:28 72:24]
+    node _GEN_228 = mux(_T_14, _GEN_113, paddedB_3_0) @[TPU.scala 172:28 72:24]
+    node _GEN_229 = mux(_T_14, _GEN_114, paddedB_3_1) @[TPU.scala 172:28 72:24]
+    node _GEN_230 = mux(_T_14, _GEN_115, paddedB_4_0) @[TPU.scala 172:28 72:24]
+    node _GEN_231 = mux(_T_14, _GEN_116, paddedB_4_1) @[TPU.scala 172:28 72:24]
+    node _GEN_232 = mux(_T_14, _GEN_117, paddedB_5_0) @[TPU.scala 172:28 72:24]
+    node _GEN_233 = mux(_T_14, _GEN_118, paddedB_5_1) @[TPU.scala 172:28 72:24]
+    node _GEN_234 = mux(_T_14, _GEN_119, slicedB_0_0) @[TPU.scala 157:19 172:28]
+    node _GEN_235 = mux(_T_14, _GEN_120, slicedB_1_0) @[TPU.scala 157:19 172:28]
+    node _GEN_236 = mux(_T_14, _GEN_121, slicedB_2_0) @[TPU.scala 157:19 172:28]
+    node _GEN_237 = mux(_T_14, _GEN_122, _GEN_211) @[TPU.scala 172:28]
+    node _GEN_238 = mux(_T_14, _GEN_123, _GEN_220) @[TPU.scala 172:28]
+    node _GEN_240 = mux(_T_14, _GEN_125, _GEN_207) @[TPU.scala 172:28]
+    node _GEN_241 = mux(_T_14, _GEN_126, _GEN_206) @[TPU.scala 172:28]
+    node _GEN_242 = mux(_T_14, _GEN_127, _GEN_6) @[TPU.scala 172:28]
+    node _GEN_243 = mux(_T_14, UInt<1>("h0"), _GEN_209) @[TPU.scala 152:22 172:28]
+    node _GEN_244 = mux(_T_14, paddedOut_0_0, _GEN_212) @[TPU.scala 172:28 73:26]
+    node _GEN_245 = mux(_T_14, paddedOut_0_1, _GEN_213) @[TPU.scala 172:28 73:26]
+    node _GEN_246 = mux(_T_14, paddedOut_1_0, _GEN_214) @[TPU.scala 172:28 73:26]
+    node _GEN_247 = mux(_T_14, paddedOut_1_1, _GEN_215) @[TPU.scala 172:28 73:26]
+    node _GEN_248 = mux(_T_14, myOut_0_0, _GEN_216) @[TPU.scala 172:28 49:22]
+    node _GEN_249 = mux(_T_14, myOut_0_1, _GEN_217) @[TPU.scala 172:28 49:22]
+    node _GEN_250 = mux(_T_14, myOut_1_0, _GEN_218) @[TPU.scala 172:28 49:22]
+    node _GEN_251 = mux(_T_14, myOut_1_1, _GEN_219) @[TPU.scala 172:28 49:22]
+    node _GEN_252 = mux(_T_8, _GEN_80, _GEN_241) @[TPU.scala 160:23]
+    node _GEN_253 = mux(_T_8, _GEN_81, act_in_0_0) @[TPU.scala 153:23 160:23]
+    node _GEN_254 = mux(_T_8, _GEN_82, act_in_0_1) @[TPU.scala 153:23 160:23]
+    node _GEN_255 = mux(_T_8, _GEN_83, act_in_0_2) @[TPU.scala 153:23 160:23]
+    node _GEN_256 = mux(_T_8, _GEN_84, act_in_0_3) @[TPU.scala 153:23 160:23]
+    node _GEN_257 = mux(_T_8, _GEN_85, act_in_1_0) @[TPU.scala 153:23 160:23]
+    node _GEN_258 = mux(_T_8, _GEN_86, act_in_1_1) @[TPU.scala 153:23 160:23]
+    node _GEN_259 = mux(_T_8, _GEN_87, act_in_1_2) @[TPU.scala 153:23 160:23]
+    node _GEN_260 = mux(_T_8, _GEN_88, act_in_1_3) @[TPU.scala 153:23 160:23]
+    node _GEN_261 = mux(_T_8, _GEN_89, paddedA_0_0) @[TPU.scala 160:23 71:24]
+    node _GEN_262 = mux(_T_8, _GEN_90, paddedA_0_1) @[TPU.scala 160:23 71:24]
+    node _GEN_263 = mux(_T_8, _GEN_91, paddedA_0_2) @[TPU.scala 160:23 71:24]
+    node _GEN_264 = mux(_T_8, _GEN_92, paddedA_0_3) @[TPU.scala 160:23 71:24]
+    node _GEN_265 = mux(_T_8, _GEN_93, paddedA_0_4) @[TPU.scala 160:23 71:24]
+    node _GEN_266 = mux(_T_8, _GEN_94, paddedA_0_5) @[TPU.scala 160:23 71:24]
+    node _GEN_267 = mux(_T_8, _GEN_95, paddedA_1_0) @[TPU.scala 160:23 71:24]
+    node _GEN_268 = mux(_T_8, _GEN_96, paddedA_1_1) @[TPU.scala 160:23 71:24]
+    node _GEN_269 = mux(_T_8, _GEN_97, paddedA_1_2) @[TPU.scala 160:23 71:24]
+    node _GEN_270 = mux(_T_8, _GEN_98, paddedA_1_3) @[TPU.scala 160:23 71:24]
+    node _GEN_271 = mux(_T_8, _GEN_99, paddedA_1_4) @[TPU.scala 160:23 71:24]
+    node _GEN_272 = mux(_T_8, _GEN_100, paddedA_1_5) @[TPU.scala 160:23 71:24]
+    node _GEN_273 = mux(_T_8, _GEN_101, slicedA_0_0) @[TPU.scala 156:15 160:23]
+    node _GEN_274 = mux(_T_8, _GEN_102, slicedA_0_1) @[TPU.scala 156:15 160:23]
+    node _GEN_275 = mux(_T_8, _GEN_103, slicedA_0_2) @[TPU.scala 156:15 160:23]
+    node _GEN_276 = mux(_T_8, _GEN_104, a_ready) @[TPU.scala 160:23 50:24]
+    node _GEN_277 = mux(_T_8, UInt<1>("h0"), _GEN_240) @[TPU.scala 160:23 170:13]
+    node _GEN_278 = mux(_T_8, enabledSyst, _GEN_221) @[TPU.scala 160:23 52:28]
+    node _GEN_279 = mux(_T_8, paddedB_0_0, _GEN_222) @[TPU.scala 160:23 72:24]
+    node _GEN_280 = mux(_T_8, paddedB_0_1, _GEN_223) @[TPU.scala 160:23 72:24]
+    node _GEN_281 = mux(_T_8, paddedB_1_0, _GEN_224) @[TPU.scala 160:23 72:24]
+    node _GEN_282 = mux(_T_8, paddedB_1_1, _GEN_225) @[TPU.scala 160:23 72:24]
+    node _GEN_283 = mux(_T_8, paddedB_2_0, _GEN_226) @[TPU.scala 160:23 72:24]
+    node _GEN_284 = mux(_T_8, paddedB_2_1, _GEN_227) @[TPU.scala 160:23 72:24]
+    node _GEN_285 = mux(_T_8, paddedB_3_0, _GEN_228) @[TPU.scala 160:23 72:24]
+    node _GEN_286 = mux(_T_8, paddedB_3_1, _GEN_229) @[TPU.scala 160:23 72:24]
+    node _GEN_287 = mux(_T_8, paddedB_4_0, _GEN_230) @[TPU.scala 160:23 72:24]
+    node _GEN_288 = mux(_T_8, paddedB_4_1, _GEN_231) @[TPU.scala 160:23 72:24]
+    node _GEN_289 = mux(_T_8, paddedB_5_0, _GEN_232) @[TPU.scala 160:23 72:24]
+    node _GEN_290 = mux(_T_8, paddedB_5_1, _GEN_233) @[TPU.scala 160:23 72:24]
+    node _GEN_291 = mux(_T_8, slicedB_0_0, _GEN_234) @[TPU.scala 157:19 160:23]
+    node _GEN_292 = mux(_T_8, slicedB_1_0, _GEN_235) @[TPU.scala 157:19 160:23]
+    node _GEN_293 = mux(_T_8, slicedB_2_0, _GEN_236) @[TPU.scala 157:19 160:23]
+    node _GEN_294 = mux(_T_8, allowReadB, _GEN_237) @[TPU.scala 160:23 154:27]
+    node _GEN_295 = mux(_T_8, b_ready, _GEN_238) @[TPU.scala 160:23 51:24]
+    node _GEN_297 = mux(_T_8, _GEN_6, _GEN_242) @[TPU.scala 160:23]
+    node _GEN_298 = mux(_T_8, UInt<1>("h0"), _GEN_243) @[TPU.scala 152:22 160:23]
+    node _GEN_299 = mux(_T_8, paddedOut_0_0, _GEN_244) @[TPU.scala 160:23 73:26]
+    node _GEN_300 = mux(_T_8, paddedOut_0_1, _GEN_245) @[TPU.scala 160:23 73:26]
+    node _GEN_301 = mux(_T_8, paddedOut_1_0, _GEN_246) @[TPU.scala 160:23 73:26]
+    node _GEN_302 = mux(_T_8, paddedOut_1_1, _GEN_247) @[TPU.scala 160:23 73:26]
+    node _GEN_303 = mux(_T_8, myOut_0_0, _GEN_248) @[TPU.scala 160:23 49:22]
+    node _GEN_304 = mux(_T_8, myOut_0_1, _GEN_249) @[TPU.scala 160:23 49:22]
+    node _GEN_305 = mux(_T_8, myOut_1_0, _GEN_250) @[TPU.scala 160:23 49:22]
+    node _GEN_306 = mux(_T_8, myOut_1_1, _GEN_251) @[TPU.scala 160:23 49:22]
+    node _myOut_WIRE_0_0 = asSInt(UInt<32>("h0")) @[TPU.scala 49:{45,45}]
+    node _myOut_WIRE_0_1 = asSInt(UInt<32>("h0")) @[TPU.scala 49:{45,45}]
+    node _myOut_WIRE_1_0 = asSInt(UInt<32>("h0")) @[TPU.scala 49:{45,45}]
+    node _myOut_WIRE_1_1 = asSInt(UInt<32>("h0")) @[TPU.scala 49:{45,45}]
+    node wrap = _GEN_2
+    node _paddedA_WIRE_0_0 = asSInt(UInt<32>("h0")) @[TPU.scala 71:{61,61}]
+    node _paddedA_WIRE_0_1 = asSInt(UInt<32>("h0")) @[TPU.scala 71:{61,61}]
+    node _paddedA_WIRE_0_2 = asSInt(UInt<32>("h0")) @[TPU.scala 71:{61,61}]
+    node _paddedA_WIRE_0_3 = asSInt(UInt<32>("h0")) @[TPU.scala 71:{61,61}]
+    node _paddedA_WIRE_0_4 = asSInt(UInt<32>("h0")) @[TPU.scala 71:{61,61}]
+    node _paddedA_WIRE_0_5 = asSInt(UInt<32>("h0")) @[TPU.scala 71:{61,61}]
+    node _paddedA_WIRE_1_0 = asSInt(UInt<32>("h0")) @[TPU.scala 71:{61,61}]
+    node _paddedA_WIRE_1_1 = asSInt(UInt<32>("h0")) @[TPU.scala 71:{61,61}]
+    node _paddedA_WIRE_1_2 = asSInt(UInt<32>("h0")) @[TPU.scala 71:{61,61}]
+    node _paddedA_WIRE_1_3 = asSInt(UInt<32>("h0")) @[TPU.scala 71:{61,61}]
+    node _paddedA_WIRE_1_4 = asSInt(UInt<32>("h0")) @[TPU.scala 71:{61,61}]
+    node _paddedA_WIRE_1_5 = asSInt(UInt<32>("h0")) @[TPU.scala 71:{61,61}]
+    node _paddedB_WIRE_0_0 = asSInt(UInt<32>("h0")) @[TPU.scala 72:{61,61}]
+    node _paddedB_WIRE_0_1 = asSInt(UInt<32>("h0")) @[TPU.scala 72:{61,61}]
+    node _paddedB_WIRE_1_0 = asSInt(UInt<32>("h0")) @[TPU.scala 72:{61,61}]
+    node _paddedB_WIRE_1_1 = asSInt(UInt<32>("h0")) @[TPU.scala 72:{61,61}]
+    node _paddedB_WIRE_2_0 = asSInt(UInt<32>("h0")) @[TPU.scala 72:{61,61}]
+    node _paddedB_WIRE_2_1 = asSInt(UInt<32>("h0")) @[TPU.scala 72:{61,61}]
+    node _paddedB_WIRE_3_0 = asSInt(UInt<32>("h0")) @[TPU.scala 72:{61,61}]
+    node _paddedB_WIRE_3_1 = asSInt(UInt<32>("h0")) @[TPU.scala 72:{61,61}]
+    node _paddedB_WIRE_4_0 = asSInt(UInt<32>("h0")) @[TPU.scala 72:{61,61}]
+    node _paddedB_WIRE_4_1 = asSInt(UInt<32>("h0")) @[TPU.scala 72:{61,61}]
+    node _paddedB_WIRE_5_0 = asSInt(UInt<32>("h0")) @[TPU.scala 72:{61,61}]
+    node _paddedB_WIRE_5_1 = asSInt(UInt<32>("h0")) @[TPU.scala 72:{61,61}]
+    node _paddedOut_WIRE_0_0 = asSInt(UInt<32>("h0")) @[TPU.scala 73:{63,63}]
+    node _paddedOut_WIRE_0_1 = asSInt(UInt<32>("h0")) @[TPU.scala 73:{63,63}]
+    node _paddedOut_WIRE_1_0 = asSInt(UInt<32>("h0")) @[TPU.scala 73:{63,63}]
+    node _paddedOut_WIRE_1_1 = asSInt(UInt<32>("h0")) @[TPU.scala 73:{63,63}]
+    node _slicedA_WIRE_0_0 = asSInt(UInt<32>("h0")) @[TPU.scala 74:{51,51}]
+    node _slicedA_WIRE_0_1 = asSInt(UInt<32>("h0")) @[TPU.scala 74:{51,51}]
+    node _slicedA_WIRE_0_2 = asSInt(UInt<32>("h0")) @[TPU.scala 74:{51,51}]
+    node _slicedB_WIRE_0_0 = asSInt(UInt<32>("h0")) @[TPU.scala 75:{49,49}]
+    node _slicedB_WIRE_1_0 = asSInt(UInt<32>("h0")) @[TPU.scala 75:{49,49}]
+    node _slicedB_WIRE_2_0 = asSInt(UInt<32>("h0")) @[TPU.scala 75:{49,49}]
+    node totalWrap = _GEN_5
+    node sliceWrap = _GEN_7
+    node cycleIdx = UInt<32>("h0") @[TPU.scala 85:22 89:12]
+    node cycleIdxCols_0 = UInt<32>("h0") @[TPU.scala 86:26 91:21]
+    node cycleIdxCols_1 = UInt<32>("h0") @[TPU.scala 86:26 91:21]
+    node cycleIdxRows_0 = UInt<32>("h0") @[TPU.scala 87:26 92:21]
+    node cycleIdxRows_1 = UInt<32>("h0") @[TPU.scala 87:26 92:21]
+    node _paddedA_slicedA_0_0_T_2_slicedA_0_0_T_5 = _GEN_19 @[TPU.scala 129:23]
+    node _paddedB_slicedB_0_0_T_2_slicedB_0_0_T_5 = _GEN_31 @[TPU.scala 132:23]
+    node _paddedA_slicedA_0_1_T_2_slicedA_0_1_T_5 = _GEN_43 @[TPU.scala 129:23]
+    node _paddedB_slicedB_1_0_T_2_slicedB_1_0_T_5 = _GEN_55 @[TPU.scala 132:23]
+    node _paddedA_slicedA_0_2_T_2_slicedA_0_2_T_5 = _GEN_67 @[TPU.scala 129:23]
+    node _paddedB_slicedB_2_0_T_2_slicedB_2_0_T_5 = _GEN_79 @[TPU.scala 132:23]
+    node _act_in_WIRE_0_0 = asSInt(UInt<32>("h0")) @[TPU.scala 153:{46,46}]
+    node _act_in_WIRE_0_1 = asSInt(UInt<32>("h0")) @[TPU.scala 153:{46,46}]
+    node _act_in_WIRE_0_2 = asSInt(UInt<32>("h0")) @[TPU.scala 153:{46,46}]
+    node _act_in_WIRE_0_3 = asSInt(UInt<32>("h0")) @[TPU.scala 153:{46,46}]
+    node _act_in_WIRE_1_0 = asSInt(UInt<32>("h0")) @[TPU.scala 153:{46,46}]
+    node _act_in_WIRE_1_1 = asSInt(UInt<32>("h0")) @[TPU.scala 153:{46,46}]
+    node _act_in_WIRE_1_2 = asSInt(UInt<32>("h0")) @[TPU.scala 153:{46,46}]
+    node _act_in_WIRE_1_3 = asSInt(UInt<32>("h0")) @[TPU.scala 153:{46,46}]
+    io_a_ready <= a_ready @[TPU.scala 142:14]
+    io_b_ready <= b_ready @[TPU.scala 143:14]
+    io_out_0_0 <= myOut_0_0 @[TPU.scala 144:10]
+    io_out_0_1 <= myOut_0_1 @[TPU.scala 144:10]
+    io_out_1_0 <= myOut_1_0 @[TPU.scala 144:10]
+    io_out_1_1 <= myOut_1_1 @[TPU.scala 144:10]
+    state <= mux(reset, UInt<3>("h0"), _GEN_252) @[TPU.scala 45:{22,22}]
+    actReg.clock <= clock
+    actReg.reset <= reset
+    actReg.io_index <= bits(_actReg_io_index_T_1, 2, 0) @[TPU.scala 148:19]
+    actReg.io_a_0_0 <= _GEN_273
+    actReg.io_a_0_1 <= _GEN_274
+    actReg.io_a_0_2 <= _GEN_275
+    systArr.clock <= clock
+    systArr.reset <= reset
+    systArr.io_a_in_0 <= actReg.io_a_out_0 @[TPU.scala 149:19]
+    systArr.io_a_in_1 <= actReg.io_a_out_1 @[TPU.scala 149:19]
+    systArr.io_a_in_2 <= actReg.io_a_out_2 @[TPU.scala 149:19]
+    systArr.io_b_in_0_0 <= _GEN_291
+    systArr.io_b_in_1_0 <= _GEN_292
+    systArr.io_b_in_2_0 <= _GEN_293
+    systArr.io_en <= enabledSyst @[TPU.scala 53:17]
+    systArr.io_b_readingin <= allowReadB @[TPU.scala 155:26]
+    myOut_0_0 <= mux(reset, _myOut_WIRE_0_0, _GEN_303) @[TPU.scala 49:{22,22}]
+    myOut_0_1 <= mux(reset, _myOut_WIRE_0_1, _GEN_304) @[TPU.scala 49:{22,22}]
+    myOut_1_0 <= mux(reset, _myOut_WIRE_1_0, _GEN_305) @[TPU.scala 49:{22,22}]
+    myOut_1_1 <= mux(reset, _myOut_WIRE_1_1, _GEN_306) @[TPU.scala 49:{22,22}]
+    a_ready <= mux(reset, UInt<1>("h1"), _GEN_276) @[TPU.scala 50:{24,24}]
+    b_ready <= mux(reset, UInt<1>("h1"), _GEN_295) @[TPU.scala 51:{24,24}]
+    enabledSyst <= mux(reset, UInt<1>("h0"), _GEN_278) @[TPU.scala 52:{28,28}]
+    cycle <= mux(reset, UInt<4>("h0"), _GEN_277) @[Counter.scala 61:{40,40}]
+    outReg.clock <= clock
+    outReg.reset <= reset
+    outReg.io_cycle <= pad(cycle, 8) @[TPU.scala 150:19]
+    outReg.io_systArr_out_0 <= systArr.io_out_0 @[TPU.scala 158:25]
+    outReg.io_clearsig <= _GEN_298
+    paddedA_0_0 <= mux(reset, _paddedA_WIRE_0_0, _GEN_261) @[TPU.scala 71:{24,24}]
+    paddedA_0_1 <= mux(reset, _paddedA_WIRE_0_1, _GEN_262) @[TPU.scala 71:{24,24}]
+    paddedA_0_2 <= mux(reset, _paddedA_WIRE_0_2, _GEN_263) @[TPU.scala 71:{24,24}]
+    paddedA_0_3 <= mux(reset, _paddedA_WIRE_0_3, _GEN_264) @[TPU.scala 71:{24,24}]
+    paddedA_0_4 <= mux(reset, _paddedA_WIRE_0_4, _GEN_265) @[TPU.scala 71:{24,24}]
+    paddedA_0_5 <= mux(reset, _paddedA_WIRE_0_5, _GEN_266) @[TPU.scala 71:{24,24}]
+    paddedA_1_0 <= mux(reset, _paddedA_WIRE_1_0, _GEN_267) @[TPU.scala 71:{24,24}]
+    paddedA_1_1 <= mux(reset, _paddedA_WIRE_1_1, _GEN_268) @[TPU.scala 71:{24,24}]
+    paddedA_1_2 <= mux(reset, _paddedA_WIRE_1_2, _GEN_269) @[TPU.scala 71:{24,24}]
+    paddedA_1_3 <= mux(reset, _paddedA_WIRE_1_3, _GEN_270) @[TPU.scala 71:{24,24}]
+    paddedA_1_4 <= mux(reset, _paddedA_WIRE_1_4, _GEN_271) @[TPU.scala 71:{24,24}]
+    paddedA_1_5 <= mux(reset, _paddedA_WIRE_1_5, _GEN_272) @[TPU.scala 71:{24,24}]
+    paddedB_0_0 <= mux(reset, _paddedB_WIRE_0_0, _GEN_279) @[TPU.scala 72:{24,24}]
+    paddedB_0_1 <= mux(reset, _paddedB_WIRE_0_1, _GEN_280) @[TPU.scala 72:{24,24}]
+    paddedB_1_0 <= mux(reset, _paddedB_WIRE_1_0, _GEN_281) @[TPU.scala 72:{24,24}]
+    paddedB_1_1 <= mux(reset, _paddedB_WIRE_1_1, _GEN_282) @[TPU.scala 72:{24,24}]
+    paddedB_2_0 <= mux(reset, _paddedB_WIRE_2_0, _GEN_283) @[TPU.scala 72:{24,24}]
+    paddedB_2_1 <= mux(reset, _paddedB_WIRE_2_1, _GEN_284) @[TPU.scala 72:{24,24}]
+    paddedB_3_0 <= mux(reset, _paddedB_WIRE_3_0, _GEN_285) @[TPU.scala 72:{24,24}]
+    paddedB_3_1 <= mux(reset, _paddedB_WIRE_3_1, _GEN_286) @[TPU.scala 72:{24,24}]
+    paddedB_4_0 <= mux(reset, _paddedB_WIRE_4_0, _GEN_287) @[TPU.scala 72:{24,24}]
+    paddedB_4_1 <= mux(reset, _paddedB_WIRE_4_1, _GEN_288) @[TPU.scala 72:{24,24}]
+    paddedB_5_0 <= mux(reset, _paddedB_WIRE_5_0, _GEN_289) @[TPU.scala 72:{24,24}]
+    paddedB_5_1 <= mux(reset, _paddedB_WIRE_5_1, _GEN_290) @[TPU.scala 72:{24,24}]
+    paddedOut_0_0 <= mux(reset, _paddedOut_WIRE_0_0, _GEN_299) @[TPU.scala 73:{26,26}]
+    paddedOut_0_1 <= mux(reset, _paddedOut_WIRE_0_1, _GEN_300) @[TPU.scala 73:{26,26}]
+    paddedOut_1_0 <= mux(reset, _paddedOut_WIRE_1_0, _GEN_301) @[TPU.scala 73:{26,26}]
+    paddedOut_1_1 <= mux(reset, _paddedOut_WIRE_1_1, _GEN_302) @[TPU.scala 73:{26,26}]
+    slicedA_0_0 <= mux(reset, _slicedA_WIRE_0_0, _paddedA_slicedA_0_0_T_2_slicedA_0_0_T_5) @[TPU.scala 129:23 74:{24,24}]
+    slicedA_0_1 <= mux(reset, _slicedA_WIRE_0_1, _paddedA_slicedA_0_1_T_2_slicedA_0_1_T_5) @[TPU.scala 129:23 74:{24,24}]
+    slicedA_0_2 <= mux(reset, _slicedA_WIRE_0_2, _paddedA_slicedA_0_2_T_2_slicedA_0_2_T_5) @[TPU.scala 129:23 74:{24,24}]
+    slicedB_0_0 <= mux(reset, _slicedB_WIRE_0_0, _paddedB_slicedB_0_0_T_2_slicedB_0_0_T_5) @[TPU.scala 132:23 75:{24,24}]
+    slicedB_1_0 <= mux(reset, _slicedB_WIRE_1_0, _paddedB_slicedB_1_0_T_2_slicedB_1_0_T_5) @[TPU.scala 132:23 75:{24,24}]
+    slicedB_2_0 <= mux(reset, _slicedB_WIRE_2_0, _paddedB_slicedB_2_0_T_2_slicedB_2_0_T_5) @[TPU.scala 132:23 75:{24,24}]
+    totalCycle <= mux(reset, UInt<10>("h0"), _GEN_4) @[Counter.scala 61:{40,40}]
+    sliceCycle <= mux(reset, UInt<3>("h0"), _GEN_297) @[Counter.scala 61:{40,40}]
+    act_in_0_0 <= mux(reset, _act_in_WIRE_0_0, _GEN_253) @[TPU.scala 153:{23,23}]
+    act_in_0_1 <= mux(reset, _act_in_WIRE_0_1, _GEN_254) @[TPU.scala 153:{23,23}]
+    act_in_0_2 <= mux(reset, _act_in_WIRE_0_2, _GEN_255) @[TPU.scala 153:{23,23}]
+    act_in_0_3 <= mux(reset, _act_in_WIRE_0_3, _GEN_256) @[TPU.scala 153:{23,23}]
+    act_in_1_0 <= mux(reset, _act_in_WIRE_1_0, _GEN_257) @[TPU.scala 153:{23,23}]
+    act_in_1_1 <= mux(reset, _act_in_WIRE_1_1, _GEN_258) @[TPU.scala 153:{23,23}]
+    act_in_1_2 <= mux(reset, _act_in_WIRE_1_2, _GEN_259) @[TPU.scala 153:{23,23}]
+    act_in_1_3 <= mux(reset, _act_in_WIRE_1_3, _GEN_260) @[TPU.scala 153:{23,23}]
+    allowReadB <= mux(reset, UInt<1>("h0"), _GEN_294) @[TPU.scala 154:{27,27}]
+    printf(clock, and(and(UInt<1>("h1"), _T_3), UInt<1>("h1")), "bound K: %d\n", boundK) : printf @[TPU.scala 123:9]
+    printf(clock, and(and(UInt<1>("h1"), _T_5), UInt<1>("h1")), "bound M: %d\n", boundM) : printf_1 @[TPU.scala 124:9]
+    printf(clock, and(and(UInt<1>("h1"), _T_7), UInt<1>("h1")), "bound N: %d\n", boundN) : printf_2 @[TPU.scala 125:9]
+    printf(clock, and(and(and(UInt<1>("h1"), _T_8), _T_10), UInt<1>("h1")), "\nLOAD TOTAL CYCLE %d\n", totalCycle) : printf_3 @[TPU.scala 161:11]
+    printf(clock, and(and(and(UInt<1>("h1"), _T_8), _T_12), UInt<1>("h1")), "LOAD\n") : printf_4 @[TPU.scala 162:11]
+    printf(clock, and(and(and(and(and(UInt<1>("h1"), eq(_T_8, UInt<1>("h0"))), eq(_T_14, UInt<1>("h0"))), _T_17), _T_19), UInt<1>("h1")), "\nSLICE TOTAL CYCLE %d\n", totalCycle) : printf_5 @[TPU.scala 189:11]
+    printf(clock, and(and(and(and(and(and(and(UInt<1>("h1"), eq(_T_8, UInt<1>("h0"))), eq(_T_14, UInt<1>("h0"))), eq(_T_17, UInt<1>("h0"))), _T_20), _T_24), _T_45), UInt<1>("h1")), "\nSTART CLEAR TOTAL CYCLE %d\n", totalCycle) : printf_6 @[TPU.scala 238:14]
+    printf(clock, and(and(and(and(and(and(UInt<1>("h1"), eq(_T_8, UInt<1>("h0"))), eq(_T_14, UInt<1>("h0"))), eq(_T_17, UInt<1>("h0"))), _T_20), _T_67), UInt<1>("h1")), "PADDED A: \n") : printf_7 @[TPU.scala 252:13]
+    printf(clock, and(and(and(and(and(and(UInt<1>("h1"), eq(_T_8, UInt<1>("h0"))), eq(_T_14, UInt<1>("h0"))), eq(_T_17, UInt<1>("h0"))), _T_20), _T_69), UInt<1>("h1")), "Vec(%d, %d, %d, %d, %d, %d)\n", paddedA_0_0, paddedA_0_1, paddedA_0_2, paddedA_0_3, paddedA_0_4, paddedA_0_5) : printf_8 @[TPU.scala 254:13]
+    printf(clock, and(and(and(and(and(and(UInt<1>("h1"), eq(_T_8, UInt<1>("h0"))), eq(_T_14, UInt<1>("h0"))), eq(_T_17, UInt<1>("h0"))), _T_20), _T_71), UInt<1>("h1")), "Vec(%d, %d, %d, %d, %d, %d)\n", paddedA_1_0, paddedA_1_1, paddedA_1_2, paddedA_1_3, paddedA_1_4, paddedA_1_5) : printf_9 @[TPU.scala 254:13]
+    printf(clock, and(and(and(and(and(and(UInt<1>("h1"), eq(_T_8, UInt<1>("h0"))), eq(_T_14, UInt<1>("h0"))), eq(_T_17, UInt<1>("h0"))), _T_20), _T_73), UInt<1>("h1")), "PADDED B: \n") : printf_10 @[TPU.scala 256:12]
+    printf(clock, and(and(and(and(and(and(UInt<1>("h1"), eq(_T_8, UInt<1>("h0"))), eq(_T_14, UInt<1>("h0"))), eq(_T_17, UInt<1>("h0"))), _T_20), _T_75), UInt<1>("h1")), "Vec(%d, %d)\n", paddedB_0_0, paddedB_0_1) : printf_11 @[TPU.scala 258:13]
+    printf(clock, and(and(and(and(and(and(UInt<1>("h1"), eq(_T_8, UInt<1>("h0"))), eq(_T_14, UInt<1>("h0"))), eq(_T_17, UInt<1>("h0"))), _T_20), _T_77), UInt<1>("h1")), "Vec(%d, %d)\n", paddedB_1_0, paddedB_1_1) : printf_12 @[TPU.scala 258:13]
+    printf(clock, and(and(and(and(and(and(UInt<1>("h1"), eq(_T_8, UInt<1>("h0"))), eq(_T_14, UInt<1>("h0"))), eq(_T_17, UInt<1>("h0"))), _T_20), _T_79), UInt<1>("h1")), "Vec(%d, %d)\n", paddedB_2_0, paddedB_2_1) : printf_13 @[TPU.scala 258:13]
+    printf(clock, and(and(and(and(and(and(UInt<1>("h1"), eq(_T_8, UInt<1>("h0"))), eq(_T_14, UInt<1>("h0"))), eq(_T_17, UInt<1>("h0"))), _T_20), _T_81), UInt<1>("h1")), "Vec(%d, %d)\n", paddedB_3_0, paddedB_3_1) : printf_14 @[TPU.scala 258:13]
+    printf(clock, and(and(and(and(and(and(UInt<1>("h1"), eq(_T_8, UInt<1>("h0"))), eq(_T_14, UInt<1>("h0"))), eq(_T_17, UInt<1>("h0"))), _T_20), _T_83), UInt<1>("h1")), "Vec(%d, %d)\n", paddedB_4_0, paddedB_4_1) : printf_15 @[TPU.scala 258:13]
+    printf(clock, and(and(and(and(and(and(UInt<1>("h1"), eq(_T_8, UInt<1>("h0"))), eq(_T_14, UInt<1>("h0"))), eq(_T_17, UInt<1>("h0"))), _T_20), _T_85), UInt<1>("h1")), "Vec(%d, %d)\n", paddedB_5_0, paddedB_5_1) : printf_16 @[TPU.scala 258:13]
+    printf(clock, and(and(and(and(and(and(UInt<1>("h1"), eq(_T_8, UInt<1>("h0"))), eq(_T_14, UInt<1>("h0"))), eq(_T_17, UInt<1>("h0"))), _T_20), _T_87), UInt<1>("h1")), "SLICED A: \n") : printf_17 @[TPU.scala 260:11]
+    printf(clock, and(and(and(and(and(and(UInt<1>("h1"), eq(_T_8, UInt<1>("h0"))), eq(_T_14, UInt<1>("h0"))), eq(_T_17, UInt<1>("h0"))), _T_20), _T_89), UInt<1>("h1")), "Vec(%d, %d, %d)\n", slicedA_0_0, slicedA_0_1, slicedA_0_2) : printf_18 @[TPU.scala 262:13]
+    printf(clock, and(and(and(and(and(and(UInt<1>("h1"), eq(_T_8, UInt<1>("h0"))), eq(_T_14, UInt<1>("h0"))), eq(_T_17, UInt<1>("h0"))), _T_20), _T_91), UInt<1>("h1")), "SLICED B: \n") : printf_19 @[TPU.scala 264:11]
+    printf(clock, and(and(and(and(and(and(UInt<1>("h1"), eq(_T_8, UInt<1>("h0"))), eq(_T_14, UInt<1>("h0"))), eq(_T_17, UInt<1>("h0"))), _T_20), _T_93), UInt<1>("h1")), "Vec(%d)\n", slicedB_0_0) : printf_20 @[TPU.scala 266:13]
+    printf(clock, and(and(and(and(and(and(UInt<1>("h1"), eq(_T_8, UInt<1>("h0"))), eq(_T_14, UInt<1>("h0"))), eq(_T_17, UInt<1>("h0"))), _T_20), _T_95), UInt<1>("h1")), "Vec(%d)\n", slicedB_1_0) : printf_21 @[TPU.scala 266:13]
+    printf(clock, and(and(and(and(and(and(UInt<1>("h1"), eq(_T_8, UInt<1>("h0"))), eq(_T_14, UInt<1>("h0"))), eq(_T_17, UInt<1>("h0"))), _T_20), _T_97), UInt<1>("h1")), "Vec(%d)\n", slicedB_2_0) : printf_22 @[TPU.scala 266:13]
+    printf(clock, and(and(and(and(and(and(UInt<1>("h1"), eq(_T_8, UInt<1>("h0"))), eq(_T_14, UInt<1>("h0"))), eq(_T_17, UInt<1>("h0"))), _T_20), _T_99), UInt<1>("h1")), "MY SLICED OUT: \n") : printf_23 @[TPU.scala 268:11]
+    printf(clock, and(and(and(and(and(and(UInt<1>("h1"), eq(_T_8, UInt<1>("h0"))), eq(_T_14, UInt<1>("h0"))), eq(_T_17, UInt<1>("h0"))), _T_20), _T_101), UInt<1>("h1")), "Vec(%d)\n", slicedOut_0_0) : printf_24 @[TPU.scala 270:13]
+    printf(clock, and(and(and(and(and(and(UInt<1>("h1"), eq(_T_8, UInt<1>("h0"))), eq(_T_14, UInt<1>("h0"))), eq(_T_17, UInt<1>("h0"))), _T_20), _T_103), UInt<1>("h1")), "MY OUT: \n") : printf_25 @[TPU.scala 273:11]
+    printf(clock, and(and(and(and(and(and(UInt<1>("h1"), eq(_T_8, UInt<1>("h0"))), eq(_T_14, UInt<1>("h0"))), eq(_T_17, UInt<1>("h0"))), _T_20), _T_105), UInt<1>("h1")), "Vec(%d, %d)\n", io_out_0_0, io_out_0_1) : printf_26 @[TPU.scala 275:13]
+    printf(clock, and(and(and(and(and(and(UInt<1>("h1"), eq(_T_8, UInt<1>("h0"))), eq(_T_14, UInt<1>("h0"))), eq(_T_17, UInt<1>("h0"))), _T_20), _T_107), UInt<1>("h1")), "Vec(%d, %d)\n", io_out_1_0, io_out_1_1) : printf_27 @[TPU.scala 275:13]
+    printf(clock, and(and(and(and(and(and(and(UInt<1>("h1"), eq(_T_8, UInt<1>("h0"))), eq(_T_14, UInt<1>("h0"))), eq(_T_17, UInt<1>("h0"))), eq(_T_20, UInt<1>("h0"))), _T_108), _T_110), UInt<1>("h1")), "\nCLEAR TOTAL CYCLE %d\n", totalCycle) : printf_28 @[TPU.scala 280:11]

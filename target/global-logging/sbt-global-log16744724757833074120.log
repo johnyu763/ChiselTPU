@@ -1,0 +1,17 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(test, Some(b0e25b0a-7c59-4b18-8b12-276fd140ef2e), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Test / test[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /Users/johnyu/Projects/ChiselTPU/target/scala-2.13/test-classes ...[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mActRegModelTester:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mActRegModel[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should get the staggered input array[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should get the staggered input array 2[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should get the staggered input array 4x4[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should get the staggered input array 4x3[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should get the staggered input array 3x4[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mTPUModelTester:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mgetNextCSM[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should multiply a 3x3 matrix[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mSystArrTester:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mTPU syst arr test[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should multiply (1s row) x (1s column)[0m[0m
